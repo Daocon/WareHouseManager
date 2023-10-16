@@ -3,12 +3,13 @@ plugins {
 }
 
 android {
+
     namespace 'hieudx.fpoly.warehousemanager'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "hieudx.fpoly.warehousemanager"
-        minSdk 30
+        minSdk 29
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -43,6 +44,16 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    //Picasso để load ảnh , tất cả load ảnh trong áp phải dùng Picasso
+//    Picasso để load ảnh , tất cả load ảnh trong áp phải dùng Picasso
     implementation 'com.squareup.picasso:picasso:2.8'
+
+//    thư viện animation
+    implementation 'com.airbnb.android:lottie:6.1.0'
+
+//    dùng cho slidePager
+    implementation 'com.cuberto:liquid-swipe:1.0.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.31'
+    implementation 'androidx.core:core:1.12.0'
+    implementation 'androidx.core:core-ktx:1.12.0'
+
 }

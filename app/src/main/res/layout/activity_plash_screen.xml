@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Plash_Screen_Activity">
+
+    <ImageView
+        android:id="@+id/imgBgr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="2dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bgr_plash_screen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+
+    <TextView
+        android:id="@+id/tvAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/animLottie"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="200dp"
+        android:elevation="2dp"
+        android:text="POLY BOX"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animLottie"
+        android:layout_width="400dp"
+        android:layout_height="270dp"
+        android:layout_centerInParent="true"
+        android:elevation="2dp"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/plash_screen_anim" />
+
+    <com.cuberto.liquid_swipe.LiquidPager
+        android:id="@+id/liquidPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>
