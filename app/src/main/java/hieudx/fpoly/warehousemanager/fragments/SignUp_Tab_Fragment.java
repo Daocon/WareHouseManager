@@ -10,16 +10,16 @@ import android.view.ViewGroup;
 
 import hieudx.fpoly.warehousemanager.R;
 
-public class Second_OnBoarding_Fragment extends Fragment {
 
-    public Second_OnBoarding_Fragment() {
+public class SignUp_Tab_Fragment extends Fragment {
+
+    public SignUp_Tab_Fragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_second__on_boarding_, container, false);
-        return v;
-
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_sign_up__tab_, container, false);
     }
 }

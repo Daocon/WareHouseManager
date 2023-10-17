@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager;
+package hieudx.fpoly.warehousemanager.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import hieudx.fpoly.warehousemanager.fragments.First_OnBoarding_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.Second_OnBoarding_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.Third_OnBoarding_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.plash_screen_frag.First_OnBoarding_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.plash_screen_frag.Second_OnBoarding_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.plash_screen_frag.Third_OnBoarding_Fragment;
 
 public class SlidePager_Adapter extends FragmentStatePagerAdapter {
     public SlidePager_Adapter(@NonNull FragmentManager fm) {

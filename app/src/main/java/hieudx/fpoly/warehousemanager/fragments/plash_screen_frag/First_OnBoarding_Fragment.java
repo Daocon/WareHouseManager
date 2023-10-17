@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.fragments;
+package hieudx.fpoly.warehousemanager.fragments.plash_screen_frag;
 
 import android.os.Bundle;
 
