@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.adapters.Login_SignUp_Adapter;
 import hieudx.fpoly.warehousemanager.databinding.ActivityLoginSignUpBinding;
 
@@ -22,6 +23,7 @@ public class Login_SignUp_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginSignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Login"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Sign Up"));
@@ -47,21 +49,9 @@ public class Login_SignUp_Activity extends AppCompatActivity {
 
             }
         });
+        onAnimation();
 
-        binding.fabFb.setTranslationY(300);
-        binding.fabGoogle.setTranslationY(300);
-        binding.fabTele.setTranslationY(300);
-        binding.tabLayout.setTranslationY(300);
 
-        binding.fabFb.setAlpha(v);
-        binding.fabGoogle.setAlpha(v);
-        binding.fabTele.setAlpha(v);
-        binding.tabLayout.setAlpha(v);
-
-        binding.fabFb.animate().translationY(0).alpha(1).setDuration(3500).setStartDelay(400).start();
-        binding.fabGoogle.animate().translationY(0).alpha(1).setDuration(3500).setStartDelay(600).start();
-        binding.fabTele.animate().translationY(0).alpha(1).setDuration(3500).setStartDelay(800).start();
-        binding.tabLayout.animate().translationY(0).alpha(1).setDuration(3500).setStartDelay(1000).start();
 //        new TabLayoutMediator(binding.tabLayout, binding.viewPager, (tab, position) -> {
 //            switch (position) {
 //                case 0:
@@ -83,4 +73,22 @@ public class Login_SignUp_Activity extends AppCompatActivity {
 //            }
 //        });
     }
+
+    private void onAnimation() {
+        binding.fabFb.setTranslationY(300);
+        binding.fabGoogle.setTranslationY(300);
+        binding.fabTele.setTranslationY(300);
+        binding.tabLayout.setTranslationY(300);
+
+        binding.fabFb.setAlpha(v);
+        binding.fabGoogle.setAlpha(v);
+        binding.fabTele.setAlpha(v);
+        binding.tabLayout.setAlpha(v);
+
+        binding.fabFb.animate().translationY(0).alpha(1).setDuration(2000).setStartDelay(400).start();
+        binding.fabGoogle.animate().translationY(0).alpha(1).setDuration(2000).setStartDelay(600).start();
+        binding.fabTele.animate().translationY(0).alpha(1).setDuration(2000).setStartDelay(800).start();
+        binding.tabLayout.animate().translationY(0).alpha(1).setDuration(2000).setStartDelay(1000).start();
+    }
+
 }

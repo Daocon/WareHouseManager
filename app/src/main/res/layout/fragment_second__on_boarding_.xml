@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#C672E8"
-    tools:context=".fragments.plash_screen_frag.Second_OnBoarding_Fragment">
+    tools:context=".fragments.plash_screen.Second_OnBoarding_Fragment">
 
     <ImageView
         android:id="@+id/img1"
@@ -36,6 +36,7 @@
         app:layout_constraintVertical_bias="0" />
 
     <TextView
+        android:id="@+id/tvSkipSecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="30dp"

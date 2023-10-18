@@ -13,13 +13,19 @@
         android:theme="@style/Theme.WareHouseManager"
         tools:targetApi="31">
         <activity
-            android:name=".view.Plash_Screen_Activity"
+            android:name=".view.Forgot_Reset_Pass_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".view.Finish_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".view.Login_SignUp_Activity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".view.Login_SignUp_Activity"
+            android:name=".view.Plash_Screen_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

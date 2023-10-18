@@ -25,7 +25,7 @@ public class Plash_Screen_Activity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(11000);
+                    Thread.sleep(11500);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

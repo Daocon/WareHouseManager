@@ -4,13 +4,11 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import hieudx.fpoly.warehousemanager.fragments.Login_Tab_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.SignUp_Tab_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.login_signup.Login_Tab_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.login_signup.SignUp_Tab_Fragment;
 
 public class Login_SignUp_Adapter extends FragmentPagerAdapter {
     private Context context;
@@ -30,47 +28,13 @@ public class Login_SignUp_Adapter extends FragmentPagerAdapter {
         } else {
             return new SignUp_Tab_Fragment();
         }
-//        switch (position) {
-//            case 0:
-//                Login_Tab_Fragment loginTabFragment = new Login_Tab_Fragment();
-//                return loginTabFragment;
-//            case 1:
-//                SignUp_Tab_Fragment signUpTabFragment = new SignUp_Tab_Fragment();
-//                return signUpTabFragment;
-//            default:
-//                return null;
-//        }
     }
 
     @Override
     public int getCount() {
         return totalTab;
     }
-//public class Login_SignUp_Adapter extends FragmentStateAdapter {
-//
-//    public Login_SignUp_Adapter(@NonNull FragmentActivity activity) {
-//        super(activity.getSupportFragmentManager(), activity.getLifecycle());
-//    }
-//
-//    @NonNull
-//    @Override
-//    public Fragment createFragment(int position) {
-//        switch (position) {
-//            case 0:
-//                return new Login_Tab_Fragment();
-//            case 1:
-//                return new SignUp_Tab_Fragment();
-//            default:
-//                return null;
-//        }
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return 2;
-//    }
 }
 
 
-//
 

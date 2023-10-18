@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.fragments;
+package hieudx.fpoly.warehousemanager.fragments.login_signup;
 
 import android.os.Bundle;
 

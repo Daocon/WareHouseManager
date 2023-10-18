@@ -1,5 +1,6 @@
-package hieudx.fpoly.warehousemanager.fragments.plash_screen_frag;
+package hieudx.fpoly.warehousemanager.fragments.plash_screen;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -30,6 +32,11 @@ public class Third_OnBoarding_Fragment extends Fragment {
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), Login_SignUp_Activity.class));
             }
+        });
+
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView tvSkipThird = v.findViewById(R.id.tvSkipThird);
+        tvSkipThird.setOnClickListener(view -> {
+            startActivity(new Intent(getContext(), Login_SignUp_Activity.class));
         });
         return v;
 

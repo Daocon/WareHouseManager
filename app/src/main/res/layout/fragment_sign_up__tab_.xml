@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.SignUp_Tab_Fragment">
+    tools:context=".fragments.login_signup.SignUp_Tab_Fragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name"
@@ -125,7 +125,7 @@
 
     <Button
         android:id="@+id/btnSignUp"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#8692f7"
         android:text="Sign Up"
