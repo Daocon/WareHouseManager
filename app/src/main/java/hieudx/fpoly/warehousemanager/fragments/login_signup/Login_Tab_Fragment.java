@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import hieudx.fpoly.warehousemanager.MainActivity;
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.FragmentLoginTabBinding;
 import hieudx.fpoly.warehousemanager.view.Forgot_Reset_Pass_Activity;
@@ -31,6 +32,10 @@ public class Login_Tab_Fragment extends Fragment {
 
         binding.tvForgotPass.setOnClickListener(view -> {
             startActivity(new Intent(getContext(), Forgot_Reset_Pass_Activity.class));
+        });
+
+        binding.btnLogin.setOnClickListener(view -> {
+            startActivity(new Intent(getActivity(), MainActivity.class));
         });
 
         return binding.getRoot();

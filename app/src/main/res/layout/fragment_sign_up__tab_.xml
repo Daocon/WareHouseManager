@@ -23,7 +23,7 @@
             android:id="@+id/edName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/ed_bgr"
+            android:background="@drawable/custom_ed_bgr"
             android:hint="Họ và tên"
             android:textColorHighlight="@color/cardview_dark_background" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -45,7 +45,7 @@
             android:id="@+id/edEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/ed_bgr"
+            android:background="@drawable/custom_ed_bgr"
             android:hint="Email"
             android:textColorHighlight="@color/cardview_dark_background" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -68,7 +68,7 @@
             android:id="@+id/edPass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/ed_bgr"
+            android:background="@drawable/custom_ed_bgr"
             android:hint="Mật khẩu"
             android:inputType="textPassword"
             android:textColorHighlight="@color/cardview_dark_background" />
@@ -93,7 +93,7 @@
             android:id="@+id/edRePass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/ed_bgr"
+            android:background="@drawable/custom_ed_bgr"
             android:hint="Xác nhận lại mật khẩu"
             android:inputType="textPassword"
             android:textColorHighlight="@color/cardview_dark_background" />
@@ -118,7 +118,7 @@
             android:id="@+id/edPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/ed_bgr"
+            android:background="@drawable/custom_ed_bgr"
             android:textColorHighlight="@color/cardview_dark_background" />
 
     </com.google.android.material.textfield.TextInputLayout>

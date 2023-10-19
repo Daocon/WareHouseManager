@@ -62,7 +62,7 @@
             android:id="@+id/edNewPass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/ed_bgr"
+            android:background="@drawable/custom_ed_bgr"
             android:hint="type your new password"
             android:inputType="textPassword"
             android:textColorHighlight="@color/cardview_dark_background" />
@@ -85,7 +85,7 @@
             android:id="@+id/edReNewPass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/ed_bgr"
+            android:background="@drawable/custom_ed_bgr"
             android:hint="retype your new password"
             android:inputType="textPassword"
             android:textColorHighlight="@color/cardview_dark_background" />
