@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_bot_product"
+        android:icon="@drawable/ic_product"
+        android:title="Sản phẩm" />
 
+    <item
+        android:id="@+id/nav_bot_category"
+        android:icon="@drawable/ic_category"
+        android:title="Loại SP" />
+
+    <item
+        android:id="@+id/nav_bot_bill"
+        android:icon="@drawable/ic_bill"
+        android:title="Hóa đơn" />
+
+    <item
+        android:id="@+id/nav_bot_member"
+        android:icon="@drawable/ic_member"
+        android:title="Thành viên" />
+
+    <item
+        android:id="@+id/nav_bot_statistic"
+        android:icon="@drawable/ic_statistic"
+        android:title="Thống kê" />
 </menu>

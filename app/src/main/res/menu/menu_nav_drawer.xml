@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_product"
-        android:icon="@drawable/baseline_shopping_cart_24"
-        android:title="Sản phẩm"></item>
+        android:id="@+id/nav_drawer_product"
+        android:icon="@drawable/ic_product"
+        android:title="Sản phẩm"/>
 
     <item
-        android:id="@+id/nav_bill"
-        android:icon="@drawable/baseline_receipt_long_24"
-        android:title="Hóa đơn"></item>
+        android:id="@+id/nav_drawer_category"
+        android:icon="@drawable/ic_category"
+        android:title="Loại sản phẩm"/>
 
     <item
-        android:id="@+id/nav_member"
-        android:icon="@drawable/baseline_people_alt_24"
-        android:title="Quản lý thành viên"></item>
+        android:id="@+id/nav_drawer_bill"
+        android:icon="@drawable/ic_bill"
+        android:title="Hóa đơn"/>
 
     <item
-        android:id="@+id/nav_statistic"
-        android:icon="@drawable/baseline_bar_chart_24"
-        android:title="Thống kê"></item>
+        android:id="@+id/nav_drawer_member"
+        android:icon="@drawable/ic_member"
+        android:title="Quản lý thành viên"/>
+
+    <item
+        android:id="@+id/nav_drawer_statistic"
+        android:icon="@drawable/ic_statistic"
+        android:title="Thống kê"/>
 
     <item android:title="">
         <menu>
             <item
                 android:id="@+id/nav_setting"
-                android:icon="@drawable/baseline_settings_24"
-                android:title="Cài đặt"></item>
+                android:icon="@drawable/ic_settings"
+                android:title="Cài đặt"/>
 
             <item
                 android:id="@+id/nav_logout"
-                android:icon="@drawable/baseline_logout_24"
-                android:title="Đăng xuất"></item>
+                android:icon="@drawable/ic_logout"
+                android:title="Đăng xuất"/>
         </menu>
 
     </item>
