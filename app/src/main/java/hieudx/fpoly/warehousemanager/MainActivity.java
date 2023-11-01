@@ -5,7 +5,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -14,18 +13,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 import hieudx.fpoly.warehousemanager.databinding.ActivityMainBinding;
 import hieudx.fpoly.warehousemanager.fragments.Bill_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Category_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.Member_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.member.Member_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Product_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Setting_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Statistic_Fragment;
@@ -40,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         customActionBar();
 
         onClickListenerNavDrawer();

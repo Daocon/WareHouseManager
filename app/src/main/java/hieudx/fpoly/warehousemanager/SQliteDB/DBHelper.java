@@ -16,21 +16,42 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 //        tạo bảng thể loại sản phẩm
-        db.execSQL("create table Category (id integer PRIMARY KEY AUTOINCREMENT, name text NOT NULL);");
+        db.execSQL("create table Category (" +
+                "id integer PRIMARY KEY AUTOINCREMENT," +
+                "name text NOT NULL);");
 
 //        tạo bảng user
-        db.execSQL("create table User (id integer PRIMARY KEY AUTOINCREMENT, username text NOT NULL, password text NOT NULL, phone text NOT NULL, role int NOT NULL);");
+        db.execSQL("create table User (" +
+                "id integer PRIMARY KEY AUTOINCREMENT, " +
+                "username text NOT NULL, password text NOT NULL, " +
+                "phone text NOT NULL, " +
+                "role int NOT NULL);");
 
 //        tạo bảng product
-        db.execSQL("create table Product (id integer PRIMARY KEY AUTOINCREMENT, name text NOT NULL, price integer NOT NULL," +
-                " quantity_in integer NOT NULL, quantity_out integer DEFAULT(0) NOT NULL, date_in text NOT NULL," +
-                " date_out text NOT NULL, id_category integer NOT NULL REFERENCES Category (id));");
+        db.execSQL("create table Product (" +
+                "id integer PRIMARY KEY AUTOINCREMENT, " +
+                "name text NOT NULL, " +
+                "price integer NOT NULL," +
+                "quantity_in integer NOT NULL, " +
+                "quantity_out integer DEFAULT(0) NOT NULL, " +
+                "date_in text NOT NULL," +
+                "date_out text NOT NULL, " +
+                "id_category integer NOT NULL REFERENCES Category (id));");
 
 //        tạo bảng bill
-        db.execSQL("create table Bill (id integer PRIMARY KEY AUTOINCREMENT, date_time text NOT NULL, total integer NOT NULL, id_bill_detail integer NOT NULL REFERENCES Bill_Detail (id));");
+        db.execSQL("create table Bill (" +
+                "id integer PRIMARY KEY AUTOINCREMENT, " +
+                "date_time text NOT NULL, " +
+                "total integer NOT NULL, " +
+                "id_bill_detail integer NOT NULL REFERENCES Bill_Detail (id));");
 
 //        tạo bảng bill_detail
-        db.execSQL("create table Bill_Detail (id integer PRIMARY KEY AUTOINCREMENT, id_user integer NOT NULL REFERENCES User (id), id_product integer not NULL REFERENCES Product (id));");
+        db.execSQL("create table Bill_Detail (" +
+                "id integer PRIMARY KEY AUTOINCREMENT, " +
+                "id_user integer NOT NULL REFERENCES User (id), " +
+                "id_product integer not NULL REFERENCES Product (id));");
+
+
     }
 
     @Override
