@@ -19,7 +19,7 @@ import hieudx.fpoly.warehousemanager.databinding.ItemDashBoardRcvBinding;
 import hieudx.fpoly.warehousemanager.fragments.Bill_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Category_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Delivery_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.Member_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.member.Member_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Product_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Staff_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Statistic_Fragment;

@@ -1,15 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Member_Fragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".fragments.member.Member_Fragment">
+    <ImageButton
+        android:id="@+id/btSheetMember"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:src="@drawable/sort"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+        android:layout_gravity="end"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"/>
+    <RelativeLayout
+        android:id="@+id/viewMember"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="MEMBER"
-        android:textSize="35sp" />
+        android:visibility="visible">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ryc_Member"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_ryc_member"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic_add"
+            android:layout_margin="20dp"/>
+    </RelativeLayout>
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/viewButtonAddNumber"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/tv_EmptyMember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chưa có thành viên"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="200dp"/>
+        <Button
+            android:id="@+id/btn_AddMember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thêm thành viên"
+            android:textColor="@color/black"
+            android:backgroundTint="#DCE6FC"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_EmptyMember"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
