@@ -1,4 +1,4 @@
 package hieudx.fpoly.warehousemanager.dao;
 
-public class Bill_Dao {
+public class Staff_Dao {
 }

@@ -1,5 +1,4 @@
 package hieudx.fpoly.warehousemanager.models;
 
-public class Bill_Detail {
-
+public class Delivery {
 }
