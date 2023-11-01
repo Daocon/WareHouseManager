@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
-    static String DB_NAME = "WareHouseManager";
+    static String DB_NAME = "WareHouseManager.db";
     static int DB_VERSION = 1;
 
     public DBHelper(Context context) {
@@ -15,22 +15,91 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+//        tạo bảng phiếu nhập
+        db.execSQL("CREATE TABLE Bill_in (\n" +
+                "    id        INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    total     INTEGER NOT NULL,\n" +
+                "    date_time INTEGER NOT NULL,\n" +
+                "    id_user   INTEGER REFERENCES User (id) \n" +
+                ");\n");
+
+//        tạo bảng chi tiết phiếu nhập
+        db.execSQL("CREATE TABLE Bill_in_detail (\n" +
+                "    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    id_product  INTEGER REFERENCES Product (id),\n" +
+                "    id_supplier         REFERENCES Supplier (id) \n" +
+                ");\n");
+
+//        tạo bảng phiếu xuất
+        db.execSQL("CREATE TABLE Bill_out (\n" +
+                "    id        INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    total     INTEGER NOT NULL,\n" +
+                "    date_time TEXT    NOT NULL,\n" +
+                "    id_user   INTEGER REFERENCES user (id) \n" +
+                ");\n");
+
+//        tạo bảng chi tiết phiếu xuất
+        db.execSQL("CREATE TABLE Bill_out_detail (\n" +
+                "    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    [add]       TEXT    NOT NULL,\n" +
+                "    id_product          REFERENCES Product (id),\n" +
+                "    id_delivery         REFERENCES Delivery (id) \n" +
+                ");\n");
+
 //        tạo bảng thể loại sản phẩm
-        db.execSQL("create table Category (id integer PRIMARY KEY AUTOINCREMENT, name text NOT NULL);");
+        db.execSQL("CREATE TABLE Category (\n" +
+                "    id   INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    name TEXT    NOT NULL\n" +
+                ");\n");
 
-//        tạo bảng user
-        db.execSQL("create table User (id integer PRIMARY KEY AUTOINCREMENT, username text NOT NULL, password text NOT NULL, phone text NOT NULL, role int NOT NULL);");
+//        tạo bảng sản phẩm
+        db.execSQL("CREATE TABLE Product (\n" +
+                "    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    name        TEXT    NOT NULL,\n" +
+                "    price       INTEGER NOT NULL,\n" +
+                "    quantity    INTEGER NOT NULL,\n" +
+                "    id_category INTEGER REFERENCES Category (id),\n" +
+                "    sale_price  INTEGER NOT NULL\n" +
+                ");\n");
 
-//        tạo bảng product
-        db.execSQL("create table Product (id integer PRIMARY KEY AUTOINCREMENT, name text NOT NULL, price integer NOT NULL," +
-                " quantity_in integer NOT NULL, quantity_out integer DEFAULT(0) NOT NULL, date_in text NOT NULL," +
-                " date_out text NOT NULL, id_category integer NOT NULL REFERENCES Category (id));");
+//        tạo bảng đơn vị vận chuyển
+        db.execSQL("CREATE TABLE Delivery (\n" +
+                "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    name     TEXT    NOT NULL,\n" +
+                "    phone    INTEGER NOT NULL,\n" +
+                "    price    INTEGER NOT NULL,\n" +
+                "    tax_code TEXT    NOT NULL\n" +
+                ");\n");
 
-//        tạo bảng bill
-        db.execSQL("create table Bill (id integer PRIMARY KEY AUTOINCREMENT, date_time text NOT NULL, total integer NOT NULL, id_bill_detail integer NOT NULL REFERENCES Bill_Detail (id));");
+//        tạo bảng nhà cung cấp
+        db.execSQL("CREATE TABLE Supplier (\n" +
+                "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    name     TEXT    NOT NULL,\n" +
+                "    phone    INTEGER NOT NULL,\n" +
+                "    [add]    TEXT    NOT NULL,\n" +
+                "    tax_code TEXT    NOT NULL\n" +
+                ");\n");
 
-//        tạo bảng bill_detail
-        db.execSQL("create table Bill_Detail (id integer PRIMARY KEY AUTOINCREMENT, id_user integer NOT NULL REFERENCES User (id), id_product integer not NULL REFERENCES Product (id));");
+//        tạo bảng User
+        db.execSQL("CREATE TABLE User (\n" +
+                "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    username TEXT    NOT NULL,\n" +
+                "    password TEXT    NOT NULL,\n" +
+                "    name     TEXT    NOT NULL,\n" +
+                "    email    TEXT    NOT NULL,\n" +
+                "    phone    INTEGER NOT NULL,\n" +
+                "    role     INTEGER NOT NULL\n" +
+                ");\n");
+
+//        tạo bảng nhân viên
+        db.execSQL("CREATE TABLE Staff (\n" +
+                "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    name     TEXT    NOT NULL,\n" +
+                "    phone    INTEGER NOT NULL,\n" +
+                "    [add]    TEXT    NOT NULL,\n" +
+                "    work_day INTEGER NOT NULL,\n" +
+                "    salary   INTEGER NOT NULL\n" +
+                ");\n");
     }
 
     @Override
