@@ -106,11 +106,16 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         if (i != i1) {
 //            xóa bảng cũ nếu tồn tại
+            db.execSQL("DROP TABLE IF EXISTS Bill_in");
+            db.execSQL("DROP TABLE IF EXISTS Bill_in_detail");
+            db.execSQL("DROP TABLE IF EXISTS Bill_out");
+            db.execSQL("DROP TABLE IF EXISTS Bill_out_detail");
             db.execSQL("DROP TABLE IF EXISTS Category");
-            db.execSQL("DROP TABLE IF EXISTS User");
             db.execSQL("DROP TABLE IF EXISTS Product");
-            db.execSQL("DROP TABLE IF EXISTS Bill");
-            db.execSQL("DROP TABLE IF EXISTS Bill_Detail");
+            db.execSQL("DROP TABLE IF EXISTS Delivery");
+            db.execSQL("DROP TABLE IF EXISTS Supplier");
+            db.execSQL("DROP TABLE IF EXISTS User");
+            db.execSQL("DROP TABLE IF EXISTS Staff");
             onCreate(db);
         }
     }

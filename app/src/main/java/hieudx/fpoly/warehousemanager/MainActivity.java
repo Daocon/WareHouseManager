@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,12 +19,13 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import hieudx.fpoly.warehousemanager.SQliteDB.DBHelper;
 import hieudx.fpoly.warehousemanager.adapters.Dash_Board_Adapter;
 import hieudx.fpoly.warehousemanager.databinding.ActivityMainBinding;
 import hieudx.fpoly.warehousemanager.fragments.Account_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Bill_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Category_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.Member_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.member.Member_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Product_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Statistic_Fragment;
 import hieudx.fpoly.warehousemanager.models.item_dash_board;
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        DBHelper dbHelper = new DBHelper(this);
         customActionBar();
         onClickListenerNavBottom();
         onCreateRcvList();
