@@ -19,7 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Bill_in (\n" +
                 "    id        INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    total     INTEGER NOT NULL,\n" +
-                "    date_time INTEGER NOT NULL,\n" +
+                "    date_time TEXT NOT NULL,\n" +
                 "    id_user   INTEGER REFERENCES User (id) \n" +
                 ");\n");
 
@@ -27,7 +27,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Bill_in_detail (\n" +
                 "    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    id_product  INTEGER REFERENCES Product (id),\n" +
-                "    id_supplier         REFERENCES Supplier (id) \n" +
+                "    id_supplier INTEGER REFERENCES Supplier (id) \n" +
                 ");\n");
 
 //        tạo bảng phiếu xuất
@@ -41,9 +41,9 @@ public class DBHelper extends SQLiteOpenHelper {
 //        tạo bảng chi tiết phiếu xuất
         db.execSQL("CREATE TABLE Bill_out_detail (\n" +
                 "    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                "    [add]       TEXT    NOT NULL,\n" +
-                "    id_product          REFERENCES Product (id),\n" +
-                "    id_delivery         REFERENCES Delivery (id) \n" +
+                "    address     TEXT    NOT NULL,\n" +
+                "    id_product  INTEGER REFERENCES Product (id),\n" +
+                "    id_delivery INTEGER REFERENCES Delivery (id) \n" +
                 ");\n");
 
 //        tạo bảng thể loại sản phẩm
@@ -66,7 +66,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Delivery (\n" +
                 "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    name     TEXT    NOT NULL,\n" +
-                "    phone    INTEGER NOT NULL,\n" +
+                "    phone    TEXT    NOT NULL,\n" +
                 "    price    INTEGER NOT NULL,\n" +
                 "    tax_code TEXT    NOT NULL\n" +
                 ");\n");
@@ -75,8 +75,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Supplier (\n" +
                 "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    name     TEXT    NOT NULL,\n" +
-                "    phone    INTEGER NOT NULL,\n" +
-                "    [add]    TEXT    NOT NULL,\n" +
+                "    phone    TEXT    NOT NULL,\n" +
+                "    address  TEXT    NOT NULL,\n" +
                 "    tax_code TEXT    NOT NULL\n" +
                 ");\n");
 
@@ -87,18 +87,19 @@ public class DBHelper extends SQLiteOpenHelper {
                 "    password TEXT    NOT NULL,\n" +
                 "    name     TEXT    NOT NULL,\n" +
                 "    email    TEXT    NOT NULL,\n" +
-                "    phone    INTEGER NOT NULL,\n" +
+                "    phone    TEXT    NOT NULL,\n" +
                 "    role     INTEGER NOT NULL\n" +
                 ");\n");
 
 //        tạo bảng nhân viên
         db.execSQL("CREATE TABLE Staff (\n" +
-                "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                "    name     TEXT    NOT NULL,\n" +
-                "    phone    INTEGER NOT NULL,\n" +
-                "    [add]    TEXT    NOT NULL,\n" +
-                "    work_day INTEGER NOT NULL,\n" +
-                "    salary   INTEGER NOT NULL\n" +
+                "    id           INTEGER PRIMARY KEY,\n" +
+                "    name         TEXT    NOT NULL,\n" +
+                "    phone        TEXT    NOT NULL,\n" +
+                "    address      TEXT    NOT NULL,\n" +
+                "    work_day     INTEGER NOT NULL,\n" +
+                "    salary       INTEGER NOT NULL,\n" +
+                "    coefficient  INTEGER NOT NULL\n" +
                 ");\n");
 
         //        thêm dữ liệu mẫu bảng User
