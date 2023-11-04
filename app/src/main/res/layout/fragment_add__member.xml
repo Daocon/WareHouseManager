@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="80dp"
         android:src="@drawable/khung" />
 
     <ImageView
@@ -20,19 +20,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/useradd" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="150dp"
         android:orientation="vertical"
         android:padding="5dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilHoTen"
+            android:id="@+id/tilName"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,8 +40,6 @@
             app:counterEnabled="true"
             app:counterMaxLength="20"
             app:endIconMode="clear_text"
-            app:helperText="Required*"
-            app:helperTextTextColor="@color/blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -49,7 +47,30 @@
             tools:layout_editor_absoluteY="41dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtHoVaTen"
+                android:id="@+id/txtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="20" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUsername"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="77dp"
+            android:hint="Ví dụ: hadao"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/user"
+            tools:layout_editor_absoluteY="41dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLength="20" />
@@ -60,13 +81,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="84dp"
+            android:layout_marginTop="155dp"
             android:hint="Ví dụ: 0972189693"
             app:counterEnabled="true"
             app:counterMaxLength="10"
             app:endIconMode="clear_text"
-            app:helperText="Required*"
-            app:helperTextTextColor="@color/blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,16 +99,15 @@
                 android:maxLength="10" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilEmail"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="168dp"
+            android:layout_marginTop="230dp"
             android:hint="Ví dụ: dao@gmail.com"
             app:endIconMode="clear_text"
-            app:helperText="Required*"
-            app:helperTextTextColor="@color/blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -98,18 +116,39 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="305dp"
+            android:hint="Ví dụ: vandao12@"
+            app:endIconMode="password_toggle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Xác nhận"
             android:backgroundTint="@color/purple"
+            android:text="Xác nhận"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>
