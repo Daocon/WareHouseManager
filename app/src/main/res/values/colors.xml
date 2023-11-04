@@ -7,4 +7,9 @@
     <color name="theme">#dce6fc</color>
     <color name="onboarding">#fdbb2d</color>
     <color name="colorPrimary">#008577</color>
+    
+    <color name="night_mode">#612481</color>
+    <color name="notificationes">#31B2C3</color>
+    <color name="private_account">#E6A326</color>
+    <color name="security">#D95F69</color>
 </resources>

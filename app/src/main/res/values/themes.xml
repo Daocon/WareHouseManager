@@ -11,4 +11,11 @@
         <item name="android:windowEnterAnimation">@anim/slide_in_bottom_sort_mem</item>
         <item name="android:windowExitAnimation">@anim/slide_out_bottom_sort_mem</item>
     </style>
+
+    <style name="nightModeSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/night_mode</item>
+        <item name="colorSwitchThumbNormal">#FFFFFF</item>
+        <item name="android:colorBackground">#99FFFFFF</item>
+    
+    </style>
 </resources>
