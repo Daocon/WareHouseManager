@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple"
+    android:background="@color/theme"
     tools:context=".fragments.Account_Fragment">
 
     <ScrollView
@@ -20,7 +20,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-                android:src="@drawable/avatar" />
+                android:src="@drawable/receptionist" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -28,7 +28,6 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="Hà Văn Đạo"
-                android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -37,7 +36,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="0972189694"
-                android:textColor="@color/white"
                 android:textSize="12sp" />
 
             <LinearLayout
@@ -71,7 +69,6 @@
                         android:layout_marginStart="20dp"
                         android:layout_toEndOf="@id/notification"
                         android:text="Bật thông báo"
-                        android:textColor="#ffffff"
                         android:textStyle="bold" />
 
                     <androidx.appcompat.widget.SwitchCompat
@@ -105,7 +102,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_toEndOf="@id/nightModeIcon"
                         android:text="Chế độ tối"
-                        android:textColor="#ffffff"
+
                         android:textStyle="bold" />
 
                     <androidx.appcompat.widget.SwitchCompat
@@ -139,7 +136,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_toEndOf="@id/autoUpdate"
                         android:text="Tự động cập nhật"
-                        android:textColor="#ffffff"
+
                         android:textStyle="bold" />
 
                     <androidx.appcompat.widget.SwitchCompat
@@ -186,7 +183,6 @@
                         android:layout_marginStart="20dp"
                         android:layout_toEndOf="@id/editInf"
                         android:text="Chỉnh sửa thông tin"
-                        android:textColor="#ffffff"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -219,7 +215,6 @@
                         android:layout_marginStart="20dp"
                         android:layout_toEndOf="@id/changePassword"
                         android:text="Thay đổi mật khẩu"
-                        android:textColor="#ffffff"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -263,7 +258,6 @@
                         android:layout_marginStart="20dp"
                         android:layout_toEndOf="@id/aboutMe"
                         android:text="Về chúng tôi"
-                        android:textColor="#ffffff"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -295,7 +289,6 @@
                         android:layout_marginStart="20dp"
                         android:layout_toEndOf="@id/privacypolicy"
                         android:text="Chính sách bảo mật"
-                        android:textColor="#ffffff"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -327,7 +320,6 @@
                         android:layout_marginStart="20dp"
                         android:layout_toEndOf="@id/error"
                         android:text="Báo lỗi"
-                        android:textColor="#ffffff"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -359,7 +351,6 @@
                         android:layout_marginStart="20dp"
                         android:layout_toEndOf="@id/help"
                         android:text="Trợ giúp và phản hồi"
-                        android:textColor="#ffffff"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -391,7 +382,36 @@
                         android:layout_marginStart="20dp"
                         android:layout_toEndOf="@id/share"
                         android:text="Chia sẻ"
-                        android:textColor="#ffffff"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/baseline_chevron_right_24" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_logOut"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="3dp">
+
+                    <ImageView
+                        android:id="@+id/logOut"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/round_back_about_me"
+                        android:padding="10dp"
+                        android:src="@drawable/logout" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_toEndOf="@id/logOut"
+                        android:text="Đăng xuất"
                         android:textStyle="bold" />
 
                     <ImageView

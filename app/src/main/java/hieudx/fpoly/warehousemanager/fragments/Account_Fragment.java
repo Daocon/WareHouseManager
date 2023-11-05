@@ -1,5 +1,8 @@
 package hieudx.fpoly.warehousemanager.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,7 +15,7 @@ import android.widget.Toast;
 
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.FragmentAccountBinding;
-import hieudx.fpoly.warehousemanager.databinding.FragmentDetailMemberBinding;
+import hieudx.fpoly.warehousemanager.view.Login_SignUp_Activity;
 
 public class Account_Fragment extends Fragment {
     private FragmentAccountBinding binding;
@@ -100,6 +103,24 @@ public class Account_Fragment extends Fragment {
                 Toast.makeText(getContext(), "Chia sẻ", Toast.LENGTH_SHORT).show();
             }
         });
+        binding.rlLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Xác nhận đăng xuất");
+                builder.setMessage("Bạn có chắc chắn muốn đăng xuất không ?");
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getContext(), Login_SignUp_Activity.class);
+                        startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("Không", null);
+                builder.show();
+            }
+        });
+
         return binding.getRoot();
     }
 }

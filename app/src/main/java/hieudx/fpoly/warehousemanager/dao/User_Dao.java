@@ -57,7 +57,7 @@ public class User_Dao {
         long row = db.insert("User", null, values);
         return (row > 0);
     }
-    public boolean deleteTv(int id) {
+    public boolean deleteUser(int id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         long row = db.delete("User", "id=?", new String[]{String.valueOf(id)});
         return (row > 0);
