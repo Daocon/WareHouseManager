@@ -37,16 +37,16 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilName"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ví dụ: Hà Văn Đạo"
                 app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorTextColor="@color/red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:startIconDrawable="@drawable/user"
-                tools:layout_editor_absoluteY="41dp">
+                app:startIconDrawable="@drawable/user">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtName"
@@ -56,14 +56,15 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilUsername"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="77dp"
+                android:layout_marginTop="85dp"
                 android:hint="Ví dụ: hadao"
                 app:counterEnabled="true"
                 app:counterMaxLength="15"
                 app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorTextColor="@color/red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -79,14 +80,15 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPhone"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="155dp"
+                android:layout_marginTop="170dp"
                 android:hint="Ví dụ: 0972189693"
                 app:counterEnabled="true"
                 app:counterMaxLength="10"
                 app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorTextColor="@color/red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -104,12 +106,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilEmail"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="235dp"
+                android:layout_marginTop="255dp"
                 android:hint="Ví dụ: dao@gmail.com"
                 app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorTextColor="@color/red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -123,14 +126,15 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPassword"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="310dp"
+                android:layout_marginTop="340dp"
                 android:hint="Ví dụ: vandao12"
                 app:counterEnabled="true"
                 app:counterMaxLength="10"
-                app:endIconMode="password_toggle"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorTextColor="@color/red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

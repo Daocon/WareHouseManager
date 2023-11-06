@@ -76,21 +76,19 @@ public class Member_Fragment extends Fragment {
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            if (bundle != null) {
-                // Lấy dữ liệu từ Bundle
-                String name = bundle.getString("name");
-                String username = bundle.getString("username");
-                String phone = bundle.getString("phone");
-                String email = bundle.getString("email");
-                String password = bundle.getString("password");
+            // Lấy dữ liệu từ Bundle
+            String name = bundle.getString("name");
+            String username = bundle.getString("username");
+            String phone = bundle.getString("phone");
+            String email = bundle.getString("email");
+            String password = bundle.getString("password");
 
-                // Thêm user vào danh sách hoặc cập nhật danh sách hiển thị
-                User userNew = new User(username, password, name, email, phone, 1);
-                if (userDao.insertUser(userNew)) {
-                    list.clear();
-                    list.addAll(userDao.getAllUser());
-                    adapter.notifyDataSetChanged();
-                }
+            // Thêm user vào danh sách hoặc cập nhật danh sách hiển thị
+            User userNew = new User(username, password, name, email, phone, 1);
+            if (userDao.insertUser(userNew)) {
+                list.clear();
+                list.addAll(userDao.getAllUser());
+                adapter.notifyDataSetChanged();
                 // Hiển thị thông báo
                 Toast.makeText(getActivity(), "Đã thêm user thành công", Toast.LENGTH_SHORT).show();
             }
