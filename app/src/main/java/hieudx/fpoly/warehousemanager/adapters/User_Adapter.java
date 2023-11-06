@@ -23,7 +23,7 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.viewholer> {
     private final Context context;
     private final ArrayList<User> listUser;
     User_Dao userDao;
-    User user;
+    private AlertDialog detailDialog;
 
     public User_Adapter(Context context, ArrayList<User> listUser) {
         this.context = context;
@@ -42,11 +42,11 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.viewholer> {
 
     @Override
     public void onBindViewHolder(@NonNull viewholer holder, int position) {
-        user = listUser.get(position);
+        User muser = listUser.get(position);
 
-        holder.binding.nameMember.setText(user.getName());
-        holder.binding.phoneMember.setText(user.getPhone());
-        holder.binding.emailMember.setText(user.getEmail());
+        holder.binding.nameMember.setText(muser.getName());
+        holder.binding.phoneMember.setText(muser.getPhone());
+        holder.binding.emailMember.setText(muser.getEmail());
 
         holder.binding.switchLimit.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -57,12 +57,12 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.viewholer> {
         holder.binding.cardViewMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OnClickGoToDetail(user);
+                OnClickGoToDetail(muser);
             }
         });
     }
 
-    private void OnClickGoToDetail(User user) {
+    private void OnClickGoToDetail(User muser) {
         // Sử dụng ViewBinding để inflate layout
         ItemDialogDetailMemberBinding binding = ItemDialogDetailMemberBinding.inflate(LayoutInflater.from(context));
         View view = binding.getRoot();
@@ -70,14 +70,14 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.viewholer> {
         // Khởi tạo AlertDialog.Builder với view đã inflate
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(view);
-        AlertDialog dialog = builder.create();
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
+        detailDialog = builder.create();
+        detailDialog.setCanceledOnTouchOutside(false);
+        detailDialog.show();
 
 
-        binding.txtHoVaTen.setText(user.getName());
-        binding.txtEmail.setText(user.getEmail());
-        binding.txtPhone.setText(user.getPhone());
+        binding.txtHoVaTen.setText(muser.getName());
+        binding.txtEmail.setText(muser.getEmail());
+        binding.txtPhone.setText(muser.getPhone());
 
         binding.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,12 +88,13 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.viewholer> {
                 builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (userDao.deleteUser(user.getId())){
+                        if (userDao.deleteUser(muser.getId())) {
                             listUser.clear();
                             listUser.addAll(userDao.getAllUser());
                             notifyDataSetChanged();
                             Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
+                            detailDialog.dismiss();
                         }
                     }
                 });
@@ -101,13 +102,13 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.viewholer> {
                 builder.show();
             }
         });
+
         binding.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+                detailDialog.dismiss();
             }
         });
-
     }
 
 
