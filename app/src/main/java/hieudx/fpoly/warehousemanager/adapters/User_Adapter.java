@@ -3,6 +3,7 @@ package hieudx.fpoly.warehousemanager.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +74,7 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.viewholer> {
         detailDialog = builder.create();
         detailDialog.setCanceledOnTouchOutside(false);
         detailDialog.show();
-
+        detailDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         binding.txtHoVaTen.setText(muser.getName());
         binding.txtEmail.setText(muser.getEmail());

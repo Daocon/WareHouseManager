@@ -84,6 +84,7 @@ public class Add_Member extends Fragment {
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frag_container_main, memberFragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
@@ -120,6 +121,7 @@ public class Add_Member extends Fragment {
             FragmentManager fragmentManager = getParentFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frag_container_main, memberFragment);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         } else {
             // Hiển thị thông báo lỗi nếu có lỗi

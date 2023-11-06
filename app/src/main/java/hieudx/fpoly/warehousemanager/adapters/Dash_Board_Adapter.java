@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.ItemDashBoardRcvBinding;
-import hieudx.fpoly.warehousemanager.fragments.Bill_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.Bill.Bill_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Category_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Delivery_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.member.Member_Fragment;

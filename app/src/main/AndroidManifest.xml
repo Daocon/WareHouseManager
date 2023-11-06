@@ -23,10 +23,10 @@
             android:name=".view.Plash_Screen_Activity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.Login_SignUp_Activity"
             android:exported="false" />
         <activity
-            android:name=".view.Login_SignUp_Activity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

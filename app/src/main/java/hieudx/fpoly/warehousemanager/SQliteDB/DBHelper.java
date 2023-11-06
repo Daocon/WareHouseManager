@@ -102,6 +102,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "    coefficient  INTEGER NOT NULL\n" +
                 ");\n");
 
+
+
+//        thêm dữ liệu mẫu bảng phiếu nhập
+        db.execSQL("INSERT INTO Bill_in VALUES(0,1800000,'6/11/2023',2)");
+        db.execSQL("INSERT INTO Bill_in VALUES(1,2000,'6/11/2023',3)");
+        db.execSQL("INSERT INTO Bill_in VALUES(2,600000,'6/11/2023',4)");
+
         //        thêm dữ liệu mẫu bảng User
         db.execSQL("INSERT INTO User VALUES(1,'admin','admin','admin','admin@gmail.com','0973967774',0)");
         db.execSQL("INSERT INTO User VALUES(2,'hieudx','123','do xuan hieu','hieudx@gmail.com','0973967774',1)");

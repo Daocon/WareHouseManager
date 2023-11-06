@@ -9,11 +9,12 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.SQliteDB.DBHelper;
+import hieudx.fpoly.warehousemanager.models.Staff;
 import hieudx.fpoly.warehousemanager.models.User;
 
 public class User_Dao {
     private final DBHelper dbHelper;
-    User user;
+    private User user;
 
     public User_Dao(Context context) {
         dbHelper = new DBHelper(context);
@@ -61,5 +62,17 @@ public class User_Dao {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         long row = db.delete("User", "id=?", new String[]{String.valueOf(id)});
         return (row > 0);
+    }
+
+    public User getUserById(int id) {
+         user = new User();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM User WHERE id = ?", new String[]{String.valueOf(id)});
+        if (c.getCount() != 0) {
+            c.moveToFirst();
+            user.setId(c.getInt(0));
+            user.setName(c.getString(1));
+        }
+        return user;
     }
 }
