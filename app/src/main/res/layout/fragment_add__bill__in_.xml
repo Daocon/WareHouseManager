@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    tools:context=".fragments.Bill.Bill_In.Add_Bill_In_Fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/custom_title_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mã hóa đơn" />
+
+        <TextView
+            android:id="@+id/tv_id_bill_in"
+            style="@style/custom_tv_add_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HDN_1234_S01" />
+
+        <TextView
+            style="@style/custom_title_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nhà cung cấp" />
+
+        <Spinner
+            android:id="@+id/spn_supplier"
+            style="@style/custom_tv_add_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/custom_title_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="thêm sản phẩm" />
+
+        <EditText
+            android:id="@+id/ed_add_product"
+            style="@style/custom_tv_add_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:hint="nhấn để thêm sản phẩm"
+            android:inputType="none" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/custom_title_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tổng giá tiền"
+        android:textColor="#F30C0C"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1.500.000"
+        android:textColor="#F30C0C"
+        android:textSize="20sp" />
+
+    <Button
+        style="@style/custom_title_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/theme"
+        android:text="xác nhận" />
+
+</LinearLayout>
