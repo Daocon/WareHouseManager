@@ -1,21 +1,13 @@
 package hieudx.fpoly.warehousemanager.fragments.Bill.Bill_In;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import hieudx.fpoly.warehousemanager.R;
+import androidx.fragment.app.Fragment;
+
 import hieudx.fpoly.warehousemanager.databinding.FragmentAddBillInBinding;
-import hieudx.fpoly.warehousemanager.databinding.FragmentBillInBinding;
 
 public class Add_Bill_In_Fragment extends Fragment {
     private FragmentAddBillInBinding binding;
@@ -28,6 +20,11 @@ public class Add_Bill_In_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentAddBillInBinding.inflate(inflater, container, false);
 
+        binding.btnAdd.setOnClickListener(view -> {
+            if (binding.spnSupplier.isSelected()){
+
+            }
+        });
         return binding.getRoot();
     }
 
