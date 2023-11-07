@@ -3,13 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.Product_Fragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="PRODUCT "
-        android:textSize="35sp"/>
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+      <ImageButton
+          android:id="@+id/btn_Sheet_Product"
+          android:layout_width="40dp"
+          android:layout_height="30dp"
+          android:src="@drawable/sort"
+          android:scaleType="fitXY"
+          android:background="@android:color/transparent"
+          android:layout_alignParentEnd="true"
+          android:layout_marginRight="30dp"
+          android:layout_marginTop="10dp"/>
 
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/rcv_List_Product"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_below="@+id/btn_Sheet_Product"
+          android:layout_marginTop="2dp"
+          tools:listitem="@layout/item_rcv_product" />
+
+      <com.google.android.material.floatingactionbutton.FloatingActionButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/fladd_Product"
+          android:layout_alignParentEnd="true"
+          android:layout_alignParentBottom="true"
+          android:layout_marginStart="10dp"
+          android:layout_marginTop="10dp"
+          android:layout_marginEnd="10dp"
+          android:layout_marginBottom="10dp"
+          android:src="@drawable/ic_add"
+          android:backgroundTint="@color/theme"/>
+  </RelativeLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_Add_Product"
+        android:layout_gravity="center"
+        android:text="Thêm"
+        android:background="@color/theme"
+        />
 </FrameLayout>

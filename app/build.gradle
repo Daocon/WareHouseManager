@@ -47,7 +47,6 @@ dependencies {
 
 //    Picasso để load ảnh , tất cả load ảnh trong áp phải dùng Picasso
     implementation 'com.squareup.picasso:picasso:2.8'
-
 //    thư viện animation
     implementation 'com.airbnb.android:lottie:6.1.0'
 
