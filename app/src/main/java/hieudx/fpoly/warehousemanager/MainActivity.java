@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,16 +19,15 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import hieudx.fpoly.warehousemanager.SQliteDB.DBHelper;
 import hieudx.fpoly.warehousemanager.adapters.Dash_Board_Adapter;
 import hieudx.fpoly.warehousemanager.databinding.ActivityMainBinding;
-import hieudx.fpoly.warehousemanager.fragments.Account_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Bill.Bill_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Category_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.member.Member_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Product_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Statistic_Fragment;
 import hieudx.fpoly.warehousemanager.models.item_dash_board;
+import hieudx.fpoly.warehousemanager.view.Account_Activity;
 
 public class MainActivity extends AppCompatActivity {
     public static ActivityMainBinding binding;
@@ -69,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.act_person) {
-            loadFragment(new Account_Fragment());
+            Intent intent = new Intent(MainActivity.this, Account_Activity.class);
+            startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

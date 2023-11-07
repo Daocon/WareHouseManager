@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -53,7 +54,6 @@ public class Member_Fragment extends Fragment {
         rcvUser.setLayoutManager(linearLayoutManager);
         adapter = new User_Adapter(getActivity(), list);
         rcvUser.setAdapter(adapter);
-
 
         binding.fltAddMember.setOnClickListener(new View.OnClickListener() {
             @Override

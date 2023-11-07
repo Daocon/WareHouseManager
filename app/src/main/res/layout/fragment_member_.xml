@@ -9,14 +9,14 @@
 
     <ImageButton
         android:id="@+id/btSheetMember"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="end"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="20dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
-        android:src="@drawable/sort" />
+        android:src="@drawable/baseline_sort_24" />
 
     <RelativeLayout
         android:id="@+id/viewMember"

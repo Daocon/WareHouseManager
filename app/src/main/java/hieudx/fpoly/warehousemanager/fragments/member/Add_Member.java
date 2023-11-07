@@ -147,6 +147,8 @@ public class Add_Member extends Fragment {
         email = binding.txtEmail.getText().toString();
         if (email.isEmpty()) {
             binding.tilEmail.setError("Vui lòng nhập email");
+        } else if (email.contains(" ")) {
+            binding.tilEmail.setError("Email không được chứa khoảng trắng");
         } else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
             binding.tilEmail.setError("Vui lòng nhập đúng định dạng email");
         } else {

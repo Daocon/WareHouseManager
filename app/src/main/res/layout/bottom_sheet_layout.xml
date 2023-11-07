@@ -24,12 +24,14 @@
             android:id="@+id/rbAZ"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="A - Z" />
 
         <RadioButton
             android:id="@+id/rbZA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="Z - A" />
 
     </RadioGroup>
