@@ -21,7 +21,7 @@ import hieudx.fpoly.warehousemanager.adapters.Bill_Out_Adapter;
 import hieudx.fpoly.warehousemanager.dao.Bill.Bill_Out_Dao;
 import hieudx.fpoly.warehousemanager.databinding.BotSheetSortBillBinding;
 import hieudx.fpoly.warehousemanager.databinding.FragmentBillOutBinding;
-import hieudx.fpoly.warehousemanager.models.Bill_Out;
+import hieudx.fpoly.warehousemanager.models.bill.Bill_Out;
 
 public class Bill_Out_Fragment extends Fragment {
     private FragmentBillOutBinding binding;

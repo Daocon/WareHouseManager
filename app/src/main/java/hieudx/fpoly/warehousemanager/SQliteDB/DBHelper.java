@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 //        tạo bảng phiếu nhập
         db.execSQL("CREATE TABLE Bill_in (\n" +
-                "    id        INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    id        TEXT PRIMARY KEY,\n" +
                 "    total     INTEGER NOT NULL,\n" +
                 "    date_time TEXT NOT NULL,\n" +
                 "    id_user   INTEGER REFERENCES User (id) \n" +
@@ -27,12 +27,13 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Bill_in_detail (\n" +
                 "    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    id_product  INTEGER REFERENCES Product (id),\n" +
-                "    id_supplier INTEGER REFERENCES Supplier (id) \n" +
+                "    id_supplier INTEGER REFERENCES Supplier (id), \n" +
+                "    id_bill_in  TEXT REFERENCES Bill_in (id) \n" +
                 ");\n");
 
 //        tạo bảng phiếu xuất
         db.execSQL("CREATE TABLE Bill_out (\n" +
-                "    id        INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    id        TEXT PRIMARY KEY,\n" +
                 "    total     INTEGER NOT NULL,\n" +
                 "    date_time TEXT    NOT NULL,\n" +
                 "    id_user   INTEGER REFERENCES user (id) \n" +
@@ -43,7 +44,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    address     TEXT    NOT NULL,\n" +
                 "    id_product  INTEGER REFERENCES Product (id),\n" +
-                "    id_delivery INTEGER REFERENCES Delivery (id) \n" +
+                "    id_delivery INTEGER REFERENCES Delivery (id), \n" +
+                "    id_bill_out TEXT REFERENCES Bill_out (id) \n" +
                 ");\n");
 
 //        tạo bảng thể loại sản phẩm
@@ -57,7 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    name        TEXT    NOT NULL,\n" +
                 "    price       INTEGER NOT NULL,\n" +
-                "    quantity    INTEGER NOT NULL,\n" +
+                "    quantity    INTEGER ,\n" +
                 "    id_category INTEGER REFERENCES Category (id),\n" +
                 "    sale_price  INTEGER NOT NULL\n" +
                 ");\n");
@@ -103,18 +105,27 @@ public class DBHelper extends SQLiteOpenHelper {
                 ");\n");
 
 //        thêm dữ liệu mẫu bảng phiếu nhập
-        db.execSQL("INSERT INTO Bill_in VALUES(0,1800000,'6/11/2023',2)");
-        db.execSQL("INSERT INTO Bill_in VALUES(1,2000,'6/11/2023',3)");
-        db.execSQL("INSERT INTO Bill_in VALUES(2,600000,'6/11/2023',4)");
-        db.execSQL("INSERT INTO Bill_in VALUES(3,100,'6/11/2023',2)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_21',1800000,'6/11/2023',2)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0510_32',2000,'6/11/2023',3)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_2012_43',600000,'6/11/2023',4)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0204_24',100,'6/11/2023',2)");
 
 //        thêm dữ liệu mẫu bảng phiếu xuất
-        db.execSQL("INSERT INTO Bill_out VALUES(0,1200000,'6/11/2023',2)");
-        db.execSQL("INSERT INTO Bill_out VALUES(1,1000,'6/11/2023',3)");
-        db.execSQL("INSERT INTO Bill_out VALUES(2,7000,'6/11/2023',4)");
-        db.execSQL("INSERT INTO Bill_out VALUES(3,80000,'6/11/2023',2)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PX_0711_21',1200000,'6/11/2023',2)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PN_0510_32',1000,'6/11/2023',3)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PN_2012_43',7000,'6/11/2023',4)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PN_0204_24',80000,'6/11/2023',2)");
 
-        //        thêm dữ liệu mẫu bảng User
+//        thêm dữ liệu mẫu bảng chi tiết phiếu nhập
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(0,1,1,'PN_0711_21')");
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(1,2,3,'PN_0510_32')");
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(2,3,3,'PN_2012_43')");
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(3,2,2,'PN_0204_24')");
+
+//        thêm dữ liệu mẫu bảng chi tiết phiếu xuất
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(0,'ababcabcbacbabcbacb',2,'PN_0204_24')");
+
+//        thêm dữ liệu mẫu bảng User
         db.execSQL("INSERT INTO User VALUES(1,'admin','admin','admin','admin@gmail.com','0973967774',0)");
         db.execSQL("INSERT INTO User VALUES(2,'hieudx','123','do xuan hieu','hieudx@gmail.com','0973967774',1)");
         db.execSQL("INSERT INTO User VALUES(3,'truongtq','123','tran quan truong','truongtq@gmail.com','0123456789',1)");

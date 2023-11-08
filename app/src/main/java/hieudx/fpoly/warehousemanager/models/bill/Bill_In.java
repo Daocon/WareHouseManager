@@ -1,26 +1,26 @@
-package hieudx.fpoly.warehousemanager.models;
+package hieudx.fpoly.warehousemanager.models.bill;
 
 public class Bill_In {
-    private int id;
+    private String id;
     private int total;
     private String date_time;
     private int id_user;
 
-    public Bill_In(int id, int total, String date_time, int id_user) {
+    public Bill_In() {
+    }
+
+    public Bill_In(String id, int total, String date_time, int id_user) {
         this.id = id;
         this.total = total;
         this.date_time = date_time;
         this.id_user = id_user;
     }
 
-    public Bill_In() {
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
