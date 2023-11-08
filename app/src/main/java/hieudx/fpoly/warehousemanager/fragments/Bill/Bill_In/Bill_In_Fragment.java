@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import hieudx.fpoly.warehousemanager.R;
-import hieudx.fpoly.warehousemanager.adapters.Bill_In_Adapter;
+import hieudx.fpoly.warehousemanager.adapters.bill.bill_in.Bill_In_Adapter;
 import hieudx.fpoly.warehousemanager.dao.Bill.Bill_In_Dao;
 import hieudx.fpoly.warehousemanager.databinding.BotSheetSortBillBinding;
 import hieudx.fpoly.warehousemanager.databinding.FragmentBillInBinding;
@@ -28,6 +28,7 @@ public class Bill_In_Fragment extends Fragment {
     private Bill_In_Dao dao;
     private ArrayList<Bill_In> list;
     private Bill_In_Adapter adapter;
+    private FragmentManager fragmentManager;
 
     public Bill_In_Fragment() {
     }
@@ -47,7 +48,6 @@ public class Bill_In_Fragment extends Fragment {
         binding.imgSort.setOnClickListener(view -> {
             Dialog dialog = new Dialog(getContext());
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
 
             BotSheetSortBillBinding btnBinding = BotSheetSortBillBinding.inflate(getLayoutInflater());
             dialog.setContentView(btnBinding.getRoot());
@@ -72,36 +72,35 @@ public class Bill_In_Fragment extends Fragment {
     }
 
     private void init() {
+        fragmentManager = requireActivity().getSupportFragmentManager();
         dao = new Bill_In_Dao(getContext());
         list = dao.getAll();
         if (!list.isEmpty()) {
             binding.btnAdd.setVisibility(View.GONE);
             binding.imgSort.setVisibility(View.VISIBLE);
             binding.rcv.setVisibility(View.VISIBLE);
-            binding.fltAdd.setVisibility(View.VISIBLE);
-            adapter = new Bill_In_Adapter(getContext(), list);
+            binding.fabAdd.setVisibility(View.VISIBLE);
+            adapter = new Bill_In_Adapter(getContext(), list, fragmentManager);
             binding.rcv.setAdapter(adapter);
         } else {
             binding.btnAdd.setVisibility(View.VISIBLE);
             binding.imgSort.setVisibility(View.GONE);
             binding.rcv.setVisibility(View.GONE);
-            binding.fltAdd.setVisibility(View.GONE);
+            binding.fabAdd.setVisibility(View.GONE);
         }
 
         binding.btnAdd.setOnClickListener(view -> {
             loadFragment();
         });
 
-        binding.fltAdd.setOnClickListener(view -> {
+        binding.fabAdd.setOnClickListener(view -> {
             loadFragment();
         });
     }
 
     private void loadFragment() {
-        Fragment newFragment = new Add_Bill_In_Fragment();
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.frag_container_main, newFragment)
+                .replace(R.id.frag_container_main, new Add_Bill_In_Fragment())
                 .addToBackStack(null) // Cho phép quay lại fragment trước đó nếu cần
                 .commit();
     }

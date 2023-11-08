@@ -1,25 +1,30 @@
-package hieudx.fpoly.warehousemanager.adapters;
+package hieudx.fpoly.warehousemanager.adapters.bill.bill_in;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvBillBinding;
+import hieudx.fpoly.warehousemanager.fragments.Bill.Bill_In.Detail_Bill_In_Fragment;
 import hieudx.fpoly.warehousemanager.models.bill.Bill_In;
 
 public class Bill_In_Adapter extends RecyclerView.Adapter<Bill_In_Adapter.ViewHolder> {
     private Context context;
     private ArrayList<Bill_In> list;
+    private FragmentManager fragmentManager;
 
-    public Bill_In_Adapter(Context context, ArrayList<Bill_In> list) {
+    public Bill_In_Adapter(Context context, ArrayList<Bill_In> list, FragmentManager fragmentManager) {
         this.context = context;
         this.list = list;
+        this.fragmentManager = fragmentManager;
     }
 
     @NonNull
@@ -36,6 +41,13 @@ public class Bill_In_Adapter extends RecyclerView.Adapter<Bill_In_Adapter.ViewHo
         holder.binding.tvNameUser.setText(user_dao.getUserById(list.get(position).getId_user()).getName());
         holder.binding.tvDateTime.setText(list.get(position).getDate_time());
         holder.binding.tvTotal.setText(list.get(position).getTotal()+"");
+
+        holder.itemView.setOnClickListener(view -> {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.frag_container_main, new Detail_Bill_In_Fragment())
+                    .addToBackStack(null) // Cho phép quay lại fragment trước đó nếu cần
+                    .commit();
+        });
     }
 
     @Override

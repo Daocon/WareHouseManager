@@ -110,6 +110,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Bill_in VALUES('PN_2012_43',600000,'6/11/2023',4)");
         db.execSQL("INSERT INTO Bill_in VALUES('PN_0204_24',100,'6/11/2023',2)");
 
+
 //        thêm dữ liệu mẫu bảng phiếu xuất
         db.execSQL("INSERT INTO Bill_out VALUES('PX_0711_21',1200000,'6/11/2023',2)");
         db.execSQL("INSERT INTO Bill_out VALUES('PN_0510_32',1000,'6/11/2023',3)");
@@ -123,7 +124,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Bill_in_detail VALUES(3,2,2,'PN_0204_24')");
 
 //        thêm dữ liệu mẫu bảng chi tiết phiếu xuất
-        db.execSQL("INSERT INTO Bill_in_detail VALUES(0,'ababcabcbacbabcbacb',2,'PN_0204_24')");
+//        db.execSQL("INSERT INTO Bill_in_detail VALUES(0,'ababcabcbacbabcbacb',2,'PN_0204_24')");
 
 //        thêm dữ liệu mẫu bảng User
         db.execSQL("INSERT INTO User VALUES(1,'admin','admin','admin','admin@gmail.com','0973967774',0)");
