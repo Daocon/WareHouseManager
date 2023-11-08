@@ -57,14 +57,24 @@ public class User_Dao {
         long row = db.insert("User", null, values);
         return (row > 0);
     }
-    public boolean deleteUser(int id) {
+
+    public int deleteUser(int id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        long row = db.delete("User", "id=?", new String[]{String.valueOf(id)});
-        return (row > 0);
+        Cursor cursor = db.rawQuery("SELECT * FROM Bill_in WHERE id_user = ?", new String[]{String.valueOf(id)});
+
+        if (cursor.getCount() != 0) {
+            return -1;
+        }
+
+        long check = db.delete("User", "id=?", new String[]{String.valueOf(id)});
+        if (check == -1) {
+            return 0;
+        }
+        return 1;
     }
 
     public User getUserById(int id) {
-         user = new User();
+        user = new User();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM User WHERE id = ?", new String[]{String.valueOf(id)});
         if (c.getCount() != 0) {

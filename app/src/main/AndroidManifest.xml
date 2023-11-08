@@ -14,7 +14,7 @@
         android:theme="@style/Theme.WareHouseManager"
         tools:targetApi="31">
         <activity
-            android:name=".view.item_add_product"
+            android:name=".view.Account_Activity"
             android:exported="false" />
         <activity
             android:name=".view.Forgot_Reset_Pass_Activity"

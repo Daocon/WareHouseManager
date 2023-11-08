@@ -89,13 +89,23 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.viewholer> {
                 builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (userDao.deleteUser(muser.getId())) {
-                            listUser.clear();
-                            listUser.addAll(userDao.getAllUser());
-                            notifyDataSetChanged();
-                            Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                            detailDialog.dismiss();
+                        int check = userDao.deleteUser(muser.getId());
+                        Toast.makeText(context, "hi "+ check, Toast.LENGTH_SHORT).show();
+                        switch (check){
+                            case 1:
+                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                listUser.clear();
+                                listUser.addAll(userDao.getAllUser());
+                                notifyDataSetChanged();
+                                dialog.dismiss();
+                                detailDialog.dismiss();
+                                break;
+                            case 0:
+                                Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                                break;
+                            case -1:
+                                Toast.makeText(context, "Thành viên tồn tại trong phiếu nhập, không được xóa", Toast.LENGTH_SHORT).show();
+                                break;
                         }
                     }
                 });
