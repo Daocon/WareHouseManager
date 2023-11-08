@@ -48,6 +48,7 @@
         android:id="@+id/flt_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/theme"
         android:src="@drawable/ic_add"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

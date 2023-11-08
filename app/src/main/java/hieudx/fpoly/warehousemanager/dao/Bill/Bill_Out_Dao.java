@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.SQliteDB.DBHelper;
-import hieudx.fpoly.warehousemanager.models.Bill_Out;
+import hieudx.fpoly.warehousemanager.models.bill.Bill_Out;
 
 public class Bill_Out_Dao {
     private DBHelper dbHelper;
@@ -25,7 +25,7 @@ public class Bill_Out_Dao {
         if (c.getCount() != 0) {
             c.moveToFirst();
             do {
-                list.add(new Bill_Out(c.getInt(0), c.getInt(1),c.getString(2),c.getInt(3)));
+                list.add(new Bill_Out(c.getString(0), c.getInt(1),c.getString(2),c.getInt(3)));
             } while (c.moveToNext());
         }
         return list;

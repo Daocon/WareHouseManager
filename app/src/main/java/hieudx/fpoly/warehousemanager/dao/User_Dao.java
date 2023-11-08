@@ -9,7 +9,6 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.SQliteDB.DBHelper;
-import hieudx.fpoly.warehousemanager.models.Staff;
 import hieudx.fpoly.warehousemanager.models.User;
 
 public class User_Dao {
@@ -71,7 +70,7 @@ public class User_Dao {
         if (c.getCount() != 0) {
             c.moveToFirst();
             user.setId(c.getInt(0));
-            user.setName(c.getString(1));
+            user.setName(c.getString(3));
         }
         return user;
     }
