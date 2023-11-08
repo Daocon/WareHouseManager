@@ -11,13 +11,13 @@ import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvBillBinding;
-import hieudx.fpoly.warehousemanager.models.Bill_In;
+import hieudx.fpoly.warehousemanager.models.Bill_Out;
 
-public class Bill_In_Adapter extends RecyclerView.Adapter<Bill_In_Adapter.ViewHolder> {
+public class Bill_Out_Adapter extends RecyclerView.Adapter<Bill_Out_Adapter.ViewHolder> {
     private Context context;
-    private ArrayList<Bill_In> list;
+    private ArrayList<Bill_Out> list;
 
-    public Bill_In_Adapter(Context context, ArrayList<Bill_In> list) {
+    public Bill_Out_Adapter(Context context, ArrayList<Bill_Out> list) {
         this.context = context;
         this.list = list;
     }
@@ -35,7 +35,7 @@ public class Bill_In_Adapter extends RecyclerView.Adapter<Bill_In_Adapter.ViewHo
         User_Dao user_dao = new User_Dao(context);
         holder.binding.tvNameUser.setText(user_dao.getUserById(list.get(position).getId_user()).getName());
         holder.binding.tvDateTime.setText(list.get(position).getDate_time());
-        holder.binding.tvTotal.setText(list.get(position).getTotal()+"");
+        holder.binding.tvTotal.setText(list.get(position).getTotal() + "");
     }
 
     @Override

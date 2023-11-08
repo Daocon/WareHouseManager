@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
     static String DB_NAME = "WareHouseManager.db";
-    static int DB_VERSION = 1;
+    static int DB_VERSION = 2;
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -102,12 +102,17 @@ public class DBHelper extends SQLiteOpenHelper {
                 "    coefficient  INTEGER NOT NULL\n" +
                 ");\n");
 
-
-
 //        thêm dữ liệu mẫu bảng phiếu nhập
         db.execSQL("INSERT INTO Bill_in VALUES(0,1800000,'6/11/2023',2)");
         db.execSQL("INSERT INTO Bill_in VALUES(1,2000,'6/11/2023',3)");
         db.execSQL("INSERT INTO Bill_in VALUES(2,600000,'6/11/2023',4)");
+        db.execSQL("INSERT INTO Bill_in VALUES(3,100,'6/11/2023',2)");
+
+//        thêm dữ liệu mẫu bảng phiếu xuất
+        db.execSQL("INSERT INTO Bill_out VALUES(0,1200000,'6/11/2023',2)");
+        db.execSQL("INSERT INTO Bill_out VALUES(1,1000,'6/11/2023',3)");
+        db.execSQL("INSERT INTO Bill_out VALUES(2,7000,'6/11/2023',4)");
+        db.execSQL("INSERT INTO Bill_out VALUES(3,80000,'6/11/2023',2)");
 
         //        thêm dữ liệu mẫu bảng User
         db.execSQL("INSERT INTO User VALUES(1,'admin','admin','admin','admin@gmail.com','0973967774',0)");

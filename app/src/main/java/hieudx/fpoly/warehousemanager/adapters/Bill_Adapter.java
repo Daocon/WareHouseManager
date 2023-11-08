@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hieudx.fpoly.warehousemanager.fragments.Bill.Bill_In.Bill_In_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.Bill.Bill_Out_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.Bill.Bill_Out.Bill_Out_Fragment;
 
 public class Bill_Adapter extends FragmentStateAdapter {
     private final List<Fragment> fragmentList = new ArrayList<>();

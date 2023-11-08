@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_margin="20dp"
     android:orientation="vertical"
-    tools:context=".fragments.Bill.Bill_In.Add_Bill_In_Fragment">
+    tools:context=".fragments.Bill.Bill_Out.Add_Bill_Out_Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,13 +30,27 @@
             style="@style/custom_title_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="nhà cung cấp" />
+            android:text="đơn vị vận chuyển" />
 
         <Spinner
             android:id="@+id/spn_supplier"
             style="@style/custom_tv_add_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+
+        <TextView
+            style="@style/custom_title_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="thêm sản phẩm" />
+
+        <EditText
+            android:id="@+id/ed_add_delivery"
+            style="@style/custom_tv_add_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="nhập địa chỉ nhận hàng" />
 
         <TextView
             style="@style/custom_title_add"
@@ -83,6 +97,7 @@
             android:textColor="#F30C0C"
             android:textSize="20sp" />
     </LinearLayout>
+
 
     <Button
         android:id="@+id/btnAdd"
