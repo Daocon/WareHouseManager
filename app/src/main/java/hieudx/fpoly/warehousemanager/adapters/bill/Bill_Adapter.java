@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.adapters;
+package hieudx.fpoly.warehousemanager.adapters.bill;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import hieudx.fpoly.warehousemanager.R;
-import hieudx.fpoly.warehousemanager.adapters.Bill_Out_Adapter;
+import hieudx.fpoly.warehousemanager.adapters.bill.bill_out.Bill_Out_Adapter;
 import hieudx.fpoly.warehousemanager.dao.Bill.Bill_Out_Dao;
 import hieudx.fpoly.warehousemanager.databinding.BotSheetSortBillBinding;
 import hieudx.fpoly.warehousemanager.databinding.FragmentBillOutBinding;

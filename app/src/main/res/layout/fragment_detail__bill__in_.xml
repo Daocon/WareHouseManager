@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Base.Theme.Bill"
     android:layout_margin="20dp"
     android:orientation="vertical"
+    android:theme="@style/Base.Theme.Bill"
     tools:context=".fragments.Bill.Bill_In.Detail_Bill_In_Fragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,16 +37,25 @@
             android:id="@+id/element2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:paddingBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/element1">
 
             <TextView
+                android:id="@+id/tv_name_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Nhân viên: Đỗ Xuân Hiếu"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <TextView
                 android:id="@+id/tv_id_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Nhân viên: NV0001 - Cao Văn Chỉnh"
+                android:hint=" - ID: 1"
                 android:textColor="@color/black"
                 android:textSize="16dp" />
         </LinearLayout>
@@ -62,7 +71,7 @@
             app:layout_constraintTop_toBottomOf="@id/element2">
 
             <TextView
-                android:id="@+id/tv_id_supplier"
+                android:id="@+id/tv_name_supplier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Nhà cung cấp: Vinamilk"
@@ -70,7 +79,7 @@
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/tv_phone_number"
+                android:id="@+id/tv_phone_supplier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint=" - Sđt: 0123456789"
@@ -101,6 +110,7 @@
             android:id="@+id/rcv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/element4" />
@@ -157,6 +167,14 @@
                 android:background="@drawable/custom_bgr_btn_delete"
                 android:text="Xóa"
                 android:textColor="@color/red" />
+
+            <Button
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/onboarding"
+                android:layout_height="wrap_content"
+                android:text="In phiếu" />
 
             <Button
                 android:id="@+id/btnUpdate"

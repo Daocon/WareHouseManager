@@ -1,16 +1,20 @@
 package hieudx.fpoly.warehousemanager.adapters.bill.bill_in;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.R;
+import hieudx.fpoly.warehousemanager.dao.Bill.Bill_In_Dao;
 import hieudx.fpoly.warehousemanager.dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvBillBinding;
 import hieudx.fpoly.warehousemanager.fragments.Bill.Bill_In.Detail_Bill_In_Fragment;
@@ -36,17 +40,26 @@ public class Bill_In_Adapter extends RecyclerView.Adapter<Bill_In_Adapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.binding.tvIdBillIn.setText(list.get(position).getId());
+        holder.binding.tvIdBill.setText(list.get(position).getId());
         User_Dao user_dao = new User_Dao(context);
         holder.binding.tvNameUser.setText(user_dao.getUserById(list.get(position).getId_user()).getName());
         holder.binding.tvDateTime.setText(list.get(position).getDate_time());
-        holder.binding.tvTotal.setText(list.get(position).getTotal()+"");
+        Bill_In_Dao bill_in_dao = new Bill_In_Dao(context);
+
+        String total = bill_in_dao.getSumTotal(list.get(position).getId());
+        holder.binding.tvTotal.setText(total);
 
         holder.itemView.setOnClickListener(view -> {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.frag_container_main, new Detail_Bill_In_Fragment())
+            Fragment fragment = new Detail_Bill_In_Fragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("data", list.get(position));
+            bundle.putString("total", total);
+            fragment.setArguments(bundle);
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.frag_container_main, fragment)
                     .addToBackStack(null) // Cho phép quay lại fragment trước đó nếu cần
-                    .commit();
+                    .commitAllowingStateLoss();
+//            fragmentManager.executePendingTransactions();
         });
     }
 

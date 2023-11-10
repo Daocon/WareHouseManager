@@ -30,7 +30,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_id_bill_in"
+                    android:id="@+id/tv_id_bill"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Mã hoá đơn"

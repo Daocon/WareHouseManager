@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.adapters.bill.bill_in.Bill_In_Adapter;
@@ -53,14 +52,14 @@ public class Bill_In_Fragment extends Fragment {
             dialog.setContentView(btnBinding.getRoot());
 
             btnBinding.rdGr.setOnCheckedChangeListener(((radioGroup, i) -> {
-                if (i == R.id.rd_sort_asc) {
-                    Collections.sort(list, (bill_in, bill_in1) -> Integer.compare(bill_in.getTotal(), bill_in1.getTotal()));
-                    adapter.notifyDataSetChanged();
-
-                } else {
-                    Collections.sort(list, (bill_in, bill_in1) -> Integer.compare(bill_in1.getTotal(), bill_in.getTotal()));
-                    adapter.notifyDataSetChanged();
-                }
+//                if (i == R.id.rd_sort_asc) {
+//                    Collections.sort(list, (bill_in, bill_in1) -> Integer.compare(bill_in.getTotal(), bill_in1.getTotal()));
+//                    adapter.notifyDataSetChanged();
+//
+//                } else {
+//                    Collections.sort(list, (bill_in, bill_in1) -> Integer.compare(bill_in1.getTotal(), bill_in.getTotal()));
+//                    adapter.notifyDataSetChanged();
+//                }
             }));
 
             dialog.show();

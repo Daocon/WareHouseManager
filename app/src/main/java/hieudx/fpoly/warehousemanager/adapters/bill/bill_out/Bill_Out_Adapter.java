@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.adapters;
+package hieudx.fpoly.warehousemanager.adapters.bill.bill_out;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -31,7 +31,7 @@ public class Bill_Out_Adapter extends RecyclerView.Adapter<Bill_Out_Adapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.binding.tvIdBillIn.setText(list.get(position).getId());
+        holder.binding.tvIdBill.setText(list.get(position).getId());
         User_Dao user_dao = new User_Dao(context);
         holder.binding.tvNameUser.setText(user_dao.getUserById(list.get(position).getId_user()).getName());
         holder.binding.tvDateTime.setText(list.get(position).getDate_time());
