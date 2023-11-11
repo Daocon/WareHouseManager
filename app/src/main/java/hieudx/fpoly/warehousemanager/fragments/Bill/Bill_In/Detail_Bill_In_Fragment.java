@@ -61,7 +61,7 @@ public class Detail_Bill_In_Fragment extends Fragment {
                     long check = bill_in_dao.delete(bill_in.getId());
                     if (check == 1) {
                         Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
-//                    requireActivity().getSupportFragmentManager().popBackStack();
+                    requireActivity().getSupportFragmentManager().popBackStack();
                     } else {
                         Toast.makeText(getContext(), "Xóa lỗi", Toast.LENGTH_SHORT).show();
                     }

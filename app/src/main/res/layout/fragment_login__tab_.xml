@@ -4,37 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Base.Theme.WareHouseManager"
     tools:context=".fragments.login_signup.Login_Tab_Fragment">
 
-    <EditText
-        android:id="@+id/edUsername"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/custom_ed_bgr"
-        android:drawableRight="@drawable/ic_person"
-        android:hint="Username"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:textColorHighlight="@color/cardview_dark_background"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.299"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintWidth_percent=".8">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edUsername"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/custom_ed_bgr"
+            android:drawableRight="@drawable/ic_person"
+            android:hint="nhập tài khoản"
+            android:textColorHighlight="@color/cardview_dark_background" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edUsername"
+        app:layout_constraintTop_toBottomOf="@+id/username"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintWidth_percent=".8"
         app:passwordToggleEnabled="true">
@@ -44,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/custom_ed_bgr"
-            android:hint="Password"
+            android:hint="nhập mật khẩu"
             android:inputType="textPassword"
             android:textColorHighlight="@color/cardview_dark_background" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -55,13 +59,14 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/purple"
         android:text="Login"
+        android:theme="@style/Base.Theme.WareHouseManager"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edUsername"
+        app:layout_constraintTop_toBottomOf="@+id/username"
         app:layout_constraintVertical_bias="0.704"
         app:layout_constraintWidth_percent=".8" />
 

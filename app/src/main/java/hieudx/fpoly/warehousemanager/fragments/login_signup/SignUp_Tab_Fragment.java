@@ -1,17 +1,17 @@
 package hieudx.fpoly.warehousemanager.fragments.login_signup;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import hieudx.fpoly.warehousemanager.R;
+import androidx.fragment.app.Fragment;
+
+import hieudx.fpoly.warehousemanager.databinding.FragmentSignUpTabBinding;
 
 
 public class SignUp_Tab_Fragment extends Fragment {
+    private FragmentSignUpTabBinding binding;
 
     public SignUp_Tab_Fragment() {
     }
@@ -19,7 +19,9 @@ public class SignUp_Tab_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up__tab_, container, false);
+        binding = FragmentSignUpTabBinding.inflate(inflater, container, false);
+
+
+        return binding.getRoot();
     }
 }

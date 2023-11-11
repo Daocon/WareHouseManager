@@ -26,10 +26,10 @@
             android:name=".view.Plash_Screen_Activity"
             android:exported="false" />
         <activity
-            android:name=".view.Login_SignUp_Activity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.Login_SignUp_Activity"
             android:theme="@style/Base.Theme.Bill"
             android:exported="true">
             <intent-filter>

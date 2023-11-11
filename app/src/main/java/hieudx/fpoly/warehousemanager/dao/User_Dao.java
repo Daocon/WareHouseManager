@@ -2,6 +2,7 @@ package hieudx.fpoly.warehousemanager.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -14,9 +15,12 @@ import hieudx.fpoly.warehousemanager.models.User;
 public class User_Dao {
     private final DBHelper dbHelper;
     private User user;
+    private SharedPreferences share;
+
 
     public User_Dao(Context context) {
         dbHelper = new DBHelper(context);
+        share = context.getSharedPreferences("ACCOUNT", Context.MODE_PRIVATE);
     }
 
     public ArrayList<User> getAllUser() {
@@ -81,5 +85,25 @@ public class User_Dao {
             user = new User(c.getInt(0), c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(5), c.getInt(6));
         }
         return user;
+    }
+
+    public boolean checkLogin(String username, String password) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM User WHERE username = ? AND password = ?", new String[]{username, password});
+        if (c.getCount() != 0) {
+            c.moveToFirst();
+            SharedPreferences.Editor editor = share.edit();
+            editor.putString("id", c.getString(0));
+            editor.putString("username", c.getString(1));
+            editor.putString("password", c.getString(2));
+            editor.putString("name", c.getString(3));
+            editor.putString("email", c.getString(4));
+            editor.putString("phone", c.getString(5));
+            editor.putString("role", c.getString(6));
+            editor.commit();
+            return true;
+        } else {
+            return false;
+        }
     }
 }
