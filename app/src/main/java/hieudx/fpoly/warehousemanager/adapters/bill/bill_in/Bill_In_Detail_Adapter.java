@@ -9,15 +9,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import hieudx.fpoly.warehousemanager.dao.Product_Dao;
+import hieudx.fpoly.warehousemanager.dao.Supplier_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvDetailBillInBinding;
-import hieudx.fpoly.warehousemanager.models.bill.Bill_product_in;
+import hieudx.fpoly.warehousemanager.models.bill.Bill_in_detail;
 
 public class Bill_In_Detail_Adapter extends RecyclerView.Adapter<Bill_In_Detail_Adapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<Bill_product_in> list;
+    private ArrayList<Bill_in_detail> list;
 
-    public Bill_In_Detail_Adapter(Context context, ArrayList<Bill_product_in> list) {
+    public Bill_In_Detail_Adapter(Context context, ArrayList<Bill_in_detail> list) {
         this.context = context;
         this.list = list;
     }
@@ -31,10 +33,16 @@ public class Bill_In_Detail_Adapter extends RecyclerView.Adapter<Bill_In_Detail_
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        int index = position+1;
-        holder.binding.tvNameProduct.setText(index + ". " + list.get(position).getId() + " - " + list.get(position).getName());
-        holder.binding.tvPrice.setText(list.get(position).getPrice()+" x "+list.get(position).getQuantity());
-        holder.binding.tvTotal.setText(list.get(position).getTotal()+"");
+        int index = position + 1;
+        Product_Dao product_dao = new Product_Dao(context);
+        String nameProduct = product_dao.getProductById(list.get(position).getId_product()).getName();
+        Supplier_Dao supplier_dao = new Supplier_Dao(context);
+        int sup_id = product_dao.getProductById(list.get(position).getId_product()).getId_supplier();
+
+        String nameSupplier = supplier_dao.getSupplierById(sup_id).getName();
+        holder.binding.tvNameProduct.setText(index + ". " + list.get(position).getId_product() + " - " + nameProduct + " - " + nameSupplier);
+        holder.binding.tvPrice.setText(list.get(position).getPrice() + " x " + list.get(position).getQuantity());
+        holder.binding.tvTotal.setText(list.get(position).getTotal() + "");
     }
 
     @Override

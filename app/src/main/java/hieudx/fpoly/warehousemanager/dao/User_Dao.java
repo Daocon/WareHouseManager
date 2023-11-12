@@ -93,13 +93,13 @@ public class User_Dao {
         if (c.getCount() != 0) {
             c.moveToFirst();
             SharedPreferences.Editor editor = share.edit();
-            editor.putString("id", c.getString(0));
+            editor.putInt("id", c.getInt(0));
             editor.putString("username", c.getString(1));
             editor.putString("password", c.getString(2));
             editor.putString("name", c.getString(3));
             editor.putString("email", c.getString(4));
             editor.putString("phone", c.getString(5));
-            editor.putString("role", c.getString(6));
+            editor.putInt("role", c.getInt(6));
             editor.commit();
             return true;
         } else {

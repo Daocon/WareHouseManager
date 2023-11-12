@@ -1,26 +1,22 @@
 package hieudx.fpoly.warehousemanager.models.bill;
 
-public class Bill_product_in {
+public class Bill_in_detail {
     private int id;
-    private String name;
     private int price;
-    private int sale;
     private int quantity;
     private String total;
-    private int id_category;
+    private int id_product;
     private String id_bill_in;
 
-    public Bill_product_in() {
+    public Bill_in_detail() {
     }
 
-    public Bill_product_in(int id, String name, int price, int sale, int quantity, String total, int id_category, String id_bill_in) {
+    public Bill_in_detail(int id, int price, int quantity, String total, int id_product, String id_bill_in) {
         this.id = id;
-        this.name = name;
         this.price = price;
-        this.sale = sale;
         this.quantity = quantity;
         this.total = total;
-        this.id_category = id_category;
+        this.id_product = id_product;
         this.id_bill_in = id_bill_in;
     }
 
@@ -32,28 +28,12 @@ public class Bill_product_in {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getPrice() {
         return price;
     }
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public int getSale() {
-        return sale;
-    }
-
-    public void setSale(int sale) {
-        this.sale = sale;
     }
 
     public int getQuantity() {
@@ -72,12 +52,12 @@ public class Bill_product_in {
         this.total = total;
     }
 
-    public int getId_category() {
-        return id_category;
+    public int getId_product() {
+        return id_product;
     }
 
-    public void setId_category(int id_category) {
-        this.id_category = id_category;
+    public void setId_product(int id_product) {
+        this.id_product = id_product;
     }
 
     public String getId_bill_in() {

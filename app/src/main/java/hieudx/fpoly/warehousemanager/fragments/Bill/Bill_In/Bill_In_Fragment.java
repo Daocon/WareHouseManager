@@ -53,11 +53,21 @@ public class Bill_In_Fragment extends Fragment {
 
             btnBinding.rdGr.setOnCheckedChangeListener(((radioGroup, i) -> {
 //                if (i == R.id.rd_sort_asc) {
-//                    Collections.sort(list, (bill_in, bill_in1) -> Integer.compare(bill_in.getTotal(), bill_in1.getTotal()));
+//                    Collections.sort(list, new Comparator<Bill_In>() {
+//                        @Override
+//                        public int compare(Bill_In bill_in, Bill_In bill_in1) {
+//                            return bill_in.getTotal().compareTo(bill_in1.getTotal());
+//                        }
+//                    });
 //                    adapter.notifyDataSetChanged();
 //
 //                } else {
-//                    Collections.sort(list, (bill_in, bill_in1) -> Integer.compare(bill_in1.getTotal(), bill_in.getTotal()));
+//                    Collections.sort(list, new Comparator<Bill_In>() {
+//                        @Override
+//                        public int compare(Bill_In bill_in, Bill_In bill_in1) {
+//                            return bill_in1.getTotal().compareTo(bill_in1.getTotal());
+//                        }
+//                    });
 //                    adapter.notifyDataSetChanged();
 //                }
             }));

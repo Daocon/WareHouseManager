@@ -45,7 +45,6 @@ public class Bill_In_Adapter extends RecyclerView.Adapter<Bill_In_Adapter.ViewHo
         holder.binding.tvNameUser.setText(user_dao.getUserById(list.get(position).getId_user()).getName());
         holder.binding.tvDateTime.setText(list.get(position).getDate_time());
         Bill_In_Dao bill_in_dao = new Bill_In_Dao(context);
-
         String total = bill_in_dao.getSumTotal(list.get(position).getId());
         holder.binding.tvTotal.setText(total);
 
@@ -53,7 +52,7 @@ public class Bill_In_Adapter extends RecyclerView.Adapter<Bill_In_Adapter.ViewHo
             Fragment fragment = new Detail_Bill_In_Fragment();
             Bundle bundle = new Bundle();
             bundle.putSerializable("data", list.get(position));
-            bundle.putString("total", total);
+            bundle.putString("sumTotal", total);
             fragment.setArguments(bundle);
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.frag_container_main, fragment)
