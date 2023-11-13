@@ -14,15 +14,12 @@ import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvProductBillBinding;
 import hieudx.fpoly.warehousemanager.models.Product;
-import hieudx.fpoly.warehousemanager.models.bill.CheckedItemData;
 
 public class Bill_In_Product_Add_Adapter extends RecyclerView.Adapter<Bill_In_Product_Add_Adapter.ViewHolder> {
     private Context context;
     private ArrayList<Product> list;
     private ArrayList<Product> list_checked;
     private OnCheckedChangeListener listener;
-    private ArrayList<CheckedItemData> checkedItemList = new ArrayList<>();
-
 
     public Bill_In_Product_Add_Adapter(Context context, ArrayList<Product> list, OnCheckedChangeListener listener) {
         this.context = context;
