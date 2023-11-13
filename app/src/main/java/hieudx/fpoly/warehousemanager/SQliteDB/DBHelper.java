@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
     static String DB_NAME = "WareHouseManager.db";
-    static int DB_VERSION = 1;
+    static int DB_VERSION = 3;
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -44,6 +44,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Product (\n" +
                 "    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    name        TEXT    NOT NULL,\n" +
+                "    price       INTEGER DEFAULT (0),\n" +
+                "    quantity    INTEGER DEFAULT (1),\n" +
                 "    img         TEXT    ,\n" +
                 "    id_category INTEGER REFERENCES Category (id),\n" +
                 "    id_supplier INTEGER REFERENCES Supplier (id) \n" +
@@ -134,10 +136,10 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Supplier VALUES(3,'PEPSICO','0123456789','Số 3-4-5, lô CN2, đường số 2, khu công nghiệp Sóng Thần 3, Phường Phú Tân, Thành phố Thủ Dầu Một, Tỉnh Bình Dương, Việt Nam','3702139167')");
 
 //        thêm dữ liệu mẫu bảng Product
-        db.execSQL("INSERT INTO Product VALUES(0,'Bánh trung thu',null,1,0)");
-        db.execSQL("INSERT INTO Product VALUES(1,'Bim bim',null,2,3)");
-        db.execSQL("INSERT INTO Product VALUES(2,'Pepsi',null,2,3)");
-        db.execSQL("INSERT INTO Product VALUES(3,'Kimbap',null,3,2)");
+        db.execSQL("INSERT INTO Product VALUES(0,'Bánh trung thu',0,1,null,1,0)");
+        db.execSQL("INSERT INTO Product VALUES(1,'Bim bim',0,1,null,2,3)");
+        db.execSQL("INSERT INTO Product VALUES(2,'Pepsi',0,1,null,2,3)");
+        db.execSQL("INSERT INTO Product VALUES(3,'Kimbap',0,1,null,3,2)");
 
 //        thêm dữ liệu mẫu bảng phiếu nhập
         db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_21','6/11/2023',2)");

@@ -1,6 +1,7 @@
 package hieudx.fpoly.warehousemanager.dao.Bill;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -23,6 +24,33 @@ public class Bill_In_Dao {
     public Bill_In_Dao(Context context) {
         dbHelper = new DBHelper(context);
         this.context = context;
+    }
+
+    public boolean insertDetail(Bill_in_detail bill_in_detail) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("price", bill_in_detail.getPrice());
+        values.put("quantity", bill_in_detail.getQuantity());
+        values.put("id_product", bill_in_detail.getId_product());
+        values.put("id_bill_in", bill_in_detail.getId_product());
+        long check = db.insert("Bill_in_detail", null, values);
+        if (check == -1) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean insert(Bill_In bill_in) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("id", bill_in.getId());
+        values.put("date_time", bill_in.getDate_time());
+        values.put("id_user", bill_in.getId_user());
+        long check = db.insert("Bill_in", null, values);
+        if (check == -1) {
+            return false;
+        }
+        return true;
     }
 
     public ArrayList<Bill_In> getAll() {

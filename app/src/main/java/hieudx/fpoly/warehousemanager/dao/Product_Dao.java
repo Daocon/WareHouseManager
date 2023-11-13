@@ -24,7 +24,7 @@ public class Product_Dao {
         if (c.getCount() != 0) {
             c.moveToFirst();
             do {
-                list.add(new Product(c.getInt(0), c.getString(1), c.getString(2), c.getInt(3), c.getInt(4)));
+                list.add(new Product(c.getInt(0), c.getString(1), c.getInt(2), c.getInt(3), c.getString(4),c.getInt(5),c.getInt(6)));
             } while (c.moveToNext());
         }
         return list;
