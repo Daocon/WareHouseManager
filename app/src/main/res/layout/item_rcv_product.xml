@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="100sp"
         android:orientation="horizontal"
+        android:layout_marginHorizontal="10sp"
+
         >
     <ImageView
         android:id="@+id/img_Product"
@@ -22,12 +24,13 @@
         android:layout_width="wrap_content"
         android:layout_height="100sp"
         android:orientation="vertical"
-        android:gravity="center">
+        android:layout_weight="9"
+        >
         <TextView
             android:id="@+id/txt_Name_Product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:text="Tên"
             />
         <TextView
