@@ -1,5 +1,6 @@
 package hieudx.fpoly.warehousemanager.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -29,9 +30,24 @@ public class Category_Dao {
         }
         return list;
     }
-//    public boolean insertCategory(){
-//        SQLiteDatabase database = dbHelper.getWritableDatabase();
-//
-//
-//    }
+    public boolean insertCategory(Category category){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name",category.getName());
+        long check = database.insert("Category",null,values);
+        return check > 0;
+
+    }
+    public boolean updateCategory(Category category){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name",category.getName());
+        long check = database.update("Category",values, "id = ?", new String[]{String.valueOf(category.getId())});
+        return check > 0;
+    }
+    public boolean deleteCategory(Category category){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        long check = database.delete("Category","id = ?", new String[]{String.valueOf(category.getId())});
+        return check > 0;
+    }
 }

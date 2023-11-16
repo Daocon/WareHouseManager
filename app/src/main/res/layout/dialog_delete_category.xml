@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200sp"
+    android:layout_gravity="center_vertical"
+    android:background="@drawable/custom_khung_delete"
+    >
+    <TextView
+        android:id="@+id/txtBancochanchanmuonxoa"
+        android:layout_width="match_parent"
+        android:layout_height="130sp"
+        android:text="Bạn có chắc chắn muốn xóa không?"
+        android:gravity="center"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70sp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/txtBancochanchanmuonxoa">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_out_Delete_Category"
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/custom_btn_delete"
+           android:text="Thoát"
+            android:textColor="#4696EB"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_confilm_Delete_Category"
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/custom_btn_delete"
+            android:text="Xóa"
+            android:textColor="#4696EB"
+            />
+    </LinearLayout>
+</RelativeLayout>
