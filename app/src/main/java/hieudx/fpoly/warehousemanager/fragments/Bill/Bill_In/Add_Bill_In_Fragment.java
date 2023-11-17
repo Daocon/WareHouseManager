@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.adapters.bill.bill_in.Bill_In_Product_Add_Adapter;
 import hieudx.fpoly.warehousemanager.dao.Bill.Bill_In_Dao;
 import hieudx.fpoly.warehousemanager.dao.Product_Dao;
@@ -27,6 +30,7 @@ public class Add_Bill_In_Fragment extends Fragment {
     private FragmentAddBillInBinding binding;
     private ArrayList<Product> list_product = new ArrayList<>();
     private ArrayList<Product> list_product_checked = new ArrayList<>();
+    private ArrayList<Bill_In> list_bill_in = new ArrayList<>();
 
     public Add_Bill_In_Fragment() {
     }
@@ -43,7 +47,8 @@ public class Add_Bill_In_Fragment extends Fragment {
 
         Bill_In bill_in = new Bill_In();
         Bill_In_Dao bill_in_dao = new Bill_In_Dao(getContext());
-        bill_in.setId(bill_in_dao.genarateIdBillIn(list_product.size()));
+        list_bill_in = bill_in_dao.getAll();
+        bill_in.setId(bill_in_dao.genarateIdBillIn(list_bill_in.size()));
         binding.tvIdBillIn.setText(bill_in.getId());
 
         Calendar calendar = Calendar.getInstance();
@@ -57,16 +62,18 @@ public class Add_Bill_In_Fragment extends Fragment {
         binding.btnAdd.setOnClickListener(view -> {
             bill_in_dao.insert(bill_in);
             for (Product product : list_product_checked) {
-//                Log.d("tag_kiemTra", "onCreateView: "+product.getPrice());
+//                Log.d("zzzzzzzz", "onCreateView: "+product.getId_supplier());
                 Bill_in_detail bill_in_detail = new Bill_in_detail(product.getPrice(), product.getQuantity(), product.getId(), bill_in.getId());
 //                Log.d("uuuuuuuuuuuuu", "onCreateView: "+bill_in_detail.getPrice()+" - "+bill_in_detail.getQuantity()+ " - "+bill_in_detail.getId_product()+ " - "+bill_in_detail.getId_bill_in());
-                bill_in_dao.insertDetail(bill_in_detail);
-//                String quantity = String.valueOf(product.getQuantity());
-//                String price = String.valueOf(product.getPrice());
-//                int productId = product.getId();
-//                Log.d("qqqqqqqqqqqq", "onCreateView: " + list_product_checked.size());
-//                // Sử dụng thông tin từ mỗi item
-//                Log.d("itemmmmmmm", "Checked - Quantity: " + quantity + ", Price: " + price + ", Product ID: " + productId + ", size: " + list_product_checked.size());
+                boolean check = bill_in_dao.insertDetail(bill_in_detail);
+                if (check) {
+                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frag_container_main, new Bill_In_Fragment())
+                            .addToBackStack(null) // Cho phép quay lại fragment trước đó nếu cần
+                            .commit();
+                }
+
             }
         });
         return binding.getRoot();

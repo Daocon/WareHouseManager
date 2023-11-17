@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:theme="@style/Base.Theme.Bill"
-    tools:context=".fragments.Bill.Bill_In.Detail_Bill_In_Fragment">
+    tools:context=".fragments.Bill.Bill_Out.Detail_Bill_Out_Fragment">
 
     <ImageView
         android:id="@+id/img_back"
@@ -24,28 +24,46 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_id_bill_in"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_id_bill_out"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Mã phiếu nhập: DH_X_2022-11-27_C_001"
+            android:hint="Mã phiếu nhập: qưeqweqwe"
             android:textColor="@color/black"
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/tv_name_user"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_id_user"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="Nhân viên: Đỗ Xuân Hiếu"
+            android:hint="Nhân viên: qweqwe - ID: 1"
             android:textColor="@color/black"
             android:textSize="16dp" />
 
         <TextView
             android:id="@+id/tv_date_time"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:hint="date_time"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Địa chỉ nhận hàng: "
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_delivery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Đơn vị vận chuyển: "
             android:textColor="@color/black"
             android:textSize="16dp" />
 
@@ -123,5 +141,5 @@
                 android:textColor="@color/black" />
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 
+</LinearLayout>

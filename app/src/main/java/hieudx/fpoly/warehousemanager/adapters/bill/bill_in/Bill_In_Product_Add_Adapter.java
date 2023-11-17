@@ -1,10 +1,8 @@
 package hieudx.fpoly.warehousemanager.adapters.bill.bill_in;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import hieudx.fpoly.warehousemanager.dao.Supplier_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvProductBillBinding;
 import hieudx.fpoly.warehousemanager.models.Product;
 
@@ -26,7 +25,6 @@ public class Bill_In_Product_Add_Adapter extends RecyclerView.Adapter<Bill_In_Pr
         this.list = list;
         this.listener = listener;
         this.list_checked = new ArrayList<>();
-
     }
 
     public interface OnCheckedChangeListener {
@@ -43,14 +41,17 @@ public class Bill_In_Product_Add_Adapter extends RecyclerView.Adapter<Bill_In_Pr
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = list.get(position);
-        holder.binding.tvNameProduct.setText(product.getName());
+        Supplier_Dao supplier_dao = new Supplier_Dao(context);
+
+        String nameSUpplier = supplier_dao.getSupplierById(list.get(position).getId_supplier()).getName();
+        holder.binding.tvNameProduct.setText(product.getName() + " - "+nameSUpplier);
         holder.binding.tvQuantity.setText(product.getQuantity() + "");
         holder.binding.edPrice.setText(product.getPrice() + "");
         holder.binding.btnPlus.setOnClickListener(view -> {
             holder.binding.tvQuantity.setText((product.getQuantity() + 1) + "");
             product.setQuantity(product.getQuantity() + 1);
             list.set(position, product);
-            notifyDataSetChanged();
+//            notifyDataSetChanged();
         });
 
         holder.binding.btnMinus.setOnClickListener(view -> {
@@ -60,32 +61,31 @@ public class Bill_In_Product_Add_Adapter extends RecyclerView.Adapter<Bill_In_Pr
                 holder.binding.tvQuantity.setText((product.getQuantity() - 1) + "");
                 product.setQuantity(product.getQuantity() - 1);
                 list.set(position, product);
-                notifyDataSetChanged();
+//                notifyDataSetChanged();
             }
         });
-        holder.binding.cbAddProduct.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                int position = holder.getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION && list != null) {
-                    String price = holder.binding.edPrice.getText().toString().trim();
-                    if (b) {
-                        if (price.contains(" ") || price.isEmpty()) {
-                            Toast.makeText(context, "Giá phải lớn hơn 0", Toast.LENGTH_SHORT).show();
-                        } else if (price.matches("[a-zA-Z]+")) {
-                            Toast.makeText(context, "Giá không được nhập chữ", Toast.LENGTH_SHORT).show();
-                        } else {
-                            product.setPrice(Integer.parseInt(price));
-                            list_checked.add(product);
-                            Log.d("tag_kiemTra", "onCheckedChanged: " + list_checked.size());
-                        }
+        holder.binding.cbAddProduct.setOnCheckedChangeListener((compoundButton, b) -> {
+            int position1 = holder.getAdapterPosition();
+            if (position1 != RecyclerView.NO_POSITION && list != null) {
+                String price = holder.binding.edPrice.getText().toString().trim();
+                if (b) {
+                    if (price.contains(" ") || price.isEmpty()) {
+                        Toast.makeText(context, "Giá phải lớn hơn 0", Toast.LENGTH_SHORT).show();
+                    } else if (price.matches("[a-zA-Z]+")) {
+                        Toast.makeText(context, "Giá không được nhập chữ", Toast.LENGTH_SHORT).show();
                     } else {
-                        list_checked.remove(product);
-                        Log.d("tag_kiemTra", "onCheckedChanged: " + list_checked.size());
+                        product.setPrice(Integer.parseInt(price));
+                        if (!list_checked.contains(product)) {
+                            list_checked.add(product);
+                        }
+//                        Log.d("tag_kiemTra", "onCheckedChanged: " + list_checked.size());
                     }
+                } else {
+                    list_checked.remove(product);
+//                    Log.d("tag_kiemTra", "onCheckedChanged: " + list_checked.size());
                 }
-                listener.onCheckedChanged(list_checked);
             }
+            listener.onCheckedChanged(list_checked);
         });
     }
 

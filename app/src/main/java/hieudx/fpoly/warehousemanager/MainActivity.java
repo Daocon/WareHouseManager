@@ -39,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+//        SharedPreferences shared = getSharedPreferences("ACCOUNT",MODE_PRIVATE);
+//        SharedPreferences.Editor editor = shared.edit();
+//        editor.putInt("id", 1);
+//        editor.putString("username", "admin");
+//        editor.putString("password", "admin");
+//        editor.putString("name", "admin");
+//        editor.commit();
+
         customActionBar();
         onClickListenerNavBottom();
         onCreateRcvList();
@@ -117,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frag_container_main, fragment).addToBackStack(null).commit();
+        transaction.replace(R.id.frag_container_main, fragment).commit();
     }
 
     private void customActionBar() {

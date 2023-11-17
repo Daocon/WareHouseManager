@@ -1,19 +1,39 @@
 package hieudx.fpoly.warehousemanager.models.bill;
 
-public class Bill_Out {
+import java.io.Serializable;
+
+public class Bill_Out implements Serializable {
     private String id;
-    private int total;
     private String date_time;
+    private String address;
     private int id_user;
+    private int id_delivery;
 
     public Bill_Out() {
     }
 
-    public Bill_Out(String id, int total, String date_time, int id_user) {
+    public Bill_Out(String id, String date_time, String address, int id_user, int id_delivery) {
         this.id = id;
-        this.total = total;
         this.date_time = date_time;
+        this.address = address;
         this.id_user = id_user;
+        this.id_delivery = id_delivery;
+    }
+
+    public int getId_delivery() {
+        return id_delivery;
+    }
+
+    public void setId_delivery(int id_delivery) {
+        this.id_delivery = id_delivery;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getId() {
@@ -22,14 +42,6 @@ public class Bill_Out {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
     }
 
     public String getDate_time() {

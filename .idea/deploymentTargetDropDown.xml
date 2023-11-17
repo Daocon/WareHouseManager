@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="deploymentTargetDropDown">
-    <runningDeviceTargetSelectedWithDropDown>
+    <targetSelectedWithDropDown>
       <Target>
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
+            <type value="VIRTUAL_DEVICE_PATH" />
+            <value value="C:\Users\Admin\.android\avd\Pixel_7_Pro_API_34.avd" />
+            <value value="C:\Users\kiend\.android\avd\Pixel_7_API_34.avd" />
             <type value="SERIAL_NUMBER" />
             <value value="KVDQZL9L95EIGQ6T" />
           </Key>
         </deviceKey>
       </Target>
-    </runningDeviceTargetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-11-15T15:55:30.507240800Z" />
+    </targetSelectedWithDropDown>
+    <timeTargetWasSelectedWithDropDown value="2023-11-15T06:45:36.054994300Z" />
+    <timeTargetWasSelectedWithDropDown value="2023-11-15T10:32:28.328663900Z" />
   </component>
 </project>

@@ -32,7 +32,7 @@ public class Bill_In_Dao {
         values.put("price", bill_in_detail.getPrice());
         values.put("quantity", bill_in_detail.getQuantity());
         values.put("id_product", bill_in_detail.getId_product());
-        values.put("id_bill_in", bill_in_detail.getId_product());
+        values.put("id_bill_in", bill_in_detail.getId_bill_in());
         long check = db.insert("Bill_in_detail", null, values);
         if (check == -1) {
             return false;
@@ -113,7 +113,7 @@ public class Bill_In_Dao {
         if (check == 0)
             return -1;
 
-        long check2 = db.delete("Bill_product_in", "id_bill_in = ?", new String[]{id_bill_in});
+        long check2 = db.delete("Bill_in_detail", "id_bill_in = ?", new String[]{id_bill_in});
         if (check2 == 0)
             return -1;
         return 1;

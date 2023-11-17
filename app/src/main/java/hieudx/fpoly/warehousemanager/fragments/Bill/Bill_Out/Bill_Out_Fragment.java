@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.adapters.bill.bill_out.Bill_Out_Adapter;
@@ -28,6 +27,8 @@ public class Bill_Out_Fragment extends Fragment {
     private Bill_Out_Dao dao;
     private ArrayList<Bill_Out> list;
     private Bill_Out_Adapter adapter;
+    private FragmentManager fragmentManager;
+
 
     public Bill_Out_Fragment() {
     }
@@ -51,14 +52,14 @@ public class Bill_Out_Fragment extends Fragment {
             dialog.setContentView(btnBinding.getRoot());
 
             btnBinding.rdGr.setOnCheckedChangeListener(((radioGroup, i) -> {
-                if (i == R.id.rd_sort_asc) {
-                    Collections.sort(list, (bill_in, bill_in1) -> Integer.compare(bill_in.getTotal(), bill_in1.getTotal()));
-                    adapter.notifyDataSetChanged();
-
-                } else {
-                    Collections.sort(list, (bill_in, bill_in1) -> Integer.compare(bill_in1.getTotal(), bill_in.getTotal()));
-                    adapter.notifyDataSetChanged();
-                }
+//                if (i == R.id.rd_sort_asc) {
+//                    Collections.sort(list, (bill_in, bill_in1) -> Integer.compare(bill_in.getTotal(), bill_in1.getTotal()));
+//                    adapter.notifyDataSetChanged();
+//
+//                } else {
+//                    Collections.sort(list, (bill_in, bill_in1) -> Integer.compare(bill_in1.getTotal(), bill_in.getTotal()));
+//                    adapter.notifyDataSetChanged();
+//                }
             }));
 
             dialog.show();
@@ -70,36 +71,35 @@ public class Bill_Out_Fragment extends Fragment {
     }
 
     private void init() {
+        fragmentManager = requireActivity().getSupportFragmentManager();
         dao = new Bill_Out_Dao(getContext());
         list = dao.getAll();
         if (!list.isEmpty()) {
             binding.btnAdd.setVisibility(View.GONE);
             binding.imgSort.setVisibility(View.VISIBLE);
             binding.rcv.setVisibility(View.VISIBLE);
-            binding.fltAdd.setVisibility(View.VISIBLE);
-            adapter = new Bill_Out_Adapter(getContext(), list);
+            binding.fabAdd.setVisibility(View.VISIBLE);
+            adapter = new Bill_Out_Adapter(getContext(), list,fragmentManager);
             binding.rcv.setAdapter(adapter);
         } else {
             binding.btnAdd.setVisibility(View.VISIBLE);
             binding.imgSort.setVisibility(View.GONE);
             binding.rcv.setVisibility(View.GONE);
-            binding.fltAdd.setVisibility(View.GONE);
+            binding.fabAdd.setVisibility(View.GONE);
         }
 
         binding.btnAdd.setOnClickListener(view -> {
             loadFragment();
         });
 
-        binding.fltAdd.setOnClickListener(view -> {
+        binding.fabAdd.setOnClickListener(view -> {
             loadFragment();
         });
     }
 
     private void loadFragment() {
-        Fragment newFragment = new Add_Bill_Out_Fragment();
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.frag_container_main, newFragment)
+                .replace(R.id.frag_container_main, new Add_Bill_Out_Fragment())
                 .addToBackStack(null) // Cho phép quay lại fragment trước đó nếu cần
                 .commit();
     }

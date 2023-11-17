@@ -90,7 +90,7 @@ public class Dash_Board_Adapter extends RecyclerView.Adapter<Dash_Board_Adapter.
 
     private void loadFragment(Fragment fragment) {
         FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.frag_container_main, fragment).addToBackStack(null).commit();
+        fragmentManager.beginTransaction().replace(R.id.frag_container_main, fragment).commit();
     }
 
     @Override

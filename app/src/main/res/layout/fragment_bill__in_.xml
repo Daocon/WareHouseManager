@@ -26,6 +26,7 @@
         style="@style/custom_title_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/theme"
         android:background="@drawable/custom_bgr_btn_add_update"
         android:text="tạo phiếu nhập"
         app:layout_constraintBottom_toBottomOf="parent"

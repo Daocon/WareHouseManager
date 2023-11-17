@@ -12,7 +12,6 @@
         android:layout_width="40dp"
         android:layout_height="30dp"
         android:layout_gravity="end"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
@@ -45,12 +44,13 @@
         app:layout_constraintTop_toBottomOf="@+id/img_sort" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/flt_add"
+        android:id="@+id/fab_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/theme"
         android:src="@drawable/ic_add"
         android:visibility="gone"
-        android:backgroundTint="@color/theme"
+        app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"

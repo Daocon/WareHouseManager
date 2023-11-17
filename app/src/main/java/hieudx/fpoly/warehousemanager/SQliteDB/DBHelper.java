@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
     static String DB_NAME = "WareHouseManager.db";
-    static int DB_VERSION = 3;
+    static int DB_VERSION = 1;
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -31,6 +31,15 @@ public class DBHelper extends SQLiteOpenHelper {
                 "    name     TEXT    NOT NULL,\n" +
                 "    phone    TEXT    NOT NULL,\n" +
                 "    address  TEXT    NOT NULL,\n" +
+                "    tax_code TEXT    NOT NULL\n" +
+                ");\n");
+
+//        tạo bảng đơn vị vận chuyển
+        db.execSQL("CREATE TABLE Delivery (\n" +
+                "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    name     TEXT    NOT NULL,\n" +
+                "    phone    TEXT    NOT NULL,\n" +
+                "    price    INTEGER NOT NULL,\n" +
                 "    tax_code TEXT    NOT NULL\n" +
                 ");\n");
 
@@ -71,40 +80,21 @@ public class DBHelper extends SQLiteOpenHelper {
 //        tạo bảng phiếu xuất
         db.execSQL("CREATE TABLE Bill_out (\n" +
                 "    id        TEXT PRIMARY KEY,\n" +
-                "    total     INTEGER NOT NULL,\n" +
-                "    date_time TEXT    NOT NULL,\n" +
-                "    id_user   INTEGER REFERENCES user (id) \n" +
+                "    date_time TEXT NOT NULL,\n" +
+                "    address   TEXT NOT NULL,\n" +
+                "    id_user   INTEGER REFERENCES User (id), \n" +
+                "    id_delivery INTEGER REFERENCES Delivery (id) \n" +
                 ");\n");
 
 //        tạo bảng chi tiết phiếu xuất
         db.execSQL("CREATE TABLE Bill_out_detail (\n" +
                 "    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                "    address     TEXT    NOT NULL,\n" +
+                "    price       INTEGER NOT NULL,\n" +
+                "    quantity    INTEGER NOT NULL,\n" +
+                "    total       INTEGER,\n" +
                 "    id_product  INTEGER REFERENCES Product (id),\n" +
-                "    id_delivery INTEGER REFERENCES Delivery (id), \n" +
                 "    id_bill_out TEXT REFERENCES Bill_out (id) \n" +
                 ");\n");
-
-
-//        tạo bảng xuất kho
-//        db.execSQL("CREATE TABLE Product_out (\n" +
-//                "    id          INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-//                "    name        TEXT    NOT NULL,\n" +
-//                "    price       INTEGER NOT NULL,\n" +
-//                "    quantity    INTEGER ,\n" +
-//                "    id_category INTEGER REFERENCES Category (id),\n" +
-//                "    sale_price  INTEGER NOT NULL\n" +
-//                ");\n");
-
-//        tạo bảng đơn vị vận chuyển
-        db.execSQL("CREATE TABLE Delivery (\n" +
-                "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                "    name     TEXT    NOT NULL,\n" +
-                "    phone    TEXT    NOT NULL,\n" +
-                "    price    INTEGER NOT NULL,\n" +
-                "    tax_code TEXT    NOT NULL\n" +
-                ");\n");
-
 
 //        tạo bảng nhân viên
         db.execSQL("CREATE TABLE Staff (\n" +
@@ -135,8 +125,13 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Supplier VALUES(2,'Hữu Nghị','0123456789','122 Định Công, Phường Định Công, Quận Hoàng Mai, Thành phố Hà Nội, Việt Nam','0102109239')");
         db.execSQL("INSERT INTO Supplier VALUES(3,'PEPSICO','0123456789','Số 3-4-5, lô CN2, đường số 2, khu công nghiệp Sóng Thần 3, Phường Phú Tân, Thành phố Thủ Dầu Một, Tỉnh Bình Dương, Việt Nam','3702139167')");
 
+//        thêm dữ liệu mẫu bảng Delivery
+        db.execSQL("INSERT INTO Delivery VALUES(1,'J&T','0123456789',17000,'0300588569')");
+        db.execSQL("INSERT INTO Delivery VALUES(2,'VN Express','0123456789',13000,'0704358569')");
+        db.execSQL("INSERT INTO Delivery VALUES(3,'GHTK','0123456789',23000,'0300588569')");
+
 //        thêm dữ liệu mẫu bảng Product
-        db.execSQL("INSERT INTO Product VALUES(0,'Bánh trung thu',0,1,null,1,0)");
+        db.execSQL("INSERT INTO Product VALUES(0,'Bánh trung thu',0,1,null,1,1)");
         db.execSQL("INSERT INTO Product VALUES(1,'Bim bim',0,1,null,2,3)");
         db.execSQL("INSERT INTO Product VALUES(2,'Pepsi',0,1,null,2,3)");
         db.execSQL("INSERT INTO Product VALUES(3,'Kimbap',0,1,null,3,2)");
@@ -156,25 +151,22 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Bill_in_detail VALUES(5,50,2,null,1,'PN_0204_24')");
 
 //        thêm dữ liệu mẫu bảng phiếu xuất
-//        db.execSQL("INSERT INTO Bill_out VALUES('PX_0711_21',1200000,'6/11/2023',2)");
-//        db.execSQL("INSERT INTO Bill_out VALUES('PN_0510_32',1000,'6/11/2023',3,2)");
-//        db.execSQL("INSERT INTO Bill_out VALUES('PN_2012_43',7000,'6/11/2023',4,1)");
-//        db.execSQL("INSERT INTO Bill_out VALUES('PN_0204_24',80000,'6/11/2023',2,3)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PX_0711_21','6/11/2023','ádqwrasda',2,1)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PX_0510_32','8/11/2023','joipjoiik',3,2)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PX_2012_43','12/11/2023',',mnzcxnz,mxc',1,2)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PX_0204_24','19/11/2023','ábiduahsdkajs',5,3)");
 
 //        thêm dữ liệu mẫu bảng chi tiết phiếu xuất
-//        db.execSQL("INSERT INTO Bill_in_detail VALUES(0,'ababcabcbacbabcbacb',2,'PN_0204_24')");
-
+        db.execSQL("INSERT INTO Bill_out_detail VALUES(0,60000,2,null,1,'PX_0711_21')");
+        db.execSQL("INSERT INTO Bill_out_detail VALUES(1,15000,1,null,1,'PX_0510_32')");
+        db.execSQL("INSERT INTO Bill_out_detail VALUES(2,10000,2,null,1,'PX_2012_43')");
+        db.execSQL("INSERT INTO Bill_out_detail VALUES(3,20000,2,null,1,'PX_0711_21')");
+        db.execSQL("INSERT INTO Bill_out_detail VALUES(4,1500,2,null,1,'PX_0711_21')");
 
 //        thêm dữ liệu mẫu bảng Staff
         db.execSQL("INSERT INTO Staff VALUES(1,'Nguyễn Văn A','0123456789','abc',30,3000000,100000)");
         db.execSQL("INSERT INTO Staff VALUES(2,'Trần Văn B','0123456789','bcd',30,6000000,200000)");
         db.execSQL("INSERT INTO Staff VALUES(3,'Trịnh Văn K','0123456789','jqk',25,100000000,500000)");
-
-//        thêm dữ liệu mẫu bảng Delivery
-        db.execSQL("INSERT INTO Delivery VALUES(1,'J&T','0123456789',17000,'0300588569')");
-        db.execSQL("INSERT INTO Delivery VALUES(2,'VN Express','0123456789',13000,'0704358569')");
-        db.execSQL("INSERT INTO Delivery VALUES(3,'GHTK','0123456789',23000,'0300588569')");
-
 
     }
 

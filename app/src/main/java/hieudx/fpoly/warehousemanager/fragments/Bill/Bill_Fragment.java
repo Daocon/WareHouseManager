@@ -1,18 +1,16 @@
 package hieudx.fpoly.warehousemanager.fragments.Bill;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import hieudx.fpoly.warehousemanager.adapters.bill.Bill_Adapter;
 import hieudx.fpoly.warehousemanager.databinding.FragmentBillBinding;
-
 
 public class Bill_Fragment extends Fragment {
     private FragmentBillBinding binding;
