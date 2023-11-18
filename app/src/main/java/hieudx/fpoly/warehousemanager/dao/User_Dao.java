@@ -17,7 +17,6 @@ public class User_Dao {
     private User user;
     private SharedPreferences share;
 
-
     public User_Dao(Context context) {
         dbHelper = new DBHelper(context);
         share = context.getSharedPreferences("ACCOUNT", Context.MODE_PRIVATE);
@@ -60,6 +59,29 @@ public class User_Dao {
         values.put("role", user.getRole());
         long row = db.insert("User", null, values);
         return (row > 0);
+    }
+
+//    1: thêm thành công - 0: thêm thất bại - -1: thủ thư có tồn tại, k đc thêm
+    public int insert(User user) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        Cursor c = db.rawQuery("SELECT * FROM User WHERE username = ?", new String[]{user.getUsername()});
+        if (c.getCount() != 0) {
+            return -1;
+        }
+
+        values.put("username", user.getUsername());
+        values.put("password", user.getPassword());
+        values.put("name", user.getName());
+        values.put("email", user.getEmail());
+        values.put("phone", user.getPhone());
+        values.put("role", user.getRole());
+
+        long check = db.insert("User", null, values);
+        if (check == -1) {
+            return 0;
+        }
+        return 1;
     }
 
     public int deleteUser(int id) {

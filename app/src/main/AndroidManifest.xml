@@ -23,14 +23,14 @@
             android:name=".view.Finish_Activity"
             android:exported="false" />
         <activity
-            android:name=".view.Login_SignUp_Activity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:theme="@style/Base.Theme.Bill"
             android:exported="false" />
         <activity
             android:name=".view.Plash_Screen_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".view.Login_SignUp_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
