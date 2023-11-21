@@ -54,19 +54,9 @@ public class Member_Fragment extends Fragment {
         rcvUser.setLayoutManager(linearLayoutManager);
         adapter = new User_Adapter(getActivity(), list);
         rcvUser.setAdapter(adapter);
+        checkListAndPerformActions();
 
-        binding.fltAddMember.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Tạo một instance của AddMemberFragment
-                Add_Member addMember = new Add_Member();
-                // Chuyển sang AddMemberFragment
-                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                transaction.replace(R.id.frag_container_main, addMember);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
-        });
+
         binding.btSheetMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,10 +83,45 @@ public class Member_Fragment extends Fragment {
                 Toast.makeText(getActivity(), "Đã thêm user thành công", Toast.LENGTH_SHORT).show();
             }
         }
-
         return view;
     }
-
+    private void checkListAndPerformActions() {
+        if (list.isEmpty()) {
+            // Không có phần tử trong danh sách
+            // Hiển thị viewButtonAddNumber
+            binding.viewMember.setVisibility(View.GONE);
+            binding.viewButtonAddNumber.setVisibility(View.VISIBLE);
+            binding.btnAddMember.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Tạo một instance của AddMemberFragment
+                    Add_Member addMember = new Add_Member();
+                    // Chuyển sang AddMemberFragment
+                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frag_container_main, addMember);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
+            });
+        } else {
+            // Có phần tử trong danh sách
+            // Hiển thị viewMember
+            binding.viewButtonAddNumber.setVisibility(View.GONE);
+            binding.viewMember.setVisibility(View.VISIBLE);
+            binding.fltAddMember.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Tạo một instance của AddMemberFragment
+                    Add_Member addMember = new Add_Member();
+                    // Chuyển sang AddMemberFragment
+                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frag_container_main, addMember);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
+            });
+        }
+    }
 
     private void showDialog() {
 

@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,6 +13,9 @@
         android:theme="@style/Theme.WareHouseManager"
         tools:targetApi="31">
         <activity
+            android:name=".fragments.account.edit_UserLogin"
+            android:exported="false" />
+        <activity
             android:name=".view.Account_Activity"
             android:exported="false" />
         <activity
@@ -24,8 +26,8 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Base.Theme.Bill"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Base.Theme.Bill" />
         <activity
             android:name=".view.Plash_Screen_Activity"
             android:exported="false" />

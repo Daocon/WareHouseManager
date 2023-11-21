@@ -90,7 +90,6 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.viewholer> {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         int check = userDao.deleteUser(muser.getId());
-                        Toast.makeText(context, "hi "+ check, Toast.LENGTH_SHORT).show();
                         switch (check){
                             case 1:
                                 Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
@@ -104,7 +103,7 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.viewholer> {
                                 Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
                                 break;
                             case -1:
-                                Toast.makeText(context, "Thành viên tồn tại trong phiếu nhập, không được xóa", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Không được xóa", Toast.LENGTH_SHORT).show();
                                 break;
                         }
                     }
