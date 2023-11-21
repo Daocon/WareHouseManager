@@ -23,7 +23,7 @@
             android:layout_height="50dp"
             android:layout_marginVertical="10dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/receptionist"/>
+            android:src="@drawable/useravatar"/>
 
         <LinearLayout
             android:id="@+id/layoutDetail"

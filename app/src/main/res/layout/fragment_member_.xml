@@ -21,8 +21,7 @@
     <RelativeLayout
         android:id="@+id/viewMember"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible">
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ryc_Member"
@@ -43,8 +42,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/viewButtonAddNumber"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tv_EmptyMember"

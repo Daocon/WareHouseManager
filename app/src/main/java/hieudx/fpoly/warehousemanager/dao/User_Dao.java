@@ -87,8 +87,9 @@ public class User_Dao {
     public int deleteUser(int id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM Bill_in WHERE id_user = ?", new String[]{String.valueOf(id)});
+        Cursor cursor1 = db.rawQuery("SELECT * FROM Bill_out WHERE id_user = ?", new String[]{String.valueOf(id)});
 
-        if (cursor.getCount() != 0) {
+        if (cursor.getCount() != 0 && cursor1.getCount() != 0) {
             return -1;
         }
 

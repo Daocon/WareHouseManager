@@ -28,7 +28,12 @@ public class Account_Activity extends AppCompatActivity {
         binding = ActivityAccountBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setSupportActionBar(binding.toolbar);
+        binding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
+        sharedPreferences = getSharedPreferences("ACCOUNT", MODE_PRIVATE);
+        binding.tvNameUser.setText(sharedPreferences.getString("name", ""));
+        binding.tvPhone.setText(sharedPreferences.getString("phone",""));
 
         sharedPreferences = getSharedPreferences("MODE", MODE_PRIVATE);
         nightMode = sharedPreferences.getBoolean("night", false);
@@ -127,22 +132,12 @@ public class Account_Activity extends AppCompatActivity {
                 builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(Account_Activity.this, Login_SignUp_Activity.class);
-                        startActivity(intent);
+                        startActivity(new Intent(Account_Activity.this, Login_SignUp_Activity.class));
                     }
                 });
                 builder.setNegativeButton("Không", null);
                 builder.show();
             }
         });
-    }
-    public void onBackButtonClicked(View view) {
-        onBackPressed();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed(); // Quay lại trang trước đó
-//        finish(); // Kết thúc Activity hiện tại
     }
 }
