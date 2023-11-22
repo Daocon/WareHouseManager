@@ -15,23 +15,29 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 
-import java.util.ArrayList;
-
-import hieudx.fpoly.warehousemanager.adapters.Dash_Board_Adapter;
 import hieudx.fpoly.warehousemanager.databinding.ActivityMainBinding;
 import hieudx.fpoly.warehousemanager.fragments.Bill.Bill_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Category_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.Delivery_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Product_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.Staff_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Statistic_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.Supplier_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.member.Member_Fragment;
-import hieudx.fpoly.warehousemanager.models.item_dash_board;
 import hieudx.fpoly.warehousemanager.view.Account_Activity;
 
 public class MainActivity extends AppCompatActivity {
     public static ActivityMainBinding binding;
     private ActionBar actionBar;
+    private Product_Fragment productFragment;
+    private Category_Fragment categoryFragment;
+    private Bill_Fragment billFragment;
+    private Member_Fragment memberFragment;
+    private Statistic_Fragment statisticFragment;
+    private Delivery_Fragment deliveryFragment;
+    private Supplier_Fragment supplierFragment;
+    private Staff_Fragment staffFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        productFragment = new Product_Fragment();
+        categoryFragment = new Category_Fragment();
+        billFragment = new Bill_Fragment();
+        memberFragment = new Member_Fragment();
+        staffFragment = new Staff_Fragment();
+        deliveryFragment = new Delivery_Fragment();
+        supplierFragment = new Supplier_Fragment();
+        statisticFragment = new Statistic_Fragment();
 //        SharedPreferences shared = getSharedPreferences("ACCOUNT",MODE_PRIVATE);
 //        SharedPreferences.Editor editor = shared.edit();
 //        editor.putInt("id", 1);
@@ -49,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         customActionBar();
         onClickListenerNavBottom();
-        onCreateRcvList();
+        onClickDashBoard();
     }
 
     @Override
@@ -83,42 +97,50 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    private void onCreateRcvList() {
-        ArrayList<item_dash_board> list = new ArrayList<>();
-        list.add(new item_dash_board(R.drawable.ic_product, "Sản phẩm"));
-        list.add(new item_dash_board(R.drawable.ic_category, "Loại sản phẩm"));
-        list.add(new item_dash_board(R.drawable.ic_bill, "Hóa đơn"));
-        list.add(new item_dash_board(R.drawable.ic_member, "Thành viên"));
-        list.add(new item_dash_board(R.drawable.ic_statistic, "Thống kê"));
-        list.add(new item_dash_board(R.drawable.ic_delivery, "Vận chuyển"));
-        list.add(new item_dash_board(R.drawable.ic_supplier, "Nhà cung cấp"));
-        list.add(new item_dash_board(R.drawable.ic_staff, "Nhân viên"));
-        Dash_Board_Adapter adapter = new Dash_Board_Adapter(list, this);
-        GridLayoutManager manager = new GridLayoutManager(this, 2);
-        binding.rcv.setLayoutManager(manager);
-        binding.rcv.setAdapter(adapter);
-    }
+
 
     private void onClickListenerNavBottom() {
         binding.navBottom.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.nav_bot_product) {
-                loadFragment(new Product_Fragment());
-                translayout();
+                loadFragment(productFragment);
             } else if (item.getItemId() == R.id.nav_bot_category) {
-                loadFragment(new Category_Fragment());
-                translayout();
+                loadFragment(categoryFragment);
             } else if (item.getItemId() == R.id.nav_bot_bill) {
-                loadFragment(new Bill_Fragment());
-                translayout();
+                loadFragment(billFragment);
             } else if (item.getItemId() == R.id.nav_bot_member) {
-                loadFragment(new Member_Fragment());
-                translayout();
+                loadFragment(memberFragment);
             } else if (item.getItemId() == R.id.nav_bot_statistic) {
-                loadFragment(new Statistic_Fragment());
-                translayout();
+                loadFragment(statisticFragment);
             }
             binding.tbMain.setTitle(item.getTitle());
             return true;
+        });
+    }
+
+    private void onClickDashBoard() {
+        binding.cardProduct.setOnClickListener(view -> {
+            loadFragment(productFragment);
+        });
+        binding.cardCaegory.setOnClickListener(view -> {
+            loadFragment(categoryFragment);
+        });
+        binding.cardBill.setOnClickListener(view -> {
+            loadFragment(billFragment);
+        });
+        binding.cardMember.setOnClickListener(view -> {
+            loadFragment(memberFragment);
+        });
+        binding.cardStatitics.setOnClickListener(view -> {
+            loadFragment(statisticFragment);
+        });
+        binding.cardDelivery.setOnClickListener(view -> {
+            loadFragment(deliveryFragment);
+        });
+        binding.cardSupplier.setOnClickListener(view -> {
+            loadFragment(supplierFragment);
+        });
+        binding.cardStaff.setOnClickListener(view -> {
+            loadFragment(staffFragment);
         });
     }
 
@@ -126,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frag_container_main, fragment).commit();
+        translayout();
     }
 
     private void customActionBar() {
@@ -141,46 +164,16 @@ public class MainActivity extends AppCompatActivity {
 //                    binding.navBottom.getMenu().getItem(0).setChecked(true);
             }
             binding.bgrDashBoard.setVisibility(View.VISIBLE);
-            binding.rcv.setVisibility(View.VISIBLE);
+            binding.layoutDashboard.setVisibility(View.VISIBLE);
         });
-
-        //        dùng để click vào icon menu bật ra nav
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, binding.drawerLayout, binding.tbMain, R.string.navigation_open, R.string.navigation_close);
-//        binding.drawerLayout.addDrawerListener(toggle);
-//        toggle.syncState();
     }
 
     public static void translayout() {
         binding.bgrDashBoard.setVisibility(View.GONE);
-        binding.rcv.setVisibility(View.GONE);
+        binding.layoutDashboard.setVisibility(View.GONE);
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) binding.bgrDashBoardParent.getLayoutParams();
         layoutParams.width = RelativeLayout.LayoutParams.WRAP_CONTENT;
         layoutParams.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
         binding.bgrDashBoardParent.setLayoutParams(layoutParams);
     }
-
-
-    //    private void onClickListenerNavDrawer() {
-//        binding.nav.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) item -> {
-//            if (item.getItemId() == R.id.nav_logout) {
-//                startActivity(new Intent(MainActivity.this, Login_SignUp_Activity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-//            } else if (item.getItemId() == R.id.nav_drawer_product) {
-//                loadFragment(new Product_Fragment());
-//            } else if (item.getItemId() == R.id.nav_drawer_category) {
-//                loadFragment(new Category_Fragment());
-//            } else if (item.getItemId() == R.id.nav_drawer_bill) {
-//                loadFragment(new Bill_Fragment());
-//            } else if (item.getItemId() == R.id.nav_drawer_member) {
-//                loadFragment(new Member_Fragment());
-//            } else if (item.getItemId() == R.id.nav_drawer_statistic) {
-//                loadFragment(new Statistic_Fragment());
-//            } else if (item.getItemId() == R.id.nav_setting) {
-//                loadFragment(new Setting_Fragment());
-//            }
-//            binding.drawerLayout.closeDrawer(binding.nav);
-//            binding.tbMain.setTitle(item.getTitle());
-//            return true;
-//        });
-//    }
 }
