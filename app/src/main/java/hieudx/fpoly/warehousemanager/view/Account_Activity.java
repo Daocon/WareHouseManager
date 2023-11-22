@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.ActivityAccountBinding;
+import hieudx.fpoly.warehousemanager.fragments.account.Edit_UserLogin;
 
 public class Account_Activity extends AppCompatActivity {
     private boolean nightMode;
@@ -84,6 +85,7 @@ public class Account_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(Account_Activity.this, "Chỉnh sửa thông tin", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Account_Activity.this, Edit_UserLogin.class));
             }
         });
         binding.rlChangePass.setOnClickListener(new View.OnClickListener() {
