@@ -61,7 +61,18 @@ public class User_Dao {
         return (row > 0);
     }
 
-//    1: thêm thành công - 0: thêm thất bại - -1: thủ thư có tồn tại, k đc thêm
+    public boolean updateUser(User user) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("username", user.getUsername());
+        values.put("name", user.getName());
+        values.put("email", user.getEmail());
+        values.put("phone", user.getPhone());
+        long row = db.update("User", values, "id = ?", new String[]{String.valueOf(user.getId())});
+        return (row > 0);
+    }
+
+    //    1: thêm thành công - 0: thêm thất bại - -1: thủ thư có tồn tại, k đc thêm
     public int insert(User user) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
