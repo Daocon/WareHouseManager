@@ -32,6 +32,12 @@ public class User implements Serializable {
         this.phone = phone;
         this.role = role;
     }
+    public User(String username, String name, String email, String phone) {
+        this.username = username;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+    }
     public int getId() {
         return id;
     }
