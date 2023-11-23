@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ActivityEditUserLoginBinding;
@@ -20,7 +22,7 @@ public class Edit_UserLogin extends AppCompatActivity {
     private SharedPreferences.Editor editor;
 
     private User_Dao userDao;
-    String name, username, phone, email;
+    String name, username, phone, email, avatar;
     int id;
 
     @Override
@@ -37,11 +39,12 @@ public class Edit_UserLogin extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("ACCOUNT", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         id = sharedPreferences.getInt("id", 0);
+        Picasso.get().load(sharedPreferences.getString("avatar","")).into(binding.avatarIv);
+        binding.txtAvatar.setText(sharedPreferences.getString("avatar",""));
         binding.txtName.setText(sharedPreferences.getString("name", ""));
         binding.txtUsername.setText(sharedPreferences.getString("username", ""));
         binding.txtPhone.setText(sharedPreferences.getString("phone", ""));
         binding.txtEmail.setText(sharedPreferences.getString("email", ""));
-
 
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,18 +61,21 @@ public class Edit_UserLogin extends AppCompatActivity {
     }
 
     private void updateUser() {
+        validationLinkAvartar();
         validationEmail();
         validationPhone();
         validationUsername();
         validationName();
 
         if (!hasErrors()) {
+            String mavatar = binding.txtAvatar.getText().toString();
             String mname = binding.txtName.getText().toString();
             String musername = binding.txtUsername.getText().toString();
             String mphone = binding.txtPhone.getText().toString();
             String memail = binding.txtEmail.getText().toString();
 
-            if (mname.equals(sharedPreferences.getString("name", "")) &&
+            if (    mavatar.equals(sharedPreferences.getString("avatar", "")) &&
+                    mname.equals(sharedPreferences.getString("name", "")) &&
                     musername.equals(sharedPreferences.getString("username", "")) &&
                     mphone.equals(sharedPreferences.getString("phone", "")) &&
                     memail.equals(sharedPreferences.getString("email", ""))) {
@@ -78,11 +84,12 @@ public class Edit_UserLogin extends AppCompatActivity {
             }
 
             userDao = new User_Dao(Edit_UserLogin.this);
-            User user = new User(musername, mname, memail, mphone);
+            User user = new User(musername, mname, memail, mphone,mavatar);
             user.setId(id);
             if (userDao.updateUser(user)) {
                 Toast.makeText(this, "Cập nhật dữ liệu thành công", Toast.LENGTH_SHORT).show();
                 // Cập nhật dữ liệu vào SharedPreferences
+                editor.putString("avatar", mavatar);
                 editor.putString("name", mname);
                 editor.putString("username", musername);
                 editor.putString("phone", mphone);
@@ -97,13 +104,25 @@ public class Edit_UserLogin extends AppCompatActivity {
 
     private boolean hasErrors() {
         return binding.tilEmail.getError() != null || binding.tilPhone.getError() != null ||
-                binding.tilUsername.getError() != null || binding.tilName.getError() != null;
+                binding.tilUsername.getError() != null || binding.tilName.getError() != null ||
+                binding.tilAvatar.getError() != null;
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    private void validationLinkAvartar(){
+        avatar = binding.txtAvatar.getText().toString();
+        if (avatar.isEmpty()){
+            binding.tilAvatar.setError("Vui lòng nhập link avatar");
+        } else if (avatar.contains(" ")){
+            binding.tilAvatar.setError("Link avatar ko được chứa khoảng trắng");
+        } else {
+            binding.tilAvatar.setError(null);
+        }
     }
 
     private void validationEmail() {

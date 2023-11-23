@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.dao.User_Dao;
@@ -35,32 +37,46 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.viewholer> {
     @NonNull
     @Override
     public viewholer onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemRycMemberBinding binding = ItemRycMemberBinding.inflate(LayoutInflater.from(parent.getContext())
-                , parent, false);
-
-        return new viewholer(binding);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        ItemRycMemberBinding binding = ItemRycMemberBinding.inflate(inflater, parent, false);
+        return new viewholer(binding.getRoot());
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewholer holder, int position) {
         User muser = listUser.get(position);
+        int role = muser.getRole();
+        if (role != 0) {
+            holder.binding.getRoot().setVisibility(View.VISIBLE);
 
-        holder.binding.nameMember.setText(muser.getName());
-        holder.binding.phoneMember.setText(muser.getPhone());
-        holder.binding.emailMember.setText(muser.getEmail());
+            Picasso.get().load(muser.getAvatar()).into(holder.binding.imgMember);
+            holder.binding.nameMember.setText(muser.getName());
+            holder.binding.phoneMember.setText(muser.getPhone());
+            holder.binding.emailMember.setText(muser.getEmail());
 
-        holder.binding.switchLimit.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                Toast.makeText(context, "Bật hạn chế", Toast.LENGTH_SHORT).show();
-            }
-        });
-        holder.binding.cardViewMember.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OnClickGoToDetail(muser);
-            }
-        });
+            holder.binding.switchLimit.setChecked(muser.getRole() == -1);
+            holder.binding.switchLimit.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                    if (isChecked) {
+                        userDao.updateUserRoleById(muser.getId(), -1);
+                        Toast.makeText(context, muser.getName() + " đã bị hạn chế", Toast.LENGTH_SHORT).show();
+                    } else {
+                        userDao.updateUserRoleById(muser.getId(), 1);
+                        Toast.makeText(context, muser.getName() + " đã bỏ hạn chế", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            holder.binding.cardViewMember.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    OnClickGoToDetail(muser);
+                }
+            });
+
+        } else {
+            holder.binding.getRoot().setVisibility(View.GONE);
+        }
     }
 
     private void OnClickGoToDetail(User muser) {
@@ -76,6 +92,7 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.viewholer> {
         detailDialog.show();
         detailDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
+        Picasso.get().load(muser.getAvatar()).into(binding.imgAvatar);
         binding.txtHoVaTen.setText(muser.getName());
         binding.txtEmail.setText(muser.getEmail());
         binding.txtPhone.setText(muser.getPhone());
@@ -90,7 +107,7 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.viewholer> {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         int check = userDao.deleteUser(muser.getId());
-                        switch (check){
+                        switch (check) {
                             case 1:
                                 Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                                 listUser.clear();
@@ -124,16 +141,22 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.viewholer> {
 
     @Override
     public int getItemCount() {
-        return listUser.size();
+        int count = 0;
+        for (User user : listUser){
+            if (user.getRole() != 0){
+                count++;
+            }
+        }
+        return count;
     }
 
     public class viewholer extends RecyclerView.ViewHolder {
         private final ItemRycMemberBinding binding;
 
-        public viewholer(ItemRycMemberBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
 
+        public viewholer(@NonNull View itemView) {
+            super(itemView);
+            binding = ItemRycMemberBinding.bind(itemView);
+        }
     }
 }

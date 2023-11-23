@@ -57,7 +57,7 @@ public class SignUp_Tab_Fragment extends Fragment {
                     && binding.pass.getError() == null
                     && binding.repass.getError() == null
                     && binding.phoneNumber.getError() == null) {
-                User user = new User(username, repass, name, email, phone, 1);
+                User user = new User(username, repass, name, email, phone, 1,"https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png");
                 User_Dao user_dao = new User_Dao(getContext());
                 int check = user_dao.insert(user);
                 switch (check) {
