@@ -72,6 +72,14 @@ public class User_Dao {
         return (row > 0);
     }
 
+    public boolean updatePasswordUser(int userId, String newPassword) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("password", newPassword);
+        long row = db.update("User", values, "id = ?", new String[]{String.valueOf(userId)});
+        return (row > 0);
+    }
+
     //    1: thêm thành công - 0: thêm thất bại - -1: thủ thư có tồn tại, k đc thêm
     public int insert(User user) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();

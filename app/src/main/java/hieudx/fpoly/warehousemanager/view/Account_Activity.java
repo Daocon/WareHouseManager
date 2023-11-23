@@ -92,6 +92,17 @@ public class Account_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(Account_Activity.this, "Thay đổi mật khẩu", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(Account_Activity.this);
+                builder.setTitle("Xác nhận đổi mật khẩu");
+                builder.setMessage("Bạn có chắc chắn muốn đổi mật khẩu không?");
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Account_Activity.this, Forgot_Reset_Pass_Activity.class));
+                    }
+                });
+                builder.setNegativeButton("Không", null);
+                builder.show();
             }
         });
 
