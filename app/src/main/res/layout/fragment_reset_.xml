@@ -63,13 +63,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/custom_ed_bgr"
-            android:hint="type your new password"
+            android:hint="Type your new password"
             android:inputType="textPassword"
             android:textColorHighlight="@color/cardview_dark_background" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edPhoneNumber"
+        android:id="@+id/ReNewPass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="15dp"
@@ -86,21 +86,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/custom_ed_bgr"
-            android:hint="retype your new password"
+            android:hint="Retype your new password"
             android:inputType="textPassword"
             android:textColorHighlight="@color/cardview_dark_background" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnResetPass"
-        android:layout_width="0dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#8692F7"
         android:text="Reset"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/edPhoneNumber"
-        app:layout_constraintStart_toStartOf="@+id/edPhoneNumber"
-        app:layout_constraintTop_toBottomOf="@+id/edPhoneNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ReNewPass"
         app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

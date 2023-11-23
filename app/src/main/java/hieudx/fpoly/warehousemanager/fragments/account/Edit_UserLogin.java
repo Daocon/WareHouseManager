@@ -80,7 +80,6 @@ public class Edit_UserLogin extends AppCompatActivity {
             userDao = new User_Dao(Edit_UserLogin.this);
             User user = new User(musername, mname, memail, mphone);
             user.setId(id);
-            Toast.makeText(this, "Id:" + user.getId(), Toast.LENGTH_SHORT).show();
             if (userDao.updateUser(user)) {
                 Toast.makeText(this, "Cập nhật dữ liệu thành công", Toast.LENGTH_SHORT).show();
                 // Cập nhật dữ liệu vào SharedPreferences
