@@ -45,6 +45,10 @@ public class Add_Bill_In_Fragment extends Fragment {
         Bill_In_Product_Add_Adapter adapter = new Bill_In_Product_Add_Adapter(getContext(), list_product, this::updateCount);
         binding.rcvProduct.setAdapter(adapter);
 
+        binding.tvAddNewProduct.setOnClickListener(view -> {
+
+        });
+
         Bill_In bill_in = new Bill_In();
         Bill_In_Dao bill_in_dao = new Bill_In_Dao(getContext());
         list_bill_in = bill_in_dao.getAll();
