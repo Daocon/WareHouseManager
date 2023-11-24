@@ -22,7 +22,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "    name     TEXT    NOT NULL,\n" +
                 "    email    TEXT    NOT NULL,\n" +
                 "    phone    TEXT    NOT NULL,\n" +
-                "    role     INTEGER NOT NULL\n" +
+                "    role     INTEGER NOT NULL,\n" +
+                "    avatar   TEXT    NOT NULL\n" +
                 ");\n");
 
 //        tạo bảng nhà cung cấp
@@ -108,11 +109,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 ");\n");
 
 //        thêm dữ liệu mẫu bảng User
-        db.execSQL("INSERT INTO User VALUES(1,'admin','admin','admin','admin@gmail.com','0973967774',0)");
-        db.execSQL("INSERT INTO User VALUES(2,'hieudx','123','do xuan hieu','hieudx@gmail.com','0973967774',1)");
-        db.execSQL("INSERT INTO User VALUES(3,'truongtq','123','tran quan truong','truongtq@gmail.com','0123456789',1)");
-        db.execSQL("INSERT INTO User VALUES(4,'daohv','123','ha van dao','daohv@gmail.com','0123456789',1)");
-        db.execSQL("INSERT INTO User VALUES(5,'duonglt','123','lam tung duong','duonglt@gmail.com','0123456789',1)");
+        db.execSQL("INSERT INTO User VALUES(1,'admin','admin','admin','admin@gmail.com','0973967774',0,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
+        db.execSQL("INSERT INTO User VALUES(2,'hieudx','123','do xuan hieu','hieudx@gmail.com','0973967774',1,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
+        db.execSQL("INSERT INTO User VALUES(3,'truongtq','123','tran quan truong','truongtq@gmail.com','0123456789',1,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
+        db.execSQL("INSERT INTO User VALUES(4,'daohv','123','ha van dao','daohv@gmail.com','0123456789',1,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
+        db.execSQL("INSERT INTO User VALUES(5,'duonglt','123','lam tung duong','duonglt@gmail.com','0123456789',1,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
 
 //        thêm dữ liệu mẫu bảng Category
         db.execSQL("INSERT INTO Category VALUES(0,'Bánh kẹo')");

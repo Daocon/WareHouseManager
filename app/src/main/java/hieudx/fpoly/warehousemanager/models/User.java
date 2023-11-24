@@ -11,6 +11,8 @@ public class User implements Serializable {
     private String phone;
     private int role;
 
+    private String avatar;
+
 
     public User() {
     }
@@ -24,19 +26,21 @@ public class User implements Serializable {
         this.phone = phone;
         this.role = role;
     }
-    public User(String username, String password, String name, String email, String phone, int role) {
+    public User(String username, String password, String name, String email, String phone, int role, String avatar) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.role = role;
+        this.avatar = avatar;
     }
-    public User(String username, String name, String email, String phone) {
+    public User(String username, String name, String email, String phone, String avatar) {
         this.username = username;
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.avatar = avatar;
     }
     public int getId() {
         return id;
@@ -92,5 +96,12 @@ public class User implements Serializable {
 
     public void setRole(int role) {
         this.role = role;
+    }
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }
