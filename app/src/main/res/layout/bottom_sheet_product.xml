@@ -3,4 +3,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dialog_btsheet_member"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtChoose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Sắp xếp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rbAZProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="A - Z"
+                android:textColor="@color/black" />
+
+            <RadioButton
+                android:id="@+id/rbZAProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Z - A"
+                android:textColor="@color/black" />
+            <RadioButton
+                android:id="@+id/rbGiaTangDan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Giá tăng dần"
+                android:textColor="@color/black" />
+            <RadioButton
+                android:id="@+id/rbGiaGiamDan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Giá giảm dần"
+                android:textColor="@color/black" />
+        </RadioGroup>
+    </LinearLayout>
 </LinearLayout>

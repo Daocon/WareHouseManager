@@ -8,17 +8,16 @@
     android:layout_marginVertical="8sp">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100sp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginHorizontal="10sp"
 
         >
     <ImageView
         android:id="@+id/img_Product"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80sp"
+        android:layout_height="100sp"
         android:layout_gravity="center"
-        android:src="@drawable/burger"
         />
     <LinearLayout
         android:layout_width="wrap_content"
@@ -30,14 +29,14 @@
             android:id="@+id/txt_Name_Product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:text="Tên"
             />
         <TextView
             android:id="@+id/txt_Ma_Product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:text="Mã"
             />
     </LinearLayout>
@@ -54,14 +53,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:text="Tồn kho"
                 />
             <TextView
                 android:id="@+id/txt_Gia_Product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:text="3000"
                 android:textColor="#FF0000"
                 />

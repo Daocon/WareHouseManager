@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
     static String DB_NAME = "WareHouseManager.db";
-    static int DB_VERSION = 3;
+    static int DB_VERSION =3 ;
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -132,10 +132,10 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Delivery VALUES(3,'GHTK','0123456789',23000,'0300588569')");
 
 //        thêm dữ liệu mẫu bảng Product
-        db.execSQL("INSERT INTO Product VALUES(0,'Bánh trung thu',0,1,null,1,1)");
-        db.execSQL("INSERT INTO Product VALUES(1,'Bim bim',0,1,null,2,3)");
-        db.execSQL("INSERT INTO Product VALUES(2,'Pepsi',0,1,null,2,3)");
-        db.execSQL("INSERT INTO Product VALUES(3,'Kimbap',0,1,null,3,2)");
+        db.execSQL("INSERT INTO Product VALUES(0,'Bánh trung thu',0,1,'https://png.pngtree.com/element_our/20190601/ourlarge/pngtree-a-big-moon-cake-free-button-image_1374096.jpg',1,1)");
+        db.execSQL("INSERT INTO Product VALUES(1,'Bim bim',0,1,'https://minhcaumart.vn/media/com_eshop/products/8936036020755.webp',2,3)");
+        db.execSQL("INSERT INTO Product VALUES(2,'Pepsi',0,1,'https://bizweb.dktcdn.net/thumb/grande/100/365/460/products/nuoc-pepsi-330ml.jpg?v=1571624262987',2,3)");
+        db.execSQL("INSERT INTO Product VALUES(3,'Kimbap',0,1,'https://www.koreanbapsang.com/wp-content/uploads/2018/09/DSC8399-2-e1696691292303.jpg',3,2)");
 
 //        thêm dữ liệu mẫu bảng phiếu nhập
         db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_21','6/11/2023',2)");
