@@ -1,5 +1,6 @@
 package hieudx.fpoly.warehousemanager.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -39,5 +40,40 @@ public class Product_Dao {
             product = new Product(c.getInt(0), c.getString(1), c.getString(2), c.getInt(3), c.getInt(4));
         }
         return product;
+    }
+    public boolean insertProduct(Product product){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name",product.getName());
+        values.put("id_category",product.getId_category());
+        values.put("price",product.getPrice());
+        values.put("quantity",product.getQuantity());
+        long check = database.insert("Product",null,values);
+        return check>0;
+    }
+    public boolean updateProduct(Product product){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name",product.getName());
+        values.put("id_category",product.getId_category());
+        values.put("price",product.getPrice());
+        values.put("quantity",product.getQuantity());
+        values.put("img",product.getImg());
+        values.put("id_category",product.getId_category());
+        long check = database.update("Product",values,"id = ?",new String[]{String.valueOf(product.getId())});
+        return check>0;
+    }
+    public int deleteProduct(int id){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM Product WHERE id = ?",new String[]{String.valueOf(id)});
+        if (cursor.getCount() != 0){
+            return -1;
+        }
+        long check = database.delete("Product","id = ?",new String[]{String.valueOf(id)});
+        if (check== -1){
+            return 0;
+        }else {
+            return 1;
+        }
     }
 }
