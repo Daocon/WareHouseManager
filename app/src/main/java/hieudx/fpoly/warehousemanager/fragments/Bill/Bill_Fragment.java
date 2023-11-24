@@ -32,14 +32,14 @@ public class Bill_Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        adapter = new Bill_Adapter(requireActivity().getSupportFragmentManager(), getLifecycle());
-        tabLayoutMediator = new TabLayoutMediator(binding.tabLayout, binding.viewPager, (tab, position) ->
-        {
-            tab.setText(adapter.getHeader(position));
+        adapter = new Bill_Adapter(this);
+        tabLayoutMediator = new TabLayoutMediator(binding.tabLayout, binding.viewPager, (tab, position) -> {
+            switch (position) {
+                case 0: tab.setText("Phiếu nhập"); break;
+                case 1: tab.setText("Phiếu xuất"); break;
+            }
         });
-//setAdapter
         binding.viewPager.setAdapter(adapter);
-//AttachMediator
         if (!tabLayoutMediator.isAttached()) tabLayoutMediator.attach();
     }
 

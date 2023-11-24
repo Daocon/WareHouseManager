@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import hieudx.fpoly.warehousemanager.databinding.ActivityMainBinding;
 import hieudx.fpoly.warehousemanager.fragments.Bill.Bill_Fragment;
@@ -107,7 +106,12 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.nav_bot_category) {
                 loadFragment(categoryFragment);
             } else if (item.getItemId() == R.id.nav_bot_bill) {
-                loadFragment(billFragment);
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frag_container_main, new Bill_Fragment())
+                        .commit();
+                translayout();
+//                loadFragment(billFragment);
             } else if (item.getItemId() == R.id.nav_bot_member) {
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -132,16 +136,22 @@ public class MainActivity extends AppCompatActivity {
             loadFragment(categoryFragment);
         });
         binding.cardBill.setOnClickListener(view -> {
-            loadFragment(billFragment);
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            fragmentManager.beginTransaction()
+//                    .replace(R.id.frag_container_main, new Bill_Fragment())
+//                    .commit();
+//            translayout();
+            loadFragment(new Bill_Fragment());
         });
         binding.cardMember.setOnClickListener(view -> {
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    loadFragment(memberFragment);
-                }
-            }, 1500);
+            loadFragment(new Member_Fragment());
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    loadFragment(memberFragment);
+//                }
+//            }, 1500);
         });
         binding.cardStatitics.setOnClickListener(view -> {
             loadFragment(statisticFragment);
@@ -159,8 +169,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frag_container_main, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.frag_container_main, fragment).commit();
+//        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//        transaction.replace(R.id.frag_container_main, fragment).commit();
         translayout();
     }
 
