@@ -28,7 +28,14 @@ public class Product {
         this.id_category = id_category;
         this.id_supplier = id_supplier;
     }
-
+    public Product(String name, int price, int quantity, String img, int id_category, int id_supplier) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.img = img;
+        this.id_category = id_category;
+        this.id_supplier = id_supplier;
+    }
     public int getPrice() {
         return price;
     }
