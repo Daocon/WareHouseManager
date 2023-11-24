@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
@@ -37,9 +39,15 @@ public class Member_Fragment extends Fragment {
     private View view;
     User_Dao userDao;
     User_Adapter adapter;
-    private ArrayList<User> list = new ArrayList<>();
+    private ArrayList<User> list;
 
     public Member_Fragment() {
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        userDao = new User_Dao(getActivity());
     }
 
     @Override
@@ -47,8 +55,19 @@ public class Member_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentMemberBinding.inflate(inflater, container, false);
         view = binding.getRoot();
-        userDao = new User_Dao(getActivity());
-        list = userDao.getAllUser();
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        list = new ArrayList<>();
+        for (User user : userDao.getAllUser()) {
+            if (user.getRole() != 0) {
+                list.add(user);
+            }
+        }
         RecyclerView rcvUser = binding.rycMember;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         rcvUser.setLayoutManager(linearLayoutManager);
@@ -67,6 +86,7 @@ public class Member_Fragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             // Lấy dữ liệu từ Bundle
+            String avatar = bundle.getString("avatar");
             String name = bundle.getString("name");
             String username = bundle.getString("username");
             String phone = bundle.getString("phone");
@@ -74,7 +94,7 @@ public class Member_Fragment extends Fragment {
             String password = bundle.getString("password");
 
             // Thêm user vào danh sách hoặc cập nhật danh sách hiển thị
-            User userNew = new User(username, password, name, email, phone, 1);
+            User userNew = new User(username, password, name, email, phone, 1, avatar);
             if (userDao.insertUser(userNew)) {
                 list.clear();
                 list.addAll(userDao.getAllUser());
@@ -83,8 +103,8 @@ public class Member_Fragment extends Fragment {
                 Toast.makeText(getActivity(), "Đã thêm user thành công", Toast.LENGTH_SHORT).show();
             }
         }
-        return view;
     }
+
     private void checkListAndPerformActions() {
         if (list.isEmpty()) {
             // Không có phần tử trong danh sách

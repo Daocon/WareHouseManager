@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.ActivityAccountBinding;
 import hieudx.fpoly.warehousemanager.fragments.account.Edit_UserLogin;
@@ -33,6 +35,7 @@ public class Account_Activity extends AppCompatActivity {
         binding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         sharedPreferences = getSharedPreferences("ACCOUNT", MODE_PRIVATE);
+        Picasso.get().load(sharedPreferences.getString("avatar","")).into(binding.avatarIV);
         binding.tvNameUser.setText(sharedPreferences.getString("name", ""));
         binding.tvPhone.setText(sharedPreferences.getString("phone",""));
 

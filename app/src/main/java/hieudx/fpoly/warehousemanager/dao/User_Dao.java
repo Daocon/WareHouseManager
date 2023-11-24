@@ -38,6 +38,7 @@ public class User_Dao {
                     user.setEmail(cursor.getString(4));
                     user.setPhone(cursor.getString(5));
                     user.setRole(cursor.getInt(6));
+                    user.setAvatar(cursor.getString(7));
                     listUser.add(user);
                     cursor.moveToNext();
                 }
@@ -57,6 +58,7 @@ public class User_Dao {
         values.put("email", user.getEmail());
         values.put("phone", user.getPhone());
         values.put("role", user.getRole());
+        values.put("avatar", user.getAvatar());
         long row = db.insert("User", null, values);
         return (row > 0);
     }
@@ -68,6 +70,7 @@ public class User_Dao {
         values.put("name", user.getName());
         values.put("email", user.getEmail());
         values.put("phone", user.getPhone());
+        values.put("avatar", user.getAvatar());
         long row = db.update("User", values, "id = ?", new String[]{String.valueOf(user.getId())});
         return (row > 0);
     }
@@ -76,6 +79,14 @@ public class User_Dao {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("password", newPassword);
+        long row = db.update("User", values, "id = ?", new String[]{String.valueOf(userId)});
+        return (row > 0);
+    }
+
+    public boolean updateUserRoleById(int userId, int role) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("role", role);
         long row = db.update("User", values, "id = ?", new String[]{String.valueOf(userId)});
         return (row > 0);
     }
@@ -95,6 +106,7 @@ public class User_Dao {
         values.put("email", user.getEmail());
         values.put("phone", user.getPhone());
         values.put("role", user.getRole());
+        values.put("avatar", user.getAvatar());
 
         long check = db.insert("User", null, values);
         if (check == -1) {
@@ -129,6 +141,30 @@ public class User_Dao {
         return user;
     }
 
+    public User getUserByUsernameAndPassword(String username, String password) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        User user = null;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM User WHERE username = ? AND password = ?",
+                new String[]{username, password});
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            user = new User();
+            user.setId(cursor.getInt(0));
+            user.setUsername(cursor.getString(1));
+            user.setPassword(cursor.getString(2));
+            user.setName(cursor.getString(3));
+            user.setEmail(cursor.getString(4));
+            user.setPhone(cursor.getString(5));
+            user.setRole(cursor.getInt(6));
+            user.setAvatar(cursor.getString(7));
+        }
+
+        cursor.close();
+        return user;
+    }
+
     public boolean checkLogin(String username, String password) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM User WHERE username = ? AND password = ?", new String[]{username, password});
@@ -142,6 +178,7 @@ public class User_Dao {
             editor.putString("email", c.getString(4));
             editor.putString("phone", c.getString(5));
             editor.putInt("role", c.getInt(6));
+            editor.putString("avatar", c.getString(7));
             editor.commit();
             return true;
         } else {

@@ -19,6 +19,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import hieudx.fpoly.warehousemanager.MainActivity;
 import hieudx.fpoly.warehousemanager.dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentLoginTabBinding;
+import hieudx.fpoly.warehousemanager.models.User;
 import hieudx.fpoly.warehousemanager.view.Forgot_Reset_Pass_Activity;
 
 
@@ -54,21 +55,27 @@ public class Login_Tab_Fragment extends Fragment {
             } else {
                 User_Dao user_dao = new User_Dao(getContext());
                 if (user_dao.checkLogin(username, pass)) {
-                    if (binding.cbRemember.isChecked()) {
-                        editor.putString("username", username);
-                        editor.putString("password", pass);
-                        editor.putBoolean("isChecked", binding.cbRemember.isChecked());
-                        editor.apply();
+                    User user = user_dao.getUserByUsernameAndPassword(username,pass);
+                    Toast.makeText(getActivity(), "Hi: "+user.getRole(), Toast.LENGTH_SHORT).show();
+                    if (user.getRole() == -1){
+                        Toast.makeText(getContext(), "Tài khoản bị hạn chế!", Toast.LENGTH_SHORT).show();
                     } else {
-                        editor.clear();
-                        editor.apply();
+                        if (binding.cbRemember.isChecked()) {
+                            editor.putString("username", username);
+                            editor.putString("password", pass);
+                            editor.putBoolean("isChecked", binding.cbRemember.isChecked());
+                            editor.apply();
+                        } else {
+                            editor.clear();
+                            editor.apply();
+                        }
+                        binding.edUsername.setText("");
+                        binding.edPass.setText("");
+                        Intent i = new Intent(getContext(), MainActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | i.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i);
+                        getActivity().finish();
                     }
-                    binding.edUsername.setText("");
-                    binding.edPass.setText("");
-                    Intent i = new Intent(getContext(), MainActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | i.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(i);
-                    getActivity().finish();
                 } else {
                     Toast.makeText(getContext(), "Tài khoản và mật khẩu không đúng", Toast.LENGTH_SHORT).show();
                 }

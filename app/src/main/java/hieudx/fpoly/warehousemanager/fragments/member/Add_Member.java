@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import org.intellij.lang.annotations.Pattern;
 
 import hieudx.fpoly.warehousemanager.R;
@@ -20,7 +22,7 @@ import hieudx.fpoly.warehousemanager.databinding.FragmentAddMemberBinding;
 
 public class Add_Member extends Fragment {
     private FragmentAddMemberBinding binding;
-    String name, username, phone, email, password;
+    String name, username, phone, email, password, avatar;
 
     public Add_Member() {
 
@@ -30,6 +32,13 @@ public class Add_Member extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAddMemberBinding.inflate(inflater, container, false);
+
+        binding.txtAvatar.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                validationLinkAvartar();
+            }
+        });
         binding.txtName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -89,11 +98,11 @@ public class Add_Member extends Fragment {
             }
         });
 
-
         return binding.getRoot();
     }
 
     private void validateData() {
+        validationLinkAvartar();
         validationName();
         validationUsername();
         validationPhone();
@@ -101,7 +110,8 @@ public class Add_Member extends Fragment {
         validationPassword();
 
         // Kiểm tra xem có bất kỳ lỗi nào không
-        if (binding.tilName.getError() == null &&
+        if (    binding.tilAvatar.getError() == null &&
+                binding.tilName.getError() == null &&
                 binding.tilUsername.getError() == null &&
                 binding.tilPhone.getError() == null &&
                 binding.tilEmail.getError() == null &&
@@ -109,6 +119,7 @@ public class Add_Member extends Fragment {
 
             // Tất cả các trường dữ liệu hợp lệ, tiến hành gửi Bundle và chuyển fragment
             Bundle bundle = new Bundle();
+            bundle.putString("avatar",avatar);
             bundle.putString("name", name);
             bundle.putString("username", username);
             bundle.putString("phone", phone);
@@ -128,7 +139,18 @@ public class Add_Member extends Fragment {
             Toast.makeText(getContext(), "Vui lòng kiểm tra lại các trường dữ liệu", Toast.LENGTH_SHORT).show();
         }
     }
+    private void validationLinkAvartar(){
+        avatar = binding.txtAvatar.getText().toString();
+        if (avatar.isEmpty()){
+            binding.tilAvatar.setError("Vui lòng nhập link avatar");
+        } else if (avatar.contains(" ")){
+            binding.tilAvatar.setError("Link avatar ko được chứa khoảng trắng");
+        } else {
+            binding.tilAvatar.setError(null);
 
+            Picasso.get().load(avatar).into(binding.imgAvatar);
+        }
+    }
     private void validationPassword() {
         password = binding.txtPassword.getText().toString();
         int passwordLength = password.length();

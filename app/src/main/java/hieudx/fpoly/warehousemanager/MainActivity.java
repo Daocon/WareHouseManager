@@ -2,6 +2,7 @@ package hieudx.fpoly.warehousemanager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -108,7 +109,13 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.nav_bot_bill) {
                 loadFragment(billFragment);
             } else if (item.getItemId() == R.id.nav_bot_member) {
-                loadFragment(memberFragment);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadFragment(memberFragment);
+                    }
+                }, 1500);
             } else if (item.getItemId() == R.id.nav_bot_statistic) {
                 loadFragment(statisticFragment);
             }
@@ -128,7 +135,13 @@ public class MainActivity extends AppCompatActivity {
             loadFragment(billFragment);
         });
         binding.cardMember.setOnClickListener(view -> {
-            loadFragment(memberFragment);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    loadFragment(memberFragment);
+                }
+            }, 1500);
         });
         binding.cardStatitics.setOnClickListener(view -> {
             loadFragment(statisticFragment);
