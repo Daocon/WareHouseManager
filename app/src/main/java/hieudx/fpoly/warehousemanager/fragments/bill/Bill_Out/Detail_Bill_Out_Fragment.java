@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.fragments.Bill.Bill_In;
+package hieudx.fpoly.warehousemanager.fragments.bill.Bill_Out;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,41 +13,46 @@ import androidx.fragment.app.FragmentTransaction;
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.R;
-import hieudx.fpoly.warehousemanager.adapters.bill.bill_in.Bill_In_Detail_Adapter;
-import hieudx.fpoly.warehousemanager.dao.Bill.Bill_In_Dao;
+import hieudx.fpoly.warehousemanager.adapters.bill.bill_out.Bill_Out_Detail_Adapter;
+import hieudx.fpoly.warehousemanager.dao.Bill.Bill_Out_Dao;
+import hieudx.fpoly.warehousemanager.dao.Delivery_Dao;
 import hieudx.fpoly.warehousemanager.dao.User_Dao;
-import hieudx.fpoly.warehousemanager.databinding.FragmentDetailBillInBinding;
-import hieudx.fpoly.warehousemanager.fragments.Bill.Bill_Fragment;
+import hieudx.fpoly.warehousemanager.databinding.FragmentDetailBillOutBinding;
+import hieudx.fpoly.warehousemanager.fragments.bill.Bill_Fragment;
+import hieudx.fpoly.warehousemanager.models.Delivery;
 import hieudx.fpoly.warehousemanager.models.User;
-import hieudx.fpoly.warehousemanager.models.bill.Bill_In;
-import hieudx.fpoly.warehousemanager.models.bill.Bill_in_detail;
+import hieudx.fpoly.warehousemanager.models.bill.Bill_Out;
+import hieudx.fpoly.warehousemanager.models.bill.Bill_out_detail;
 
-public class Detail_Bill_In_Fragment extends Fragment {
-    private FragmentDetailBillInBinding binding;
-    private ArrayList<Bill_in_detail> list = new ArrayList<>();
+public class Detail_Bill_Out_Fragment extends Fragment {
+    private FragmentDetailBillOutBinding binding;
+    private ArrayList<Bill_out_detail> list = new ArrayList<>();
 
-    public Detail_Bill_In_Fragment() {
+    public Detail_Bill_Out_Fragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentDetailBillInBinding.inflate(inflater, container, false);
+        binding = FragmentDetailBillOutBinding.inflate(inflater, container, false);
         Bundle bundle = getArguments();
-
         binding.imgBack.setOnClickListener(view -> loadFragment());
         if (bundle != null) {
-            Bill_In bill_in = (Bill_In) bundle.getSerializable("data");
-            binding.tvIdBillIn.setText("Mã hóa đơn: " + bill_in.getId());
+            Bill_Out bill_out = (Bill_Out) bundle.getSerializable("data");
+            binding.tvIdBillOut.setText("Mã hóa đơn: " + bill_out.getId());
+            binding.tvDateTime.setText("Ngày xuất: " + bill_out.getDate_time());
             User_Dao user_dao = new User_Dao(getContext());
-            User user = user_dao.getUserById(bill_in.getId_user());
-            binding.tvNameUser.setText("Nhân viên: " + user.getName() + " - ID: " + user.getId());
-            binding.tvDateTime.setText("Ngày nhập: " + bill_in.getDate_time());
+            User user = user_dao.getUserById(bill_out.getId_user());
+            binding.tvIdUser.setText("Nhân viên: " + user.getName() + " - ID: " + user.getId());
+            binding.tvAddress.setText("Địa chỉ nhận hàng: " + bill_out.getAddress());
+            Delivery_Dao delivery_dao = new Delivery_Dao(getContext());
+            Delivery delivery = delivery_dao.getDeliveryById(bill_out.getId_delivery());
+            binding.tvDelivery.setText("Đvvc: " + delivery.getName());
             binding.tvTotal.setText(bundle.getString("sumTotal"));
 
-            Bill_In_Dao bill_in_dao = new Bill_In_Dao(getContext());
-            list.addAll(bill_in_dao.getListProductDetail(bill_in.getId()));
-            Bill_In_Detail_Adapter adapter = new Bill_In_Detail_Adapter(getContext(), list);
+            Bill_Out_Dao bill_out_dao = new Bill_Out_Dao(getContext());
+            list.addAll(bill_out_dao.getListProductDetail(bill_out.getId()));
+            Bill_Out_Detail_Adapter adapter = new Bill_Out_Detail_Adapter(getContext(), list);
             binding.rcv.setAdapter(adapter);
 
             binding.btnDelete.setOnClickListener(view -> {
@@ -55,7 +60,7 @@ public class Detail_Bill_In_Fragment extends Fragment {
                 builder.setTitle("Thông báo");
                 builder.setMessage("Bạn có chắc chắn muốn xóa ?");
                 builder.setNegativeButton("Có", (dialog, which) -> {
-                    long check = bill_in_dao.delete(bill_in.getId());
+                    long check = bill_out_dao.delete(bill_out.getId());
                     if (check == 1) {
                         Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
                         loadFragment();
@@ -66,6 +71,7 @@ public class Detail_Bill_In_Fragment extends Fragment {
                 builder.setPositiveButton("Không", null);
                 builder.show();
             });
+
         }
         return binding.getRoot();
     }

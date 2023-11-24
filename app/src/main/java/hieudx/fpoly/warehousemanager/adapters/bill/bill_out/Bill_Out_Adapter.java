@@ -18,7 +18,7 @@ import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.dao.Bill.Bill_Out_Dao;
 import hieudx.fpoly.warehousemanager.dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvBillBinding;
-import hieudx.fpoly.warehousemanager.fragments.Bill.Bill_Out.Detail_Bill_Out_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.bill.Bill_Out.Detail_Bill_Out_Fragment;
 import hieudx.fpoly.warehousemanager.models.bill.Bill_Out;
 
 public class Bill_Out_Adapter extends RecyclerView.Adapter<Bill_Out_Adapter.ViewHolder> {

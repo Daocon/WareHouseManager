@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Statistic_Fragment">
+    android:orientation="vertical"
+    android:theme="@style/Base.Theme.Bill"
+    tools:context=".fragments.statistic.Statistic_Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="nav_statistic"
-        android:textSize="35sp" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="60dp"
+        app:cardCornerRadius="50dp">
 
-</FrameLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabBackground="@drawable/custom_bgr_selected_bill_tab"
+            app:tabIndicatorHeight="0dp"
+            app:tabRippleColor="@android:color/transparent"
+            app:tabSelectedTextColor="@color/black" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+</LinearLayout>

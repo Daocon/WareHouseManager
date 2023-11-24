@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Base.Theme.Bill"
-    tools:context=".fragments.Bill.Bill_Fragment">
+    tools:context=".fragments.bill.Bill_Fragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"

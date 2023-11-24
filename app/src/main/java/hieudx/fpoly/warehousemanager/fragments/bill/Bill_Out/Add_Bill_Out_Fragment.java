@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.fragments.Bill.Bill_Out;
+package hieudx.fpoly.warehousemanager.fragments.bill.Bill_Out;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

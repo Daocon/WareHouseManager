@@ -6,7 +6,7 @@
     android:theme="@style/Base.Theme.Bill"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.Bill.Bill_In.Bill_In_Fragment">
+    tools:context=".fragments.bill.Bill_In.Bill_In_Fragment">
 
     <ImageButton
         android:id="@+id/img_sort"

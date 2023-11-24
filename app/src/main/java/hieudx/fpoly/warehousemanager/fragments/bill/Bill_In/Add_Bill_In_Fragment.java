@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.fragments.Bill.Bill_In;
+package hieudx.fpoly.warehousemanager.fragments.bill.Bill_In;
 
 import android.content.Context;
 import android.content.SharedPreferences;

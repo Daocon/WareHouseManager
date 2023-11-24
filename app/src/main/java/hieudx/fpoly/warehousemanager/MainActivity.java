@@ -17,12 +17,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import hieudx.fpoly.warehousemanager.databinding.ActivityMainBinding;
-import hieudx.fpoly.warehousemanager.fragments.Bill.Bill_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.bill.Bill_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Category_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Delivery_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Product_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Staff_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.Statistic_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.statistic.Statistic_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Supplier_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.member.Member_Fragment;
 import hieudx.fpoly.warehousemanager.view.Account_Activity;

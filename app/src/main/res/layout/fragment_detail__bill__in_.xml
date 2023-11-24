@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:theme="@style/Base.Theme.Bill"
-    tools:context=".fragments.Bill.Bill_In.Detail_Bill_In_Fragment">
+    tools:context=".fragments.bill.Bill_In.Detail_Bill_In_Fragment">
 
     <ImageView
         android:id="@+id/img_back"
