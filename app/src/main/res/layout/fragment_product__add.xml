@@ -9,7 +9,7 @@
         android:layout_height="match_parent">
     <!-- TODO: Update blank fragment layout -->
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_UpImg_Ađ"
+        android:id="@+id/btn_UpImg_Add"
         android:layout_width="160dp"
         android:layout_height="44dp"
         android:layout_marginTop="15sp"
@@ -29,7 +29,7 @@
         android:layout_height="44dp"
         android:layout_marginLeft="15sp"
         android:textSize="16sp"
-        android:layout_below="@+id/btn_UpImg_Ađ"
+        android:layout_below="@+id/btn_UpImg_Add"
         android:drawableStart="@drawable/img_chupanh"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
         android:text="Chụp ảnh"

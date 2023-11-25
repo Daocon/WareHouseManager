@@ -22,12 +22,12 @@ import hieudx.fpoly.warehousemanager.databinding.ItemRcvCategoryBinding;
 import hieudx.fpoly.warehousemanager.models.Category;
 
 public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.ViewHolder> {
-private final ArrayList<Category> list;
-private final Context context;
-Category_Dao dao;
+    private final ArrayList<Category> list;
+    private final Context context;
+    Category_Dao dao;
 
 
-    public Category_Adapter(Context context,ArrayList<Category> list) {
+    public Category_Adapter(Context context, ArrayList<Category> list) {
         this.context = context;
         this.list = list;
         dao = new Category_Dao(context);
@@ -43,7 +43,7 @@ Category_Dao dao;
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.binding.txtMaCategory.setText("Mã loại: "+String.valueOf(list.get(position).getId()));
+        holder.binding.txtMaCategory.setText("Mã loại: " + String.valueOf(list.get(position).getId()));
         holder.binding.txtNameCategory.setText(list.get(position).getName());
         Category cCategory = list.get(position);
         holder.binding.btnDeleteItemCategory.setOnClickListener(new View.OnClickListener() {
@@ -67,14 +67,25 @@ Category_Dao dao;
                 deleteCategoryBinding.btnConfilmDeleteCategory.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (dao.deleteCategory(cCategory)){
-                            list.clear();
-                            list.addAll(dao.getListCategory());
-                            notifyDataSetChanged();
-                            dialog.dismiss();
-                            Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                        int check = dao.deleteCategory(list.get(holder.getAdapterPosition()).getId());
+                        switch (check) {
+                            case 1:
+                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                list.clear();
+                                list.addAll(dao.getListCategory());
+                                notifyDataSetChanged();
+                                dialog.dismiss();
+                                break;
+                            case 0:
+                                Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                break;
+                            case -1:
+                                Toast.makeText(context, "Không thể xóa vì loại sản phẩm này còn sản phẩm", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                break;
+                            default:
+                                break;
                         }
                     }
                 });
@@ -96,16 +107,16 @@ Category_Dao dao;
                     public void onClick(View view) {
                         String nameCategory = updateCategoryBinding.edtUpdateTenLoaiSp.getText().toString();
                         cCategory.setName(nameCategory);
-                        if (nameCategory.isEmpty()){
+                        if (nameCategory.isEmpty()) {
                             updateCategoryBinding.tbUpdateCategory.setError("Không được để trông");
 
-                        }else if (dao.updateCategory(cCategory)){
+                        } else if (dao.updateCategory(cCategory)) {
                             Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
                             list.clear();
                             list.addAll(dao.getListCategory());
                             notifyDataSetChanged();
                             dialog.dismiss();
-                        }else {
+                        } else {
                             Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -127,13 +138,15 @@ Category_Dao dao;
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private ItemRcvCategoryBinding binding;
+
         public ViewHolder(@NonNull ItemRcvCategoryBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
     }
+
     public boolean checkAdd() {
         return getItemCount() == 0;
     }

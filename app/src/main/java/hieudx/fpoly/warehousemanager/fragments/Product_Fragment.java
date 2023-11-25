@@ -26,8 +26,10 @@ import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.adapters.Product_Adapter;
 import hieudx.fpoly.warehousemanager.dao.Product_Dao;
 import hieudx.fpoly.warehousemanager.databinding.BottomSheetProductBinding;
+import hieudx.fpoly.warehousemanager.databinding.BottomSheetProductDetailsBinding;
 import hieudx.fpoly.warehousemanager.databinding.FragmentProductBinding;
 import hieudx.fpoly.warehousemanager.fragments.fragment_product.Product_Add;
+import hieudx.fpoly.warehousemanager.fragments.fragment_product.Product_Update;
 import hieudx.fpoly.warehousemanager.models.Product;
 
 public class Product_Fragment extends Fragment {
@@ -79,7 +81,12 @@ public class Product_Fragment extends Fragment {
                 Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
             }
         }
-
+        adapter.setOnItemClick(new Product_Adapter.OnItemClick() {
+            @Override
+            public void onItemClick(int position) {
+                showDialogDetail(adapter.getProductAtPosition(position));
+            }
+        });
         return bView;
     }
 
@@ -91,6 +98,76 @@ public class Product_Fragment extends Fragment {
             fragmentProductBinding.btnAddProduct.setVisibility(View.GONE);
         }
     }
+
+    private void showDialogDetail(Product product) {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        BottomSheetProductDetailsBinding detailsBinding = BottomSheetProductDetailsBinding.inflate(getLayoutInflater());
+        dialog.setContentView(detailsBinding.getRoot());
+//        detailsBinding.txtNameProductDetail.setText(list.get());
+        if (product != null) {
+            detailsBinding.txtNameProductDetail.setText(product.getName());
+            detailsBinding.txtNamePriceProductDetail.setText("Giá: " + String.valueOf(product.getId()));
+            detailsBinding.txtQuantityProductDetail.setText("Tồn kho"+String.valueOf(product.getQuantity()));
+            detailsBinding.txtNameCategoryProductDetail.setText("Loại: "+ String.valueOf(product.getId_category()));
+
+        }
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        detailsBinding.btnUpdateProductDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToProductUpdateFragment(product);
+                dialog.dismiss();
+            }
+        });
+        detailsBinding.btnDeleteProductDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int check = productDao.deleteProduct(product.getId());
+                switch (check) {
+                    case 1:
+                        Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
+                        list.clear();
+                        list.addAll(productDao.getProductList());
+                        adapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                        updateAddButtonVisibility();
+                        break;
+                    case 0:
+                        Toast.makeText(getContext(), "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        break;
+                    case -1:
+                        Toast.makeText(getContext(), "Không thể xóa vì sản phẩm này đã được sử dụng trong hóa đơn", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+
+
+    }
+    private void navigateToProductUpdateFragment(Product product) {
+        Product_Update editFragment = new Product_Update();
+        Bundle bundle = new Bundle();
+        bundle.putInt("productId", product.getId());
+
+        editFragment.setArguments(bundle);
+
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.frag_container_main, editFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 
     private void showDialogBottomSheet() {
         final Dialog dialog = new Dialog(getContext());
@@ -148,4 +225,5 @@ public class Product_Fragment extends Fragment {
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
+
 }
