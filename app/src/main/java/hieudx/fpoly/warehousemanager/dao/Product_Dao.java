@@ -65,7 +65,7 @@ public class Product_Dao {
     }
     public int deleteProduct(int id){
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        Cursor cursor = database.rawQuery("SELECT * FROM Product WHERE id = ?",new String[]{String.valueOf(id)});
+        Cursor cursor = database.rawQuery("SELECT * FROM Bill_in_detail WHERE id_product = ?",new String[]{String.valueOf(id)});
         if (cursor.getCount() != 0){
             return -1;
         }
