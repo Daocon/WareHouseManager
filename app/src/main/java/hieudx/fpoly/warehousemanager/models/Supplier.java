@@ -18,6 +18,13 @@ public class Supplier {
         this.tax_code = tax_code;
     }
 
+    public Supplier(String name, String phone, String address, String tax_code) {
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.tax_code = tax_code;
+    }
+
     public int getId() {
         return id;
     }
