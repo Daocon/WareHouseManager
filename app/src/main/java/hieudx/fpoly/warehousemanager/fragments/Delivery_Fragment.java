@@ -3,6 +3,8 @@ package hieudx.fpoly.warehousemanager.fragments;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,12 +13,17 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import hieudx.fpoly.warehousemanager.R;
@@ -26,6 +33,8 @@ import hieudx.fpoly.warehousemanager.adapters.Product_Adapter;
 import hieudx.fpoly.warehousemanager.dao.Category_Dao;
 import hieudx.fpoly.warehousemanager.dao.Delivery_Dao;
 import hieudx.fpoly.warehousemanager.dao.Product_Dao;
+import hieudx.fpoly.warehousemanager.databinding.BottomSheetCategoryBinding;
+import hieudx.fpoly.warehousemanager.databinding.BottomSheetDeliveryBinding;
 import hieudx.fpoly.warehousemanager.databinding.DialogDeleteCategoryBinding;
 import hieudx.fpoly.warehousemanager.databinding.DialogUpdateDeliveryBinding;
 import hieudx.fpoly.warehousemanager.databinding.FragmentDeliveryBinding;
@@ -86,7 +95,12 @@ public class Delivery_Fragment extends Fragment {
                 transaction.commit();
             }
         });
-
+        binding.btnSheetDeligery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialogBottomSheet();
+            }
+        });
         Bundle bundle = getArguments();
         if (bundle != null) {
             String tenDvvc = bundle.getString("namedvvc");
@@ -155,5 +169,42 @@ public class Delivery_Fragment extends Fragment {
         transaction.replace(R.id.frag_container_main, editFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+    public void showDialogBottomSheet(){
+        final Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        BottomSheetDeliveryBinding layoutBinding = BottomSheetDeliveryBinding.inflate(getLayoutInflater());
+        dialog.setContentView(layoutBinding.getRoot());
+        layoutBinding.radioGroupDelivery.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (i == R.id.sxA_ZDelivery){
+                    Toast.makeText(getContext(), "Sắp xếp từ A-Z", Toast.LENGTH_SHORT).show();
+                    Collections.sort(list, new Comparator<Delivery>() {
+                        @Override
+                        public int compare(Delivery delivery, Delivery t1) {
+                            return delivery.getName().compareToIgnoreCase(t1.getName());
+                        }
+                    });
+                    adapter.notifyDataSetChanged();
+                }else {
+                    Toast.makeText(getContext(), "Sắp xếp từ Z-A", Toast.LENGTH_SHORT).show();
+                    Collections.sort(list, new Comparator<Delivery>() {
+                        @Override
+                        public int compare(Delivery delivery, Delivery t1) {
+                            return t1.getName().compareToIgnoreCase(delivery.getName());
+                        }
+                    });
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 }
