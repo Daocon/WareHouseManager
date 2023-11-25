@@ -34,6 +34,12 @@ public class Product_Adapter extends RecyclerView.Adapter<Product_Adapter.Viewho
     public void setOnItemClick(OnItemClick listener){
         mListener = listener;
     }
+    public Product getProductAtPosition(int position) {
+        if (position >= 0 && position < list.size()) {
+            return list.get(position);
+        }
+        return null;
+    }
     @NonNull
     @Override
     public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,8 +59,11 @@ public class Product_Adapter extends RecyclerView.Adapter<Product_Adapter.Viewho
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (mListener != null){
                     mListener.onItemClick(holder.getAdapterPosition());
+
+
                 }
             }
         });

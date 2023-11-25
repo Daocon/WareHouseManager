@@ -18,6 +18,13 @@ public class Delivery {
         this.tax_code = tax_code;
     }
 
+    public Delivery(String name, String phone, int price, String tax_code) {
+        this.name = name;
+        this.phone = phone;
+        this.price = price;
+        this.tax_code = tax_code;
+    }
+
     public int getId() {
         return id;
     }

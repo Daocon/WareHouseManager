@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.fragment_product.Product_Update">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_UpImg_Up"
+                android:layout_width="160dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="15sp"
+                android:layout_marginLeft="15sp"
+                android:drawableStart="@drawable/img_themanh"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:text="Tải ảnh lên"
+                android:textSize="16sp"
+                android:backgroundTint="@color/white"
+                android:textColor="#0D99FF"
+                />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_addImg_Up"
+                android:layout_width="160dp"
+                android:layout_height="44dp"
+                android:layout_marginLeft="15sp"
+                android:textSize="16sp"
+                android:layout_below="@+id/btn_UpImg_Up"
+                android:drawableStart="@drawable/img_chupanh"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:text="Chụp ảnh"
+                android:textColor="#0D99FF"
+                />
+            <TextView
+                android:id="@+id/txtAnhSanPhamUp"
+                android:layout_below="@+id/btn_addImg_Up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Link ảnh sản phẩm"
+                android:layout_marginHorizontal="15sp"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNhapAnhSP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtAnhSanPhamUp"
+                android:layout_marginHorizontal="15sp"
+                android:layout_marginTop="10sp"
+
+                >
+                <EditText
+                    android:id="@+id/edtAnhSanPhamUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Base.Theme.WareHouseManager"
+                    android:hint="Ví dụ: https://123abc.webp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/txtTenSanPhamUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tilNhapAnhSP"
+                android:text="Tên sản phẩm"
+                android:layout_marginHorizontal="15sp"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNhapTenUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtTenSanPhamUp"
+                android:layout_marginHorizontal="15sp"
+                android:layout_marginTop="10sp"
+
+                >
+                <EditText
+                    android:id="@+id/edtTenSanPhamUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Base.Theme.WareHouseManager"
+                    android:hint="Ví dụ: Bánh bông lan"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/txtgiaprdUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Số lượng"
+                android:layout_below="@+id/tilNhapTenUp"
+                android:layout_marginHorizontal="15sp"
+                android:layout_marginTop="15sp"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNhapSolUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtgiaprdUp"
+                android:layout_marginHorizontal="15sp"
+                android:layout_marginTop="10sp"
+
+                >
+                <EditText
+                    android:id="@+id/edtSoLuongUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Base.Theme.WareHouseManager"
+                    android:hint="Ví dụ: 3"
+                    android:inputType="none"
+                    android:focusable="false"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:id="@+id/linGiaban_giaVon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/tilNhapSolUp"
+                android:layout_marginHorizontal="15sp"
+                android:layout_marginTop="15sp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="5sp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Giá"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilGiaBanUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtgiaprd"
+                        android:layout_marginTop="10sp"
+                        >
+                        <EditText
+                            android:id="@+id/edtGiaBanUp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/Base.Theme.WareHouseManager"
+                            android:hint="0.0000"
+                            android:focusable="false"
+                            android:inputType="none"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/txt_categoryUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Loại sản phẩm"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="15sp"
+                android:layout_below="@+id/linGiaban_giaVon"
+                />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spn_LoaiSanPhamUp"
+                android:layout_marginHorizontal="15sp"
+                android:layout_marginTop="15sp"
+                android:layout_below="@+id/txt_categoryUp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/spn_LoaiSanPhamUp"
+                android:layout_marginTop="10sp">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnHuyUpProduct"
+                    android:layout_width="0sp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Hủy"
+                    android:background="@drawable/khung_btn_add"
+                    android:theme="@style/custom_title_add"
+                    android:layout_marginHorizontal="15sp"
+                    />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnXacNhanUp"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="15sp"
+                    android:text="Xác nhận"
+                    android:background="@drawable/khung_btn_add"
+
+                    android:theme="@style/custom_title_add"
+                    />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</FrameLayout>
