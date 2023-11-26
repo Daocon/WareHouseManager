@@ -16,19 +16,19 @@
         android:textSize="25sp" />
 
     <RadioGroup
-        android:id="@+id/radioGroupDelivery"
+        android:id="@+id/radioGroupSupplier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RadioButton
-            android:id="@+id/sxA_ZDelivery"
+            android:id="@+id/sxA_ZSupplier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="A - Z"
             android:textColor="@color/black" />
 
         <RadioButton
-            android:id="@+id/sxZ_ADelivery"
+            android:id="@+id/sxZ_ASupplier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Z - A"
