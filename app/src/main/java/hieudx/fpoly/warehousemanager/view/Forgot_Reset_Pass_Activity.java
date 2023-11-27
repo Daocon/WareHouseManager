@@ -17,6 +17,7 @@ public class Forgot_Reset_Pass_Activity extends AppCompatActivity {
         binding = ActivityForgotResetPassBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        getSupportFragmentManager().beginTransaction().add(R.id.frag_container, new Forgot_Fragment()).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.frag_container,
+                new Forgot_Fragment()).addToBackStack(null).commit();
     }
 }

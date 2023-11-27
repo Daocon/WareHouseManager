@@ -1,6 +1,7 @@
 package hieudx.fpoly.warehousemanager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import hieudx.fpoly.warehousemanager.databinding.ActivityMainBinding;
 import hieudx.fpoly.warehousemanager.fragments.Bill.Bill_Fragment;
@@ -38,12 +40,18 @@ public class MainActivity extends AppCompatActivity {
     private Delivery_Fragment deliveryFragment;
     private Supplier_Fragment supplierFragment;
     private Staff_Fragment staffFragment;
+    private SharedPreferences sharedPreferences;
+
+    int role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        sharedPreferences = getSharedPreferences("ACCOUNT", MODE_PRIVATE);
+        role = sharedPreferences.getInt("role",2);
 
         productFragment = new Product_Fragment();
         categoryFragment = new Category_Fragment();
@@ -113,13 +121,15 @@ public class MainActivity extends AppCompatActivity {
                 translayout();
 //                loadFragment(billFragment);
             } else if (item.getItemId() == R.id.nav_bot_member) {
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadFragment(memberFragment);
-                    }
-                }, 1500);
+                if (role == 1){
+                    Toast.makeText(this, "Bạn ko được phép truy cập", Toast.LENGTH_SHORT).show();
+                } else if (role == 0){
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.frag_container_main, new Member_Fragment())
+                            .commit();
+                    translayout();
+                }
             } else if (item.getItemId() == R.id.nav_bot_statistic) {
                 loadFragment(statisticFragment);
             }
@@ -144,14 +154,11 @@ public class MainActivity extends AppCompatActivity {
             loadFragment(new Bill_Fragment());
         });
         binding.cardMember.setOnClickListener(view -> {
-            loadFragment(new Member_Fragment());
-//            Handler handler = new Handler();
-//            handler.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    loadFragment(memberFragment);
-//                }
-//            }, 1500);
+            if (role == 1){
+                Toast.makeText(this, "Bạn ko được phép truy cập", Toast.LENGTH_SHORT).show();
+            } else if (role == 0){
+                loadFragment(memberFragment);
+            }
         });
         binding.cardStatitics.setOnClickListener(view -> {
             loadFragment(statisticFragment);

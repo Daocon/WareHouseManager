@@ -32,7 +32,7 @@ public class Account_Activity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-        binding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        binding.toolbar.setNavigationOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
         sharedPreferences = getSharedPreferences("ACCOUNT", MODE_PRIVATE);
         Picasso.get().load(sharedPreferences.getString("avatar","")).into(binding.avatarIV);
@@ -89,6 +89,7 @@ public class Account_Activity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(Account_Activity.this, "Chỉnh sửa thông tin", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(Account_Activity.this, Edit_UserLogin.class));
+                getOnBackPressedDispatcher().onBackPressed();
             }
         });
         binding.rlChangePass.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +103,7 @@ public class Account_Activity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         startActivity(new Intent(Account_Activity.this, Forgot_Reset_Pass_Activity.class));
+                        getOnBackPressedDispatcher().onBackPressed();
                     }
                 });
                 builder.setNegativeButton("Không", null);

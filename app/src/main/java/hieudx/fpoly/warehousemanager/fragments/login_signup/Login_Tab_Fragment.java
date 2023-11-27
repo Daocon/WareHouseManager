@@ -56,7 +56,7 @@ public class Login_Tab_Fragment extends Fragment {
                 User_Dao user_dao = new User_Dao(getContext());
                 if (user_dao.checkLogin(username, pass)) {
                     User user = user_dao.getUserByUsernameAndPassword(username,pass);
-                    Toast.makeText(getActivity(), "Hi: "+user.getRole(), Toast.LENGTH_SHORT).show();
+
                     if (user.getRole() == -1){
                         Toast.makeText(getContext(), "Tài khoản bị hạn chế!", Toast.LENGTH_SHORT).show();
                     } else {
