@@ -34,7 +34,7 @@ public class Edit_UserLogin extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-        binding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        binding.toolbar.setNavigationOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
         sharedPreferences = getSharedPreferences("ACCOUNT", MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -55,7 +55,7 @@ public class Edit_UserLogin extends AppCompatActivity {
         binding.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Edit_UserLogin.this, Account_Activity.class));
+                getOnBackPressedDispatcher().onBackPressed();
             }
         });
     }
@@ -95,7 +95,7 @@ public class Edit_UserLogin extends AppCompatActivity {
                 editor.putString("phone", mphone);
                 editor.putString("email", memail);
                 editor.apply();
-                startActivity(new Intent(Edit_UserLogin.this, Account_Activity.class));
+                getOnBackPressedDispatcher().onBackPressed();
             } else {
                 Toast.makeText(this, "Cập nhật dữ liệu thất bại", Toast.LENGTH_SHORT).show();
             }
