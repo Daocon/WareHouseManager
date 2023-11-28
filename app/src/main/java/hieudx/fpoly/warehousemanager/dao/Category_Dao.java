@@ -9,11 +9,9 @@ import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.SQliteDB.DBHelper;
 import hieudx.fpoly.warehousemanager.models.Category;
-import hieudx.fpoly.warehousemanager.models.Product;
 
 public class Category_Dao {
     private DBHelper dbHelper;
-
 
     public Category_Dao(Context context) {
         this.dbHelper = new DBHelper(context);
