@@ -319,11 +319,12 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_bottom"
-            app:itemTextColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/theme"
+            app:itemIconTint="@color/black"
+            app:itemTextColor="@color/black"
             app:menu="@menu/menu_nav_bottom" />
     </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
