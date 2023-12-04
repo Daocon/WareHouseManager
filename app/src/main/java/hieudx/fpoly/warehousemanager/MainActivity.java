@@ -24,6 +24,7 @@ import hieudx.fpoly.warehousemanager.fragments.Category_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Delivery_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Product_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Staff_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.statistic.Chart_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.statistic.Statistic_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Supplier_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.member.Member_Fragment;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private Delivery_Fragment deliveryFragment;
     private Supplier_Fragment supplierFragment;
     private Staff_Fragment staffFragment;
+    private Chart_Fragment chartFragment;
     private SharedPreferences sharedPreferences;
 
     int role;
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         deliveryFragment = new Delivery_Fragment();
         supplierFragment = new Supplier_Fragment();
         statisticFragment = new Statistic_Fragment();
+        chartFragment = new Chart_Fragment();
 //        SharedPreferences shared = getSharedPreferences("ACCOUNT",MODE_PRIVATE);
 //        SharedPreferences.Editor editor = shared.edit();
 //        editor.putInt("id", 1);
@@ -131,7 +134,11 @@ public class MainActivity extends AppCompatActivity {
                     translayout();
                 }
             } else if (item.getItemId() == R.id.nav_bot_statistic) {
-                loadFragment(statisticFragment);
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frag_container_main, new Statistic_Fragment())
+                        .commit();
+                translayout();
             }
             binding.tbMain.setTitle(item.getTitle());
             return true;
