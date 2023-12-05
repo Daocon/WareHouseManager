@@ -138,7 +138,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Product VALUES(3,'Kimbap',0,1,'https://www.koreanbapsang.com/wp-content/uploads/2018/09/DSC8399-2-e1696691292303.jpg',3,2)");
 
 //        thêm dữ liệu mẫu bảng phiếu nhập
-        db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_21','06/05/2023 01:35:35',2)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_21','06/01/2023 01:35:35',2)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_22','06/05/2023 01:35:35',2)");
         db.execSQL("INSERT INTO Bill_in VALUES('PN_0510_32','07/09/2023 01:35:35',3)");
         db.execSQL("INSERT INTO Bill_in VALUES('PN_2012_43','10/10/2023 01:35:35',4)");
         db.execSQL("INSERT INTO Bill_in VALUES('PN_0204_24','22/11/2023 01:35:35',2)");
@@ -149,7 +150,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Bill_in_detail VALUES(1,5000,2,10000,2,'PN_0510_32')");
         db.execSQL("INSERT INTO Bill_in_detail VALUES(2,7000,2,14000,2,'PN_2012_43')");
         db.execSQL("INSERT INTO Bill_in_detail VALUES(3,5000,2,10000,3,'PN_0204_24')");
-        db.execSQL("INSERT INTO Bill_in_detail VALUES(4,100,2,200,0,'PN_0204_10')");
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(4,100,2,200,0,'PN_0711_22')");
         db.execSQL("INSERT INTO Bill_in_detail VALUES(5,50,2,100,1,'PN_0204_24')");
 
 //        thêm dữ liệu mẫu bảng phiếu xuất
