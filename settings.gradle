@@ -1,7 +1,7 @@
 pluginManagement {
     repositories {
         google()
-        mavenCentral()
+        jcenter()
         gradlePluginPortal()
     }
 }
@@ -12,6 +12,7 @@ githubProperties.load(new FileInputStream(new File(rootDir,"github.properties"))
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        maven { url "https://jitpack.io" }
             maven {
                 name = "GitHubPackages"
                 url = uri("https://maven.pkg.github.com/Cuberto/liquid-swipe-android")
@@ -25,7 +26,7 @@ dependencyResolutionManagement {
             }
 
         google()
-        mavenCentral()
+        jcenter()
 
     }
 }

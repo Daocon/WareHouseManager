@@ -109,11 +109,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 ");\n");
 
 //        thêm dữ liệu mẫu bảng User
-//        db.execSQL("INSERT INTO User VALUES(1,'admin','admin','admin','admin@gmail.com','0973967774',0,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
-//        db.execSQL("INSERT INTO User VALUES(2,'hieudx','123','do xuan hieu','hieudx@gmail.com','0973967774',1,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
-//        db.execSQL("INSERT INTO User VALUES(3,'truongtq','123','tran quan truong','truongtq@gmail.com','0123456789',1,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
-//        db.execSQL("INSERT INTO User VALUES(4,'daohv','123','ha van dao','daohv@gmail.com','0123456789',1,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
-//        db.execSQL("INSERT INTO User VALUES(5,'duonglt','123','lam tung duong','duonglt@gmail.com','0123456789',1,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
+        db.execSQL("INSERT INTO User VALUES(1,'admin','admin','admin','admin@gmail.com','0973967774',0,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
+        db.execSQL("INSERT INTO User VALUES(2,'hieudx','123','do xuan hieu','hieudx@gmail.com','0973967774',1,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
+        db.execSQL("INSERT INTO User VALUES(3,'truongtq','123','tran quan truong','truongtq@gmail.com','0123456789',1,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
+        db.execSQL("INSERT INTO User VALUES(4,'daohv','123','ha van dao','daohv@gmail.com','0123456789',1,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
+        db.execSQL("INSERT INTO User VALUES(5,'duonglt','123','lam tung duong','duonglt@gmail.com','0123456789',1,'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png')");
 
 //        thêm dữ liệu mẫu bảng Category
         db.execSQL("INSERT INTO Category VALUES(0,'Bánh kẹo')");
@@ -138,31 +138,33 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Product VALUES(3,'Kimbap',0,1,'https://www.koreanbapsang.com/wp-content/uploads/2018/09/DSC8399-2-e1696691292303.jpg',3,2)");
 
 //        thêm dữ liệu mẫu bảng phiếu nhập
-        db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_21','6/11/2023',2)");
-        db.execSQL("INSERT INTO Bill_in VALUES('PN_0510_32','6/11/2023',3)");
-        db.execSQL("INSERT INTO Bill_in VALUES('PN_2012_43','6/11/2023',4)");
-        db.execSQL("INSERT INTO Bill_in VALUES('PN_0204_24','6/11/2023',2)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_21','06/01/2023 01:35:35',2)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_22','06/05/2023 01:35:35',2)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0510_32','07/09/2023 01:35:35',3)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_2012_43','10/10/2023 01:35:35',4)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0204_24','22/11/2023 01:35:35',2)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0204_10','22/11/2023 01:35:35',2)");
 
 //        thêm dữ liệu bảg chi tiết phiếu nhập
-        db.execSQL("INSERT INTO Bill_in_detail VALUES(0,30000,2,null,1,'PN_0711_21')");
-        db.execSQL("INSERT INTO Bill_in_detail VALUES(1,5000,2,null,2,'PN_0510_32')");
-        db.execSQL("INSERT INTO Bill_in_detail VALUES(2,7000,2,null,2,'PN_2012_43')");
-        db.execSQL("INSERT INTO Bill_in_detail VALUES(3,5000,2,null,3,'PN_0204_24')");
-        db.execSQL("INSERT INTO Bill_in_detail VALUES(4,100,2,null,0,'PN_0204_24')");
-        db.execSQL("INSERT INTO Bill_in_detail VALUES(5,50,2,null,1,'PN_0204_24')");
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(0,30000,2,60000,1,'PN_0711_21')");
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(1,5000,2,10000,2,'PN_0510_32')");
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(2,7000,2,14000,2,'PN_2012_43')");
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(3,5000,2,10000,3,'PN_0204_24')");
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(4,100,2,200,0,'PN_0711_22')");
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(5,50,2,100,1,'PN_0204_24')");
 
 //        thêm dữ liệu mẫu bảng phiếu xuất
-        db.execSQL("INSERT INTO Bill_out VALUES('PX_0711_21','6/11/2023','ádqwrasda',2,1)");
-        db.execSQL("INSERT INTO Bill_out VALUES('PX_0510_32','8/11/2023','joipjoiik',3,2)");
-        db.execSQL("INSERT INTO Bill_out VALUES('PX_2012_43','12/11/2023',',mnzcxnz,mxc',1,2)");
-        db.execSQL("INSERT INTO Bill_out VALUES('PX_0204_24','19/11/2023','ábiduahsdkajs',5,3)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PX_0711_21','20/08/2023 01:35:35','ádqwrasda',2,1)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PX_0510_32','22/03/2023 01:35:35','joipjoiik',3,2)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PX_2012_43','24/10/2023 01:35:35',',mnzcxnz,mxc',1,2)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PX_0204_24','25/11/2023 01:35:35','ábiduahsdkajs',5,3)");
 
 //        thêm dữ liệu mẫu bảng chi tiết phiếu xuất
-        db.execSQL("INSERT INTO Bill_out_detail VALUES(0,60000,2,null,1,'PX_0711_21')");
-        db.execSQL("INSERT INTO Bill_out_detail VALUES(1,15000,1,null,1,'PX_0510_32')");
-        db.execSQL("INSERT INTO Bill_out_detail VALUES(2,10000,2,null,1,'PX_2012_43')");
-        db.execSQL("INSERT INTO Bill_out_detail VALUES(3,20000,2,null,1,'PX_0711_21')");
-        db.execSQL("INSERT INTO Bill_out_detail VALUES(4,1500,2,null,1,'PX_0711_21')");
+        db.execSQL("INSERT INTO Bill_out_detail VALUES(0,60000,2,120000,1,'PX_0711_21')");
+        db.execSQL("INSERT INTO Bill_out_detail VALUES(1,15000,1,15000,1,'PX_0510_32')");
+        db.execSQL("INSERT INTO Bill_out_detail VALUES(2,10000,2,20000,1,'PX_2012_43')");
+        db.execSQL("INSERT INTO Bill_out_detail VALUES(3,20000,2,40000,1,'PX_0711_21')");
+        db.execSQL("INSERT INTO Bill_out_detail VALUES(4,1500,2,3000,1,'PX_0711_21')");
 
 //        thêm dữ liệu mẫu bảng Staff
         db.execSQL("INSERT INTO Staff VALUES(1,'Nguyễn Văn A','0123456789','abc',30,3000000,100000)");

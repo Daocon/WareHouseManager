@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Pair;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import hieudx.fpoly.warehousemanager.SQliteDB.DBHelper;
@@ -73,5 +75,23 @@ public class Bill_Out_Dao {
         if (check2 == 0)
             return -1;
         return 1;
+    }
+
+    @SuppressLint("Range")
+    public List<Pair<String, Float>> getMonthlyTotals() {
+        List<Pair<String, Float>> monthlyTotals = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT strftime('%m', substr(Bill_out.date_time, 7, 4) || '-' || substr(Bill_out.date_time, 4, 2) || '-' || substr(Bill_out.date_time, 1, 2)) as Month, SUM(Bill_out_detail.total) as Total " +
+                "FROM Bill_out JOIN Bill_out_detail ON Bill_out.id = Bill_out_detail.id_bill_out " +
+                "GROUP BY Month", null);
+        if (cursor.moveToFirst()) {
+            do {
+                String month = cursor.getString(cursor.getColumnIndex("Month"));
+                Float total = cursor.getFloat(cursor.getColumnIndex("Total"));
+                monthlyTotals.add(new Pair<>(month, total));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return monthlyTotals;
     }
 }

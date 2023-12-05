@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import hieudx.fpoly.warehousemanager.fragments.statistic.Chart_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.statistic.Statistic_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.statistic.Total_Fragment;
 
@@ -19,7 +20,7 @@ public class Statistic_Adapter extends FragmentStateAdapter {
         if (position == 0) {
             return new Total_Fragment();
         }
-        return new Statistic_Fragment();
+        return new Chart_Fragment();
     }
 
     @Override
