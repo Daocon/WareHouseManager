@@ -139,10 +139,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
 //        thêm dữ liệu mẫu bảng phiếu nhập
         db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_21','06/01/2023 01:35:35',2)");
-        db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_22','06/05/2023 01:35:35',2)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_22','06/05/2021 01:35:35',2)");
         db.execSQL("INSERT INTO Bill_in VALUES('PN_0510_32','07/09/2023 01:35:35',3)");
-        db.execSQL("INSERT INTO Bill_in VALUES('PN_2012_43','10/10/2023 01:35:35',4)");
-        db.execSQL("INSERT INTO Bill_in VALUES('PN_0204_24','22/11/2023 01:35:35',2)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_2012_43','10/10/2021 01:35:35',4)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0204_24','22/11/2022 01:35:35',2)");
         db.execSQL("INSERT INTO Bill_in VALUES('PN_0204_10','22/11/2023 01:35:35',2)");
 
 //        thêm dữ liệu bảg chi tiết phiếu nhập
@@ -155,8 +155,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
 //        thêm dữ liệu mẫu bảng phiếu xuất
         db.execSQL("INSERT INTO Bill_out VALUES('PX_0711_21','20/08/2023 01:35:35','ádqwrasda',2,1)");
-        db.execSQL("INSERT INTO Bill_out VALUES('PX_0510_32','22/03/2023 01:35:35','joipjoiik',3,2)");
-        db.execSQL("INSERT INTO Bill_out VALUES('PX_2012_43','24/10/2023 01:35:35',',mnzcxnz,mxc',1,2)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PX_0510_32','22/03/2022 01:35:35','joipjoiik',3,2)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PX_2012_43','24/10/2022 01:35:35',',mnzcxnz,mxc',1,2)");
         db.execSQL("INSERT INTO Bill_out VALUES('PX_0204_24','25/11/2023 01:35:35','ábiduahsdkajs',5,3)");
 
 //        thêm dữ liệu mẫu bảng chi tiết phiếu xuất
