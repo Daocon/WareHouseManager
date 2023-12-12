@@ -120,13 +120,15 @@ public class Bill_In_Dao {
             return -1;
         return 1;
     }
+    // get monthly totals
     @SuppressLint("Range")
-    public List<Pair<String, Float>> getMonthlyTotals() {
+    public List<Pair<String, Float>> getMonthlyTotals(String year) {
         List<Pair<String, Float>> monthlyTotals = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT strftime('%m', substr(Bill_in.date_time, 7, 4) || '-' || substr(Bill_in.date_time, 4, 2) || '-' || substr(Bill_in.date_time, 1, 2)) as Month, SUM(Bill_in_detail.total) as Total " +
+        Cursor cursor = db.rawQuery("SELECT strftime('%Y-%m', substr(Bill_in.date_time, 7, 4) || '-' || substr(Bill_in.date_time, 4, 2) || '-' || substr(Bill_in.date_time, 1, 2)) as Month, SUM(Bill_in_detail.total) as Total " +
                 "FROM Bill_in JOIN Bill_in_detail ON Bill_in.id = Bill_in_detail.id_bill_in " +
-                "GROUP BY Month", null);
+                "WHERE strftime('%Y', substr(Bill_in.date_time, 7, 4) || '-' || substr(Bill_in.date_time, 4, 2) || '-' || substr(Bill_in.date_time, 1, 2)) = ? " +
+                "GROUP BY Month", new String[]{year});
         if (cursor.moveToFirst()) {
             do {
                 String month = cursor.getString(cursor.getColumnIndex("Month"));
@@ -136,6 +138,22 @@ public class Bill_In_Dao {
         }
         cursor.close();
         return monthlyTotals;
+    }
+    // get all year
+    @SuppressLint("Range")
+    public List<String> getAllYears() {
+        List<String> years = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT DISTINCT strftime('%Y', substr(Bill_in.date_time, 7, 4) || '-' || substr(Bill_in.date_time, 4, 2) || '-' || substr(Bill_in.date_time, 1, 2)) as Year " +
+                "FROM Bill_in", null);
+        if (cursor.moveToFirst()) {
+            do {
+                String year = cursor.getString(cursor.getColumnIndex("Year"));
+                years.add(year);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return years;
     }
 }
 
