@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
             loadFragment(supplierFragment);
         });
         binding.cardStaff.setOnClickListener(view -> {
-            loadFragment(chartFragment);
+            loadFragment(staffFragment);
         });
     }
 
