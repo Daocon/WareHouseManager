@@ -1,34 +1,26 @@
 package hieudx.fpoly.warehousemanager;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import hieudx.fpoly.warehousemanager.databinding.ActivityMainBinding;
-import hieudx.fpoly.warehousemanager.fragments.bill.Bill_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.Category_Fragment;
+import hieudx.fpoly.warehousemanager.Category.Fragment.Category_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Delivery_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Product_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Staff_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.Supplier_Fragment;
+import hieudx.fpoly.warehousemanager.Bill.Fragment.Bill_Fragment;
+import hieudx.fpoly.warehousemanager.fragments.member.Member_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.statistic.Chart_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.statistic.Statistic_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.Supplier_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.member.Member_Fragment;
-import hieudx.fpoly.warehousemanager.view.Account_Activity;
 
 public class MainActivity extends AppCompatActivity {
     public static ActivityMainBinding binding;
@@ -76,39 +68,6 @@ public class MainActivity extends AppCompatActivity {
         onClickListenerNavBottom();
         onClickDashBoard();
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_actionbar, menu);
-        MenuItem searchItem = menu.findItem(R.id.act_searchview);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                Toast.makeText(MainActivity.this, "Khi người dùng nhấn enter", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-//                xử lý Khi người dùng thay đổi nội dung ô tìm kiếm
-//                Có thể thực hiện tìm kiếm theo thời gian thực ở đây
-                return true;
-            }
-        });
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.act_person) {
-            Intent intent = new Intent(MainActivity.this, Account_Activity.class);
-            startActivity(intent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
     private void onClickListenerNavBottom() {
         binding.navBottom.setOnItemSelectedListener(item -> {
@@ -206,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public static void translayout() {
+    private void translayout() {
         binding.bgrDashBoard.setVisibility(View.GONE);
         binding.layoutDashboard.setVisibility(View.GONE);
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) binding.bgrDashBoardParent.getLayoutParams();

@@ -55,13 +55,12 @@
 
     <Button
         android:id="@+id/btnLogin"
+        style="@style/custom_title_add"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:backgroundTint="@color/purple"
         android:text="Login"
+        android:textColor="@color/white"
         android:theme="@style/Base.Theme.WareHouseManager"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.531"

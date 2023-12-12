@@ -3,31 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:theme="@style/Base.Theme.Bill"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fragments.bill.Bill_In.Bill_In_Fragment">
+    android:theme="@style/Base.Theme.Bill"
+    tools:context=".Bill.Fragment.Bill_In.Bill_In_Fragment">
 
     <ImageButton
         android:id="@+id/img_sort"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:layout_gravity="end"
-        android:layout_marginEnd="20dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
+        style="@style/custom_img_sort"
         android:src="@drawable/sort"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_add"
         style="@style/custom_title_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/theme"
         android:background="@drawable/custom_bgr_btn_add_update"
+        android:backgroundTint="@color/theme"
         android:text="tạo phiếu nhập"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,11 +38,8 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/theme"
+        style="@style/custom_fab_add"
         android:src="@drawable/ic_add"
-        android:visibility="gone"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

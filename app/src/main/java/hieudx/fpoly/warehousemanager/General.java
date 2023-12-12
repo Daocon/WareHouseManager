@@ -1,58 +1,77 @@
 package hieudx.fpoly.warehousemanager;
 
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Locale;
+
 public class General {
+    public static void isEmptyValid(TextInputEditText inputEditText, TextInputLayout inputLayout) {
+        inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
-    public static void validName(String value, TextInputLayout field) {
-        if (value.matches(".*\\d.*")) {
-            field.setError("Tên không được chứa số");
-        } else if (TextUtils.isEmpty(value.trim())) {
-            field.setError("Hãy nhập tên");
-        } else {
-            field.setError(null);
-        }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (TextUtils.isEmpty(charSequence.toString())) {
+                    inputLayout.setError("Không được để trống");
+                } else if (TextUtils.isEmpty(charSequence.toString().trim())) {
+                    inputLayout.setError("Không được nhập khoảng trắng");
+                } else {
+                    inputLayout.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
     }
 
-    public static void validPass(String value, String value2, TextInputLayout field) {
-        if (!value.equals(value2)) {
-            field.setError("Mật khẩu không trùng khớp");
-        } else if (TextUtils.isEmpty(value.trim()) || TextUtils.isEmpty(value2.trim())) {
-            field.setError("Hãy nhập mật khẩu");
-        } else {
-            field.setError(null);
-        }
+    public static void isContainNumber(String value, TextInputLayout inputLayout) {
+        if (value.matches(".*\\d.*"))
+            inputLayout.setError("Không được chứa số");
+        else inputLayout.setError(null);
     }
 
-    public static void validUsername(String value, TextInputLayout field) {
-        if (TextUtils.isEmpty(value.trim())) {
-            field.setError("Hãy nhập tên đăng nhập");
-        } else if (value.trim().contains(" ")) {
-            field.setError("Tên đăng nhập không được chứa khoảng trắng");
-        }
+    public static void isContainSpace(String value, TextInputLayout inputLayout) {
+        if (value.trim().contains(" "))
+            inputLayout.setError("Không được chứa khoảng trắng");
+        else inputLayout.setError(null);
     }
 
-    public static void validEmail(String value, TextInputLayout field) {
-        if (TextUtils.isEmpty(value.trim())) {
-            field.setError("Hãy nhập email");
-        } else if (value.trim().contains(" ")) {
-            field.setError("Email không được chứa khoảng trắng");
-        } else if (!value.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
-            field.setError("Hãy nhập đúng định dạng email");
+    public static void validEmail(String value, TextInputLayout inputLayout) {
+        if (value.trim().contains(" ") || !value.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"))
+            inputLayout.setError("Hãy nhập đúng định dạng email");
+        else inputLayout.setError(null);
+    }
+
+    public static void passValid(String pass, String repass, TextInputLayout inputLayout) {
+        if (!pass.equals(repass)) {
+            inputLayout.setError("Mật khẩu không trùng khớp");
         } else {
-            field.setError(null);
+            inputLayout.setError(null);
         }
     }
 
     public static void validPhone(String value, TextInputLayout field) {
-        if (TextUtils.isEmpty(value.trim())) {
-            field.setError("Hãy nhập số điện thoại");
-        } else if (value.length() < 10 || value.length() > 10) {
+        if (value.length() < 10 || value.length() > 10) {
             field.setError("Số điện thoại phải chứa 10 số");
-        } else if (value.contains(" ")) {
-            field.setError("Số điện thoại không được chứa khoảng trắng");
         } else if (!value.startsWith("0")) {
             field.setError("Số điện thoại phải bắt đầu bằng số 0");
         } else {
@@ -60,30 +79,31 @@ public class General {
         }
     }
 
-//    public static void init(Fragment fragment, RecyclerView.Adapter adapter) {
-//        fragment.requireFragmentManager() = fragment.requ.getSupportFragmentManager();
-//        dao = new Bill_In_Dao(getContext());
-//        list = dao.getAll();
-//        if (!list.isEmpty()) {
-//            binding.btnAdd.setVisibility(View.GONE);
-//            binding.imgSort.setVisibility(View.VISIBLE);
-//            binding.rcv.setVisibility(View.VISIBLE);
-//            binding.fabAdd.setVisibility(View.VISIBLE);
-//            adapter = new Bill_In_Adapter(getContext(), list, fragmentManager);
-//            binding.rcv.setAdapter(adapter);
-//        } else {
-//            binding.btnAdd.setVisibility(View.VISIBLE);
-//            binding.imgSort.setVisibility(View.GONE);
-//            binding.rcv.setVisibility(View.GONE);
-//            binding.fabAdd.setVisibility(View.GONE);
-//        }
-//
-//        binding.btnAdd.setOnClickListener(view -> {
-//            loadFragment();
-//        });
-//
-//        binding.fabAdd.setOnClickListener(view -> {
-//            loadFragment();
-//        });
-//    }
+    public static String formatSumVND(Double sum) {
+        Locale locale = new Locale("vi", "VN");
+        NumberFormat nf = NumberFormat.getInstance(locale);
+        return nf.format(sum);
+    }
+
+    public static void transLayout(ArrayList list, Button btnAdd, ImageView imgSort, RecyclerView rcv, FloatingActionButton fabAdd) {
+        if (!list.isEmpty()) {
+            btnAdd.setVisibility(View.GONE);
+            imgSort.setVisibility(View.VISIBLE);
+            rcv.setVisibility(View.VISIBLE);
+            fabAdd.setVisibility(View.VISIBLE);
+        } else {
+            btnAdd.setVisibility(View.VISIBLE);
+            imgSort.setVisibility(View.GONE);
+            rcv.setVisibility(View.GONE);
+            fabAdd.setVisibility(View.GONE);
+        }
+    }
+
+    public static void loadFragment(FragmentManager fragmentManager, Fragment fragment) {
+        fragmentManager.beginTransaction()
+                .replace(R.id.frag_container_main, fragment)
+                .addToBackStack(null) // Cho phép quay lại fragment trước đó nếu cần
+                .commit();
+    }
+
 }

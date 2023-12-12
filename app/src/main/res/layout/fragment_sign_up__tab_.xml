@@ -142,17 +142,15 @@
             android:layout_height="match_parent"
             android:background="@drawable/custom_ed_bgr"
             android:textColorHighlight="@color/cardview_dark_background" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnSignUp"
+        style="@style/custom_title_add"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:backgroundTint="#8692f7"
         android:text="Sign Up"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

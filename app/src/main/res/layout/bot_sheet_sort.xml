@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_btsheet_member"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/custom_tv_add_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Sắp xếp"
+        android:textAlignment="center"
+        android:textSize="25sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="#B8B6B6" />
+
+    <RadioGroup
+        android:id="@+id/rd_gr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rd_sort_asc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Giá tăng dần" />
+
+        <RadioButton
+            android:id="@+id/rd_sort_decs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Giá giảm dần" />
+
+        <RadioButton
+            android:id="@+id/rd_sort_AZ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A - Z" />
+
+        <RadioButton
+            android:id="@+id/rd_sort_ZA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Z - A" />
+    </RadioGroup>
+</LinearLayout>

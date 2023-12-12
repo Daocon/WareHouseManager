@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
     static String DB_NAME = "WareHouseManager.db";
-    static int DB_VERSION = 4 ;
+    static int DB_VERSION = 1;
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -65,6 +65,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Bill_in (\n" +
                 "    id                  TEXT PRIMARY KEY,\n" +
                 "    date_time           TEXT NOT NULL,\n" +
+                "    sum                 INTEGER,\n" +
                 "    id_user             INTEGER REFERENCES User (id) \n" +
                 ");\n");
 
@@ -82,6 +83,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Bill_out (\n" +
                 "    id        TEXT PRIMARY KEY,\n" +
                 "    date_time TEXT NOT NULL,\n" +
+                "    sum       INTEGER,\n" +
                 "    address   TEXT NOT NULL,\n" +
                 "    id_user   INTEGER REFERENCES User (id), \n" +
                 "    id_delivery INTEGER REFERENCES Delivery (id) \n" +
@@ -138,26 +140,23 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Product VALUES(3,'Kimbap',0,1,'https://www.koreanbapsang.com/wp-content/uploads/2018/09/DSC8399-2-e1696691292303.jpg',3,2)");
 
 //        thêm dữ liệu mẫu bảng phiếu nhập
-        db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_21','06/01/2023 01:35:35',2)");
-        db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_22','06/05/2023 01:35:35',2)");
-        db.execSQL("INSERT INTO Bill_in VALUES('PN_0510_32','07/09/2023 01:35:35',3)");
-        db.execSQL("INSERT INTO Bill_in VALUES('PN_2012_43','10/10/2023 01:35:35',4)");
-        db.execSQL("INSERT INTO Bill_in VALUES('PN_0204_24','22/11/2023 01:35:35',2)");
-        db.execSQL("INSERT INTO Bill_in VALUES('PN_0204_10','22/11/2023 01:35:35',2)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0711_21','06/01/2023 01:35:35',600200,2)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0510_32','07/09/2023 01:35:35',10000,3)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_2012_43','10/10/2023 01:35:35',14000,4)");
+        db.execSQL("INSERT INTO Bill_in VALUES('PN_0204_24','22/11/2023 01:35:35',101000,2)");
 
 //        thêm dữ liệu bảg chi tiết phiếu nhập
-        db.execSQL("INSERT INTO Bill_in_detail VALUES(0,30000,2,60000,1,'PN_0711_21')");
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(0,30000,2,600000,1,'PN_0711_21')");
         db.execSQL("INSERT INTO Bill_in_detail VALUES(1,5000,2,10000,2,'PN_0510_32')");
         db.execSQL("INSERT INTO Bill_in_detail VALUES(2,7000,2,14000,2,'PN_2012_43')");
         db.execSQL("INSERT INTO Bill_in_detail VALUES(3,5000,2,10000,3,'PN_0204_24')");
-        db.execSQL("INSERT INTO Bill_in_detail VALUES(4,100,2,200,0,'PN_0711_22')");
-        db.execSQL("INSERT INTO Bill_in_detail VALUES(5,50,2,100,1,'PN_0204_24')");
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(4,100,2,200,0,'PN_0711_21')");
+        db.execSQL("INSERT INTO Bill_in_detail VALUES(5,50,2,1000,1,'PN_0204_24')");
 
 //        thêm dữ liệu mẫu bảng phiếu xuất
-        db.execSQL("INSERT INTO Bill_out VALUES('PX_0711_21','20/08/2023 01:35:35','ádqwrasda',2,1)");
-        db.execSQL("INSERT INTO Bill_out VALUES('PX_0510_32','22/03/2023 01:35:35','joipjoiik',3,2)");
-        db.execSQL("INSERT INTO Bill_out VALUES('PX_2012_43','24/10/2023 01:35:35',',mnzcxnz,mxc',1,2)");
-        db.execSQL("INSERT INTO Bill_out VALUES('PX_0204_24','25/11/2023 01:35:35','ábiduahsdkajs',5,3)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PX_0711_21','20/08/2023 01:35:35',163000,'ádqwrasda',2,1)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PX_0510_32','22/03/2023 01:35:35',15000,'joipjoiik',3,2)");
+        db.execSQL("INSERT INTO Bill_out VALUES('PX_2012_43','24/10/2023 01:35:35',20000,',mnzcxnz,mxc',1,2)");
 
 //        thêm dữ liệu mẫu bảng chi tiết phiếu xuất
         db.execSQL("INSERT INTO Bill_out_detail VALUES(0,60000,2,120000,1,'PX_0711_21')");

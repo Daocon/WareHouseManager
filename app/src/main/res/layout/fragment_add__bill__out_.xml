@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_margin="20dp"
     android:orientation="vertical"
-    tools:context=".fragments.bill.Bill_Out.Add_Bill_Out_Fragment">
+    tools:context=".Bill.Fragment.Bill_Out.Add_Bill_Out_Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,8 +15,6 @@
 
         <TextView
             style="@style/custom_title_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="mã hóa đơn" />
 
         <TextView
@@ -28,8 +26,6 @@
 
         <TextView
             style="@style/custom_title_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="đơn vị vận chuyển" />
 
         <Spinner
@@ -41,8 +37,6 @@
 
         <TextView
             style="@style/custom_title_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="thêm sản phẩm" />
 
         <EditText
@@ -54,8 +48,6 @@
 
         <TextView
             style="@style/custom_title_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="thêm sản phẩm" />
 
         <EditText
@@ -81,8 +73,6 @@
 
         <TextView
             style="@style/custom_title_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="tổng giá tiền"
             android:layout_weight="1"
             android:textColor="#F30C0C"
@@ -98,12 +88,9 @@
             android:textSize="20sp" />
     </LinearLayout>
 
-
     <Button
         android:id="@+id/btnAdd"
         style="@style/custom_title_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="@color/theme"
         android:text="xác nhận" />

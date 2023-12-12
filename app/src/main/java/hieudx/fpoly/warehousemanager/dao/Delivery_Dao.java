@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.SQliteDB.DBHelper;
-import hieudx.fpoly.warehousemanager.models.Category;
 import hieudx.fpoly.warehousemanager.models.Delivery;
 
 public class Delivery_Dao {

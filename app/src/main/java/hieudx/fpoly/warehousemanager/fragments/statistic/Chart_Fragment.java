@@ -21,8 +21,8 @@ import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
 import java.util.List;
-import hieudx.fpoly.warehousemanager.dao.Bill.Bill_In_Dao;
-import hieudx.fpoly.warehousemanager.dao.Bill.Bill_Out_Dao;
+import hieudx.fpoly.warehousemanager.Bill.Dao.Bill_In_Dao;
+import hieudx.fpoly.warehousemanager.Bill.Dao.Bill_Out_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentChartBinding;
 
 public class Chart_Fragment extends Fragment {

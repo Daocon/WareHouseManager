@@ -17,11 +17,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import hieudx.fpoly.warehousemanager.R;
-import hieudx.fpoly.warehousemanager.dao.Category_Dao;
+import hieudx.fpoly.warehousemanager.Category.Dao.Category_Dao;
 import hieudx.fpoly.warehousemanager.dao.Product_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentProductUpdateBinding;
 import hieudx.fpoly.warehousemanager.fragments.Product_Fragment;
-import hieudx.fpoly.warehousemanager.models.Category;
+import hieudx.fpoly.warehousemanager.Category.Model.Category;
 import hieudx.fpoly.warehousemanager.models.Product;
 
 

@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import hieudx.fpoly.warehousemanager.R;
-import hieudx.fpoly.warehousemanager.dao.Category_Dao;
+import hieudx.fpoly.warehousemanager.Category.Dao.Category_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentProductAddBinding;
 import hieudx.fpoly.warehousemanager.fragments.Product_Fragment;
-import hieudx.fpoly.warehousemanager.models.Category;
+import hieudx.fpoly.warehousemanager.Category.Model.Category;
 
 
 public class Product_Add extends Fragment {

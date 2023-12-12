@@ -5,16 +5,12 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-
-import com.google.android.material.textfield.TextInputLayout;
 
 import hieudx.fpoly.warehousemanager.MainActivity;
 import hieudx.fpoly.warehousemanager.dao.User_Dao;
@@ -40,7 +36,6 @@ public class Login_Tab_Fragment extends Fragment {
 
         checkRemember();
         animation();
-        validation();
 
         binding.tvForgotPass.setOnClickListener(view -> {
             startActivity(new Intent(getContext(), Forgot_Reset_Pass_Activity.class));
@@ -50,13 +45,11 @@ public class Login_Tab_Fragment extends Fragment {
             String username = binding.edUsername.getText().toString();
             String pass = binding.edPass.getText().toString();
             if (username.isEmpty() || pass.isEmpty()) {
-                validField(username, binding.username);
-                validField(pass, binding.pass);
+                Toast.makeText(getContext(), "Hãy nhập đủ dữ liệu", Toast.LENGTH_SHORT).show();
             } else {
                 User_Dao user_dao = new User_Dao(getContext());
                 if (user_dao.checkLogin(username, pass)) {
                     User user = user_dao.getUserByUsernameAndPassword(username,pass);
-
                     if (user.getRole() == -1){
                         Toast.makeText(getContext(), "Tài khoản bị hạn chế!", Toast.LENGTH_SHORT).show();
                     } else {
@@ -93,54 +86,6 @@ public class Login_Tab_Fragment extends Fragment {
             binding.edPass.setText(shared.getString("password", ""));
             binding.cbRemember.setChecked(isCheck);
         }
-    }
-
-    private void validField(String value, TextInputLayout field) {
-        if (value.isEmpty()) {
-            field.setError("Trường này không được để trống");
-        } else {
-            field.setError(null);
-        }
-    }
-
-    private void validation() {
-        binding.edUsername.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length() == 0) {
-                    binding.username.setError("Vui lòng nhập tài khoản");
-                } else {
-                    binding.username.setError(null);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
-
-        binding.edPass.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length() == 0) {
-                    binding.pass.setError("Vui lòng nhập mật khẩu");
-                } else {
-                    binding.pass.setError(null);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
     }
 
     private void animation() {

@@ -33,7 +33,32 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/custom_actionbar" />
+                android:background="@drawable/custom_actionbar">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginHorizontal="10dp"
+                    app:cardCornerRadius="30dp">
+
+                    <ImageView
+                        android:id="@+id/img_account"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_avt" />
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    app:defaultQueryHint="Nội dung tìm kiếm"
+                    app:iconifiedByDefault="true" />
+            </androidx.appcompat.widget.Toolbar>
 
         </RelativeLayout>
 
