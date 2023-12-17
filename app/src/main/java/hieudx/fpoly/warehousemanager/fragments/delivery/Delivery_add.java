@@ -1,21 +1,17 @@
 package hieudx.fpoly.warehousemanager.fragments.delivery;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import java.util.HashMap;
-
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.FragmentDeliveryAddBinding;
 import hieudx.fpoly.warehousemanager.fragments.Delivery_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.Product_Fragment;
 
 
 public class Delivery_add extends Fragment {

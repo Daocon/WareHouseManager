@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.dao.Supplier_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvProductBillBinding;
-import hieudx.fpoly.warehousemanager.models.Product;
+import hieudx.fpoly.warehousemanager.Product.Model.Product;
 
 public class Bill_In_Product_Add_Adapter extends RecyclerView.Adapter<Bill_In_Product_Add_Adapter.ViewHolder> {
     private Context context;

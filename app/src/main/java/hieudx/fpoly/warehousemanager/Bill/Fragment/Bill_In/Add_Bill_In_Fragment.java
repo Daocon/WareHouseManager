@@ -20,9 +20,9 @@ import java.util.Locale;
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.Bill.Adapter.bill_in.Bill_In_Product_Add_Adapter;
 import hieudx.fpoly.warehousemanager.Bill.Dao.Bill_In_Dao;
-import hieudx.fpoly.warehousemanager.dao.Product_Dao;
+import hieudx.fpoly.warehousemanager.Product.Dao.Product_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentAddBillInBinding;
-import hieudx.fpoly.warehousemanager.models.Product;
+import hieudx.fpoly.warehousemanager.Product.Model.Product;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_In;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_in_detail;
 
@@ -72,9 +72,7 @@ public class Add_Bill_In_Fragment extends Fragment {
                 boolean check = bill_in_dao.insertDetail(bill_in_detail);
                 if (check) {
                     Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-
                 }
-
             }
             bill_in_dao.updateSumTotal(bill_in.getId());
             FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();

@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import hieudx.fpoly.warehousemanager.databinding.ActivityMainBinding;
 import hieudx.fpoly.warehousemanager.Category.Fragment.Category_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Delivery_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.Product_Fragment;
+import hieudx.fpoly.warehousemanager.Product.Fragment.Product_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Staff_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Supplier_Fragment;
 import hieudx.fpoly.warehousemanager.Bill.Fragment.Bill_Fragment;
@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private Category_Fragment categoryFragment;
     private Bill_Fragment billFragment;
     private Member_Fragment memberFragment;
-    private Statistic_Fragment statisticFragment;
     private Delivery_Fragment deliveryFragment;
     private Supplier_Fragment supplierFragment;
     private Staff_Fragment staffFragment;
@@ -54,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         staffFragment = new Staff_Fragment();
         deliveryFragment = new Delivery_Fragment();
         supplierFragment = new Supplier_Fragment();
-        statisticFragment = new Statistic_Fragment();
         chartFragment = new Chart_Fragment();
 //        SharedPreferences shared = getSharedPreferences("ACCOUNT",MODE_PRIVATE);
 //        SharedPreferences.Editor editor = shared.edit();
@@ -127,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         binding.cardStatitics.setOnClickListener(view -> {
-            loadFragment(statisticFragment);
+            loadFragment(new Statistic_Fragment());
         });
         binding.cardDelivery.setOnClickListener(view -> {
             loadFragment(deliveryFragment);
@@ -153,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.tbMain);
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
         actionBar.setHomeAsUpIndicator(R.drawable.ic_home);
         binding.tbMain.setNavigationOnClickListener(view -> {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frag_container_main);

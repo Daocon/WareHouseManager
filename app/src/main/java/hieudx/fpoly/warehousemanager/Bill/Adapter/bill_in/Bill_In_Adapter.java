@@ -50,7 +50,7 @@ public class Bill_In_Adapter extends RecyclerView.Adapter<Bill_In_Adapter.ViewHo
         holder.binding.tvNameUser.setText(user_dao.getUserById(list.get(position).getId_user()).getName());
         holder.binding.tvDateTime.setText(list.get(position).getDate_time());
         String sum = General.formatSumVND(list.get(position).getSum());
-        holder.binding.tvTotal.setText(sum);
+        holder.binding.tvTotal.setText(sum+"đ");
 
         holder.itemView.setOnClickListener(view -> {
             Fragment fragment = new Detail_Bill_In_Fragment();
@@ -102,7 +102,7 @@ public class Bill_In_Adapter extends RecyclerView.Adapter<Bill_In_Adapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private final ItemRcvBillBinding binding;
+        private ItemRcvBillBinding binding;
 
         public ViewHolder(@NonNull ItemRcvBillBinding binding) {
             super(binding.getRoot());

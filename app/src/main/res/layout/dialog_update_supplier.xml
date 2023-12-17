@@ -65,6 +65,5 @@
         android:layout_width="150sp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30sp"
-        android:background="@drawable/khung_btn_add"
         android:text="Cập nhật" />
 </LinearLayout>

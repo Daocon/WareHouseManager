@@ -56,6 +56,7 @@
             android:id="@+id/ed_name"
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:hint="nhập tên thể loại sản phẩm"
             android:background="@drawable/custom_ed_bgr"
             android:textColorHighlight="@color/cardview_dark_background" />
     </com.google.android.material.textfield.TextInputLayout>

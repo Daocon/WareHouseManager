@@ -1,15 +1,29 @@
 package hieudx.fpoly.warehousemanager;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -17,9 +31,57 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class General {
+
+    public static void onStateIconBack(FragmentActivity fragmentActivity, ActionBar actionBar, FragmentManager fragmentManager, boolean state) {
+        ((AppCompatActivity) fragmentActivity).setSupportActionBar(MainActivity.binding.tbMain);
+        if (state) actionBar.setHomeAsUpIndicator(R.drawable.ic_home);
+        else actionBar.setHomeAsUpIndicator(R.drawable.back);
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        MainActivity.binding.tbMain.setNavigationOnClickListener(view12 -> {
+            if (state) {
+                Fragment currentFragment =  fragmentManager.findFragmentById(R.id.frag_container_main);
+                if (currentFragment != null) {
+                    fragmentManager.beginTransaction().remove(currentFragment).commit();
+                }
+                MainActivity.binding.bgrDashBoard.setVisibility(View.VISIBLE);
+                MainActivity.binding.layoutDashboard.setVisibility(View.VISIBLE);
+            }
+                else fragmentManager.popBackStack();
+
+        });
+    }
+
+    public static void onLoadSpinner(Context context, ArrayList<HashMap<String, Object>> listHM, Spinner spinner) {
+        SimpleAdapter simpleAdapter = new SimpleAdapter(
+                context,
+                listHM,
+                android.R.layout.simple_list_item_1,
+                new String[]{"name"},
+                new int[]{android.R.id.text1});
+        spinner.setAdapter(simpleAdapter);
+
+
+    }
+
+    public static Dialog onSettingsBotSheet(Context context, ViewBinding viewBinding) {
+        Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(viewBinding.getRoot());
+
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        dialog.show();
+        return dialog;
+    }
+
     public static void isEmptyValid(TextInputEditText inputEditText, TextInputLayout inputLayout) {
         inputEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -52,6 +114,11 @@ public class General {
     public static void isContainSpace(String value, TextInputLayout inputLayout) {
         if (value.trim().contains(" "))
             inputLayout.setError("Không được chứa khoảng trắng");
+        else inputLayout.setError(null);
+    }
+
+    public static void isContainChar(String value, TextInputLayout inputLayout) {
+        if (value.matches("[a-zA-Z]+")) inputLayout.setError("Không được nhâp chữ");
         else inputLayout.setError(null);
     }
 
@@ -99,11 +166,11 @@ public class General {
         }
     }
 
-    public static void loadFragment(FragmentManager fragmentManager, Fragment fragment) {
+    public static void loadFragment(FragmentManager fragmentManager, Fragment fragment, Bundle bundle) {
+        if (bundle != null) fragment.setArguments(bundle);
         fragmentManager.beginTransaction()
                 .replace(R.id.frag_container_main, fragment)
                 .addToBackStack(null) // Cho phép quay lại fragment trước đó nếu cần
                 .commit();
     }
-
 }

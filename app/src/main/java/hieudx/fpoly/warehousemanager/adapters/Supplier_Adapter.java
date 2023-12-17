@@ -14,12 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import hieudx.fpoly.warehousemanager.Product.Adapter.Product_Adapter;
 import hieudx.fpoly.warehousemanager.dao.Supplier_Dao;
-import hieudx.fpoly.warehousemanager.databinding.DialogDeleteDeliveryBinding;
 import hieudx.fpoly.warehousemanager.databinding.DialogDeleteSupplierBinding;
-import hieudx.fpoly.warehousemanager.databinding.ItemRcvDeliveryBinding;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvSupplierBinding;
-import hieudx.fpoly.warehousemanager.models.Delivery;
 import hieudx.fpoly.warehousemanager.models.Supplier;
 
 public class Supplier_Adapter extends RecyclerView.Adapter<Supplier_Adapter.ViewHolder> {

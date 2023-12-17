@@ -18,10 +18,12 @@ import hieudx.fpoly.warehousemanager.Bill.Model.Bill_out_detail;
 public class Bill_Out_Dao {
     private DBHelper dbHelper;
     private Context context;
+    private SQLiteDatabase db;
 
     public Bill_Out_Dao(Context context) {
         dbHelper = new DBHelper(context);
         this.context = context;
+        this.db = dbHelper.getWritableDatabase();
     }
 
     public ArrayList<Bill_Out> getAll() {
@@ -101,7 +103,6 @@ public class Bill_Out_Dao {
     @SuppressLint("Range")
     public List<String> getAllYears() {
         List<String> years = new ArrayList<>();
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT DISTINCT strftime('%Y', substr(Bill_out.date_time, 7, 4) || '-' || substr(Bill_out.date_time, 4, 2) || '-' || substr(Bill_out.date_time, 1, 2)) as Year " +
                 "FROM Bill_out", null);
         if (cursor.moveToFirst()) {

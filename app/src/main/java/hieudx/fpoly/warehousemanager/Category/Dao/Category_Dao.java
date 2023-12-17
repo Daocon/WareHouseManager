@@ -1,5 +1,6 @@
 package hieudx.fpoly.warehousemanager.Category.Dao;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -7,23 +8,22 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import hieudx.fpoly.warehousemanager.SQliteDB.DBHelper;
 import hieudx.fpoly.warehousemanager.Category.Model.Category;
+import hieudx.fpoly.warehousemanager.SQliteDB.DBHelper;
 
 public class Category_Dao {
     private DBHelper dbHelper;
-    private SQLiteDatabase database;
+    private SQLiteDatabase db;
 
 
     public Category_Dao(Context context) {
         this.dbHelper = new DBHelper(context);
-        this.database = dbHelper.getWritableDatabase();
+        this.db = dbHelper.getWritableDatabase();
     }
 
     public ArrayList<Category> getListCategory() {
         ArrayList<Category> list = new ArrayList<>();
-        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
-        Cursor c = sqLiteDatabase.rawQuery("Select * from Category", null);
+        Cursor c = db.rawQuery("Select * from Category", null);
         if (c.getCount() != 0) {
             c.moveToFirst();
             do {
@@ -36,22 +36,21 @@ public class Category_Dao {
     public long insertCategory(String name) {
         ContentValues values = new ContentValues();
         values.put("name", name);
-        return database.insert("Category", null, values);
+        return db.insert("Category", null, values);
     }
 
-    public boolean updateCategory(Category category) {
+    public int editCategory(Category category) {
         ContentValues values = new ContentValues();
         values.put("name", category.getName());
-        long check = database.update("Category", values, "id = ?", new String[]{String.valueOf(category.getId())});
-        return check > 0;
+        return db.update("Category", values, "id = ?", new String[]{String.valueOf(category.getId())});
     }
 
     public int deleteCategory(int idCategory) {
-        Cursor cursor = database.rawQuery("SELECT * FROM Product where id_category = ?", new String[]{String.valueOf(idCategory)});
+        Cursor cursor = db.rawQuery("SELECT * FROM Product where id_category = ?", new String[]{String.valueOf(idCategory)});
         if (cursor.getCount() != 0) {
             return -1;
         }
-        long check = database.delete("Category", "id = ?", new String[]{String.valueOf(idCategory)});
+        long check = db.delete("Category", "id = ?", new String[]{String.valueOf(idCategory)});
         if (check == -1) {
             return 0;
         } else {
@@ -59,11 +58,22 @@ public class Category_Dao {
         }
     }
 
-    public boolean getCategoryByName(String name) {
-        Cursor c = database.rawQuery("select * from Category WHERE name = ?", new String[]{name});
+    public boolean isExistCategory(String name) {
+        Cursor c = db.rawQuery("select * from Category WHERE name = ?", new String[]{name});
         if (c.getCount() != 0) {
             return true;
         }
         return false;
+    }
+
+    @SuppressLint("Range")
+    public Category getCategoryById(int id) {
+        Category category = null;
+        Cursor c = db.rawQuery("SELECT * FROM Category WHERE id = ?", new String[]{String.valueOf(id)});
+        if (c.getCount() != 0) {
+            c.moveToFirst();
+            category = new Category(c.getInt(0), c.getString(1));
+        }
+        return category;
     }
 }

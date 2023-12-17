@@ -37,7 +37,7 @@ public class Detail_Bill_Out_Fragment extends Fragment {
 
         Bundle bundle = getArguments();
 
-        binding.imgBack.setOnClickListener(view -> General.loadFragment(requireActivity().getSupportFragmentManager(), new Bill_Fragment()));
+        binding.imgBack.setOnClickListener(view -> General.loadFragment(requireActivity().getSupportFragmentManager(), new Bill_Fragment(), null));
 
         if (bundle != null) {
             User_Dao user_dao = new User_Dao(getContext());
@@ -67,7 +67,7 @@ public class Detail_Bill_Out_Fragment extends Fragment {
                     long check = bill_out_dao.delete(bill_out.getId());
                     if (check == 1) {
                         Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
-                        General.loadFragment(requireActivity().getSupportFragmentManager(), new Bill_Fragment());
+                        General.loadFragment(requireActivity().getSupportFragmentManager(), new Bill_Fragment(), null);
                     } else {
                         Toast.makeText(getContext(), "Xóa lỗi", Toast.LENGTH_SHORT).show();
                     }

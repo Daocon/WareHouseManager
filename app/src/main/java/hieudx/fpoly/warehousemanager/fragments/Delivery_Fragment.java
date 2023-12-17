@@ -26,7 +26,7 @@ import java.util.Comparator;
 
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.adapters.Delivery_Adapter;
-import hieudx.fpoly.warehousemanager.adapters.Product_Adapter;
+import hieudx.fpoly.warehousemanager.Product.Adapter.Product_Adapter;
 import hieudx.fpoly.warehousemanager.dao.Delivery_Dao;
 import hieudx.fpoly.warehousemanager.databinding.BottomSheetDeliveryBinding;
 import hieudx.fpoly.warehousemanager.databinding.DialogUpdateDeliveryBinding;

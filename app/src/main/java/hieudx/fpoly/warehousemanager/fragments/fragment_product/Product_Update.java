@@ -1,28 +1,27 @@
 package hieudx.fpoly.warehousemanager.fragments.fragment_product;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SimpleAdapter;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.Category.Dao.Category_Dao;
-import hieudx.fpoly.warehousemanager.dao.Product_Dao;
-import hieudx.fpoly.warehousemanager.databinding.FragmentProductUpdateBinding;
-import hieudx.fpoly.warehousemanager.fragments.Product_Fragment;
 import hieudx.fpoly.warehousemanager.Category.Model.Category;
-import hieudx.fpoly.warehousemanager.models.Product;
+import hieudx.fpoly.warehousemanager.Product.Dao.Product_Dao;
+import hieudx.fpoly.warehousemanager.Product.Fragment.Product_Fragment;
+import hieudx.fpoly.warehousemanager.Product.Model.Product;
+import hieudx.fpoly.warehousemanager.R;
+import hieudx.fpoly.warehousemanager.databinding.FragmentProductUpdateBinding;
 
 
 public class Product_Update extends Fragment {

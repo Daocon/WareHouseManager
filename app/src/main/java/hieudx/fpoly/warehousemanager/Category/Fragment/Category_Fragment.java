@@ -1,20 +1,17 @@
 package hieudx.fpoly.warehousemanager.Category.Fragment;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -24,6 +21,7 @@ import hieudx.fpoly.warehousemanager.Category.Adapter.Category_Adapter;
 import hieudx.fpoly.warehousemanager.Category.Dao.Category_Dao;
 import hieudx.fpoly.warehousemanager.Category.Model.Category;
 import hieudx.fpoly.warehousemanager.General;
+import hieudx.fpoly.warehousemanager.MainActivity;
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.BotSheetSortBinding;
 import hieudx.fpoly.warehousemanager.databinding.DialogAddEditCategoryBinding;
@@ -53,11 +51,23 @@ public class Category_Fragment extends Fragment {
         init();
         onClickSort();
         onAddCategory();
-        onEditCategory();
+        onSearch();
     }
 
-    private void onEditCategory() {
+    private void onSearch() {
+        MainActivity.binding.searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.getFilter().filter(query);
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
     private void onAddCategory() {
@@ -67,16 +77,14 @@ public class Category_Fragment extends Fragment {
             builder.setCancelable(false);
             builder.setView(dialog_binding.getRoot());
             AlertDialog dialog = builder.create();
-            dialog.show();
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
             General.isEmptyValid(dialog_binding.edName, dialog_binding.name);
-
+            dialog.show();
             dialog_binding.btnAdd.setOnClickListener(view1 -> {
                 String name = dialog_binding.edName.getText().toString();
                 if (TextUtils.isEmpty(name)) {
                     Toast.makeText(getContext(), "Hãy nhập dữ liệu", Toast.LENGTH_SHORT).show();
-                } else if (!categoryDao.getCategoryByName(name)) {
+                } else if (!categoryDao.isExistCategory(name)) {
                     dialog_binding.name.setError(null);
                     if (dialog_binding.name.getError() == null) {
                         if (categoryDao.insertCategory(name) > 0) {
@@ -88,7 +96,7 @@ public class Category_Fragment extends Fragment {
                         }
                     }
                 } else {
-                    dialog_binding.name.setError("Tên nhãn đã tồn tại");
+                    dialog_binding.name.setError("Tên thể loại đã tồn tại");
                 }
             });
             dialog_binding.imgClose.setOnClickListener(view12 -> dialog.dismiss());
@@ -97,10 +105,7 @@ public class Category_Fragment extends Fragment {
 
     private void onClickSort() {
         binding.imgSort.setOnClickListener(view -> {
-            Dialog dialog = new Dialog(getContext());
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             BotSheetSortBinding btnBinding = BotSheetSortBinding.inflate(getLayoutInflater());
-            dialog.setContentView(btnBinding.getRoot());
 
             btnBinding.rdSortAsc.setVisibility(View.GONE);
             btnBinding.rdSortDecs.setVisibility(View.GONE);
@@ -114,11 +119,7 @@ public class Category_Fragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }));
 
-            dialog.show();
-            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-            dialog.getWindow().setGravity(Gravity.BOTTOM);
+            General.onSettingsBotSheet(getContext(), btnBinding);
         });
     }
 
@@ -126,7 +127,7 @@ public class Category_Fragment extends Fragment {
         categoryDao = new Category_Dao(getContext());
         list = categoryDao.getListCategory();
         General.transLayout(list, binding.btnAdd, binding.imgSort, binding.rcv, binding.fabAdd);
-        adapter = new Category_Adapter(getContext(), list);
+        adapter = new Category_Adapter(getContext(), list, getParentFragmentManager());
         binding.rcv.setAdapter(adapter);
     }
 }

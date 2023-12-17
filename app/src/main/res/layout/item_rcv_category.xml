@@ -3,22 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="5sp"
+    android:layout_marginHorizontal="10dp"
     android:layout_marginVertical="10sp"
     app:cardCornerRadius="15sp"
     app:cardElevation="10dp">
 
     <LinearLayout
-        android:id="@+id/lin_item_category"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -28,14 +26,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tên loại: "
-                android:textSize="20sp" />
+                android:textAllCaps="false" />
 
             <TextView
                 android:id="@+id/txt_Ma_Category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mã:"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout

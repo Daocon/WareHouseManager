@@ -2,7 +2,7 @@ package hieudx.fpoly.warehousemanager.Bill.Model;
 
 public class Bill_in_detail {
     private int id;
-    private int price;
+    private double price;
     private int quantity;
     private String total;
     private int id_product;
@@ -11,14 +11,14 @@ public class Bill_in_detail {
     public Bill_in_detail() {
     }
 
-    public Bill_in_detail(int price, int quantity, int id_product, String id_bill_in) {
+    public Bill_in_detail(double price, int quantity, int id_product, String id_bill_in) {
         this.price = price;
         this.quantity = quantity;
         this.id_product = id_product;
         this.id_bill_in = id_bill_in;
     }
 
-    public Bill_in_detail(int id, int price, int quantity, String total, int id_product, String id_bill_in) {
+    public Bill_in_detail(int id, double price, int quantity, String total, int id_product, String id_bill_in) {
         this.id = id;
         this.price = price;
         this.quantity = quantity;
@@ -35,7 +35,7 @@ public class Bill_in_detail {
         this.id = id;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 

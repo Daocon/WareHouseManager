@@ -196,7 +196,6 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Hủy"
-                    android:background="@drawable/khung_btn_add"
                     android:theme="@style/custom_title_add"
                     android:layout_marginHorizontal="15sp"
                     />
@@ -207,7 +206,6 @@
                     android:layout_weight="1"
                     android:layout_marginRight="15sp"
                     android:text="Xác nhận"
-                    android:background="@drawable/khung_btn_add"
 
                     android:theme="@style/custom_title_add"
                     />

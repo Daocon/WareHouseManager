@@ -10,13 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import hieudx.fpoly.warehousemanager.dao.Product_Dao;
+import hieudx.fpoly.warehousemanager.Product.Dao.Product_Dao;
 import hieudx.fpoly.warehousemanager.dao.Supplier_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvDetailBillInBinding;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_in_detail;
 
 public class Bill_In_Detail_Adapter extends RecyclerView.Adapter<Bill_In_Detail_Adapter.ViewHolder> {
-
     private Context context;
     private ArrayList<Bill_in_detail> list;
 
@@ -59,7 +58,7 @@ public class Bill_In_Detail_Adapter extends RecyclerView.Adapter<Bill_In_Detail_
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private final ItemRcvDetailBillInBinding binding;
+        private ItemRcvDetailBillInBinding binding;
 
         public ViewHolder(@NonNull ItemRcvDetailBillInBinding binding) {
             super(binding.getRoot());

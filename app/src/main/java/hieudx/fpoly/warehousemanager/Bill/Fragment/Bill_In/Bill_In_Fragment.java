@@ -1,14 +1,9 @@
 package hieudx.fpoly.warehousemanager.Bill.Fragment.Bill_In;
 
-import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,15 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import hieudx.fpoly.warehousemanager.Bill.Adapter.bill_in.Bill_In_Adapter;
 import hieudx.fpoly.warehousemanager.Bill.Dao.Bill_In_Dao;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_In;
 import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.MainActivity;
-import hieudx.fpoly.warehousemanager.R;
-import hieudx.fpoly.warehousemanager.databinding.BotSheetSortBinding;
 import hieudx.fpoly.warehousemanager.databinding.FragmentBillInBinding;
 
 public class Bill_In_Fragment extends Fragment {
@@ -71,32 +63,29 @@ public class Bill_In_Fragment extends Fragment {
     }
 
     private void onClickSort() {
-        binding.imgSort.setOnClickListener(view -> {
-            Dialog dialog = new Dialog(getContext());
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            BotSheetSortBinding btnBinding = BotSheetSortBinding.inflate(getLayoutInflater());
-            dialog.setContentView(btnBinding.getRoot());
-
-            btnBinding.rdGr.setOnCheckedChangeListener(((radioGroup, i) -> {
-                if (i == R.id.rd_sort_asc) {
-                    Collections.sort(list, Bill_In.sortByAscSum);
-                } else if(i == R.id.rd_sort_decs){
-                    Collections.sort(list, Bill_In.sortByDescSum);
-                } else if (i == R.id.rd_sort_AZ){
-                    Collections.sort(list, Bill_In.sortByNameAZ);
-                } else if (i == R.id.rd_sort_ZA){
-                    Collections.sort(list, Bill_In.sortByNameZA);
-                }
-                adapter.notifyDataSetChanged();
-
-            }));
-
-            dialog.show();
-            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-            dialog.getWindow().setGravity(Gravity.BOTTOM);
-        });
+//        binding.imgSort.setOnClickListener(view -> {
+//            Dialog dialog = new Dialog(getContext());
+//            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//            BotSheetSortBinding btnBinding = BotSheetSortBinding.inflate(getLayoutInflater());
+//            dialog.setContentView(btnBinding.getRoot());
+//
+//            btnBinding.rdGr.setOnCheckedChangeListener(((radioGroup, i) -> {
+//                if (i == R.id.rd_sort_asc) {
+//                    Collections.sort(list, Bill_In.sortByAscSum);
+//                } else if(i == R.id.rd_sort_decs){
+//                    Collections.sort(list, Bill_In.sortByDescSum);
+//                } else if (i == R.id.rd_sort_AZ){
+//                    Collections.sort(list, Bill_In.sortByNameAZ);
+//                } else if (i == R.id.rd_sort_ZA){
+//                    Collections.sort(list, Bill_In.sortByNameZA);
+//                }
+//                adapter.notifyDataSetChanged();
+//
+//            }));
+//
+//            General.onSettingsBotSheet(dialog);
+//            dialog.show();
+//        });
     }
 
     private void init() {
@@ -108,11 +97,11 @@ public class Bill_In_Fragment extends Fragment {
         binding.rcv.setAdapter(adapter);
 
         binding.btnAdd.setOnClickListener(view -> {
-            General.loadFragment(fragmentManager, new Add_Bill_In_Fragment());
+            General.loadFragment(fragmentManager, new Add_Bill_In_Fragment(), null);
         });
 
         binding.fabAdd.setOnClickListener(view -> {
-            General.loadFragment(fragmentManager, new Add_Bill_In_Fragment());
+            General.loadFragment(fragmentManager, new Add_Bill_In_Fragment(), null);
         });
     }
 }

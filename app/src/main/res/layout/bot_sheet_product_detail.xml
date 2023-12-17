@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Base.Theme.Bill"
+    android:background="@drawable/custom_bgr_bot_sheet"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/custom_title_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Chi tiết sản phẩm"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="25sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="#B8B6B6" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/custom_title_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tên sản phẩm: "
+        android:textAllCaps="false"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        style="@style/custom_title_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Giá nhập: "
+        android:textAllCaps="false"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/tv_ton_kho"
+        style="@style/custom_title_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tồn kho: "
+        android:textAllCaps="false"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/tv_category"
+        style="@style/custom_title_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Loại sản phẩm: "
+        android:textAllCaps="false"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/tv_supplier"
+        style="@style/custom_title_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nhà cung cấp: "
+        android:textAllCaps="false"
+        android:textStyle="normal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_bgr_btn_delete"
+            android:text="Xóa"
+            android:textColor="@color/red" />
+
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_bgr_btn_add_update"
+            android:backgroundTint="@color/theme"
+            android:text="Sửa"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -18,8 +18,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
             android:background="@android:color/transparent"
-            android:scaleType="fitXY"
-            android:src="@drawable/baseline_sort_24" />
+            android:scaleType="fitXY"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_List_Deligery"
@@ -48,7 +47,6 @@
         android:layout_width="150sp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/khung_btn_add"
         android:text="Thêm" />
 
 </FrameLayout>

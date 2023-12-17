@@ -1,15 +1,14 @@
 package hieudx.fpoly.warehousemanager.fragments.forgot_reset_pass;
 
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.dao.User_Dao;
@@ -43,7 +42,7 @@ public class Forgot_Fragment extends Fragment {
 
         binding.imgBack.setOnClickListener(view -> {
 //            fragmentManager.popBackStack();
-            getActivity().getOnBackPressedDispatcher().onBackPressed();
+            getActivity().finish();
         });
 
         binding.btnVerify.setOnClickListener(new View.OnClickListener() {

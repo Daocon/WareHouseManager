@@ -1,37 +1,42 @@
 package hieudx.fpoly.warehousemanager.Category.Adapter;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.Category.Dao.Category_Dao;
-import hieudx.fpoly.warehousemanager.databinding.DialogDeleteCategoryBinding;
-import hieudx.fpoly.warehousemanager.databinding.DialogUpdateCategoryBinding;
-import hieudx.fpoly.warehousemanager.databinding.ItemRcvCategoryBinding;
+import hieudx.fpoly.warehousemanager.Category.Fragment.Product_Category_Fragment;
 import hieudx.fpoly.warehousemanager.Category.Model.Category;
+import hieudx.fpoly.warehousemanager.General;
+import hieudx.fpoly.warehousemanager.databinding.DialogAddEditCategoryBinding;
+import hieudx.fpoly.warehousemanager.databinding.ItemRcvCategoryBinding;
 
 public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.ViewHolder> implements Filterable {
-    private final ArrayList<Category> list;
-    private final Context context;
-    Category_Dao dao;
+    private ArrayList<Category> list;
+    private ArrayList<Category> mlist;
+    private Context context;
+    private Category_Dao dao;
+    private FragmentManager fragmentManager;
 
 
-    public Category_Adapter(Context context, ArrayList<Category> list) {
+    public Category_Adapter(Context context, ArrayList<Category> list, FragmentManager fragmentManager) {
         this.context = context;
         this.list = list;
+        this.mlist = list;
         dao = new Category_Dao(context);
+        this.fragmentManager = fragmentManager;
     }
 
 
@@ -44,74 +49,39 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.binding.txtMaCategory.setText("Mã loại: " + String.valueOf(list.get(position).getId()));
+        holder.binding.txtMaCategory.setText("Mã loại: " + list.get(position).getId());
         holder.binding.tvName.setText(list.get(position).getName());
-        Category cCategory = list.get(position);
-        holder.binding.btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                LayoutInflater inflater = ((Activity) context).getLayoutInflater();
 
-                DialogDeleteCategoryBinding deleteCategoryBinding = DialogDeleteCategoryBinding.inflate(inflater);
-                builder.setView(deleteCategoryBinding.getRoot());
-
-                Dialog dialog = builder.create();
-                dialog.show();
-
-                deleteCategoryBinding.btnOutDeleteCategory.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
-                deleteCategoryBinding.btnConfilmDeleteCategory.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        int check = dao.deleteCategory(list.get(holder.getAdapterPosition()).getId());
-                        switch (check) {
-                            case 1:
-                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                                list.clear();
-                                list.addAll(dao.getListCategory());
-                                notifyDataSetChanged();
-                                dialog.dismiss();
-                                break;
-                            case 0:
-                                Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                                break;
-                            case -1:
-                                Toast.makeText(context, "Không thể xóa vì loại sản phẩm này còn sản phẩm", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                });
-            }
+        holder.binding.btnDelete.setOnClickListener(view -> onDeleteCategory(list.get(position)));
+        holder.binding.btnEdit.setOnClickListener(view -> onEditCategory(list.get(position)));
+        holder.itemView.setOnClickListener(view -> {
+            General.loadFragment(fragmentManager, new Product_Category_Fragment(), null);
         });
-        holder.binding.linItemCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+    }
 
-                DialogUpdateCategoryBinding updateCategoryBinding = DialogUpdateCategoryBinding.inflate(inflater);
-                builder.setView(updateCategoryBinding.getRoot());
+    private void onEditCategory(Category cat) {
+        DialogAddEditCategoryBinding dialog_binding = DialogAddEditCategoryBinding.inflate(LayoutInflater.from(context));
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(false);
+        builder.setView(dialog_binding.getRoot());
+        AlertDialog dialog = builder.create();
+        General.isEmptyValid(dialog_binding.edName, dialog_binding.name);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-                Dialog dialog = builder.create();
-                dialog.show();
-                updateCategoryBinding.btnComfilmUpdateCategory.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String nameCategory = updateCategoryBinding.edtUpdateTenLoaiSp.getText().toString();
-                        cCategory.setName(nameCategory);
-                        if (nameCategory.isEmpty()) {
-                            updateCategoryBinding.tbUpdateCategory.setError("Không được để trông");
+        dialog_binding.btnAdd.setText("sửa");
+        dialog_binding.tvTitleDialog.setText("sửa thể loại");
+        dialog_binding.edName.setText(cat.getName());
+        dialog.show();
 
-                        } else if (dao.updateCategory(cCategory)) {
+        dialog_binding.btnAdd.setOnClickListener(view -> {
+            String name = dialog_binding.edName.getText().toString().trim();
+            if (TextUtils.isEmpty(name)) {
+                Toast.makeText(context, "Hãy nhập tên thể loại", Toast.LENGTH_SHORT).show();
+            } else {
+                if (!dao.isExistCategory(name)) {
+                    dialog_binding.name.setError(null);
+                    if (dialog_binding.name.getError() == null) {
+                        if (dao.editCategory(cat) > 0) {
                             Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
                             list.clear();
                             list.addAll(dao.getListCategory());
@@ -121,27 +91,84 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.View
                             Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
                         }
                     }
-                });
-
-                updateCategoryBinding.btnHuyUpdateItemCategory.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        updateCategoryBinding.edtUpdateTenLoaiSp.setText("");
-                        dialog.dismiss();
-                    }
-                });
+                } else {
+                    dialog_binding.name.setError("Tên thể loại đã tồn tại");
+                }
             }
         });
+
+        dialog_binding.imgClose.setOnClickListener(view -> {
+            dialog.dismiss();
+        });
+    }
+
+    private void onDeleteCategory(Category cat) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(false);
+        builder.setTitle("Thông báo");
+        builder.setMessage("Bạn có muốn xóa");
+        builder.setNegativeButton("Có", (dialog, which) -> {
+            switch (dao.deleteCategory(cat.getId())) {
+                case 0:
+                    Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    break;
+                case 1:
+                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                    list.clear();
+                    list.addAll(dao.getListCategory());
+                    notifyDataSetChanged();
+                    dialog.dismiss();
+                    break;
+                case -1:
+                    Toast.makeText(context, "Bạn không thể xóa thể loại có sản phẩm", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    break;
+            }
+            dialog.dismiss();
+        });
+
+        builder.setPositiveButton("Không", null);
+        builder.create();
+        builder.show();
+
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
-    }
+        if (list != null) {
+            return list.size();
+        }
+        return 0;    }
 
     @Override
     public Filter getFilter() {
-        return null;
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String search = charSequence.toString();
+                if (TextUtils.isEmpty(search)) {
+                    list = mlist;
+                } else {
+                    ArrayList<Category> listFilter = new ArrayList<>();
+                    for (Category cat : mlist) {
+                        if (cat.getName().toUpperCase().contains(search.toUpperCase())) {
+                            listFilter.add(cat);
+                        }
+                    }
+                    list = listFilter;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = list;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                list = (ArrayList<Category>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -151,9 +178,5 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.View
             super(binding.getRoot());
             this.binding = binding;
         }
-    }
-
-    public boolean checkAdd() {
-        return getItemCount() == 0;
     }
 }

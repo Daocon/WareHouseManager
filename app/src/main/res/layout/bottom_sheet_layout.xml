@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dialog_btsheet_member">
+    android:background="@drawable/custom_bgr_bot_sheet">
 
     <TextView
         android:id="@+id/txtChoose"

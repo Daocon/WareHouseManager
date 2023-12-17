@@ -2,19 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dialog_btsheet_member"
+    android:background="@drawable/custom_bgr_bot_sheet"
     android:orientation="vertical">
 
     <TextView
-        style="@style/custom_tv_add_form"
+        android:textAllCaps="false"
+        style="@style/custom_title_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:text="Sắp xếp"
+        android:layout_marginTop="5dp"
         android:textAlignment="center"
         android:textSize="25sp" />
 
-    <TextView
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="5dp"

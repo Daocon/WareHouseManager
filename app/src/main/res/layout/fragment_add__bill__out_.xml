@@ -73,17 +73,16 @@
 
         <TextView
             style="@style/custom_title_add"
-            android:text="tổng giá tiền"
-            android:layout_weight="1"
-            android:textColor="#F30C0C"
             android:layout_marginBottom="14dp"
-            android:textSize="20sp" />
+            android:layout_weight="1"
+            android:text="tổng giá tiền"
+            android:textColor="#F30C0C" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1.500.000"
             android:layout_gravity="center_vertical"
+            android:text="1.500.000"
             android:textColor="#F30C0C"
             android:textSize="20sp" />
     </LinearLayout>

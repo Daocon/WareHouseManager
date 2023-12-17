@@ -26,21 +26,16 @@ import java.util.Comparator;
 
 import hieudx.fpoly.warehousemanager.R;
 
-import hieudx.fpoly.warehousemanager.adapters.Product_Adapter;
+import hieudx.fpoly.warehousemanager.Product.Adapter.Product_Adapter;
 import hieudx.fpoly.warehousemanager.adapters.Supplier_Adapter;
 
 import hieudx.fpoly.warehousemanager.dao.Supplier_Dao;
-import hieudx.fpoly.warehousemanager.databinding.BottomSheetDeliveryBinding;
 import hieudx.fpoly.warehousemanager.databinding.BottomSheetSupplierBinding;
-import hieudx.fpoly.warehousemanager.databinding.DialogUpdateDeliveryBinding;
 import hieudx.fpoly.warehousemanager.databinding.DialogUpdateSupplierBinding;
 import hieudx.fpoly.warehousemanager.databinding.FragmentSupplierBinding;
 
 import hieudx.fpoly.warehousemanager.fragments.Supplier.Supplier_Add;
 import hieudx.fpoly.warehousemanager.fragments.Supplier.Supplier_Update;
-import hieudx.fpoly.warehousemanager.fragments.delivery.Delevery_update;
-import hieudx.fpoly.warehousemanager.fragments.delivery.Delivery_add;
-import hieudx.fpoly.warehousemanager.models.Delivery;
 import hieudx.fpoly.warehousemanager.models.Supplier;
 
 public class Supplier_Fragment extends Fragment {

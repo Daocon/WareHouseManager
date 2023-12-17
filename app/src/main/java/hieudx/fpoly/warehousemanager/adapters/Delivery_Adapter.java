@@ -14,12 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import hieudx.fpoly.warehousemanager.Product.Adapter.Product_Adapter;
 import hieudx.fpoly.warehousemanager.dao.Delivery_Dao;
 import hieudx.fpoly.warehousemanager.databinding.DialogDeleteDeliveryBinding;
-import hieudx.fpoly.warehousemanager.databinding.DialogUpdateCategoryBinding;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvDeliveryBinding;
 import hieudx.fpoly.warehousemanager.models.Delivery;
-import hieudx.fpoly.warehousemanager.models.Product;
 
 public class Delivery_Adapter extends RecyclerView.Adapter<Delivery_Adapter.ViewHolder> {
     private ArrayList<Delivery> list;

@@ -24,7 +24,7 @@ import hieudx.fpoly.warehousemanager.MainActivity;
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.Bill.Adapter.bill_out.Bill_Out_Adapter;
 import hieudx.fpoly.warehousemanager.Bill.Dao.Bill_Out_Dao;
-import hieudx.fpoly.warehousemanager.databinding.BotSheetSortBillBinding;
+import hieudx.fpoly.warehousemanager.databinding.BotSheetSortBinding;
 import hieudx.fpoly.warehousemanager.databinding.FragmentBillOutBinding;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_Out;
 
@@ -50,6 +50,7 @@ public class Bill_Out_Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         init();
         onClickSort();
         onSearch();
@@ -75,7 +76,7 @@ public class Bill_Out_Fragment extends Fragment {
         binding.imgSort.setOnClickListener(view -> {
             Dialog dialog = new Dialog(getContext());
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            BotSheetSortBillBinding btnBinding = BotSheetSortBillBinding.inflate(getLayoutInflater());
+            BotSheetSortBinding btnBinding = BotSheetSortBinding.inflate(getLayoutInflater());
             dialog.setContentView(btnBinding.getRoot());
 
             btnBinding.rdGr.setOnCheckedChangeListener(((radioGroup, i) -> {
@@ -108,11 +109,11 @@ public class Bill_Out_Fragment extends Fragment {
         binding.rcv.setAdapter(adapter);
 
         binding.btnAdd.setOnClickListener(view -> {
-            General.loadFragment(fragmentManager, new Add_Bill_Out_Fragment());
+            General.loadFragment(fragmentManager, new Add_Bill_Out_Fragment(), null);
         });
 
         binding.fabAdd.setOnClickListener(view -> {
-            General.loadFragment(fragmentManager, new Add_Bill_Out_Fragment());
+            General.loadFragment(fragmentManager, new Add_Bill_Out_Fragment(), null);
         });
     }
 
