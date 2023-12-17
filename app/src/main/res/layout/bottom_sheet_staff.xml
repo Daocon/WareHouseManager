@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_btsheet_member"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtSort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Sắp xếp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupStaff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/sxA_ZStaff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A - Z"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:id="@+id/sxZ_AStaff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Z - A"
+            android:textColor="@color/black" />
+
+    </RadioGroup>
+</LinearLayout>
