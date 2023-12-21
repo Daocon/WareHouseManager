@@ -151,7 +151,7 @@
         android:layout_below="@+id/title_coefficient_Staff"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
-        android:background="@drawable/khung_btn_add"
+        android:background="@drawable/custom_bgr_btn_add_update"
         android:text="Thêm" />
 
 </RelativeLayout>

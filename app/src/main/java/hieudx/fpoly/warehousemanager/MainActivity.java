@@ -1,7 +1,9 @@
 package hieudx.fpoly.warehousemanager;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -9,34 +11,23 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import hieudx.fpoly.warehousemanager.databinding.ActivityMainBinding;
+import hieudx.fpoly.warehousemanager.Bill.Fragment.Bill_Fragment;
 import hieudx.fpoly.warehousemanager.Category.Fragment.Category_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.Delivery_Fragment;
 import hieudx.fpoly.warehousemanager.Product.Fragment.Product_Fragment;
+import hieudx.fpoly.warehousemanager.databinding.ActivityMainBinding;
+import hieudx.fpoly.warehousemanager.fragments.Delivery_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Staff_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.Supplier_Fragment;
-import hieudx.fpoly.warehousemanager.Bill.Fragment.Bill_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.member.Member_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.statistic.Chart_Fragment;
+import hieudx.fpoly.warehousemanager.Member.Fragment.Member_Fragment;
 import hieudx.fpoly.warehousemanager.fragments.statistic.Statistic_Fragment;
+import hieudx.fpoly.warehousemanager.view.Account_Activity;
 
 public class MainActivity extends AppCompatActivity {
     public static ActivityMainBinding binding;
     private ActionBar actionBar;
-    private Product_Fragment productFragment;
-    private Category_Fragment categoryFragment;
-    private Bill_Fragment billFragment;
-    private Member_Fragment memberFragment;
-    private Delivery_Fragment deliveryFragment;
-    private Supplier_Fragment supplierFragment;
-    private Staff_Fragment staffFragment;
-    private Chart_Fragment chartFragment;
     private SharedPreferences sharedPreferences;
-
     int role;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,16 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         sharedPreferences = getSharedPreferences("ACCOUNT", MODE_PRIVATE);
-        role = sharedPreferences.getInt("role",2);
+        role = sharedPreferences.getInt("role", 2);
 
-        productFragment = new Product_Fragment();
-        categoryFragment = new Category_Fragment();
-        billFragment = new Bill_Fragment();
-        memberFragment = new Member_Fragment();
-        staffFragment = new Staff_Fragment();
-        deliveryFragment = new Delivery_Fragment();
-        supplierFragment = new Supplier_Fragment();
-        chartFragment = new Chart_Fragment();
 //        SharedPreferences shared = getSharedPreferences("ACCOUNT",MODE_PRIVATE);
 //        SharedPreferences.Editor editor = shared.edit();
 //        editor.putInt("id", 1);
@@ -70,31 +53,29 @@ public class MainActivity extends AppCompatActivity {
     private void onClickListenerNavBottom() {
         binding.navBottom.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.nav_bot_product) {
-                loadFragment(productFragment);
-            } else if (item.getItemId() == R.id.nav_bot_category) {
-                loadFragment(categoryFragment);
-            } else if (item.getItemId() == R.id.nav_bot_bill) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.frag_container_main, new Bill_Fragment())
-                        .commit();
+                General.loadFragment(getSupportFragmentManager(), new Product_Fragment(), null);
                 translayout();
+            } else if (item.getItemId() == R.id.nav_bot_category) {
+                General.loadFragment(getSupportFragmentManager(), new Category_Fragment(), null);
+                translayout();
+            } else if (item.getItemId() == R.id.nav_bot_bill) {
+                General.loadFragment(getSupportFragmentManager(), new Bill_Fragment(), null);
+                translayout();
+//                FragmentManager fragmentManager = getSupportFragmentManager();
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.frag_container_main, new Bill_Fragment())
+//                        .commit();
+//                translayout();
 //                loadFragment(billFragment);
             } else if (item.getItemId() == R.id.nav_bot_member) {
-                if (role == 1){
+                if (role == 1) {
                     Toast.makeText(this, "Bạn ko được phép truy cập", Toast.LENGTH_SHORT).show();
-                } else if (role == 0){
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.frag_container_main, new Member_Fragment())
-                            .commit();
+                } else if (role == 0) {
+                    General.loadFragment(getSupportFragmentManager(), new Member_Fragment(), null);
                     translayout();
                 }
             } else if (item.getItemId() == R.id.nav_bot_statistic) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.frag_container_main, new Statistic_Fragment())
-                        .commit();
+                General.loadFragment(getSupportFragmentManager(), new Statistic_Fragment(), null);
                 translayout();
             }
             binding.tbMain.setTitle(item.getTitle());
@@ -104,46 +85,41 @@ public class MainActivity extends AppCompatActivity {
 
     private void onClickDashBoard() {
         binding.cardProduct.setOnClickListener(view -> {
-            loadFragment(productFragment);
+            General.loadFragment(getSupportFragmentManager(), new Product_Fragment(), null);
+            translayout();
         });
         binding.cardCaegory.setOnClickListener(view -> {
-            loadFragment(categoryFragment);
+            General.loadFragment(getSupportFragmentManager(), new Category_Fragment(), null);
+            translayout();
         });
         binding.cardBill.setOnClickListener(view -> {
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            fragmentManager.beginTransaction()
-//                    .replace(R.id.frag_container_main, new Bill_Fragment())
-//                    .commit();
-//            translayout();
-            loadFragment(new Bill_Fragment());
+            General.loadFragment(getSupportFragmentManager(), new Bill_Fragment(), null);
+            translayout();
         });
         binding.cardMember.setOnClickListener(view -> {
-            if (role == 1){
+            if (role == 1) {
                 Toast.makeText(this, "Bạn ko được phép truy cập", Toast.LENGTH_SHORT).show();
-            } else if (role == 0){
-                loadFragment(memberFragment);
+            } else if (role == 0) {
+                General.loadFragment(getSupportFragmentManager(), new Member_Fragment(), null);
+                translayout();
             }
         });
         binding.cardStatitics.setOnClickListener(view -> {
-            loadFragment(new Statistic_Fragment());
+            General.loadFragment(getSupportFragmentManager(), new Statistic_Fragment(), null);
+            translayout();
         });
         binding.cardDelivery.setOnClickListener(view -> {
-            loadFragment(deliveryFragment);
+            General.loadFragment(getSupportFragmentManager(), new Delivery_Fragment(), null);
+            translayout();
         });
         binding.cardSupplier.setOnClickListener(view -> {
-            loadFragment(supplierFragment);
+            General.loadFragment(getSupportFragmentManager(), new Supplier_Fragment(), null);
+            translayout();
         });
         binding.cardStaff.setOnClickListener(view -> {
-            loadFragment(staffFragment);
+            General.loadFragment(getSupportFragmentManager(), new Staff_Fragment(), null);
+            translayout();
         });
-    }
-
-    private void loadFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.frag_container_main, fragment).commit();
-//        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        transaction.replace(R.id.frag_container_main, fragment).commit();
-        translayout();
     }
 
     private void customActionBar() {
@@ -154,13 +130,22 @@ public class MainActivity extends AppCompatActivity {
 
         actionBar.setHomeAsUpIndicator(R.drawable.ic_home);
         binding.tbMain.setNavigationOnClickListener(view -> {
+            binding.fragContainerMain.setVisibility(View.GONE);
+
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frag_container_main);
+            Log.d("currentFragment", "customActionBar: " + currentFragment);
+
             if (currentFragment != null) {
+                Log.d("currentFragment", "customActionBar: " + currentFragment);
                 getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
 //                    binding.navBottom.getMenu().getItem(0).setChecked(true);
             }
             binding.bgrDashBoard.setVisibility(View.VISIBLE);
             binding.layoutDashboard.setVisibility(View.VISIBLE);
+        });
+
+        binding.cvAccount.setOnClickListener(view -> {
+            startActivity(new Intent(this, Account_Activity.class));
         });
     }
 

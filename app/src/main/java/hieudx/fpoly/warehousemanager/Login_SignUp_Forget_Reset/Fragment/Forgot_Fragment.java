@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.fragments.forgot_reset_pass;
+package hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import hieudx.fpoly.warehousemanager.R;
-import hieudx.fpoly.warehousemanager.dao.User_Dao;
+import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentForgotBinding;
-import hieudx.fpoly.warehousemanager.models.User;
+import hieudx.fpoly.warehousemanager.Member.Model.User;
 
 public class Forgot_Fragment extends Fragment {
     private FragmentForgotBinding binding;

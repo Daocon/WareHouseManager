@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.adapters;
+package hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset;
 
 import android.content.Context;
 
@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import hieudx.fpoly.warehousemanager.fragments.login_signup.Login_Tab_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.login_signup.SignUp_Tab_Fragment;
+import hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Fragment.Login_Tab_Fragment;
+import hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Fragment.SignUp_Tab_Fragment;
 
 public class Login_SignUp_Adapter extends FragmentPagerAdapter {
     private Context context;

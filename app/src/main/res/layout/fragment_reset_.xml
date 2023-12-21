@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.forgot_reset_pass.Reset_Fragment">
+    tools:context=".Login_SignUp_Forget_Reset.Fragment.Reset_Fragment">
 
     <ImageView
         android:id="@+id/imgBack"

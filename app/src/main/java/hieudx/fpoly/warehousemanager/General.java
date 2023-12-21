@@ -2,6 +2,7 @@ package hieudx.fpoly.warehousemanager;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -30,11 +31,22 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
 public class General {
+    public static String genarateIdBill(int listSize, String kob, Context context) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMM", Locale.getDefault());
+        String currentDate = dateFormat.format(new Date());
+
+        SharedPreferences shared = context.getSharedPreferences("ACCOUNT", Context.MODE_PRIVATE);
+        int user_id = shared.getInt("id", 0);
+        String generatedId = kob + "_" + currentDate + "_" + user_id + (listSize + 1);
+        return generatedId;
+    }
 
     public static void onStateIconBack(FragmentActivity fragmentActivity, ActionBar actionBar, FragmentManager fragmentManager, boolean state) {
         ((AppCompatActivity) fragmentActivity).setSupportActionBar(MainActivity.binding.tbMain);
@@ -65,8 +77,6 @@ public class General {
                 new String[]{"name"},
                 new int[]{android.R.id.text1});
         spinner.setAdapter(simpleAdapter);
-
-
     }
 
     public static Dialog onSettingsBotSheet(Context context, ViewBinding viewBinding) {
@@ -139,8 +149,10 @@ public class General {
     public static void validPhone(String value, TextInputLayout field) {
         if (value.length() < 10 || value.length() > 10) {
             field.setError("Số điện thoại phải chứa 10 số");
-        } else if (!value.startsWith("0")) {
-            field.setError("Số điện thoại phải bắt đầu bằng số 0");
+        } else if (!value.matches("^0\\d{9}$")) {
+            field.setError("Số điện thoại không hợp lệ");
+        } else if (!TextUtils.isDigitsOnly(value)){
+            field.setError("Không được nhập chữ");
         } else {
             field.setError(null);
         }
@@ -173,4 +185,5 @@ public class General {
                 .addToBackStack(null) // Cho phép quay lại fragment trước đó nếu cần
                 .commit();
     }
+
 }

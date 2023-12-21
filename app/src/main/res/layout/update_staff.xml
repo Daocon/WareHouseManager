@@ -85,6 +85,6 @@
         android:layout_width="150sp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30sp"
-        android:background="@drawable/khung_btn_add"
+        android:background="@drawable/custom_bgr_btn_add_update"
         android:text="Cập nhật" />
 </LinearLayout>

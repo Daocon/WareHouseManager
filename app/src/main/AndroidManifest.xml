@@ -19,7 +19,7 @@
             android:name=".view.Account_Activity"
             android:exported="false" />
         <activity
-            android:name=".view.Forgot_Reset_Pass_Activity"
+            android:name=".Login_SignUp_Forget_Reset.Activity.Forgot_Reset_Pass_Activity"
             android:exported="false" />
         <activity
             android:name=".view.Finish_Activity"
@@ -32,7 +32,7 @@
             android:name=".view.Plash_Screen_Activity"
             android:exported="false" />
         <activity
-            android:name=".view.Login_SignUp_Activity"
+            android:name=".Login_SignUp_Forget_Reset.Activity.Login_SignUp_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

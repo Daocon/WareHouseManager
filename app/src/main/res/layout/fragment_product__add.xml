@@ -192,29 +192,21 @@
 
             <Button
                 android:id="@+id/btnAdd"
+                style="@style/custom_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/custom_bgr_btn_add_update"
-                android:backgroundTint="@color/theme"
-                android:text="Xác nhận"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:text="Xác nhận" />
 
             <Button
                 android:id="@+id/btnClear"
+                style="@style/custom_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/custom_bgr_btn_add_update"
-                android:backgroundTint="@color/theme"
-                android:text="Làm mới"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-
-
+                android:text="Làm mới" />
         </LinearLayout>
     </LinearLayout>
 

@@ -6,22 +6,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
-import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.Bill.Adapter.bill_out.Bill_Out_Detail_Adapter;
 import hieudx.fpoly.warehousemanager.Bill.Dao.Bill_Out_Dao;
-import hieudx.fpoly.warehousemanager.dao.Delivery_Dao;
-import hieudx.fpoly.warehousemanager.dao.User_Dao;
-import hieudx.fpoly.warehousemanager.databinding.FragmentDetailBillOutBinding;
-import hieudx.fpoly.warehousemanager.Bill.Fragment.Bill_Fragment;
-import hieudx.fpoly.warehousemanager.models.Delivery;
-import hieudx.fpoly.warehousemanager.models.User;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_Out;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_out_detail;
+import hieudx.fpoly.warehousemanager.General;
+import hieudx.fpoly.warehousemanager.dao.Delivery_Dao;
+import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
+import hieudx.fpoly.warehousemanager.databinding.FragmentDetailBillOutBinding;
+import hieudx.fpoly.warehousemanager.models.Delivery;
+import hieudx.fpoly.warehousemanager.Member.Model.User;
 
 public class Detail_Bill_Out_Fragment extends Fragment {
     private FragmentDetailBillOutBinding binding;
@@ -34,11 +37,16 @@ public class Detail_Bill_Out_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentDetailBillOutBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        General.onStateIconBack(getActivity(), actionBar, getParentFragmentManager(), false);
         Bundle bundle = getArguments();
-
-        binding.imgBack.setOnClickListener(view -> General.loadFragment(requireActivity().getSupportFragmentManager(), new Bill_Fragment(), null));
-
         if (bundle != null) {
             User_Dao user_dao = new User_Dao(getContext());
             Delivery_Dao delivery_dao = new Delivery_Dao(getContext());
@@ -59,7 +67,7 @@ public class Detail_Bill_Out_Fragment extends Fragment {
             list.addAll(bill_out_dao.getListProductDetail(bill_out.getId()));
             binding.rcv.setAdapter(adapter);
 
-            binding.btnDelete.setOnClickListener(view -> {
+            binding.btnDelete.setOnClickListener(view1 -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Thông báo");
                 builder.setMessage("Bạn có chắc chắn muốn xóa ?");
@@ -67,7 +75,7 @@ public class Detail_Bill_Out_Fragment extends Fragment {
                     long check = bill_out_dao.delete(bill_out.getId());
                     if (check == 1) {
                         Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
-                        General.loadFragment(requireActivity().getSupportFragmentManager(), new Bill_Fragment(), null);
+                        getParentFragmentManager().popBackStack();
                     } else {
                         Toast.makeText(getContext(), "Xóa lỗi", Toast.LENGTH_SHORT).show();
                     }
@@ -76,7 +84,5 @@ public class Detail_Bill_Out_Fragment extends Fragment {
                 builder.show();
             });
         }
-        return binding.getRoot();
     }
-
 }

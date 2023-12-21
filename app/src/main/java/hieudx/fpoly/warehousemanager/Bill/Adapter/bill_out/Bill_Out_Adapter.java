@@ -9,19 +9,16 @@ import android.widget.Filter;
 import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import hieudx.fpoly.warehousemanager.General;
-import hieudx.fpoly.warehousemanager.R;
-import hieudx.fpoly.warehousemanager.dao.User_Dao;
-import hieudx.fpoly.warehousemanager.databinding.ItemRcvBillBinding;
 import hieudx.fpoly.warehousemanager.Bill.Fragment.Bill_Out.Detail_Bill_Out_Fragment;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_Out;
+import hieudx.fpoly.warehousemanager.General;
+import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
+import hieudx.fpoly.warehousemanager.databinding.ItemRcvBillBinding;
 
 public class Bill_Out_Adapter extends RecyclerView.Adapter<Bill_Out_Adapter.ViewHolder> implements Filterable {
     private Context context;
@@ -53,13 +50,10 @@ public class Bill_Out_Adapter extends RecyclerView.Adapter<Bill_Out_Adapter.View
         holder.binding.tvTotal.setText(sum);
 
         holder.itemView.setOnClickListener(view -> {
-            Fragment fragment = new Detail_Bill_Out_Fragment();
             Bundle bundle = new Bundle();
             bundle.putSerializable("data", list.get(position));
             bundle.putString("sum", sum);
-            fragment.setArguments(bundle);
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.frag_container_main, fragment).addToBackStack(null).commit();
+            General.loadFragment(fragmentManager, new Detail_Bill_Out_Fragment(), bundle);
         });
     }
 
@@ -101,7 +95,7 @@ public class Bill_Out_Adapter extends RecyclerView.Adapter<Bill_Out_Adapter.View
         };    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private final ItemRcvBillBinding binding;
+        private ItemRcvBillBinding binding;
 
         public ViewHolder(@NonNull ItemRcvBillBinding binding) {
             super(binding.getRoot());

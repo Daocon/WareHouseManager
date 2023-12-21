@@ -71,36 +71,34 @@ public class Category_Fragment extends Fragment {
     }
 
     private void onAddCategory() {
-        binding.fabAdd.setOnClickListener(view -> {
-            DialogAddEditCategoryBinding dialog_binding = DialogAddEditCategoryBinding.inflate(LayoutInflater.from(getContext()));
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setCancelable(false);
-            builder.setView(dialog_binding.getRoot());
-            AlertDialog dialog = builder.create();
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            General.isEmptyValid(dialog_binding.edName, dialog_binding.name);
-            dialog.show();
-            dialog_binding.btnAdd.setOnClickListener(view1 -> {
-                String name = dialog_binding.edName.getText().toString();
-                if (TextUtils.isEmpty(name)) {
-                    Toast.makeText(getContext(), "Hãy nhập dữ liệu", Toast.LENGTH_SHORT).show();
-                } else if (!categoryDao.isExistCategory(name)) {
-                    dialog_binding.name.setError(null);
-                    if (dialog_binding.name.getError() == null) {
-                        if (categoryDao.insertCategory(name) > 0) {
-                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            init();
-                            dialog.dismiss();
-                        } else {
-                            Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
-                        }
+        DialogAddEditCategoryBinding dialog_binding = DialogAddEditCategoryBinding.inflate(LayoutInflater.from(getContext()));
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setCancelable(false);
+        builder.setView(dialog_binding.getRoot());
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        General.isEmptyValid(dialog_binding.edName, dialog_binding.name);
+        dialog.show();
+        dialog_binding.btnAdd.setOnClickListener(view1 -> {
+            String name = dialog_binding.edName.getText().toString();
+            if (TextUtils.isEmpty(name)) {
+                Toast.makeText(getContext(), "Hãy nhập dữ liệu", Toast.LENGTH_SHORT).show();
+            } else if (!categoryDao.isExistCategory(name)) {
+                dialog_binding.name.setError(null);
+                if (dialog_binding.name.getError() == null) {
+                    if (categoryDao.insertCategory(name) > 0) {
+                        Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        init();
+                        dialog.dismiss();
+                    } else {
+                        Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    dialog_binding.name.setError("Tên thể loại đã tồn tại");
                 }
-            });
-            dialog_binding.imgClose.setOnClickListener(view12 -> dialog.dismiss());
+            } else {
+                dialog_binding.name.setError("Tên thể loại đã tồn tại");
+            }
         });
+        dialog_binding.imgClose.setOnClickListener(view12 -> dialog.dismiss());
     }
 
     private void onClickSort() {
@@ -129,5 +127,14 @@ public class Category_Fragment extends Fragment {
         General.transLayout(list, binding.btnAdd, binding.imgSort, binding.rcv, binding.fabAdd);
         adapter = new Category_Adapter(getContext(), list, getParentFragmentManager());
         binding.rcv.setAdapter(adapter);
+
+        binding.fabAdd.setOnClickListener(view -> {
+            onAddCategory();
+
+        });
+
+        binding.btnAdd.setOnClickListener(view -> {
+            onAddCategory();
+        });
     }
 }

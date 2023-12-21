@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import hieudx.fpoly.warehousemanager.Product.Adapter.Product_Adapter;
 import hieudx.fpoly.warehousemanager.dao.Delivery_Dao;
 import hieudx.fpoly.warehousemanager.databinding.DialogDeleteDeliveryBinding;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvDeliveryBinding;
@@ -33,10 +32,10 @@ public class Delivery_Adapter extends RecyclerView.Adapter<Delivery_Adapter.View
     public interface OnItemClick{
         void onItemClick(int position);
     }
-    private Product_Adapter.OnItemClick mListener;
-    public void setOnItemClick(Product_Adapter.OnItemClick listener){
-        mListener = listener;
-    }
+//    private Product_Adapter.OnItemClick mListener;
+//    public void setOnItemClick(Product_Adapter.OnItemClick listener){
+//        mListener = listener;
+//    }
     public Delivery getDeliveryAtPosition(int position) {
         if (position >= 0 && position < list.size()) {
             return list.get(position);
@@ -60,11 +59,11 @@ public class Delivery_Adapter extends RecyclerView.Adapter<Delivery_Adapter.View
             @Override
             public void onClick(View view) {
 
-                if (mListener != null){
-                    mListener.onItemClick(holder.getAdapterPosition());
-
-
-                }
+//                if (mListener != null){
+//                    mListener.onItemClick(holder.getAdapterPosition());
+//
+//
+//                }
             }
         });
         holder.binding.btnDeleteItemDelivery.setOnClickListener(new View.OnClickListener() {

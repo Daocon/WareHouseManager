@@ -2,7 +2,6 @@ package hieudx.fpoly.warehousemanager.fragments.account;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +10,9 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import hieudx.fpoly.warehousemanager.R;
-import hieudx.fpoly.warehousemanager.dao.User_Dao;
+import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ActivityEditUserLoginBinding;
-import hieudx.fpoly.warehousemanager.models.User;
-import hieudx.fpoly.warehousemanager.view.Account_Activity;
+import hieudx.fpoly.warehousemanager.Member.Model.User;
 
 public class Edit_UserLogin extends AppCompatActivity {
     private ActivityEditUserLoginBinding binding;

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:theme="@style/Theme.Material3.DayNight.NoActionBar">
+    android:theme="@style/Base.Theme.Bill">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,173 +16,142 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:src="@drawable/useravatar" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/imgAvatar"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="170dp"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilAvatar"
+                android:id="@+id/avt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Link avatar (png/jpg)"
+                android:layout_height="match_parent"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:errorTextColor="@color/red"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:startIconDrawable="@drawable/avatar">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtAvatar"
+                    android:id="@+id/ed_avt"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:background="@drawable/custom_ed_bgr"
+                    android:hint="Link avatar (png/jpg)"
+                    android:textColorHighlight="@color/cardview_dark_background" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilName"
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ví dụ: Hà Văn Đạo"
-                android:layout_marginTop="10dp"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:errorTextColor="@color/red"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilAvatar"
-                app:startIconDrawable="@drawable/user">
+                app:startIconDrawable="@drawable/ic_person">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilUsername"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Ví dụ: hadao"
-                app:counterEnabled="true"
-                app:counterMaxLength="15"
-                app:endIconMode="clear_text"
-                app:errorEnabled="true"
-                app:errorTextColor="@color/red"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilName"
-                app:startIconDrawable="@drawable/user"
-                tools:layout_editor_absoluteY="41dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtUsername"
+                    android:id="@+id/ed_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="10" />
+                    android:background="@drawable/custom_ed_bgr"
+                    android:hint="họ tên đầy đủ" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilPhone"
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Ví dụ: 0972189693"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:startIconDrawable="@drawable/ic_person">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_ed_bgr"
+                    android:hint="tên đăng nhập" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:counterEnabled="true"
                 app:counterMaxLength="10"
                 app:endIconMode="clear_text"
-                app:errorEnabled="true"
-                app:errorTextColor="@color/red"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilUsername"
                 app:startIconDrawable="@drawable/call">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtPhone"
+                    android:id="@+id/ed_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/custom_ed_bgr"
+                    android:hint="số điện thoại"
                     android:inputType="number"
                     android:maxLength="10" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilEmail"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Ví dụ: dao@gmail.com"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:errorTextColor="@color/red"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilPhone"
                 app:startIconDrawable="@drawable/email">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtEmail"
+                    android:id="@+id/ed_email"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_ed_bgr"
+                    android:hint="email"
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilPassword"
+                android:id="@+id/pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Ví dụ: vandao12"
-                app:counterEnabled="true"
-                app:counterMaxLength="10"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                app:errorTextColor="@color/red"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilEmail"
                 app:startIconDrawable="@drawable/password">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtPassword"
+                    android:id="@+id/ed_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:maxLength="10" />
+                    android:background="@drawable/custom_ed_bgr"
+                    android:hint="mật khẩu"
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/btnCancel"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/purple"
-                android:text="Hủy"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toStartOf="@+id/btnSave"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnSave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/purple"
-                android:text="Xác nhận"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btnCancel"
-                app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/btnAdd"
+                    style="@style/custom_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:text="Xác nhận" />
+
+                <Button
+                    android:id="@+id/btnClear"
+                    style="@style/custom_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:text="Làm mới" />
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
 </ScrollView>

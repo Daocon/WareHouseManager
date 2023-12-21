@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.dao;
+package hieudx.fpoly.warehousemanager.Member.Dao;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,21 +10,22 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.SQliteDB.DBHelper;
-import hieudx.fpoly.warehousemanager.models.User;
+import hieudx.fpoly.warehousemanager.Member.Model.User;
 
 public class User_Dao {
-    private final DBHelper dbHelper;
+    private DBHelper dbHelper;
+    private SQLiteDatabase db;
     private User user;
     private SharedPreferences share;
 
     public User_Dao(Context context) {
         dbHelper = new DBHelper(context);
+        this.db = dbHelper.getWritableDatabase();
         share = context.getSharedPreferences("ACCOUNT", Context.MODE_PRIVATE);
     }
 
     public ArrayList<User> getAllUser() {
         ArrayList<User> listUser = new ArrayList<User>();
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
         try {
             Cursor cursor = db.rawQuery("SELECT * FROM User", null);
             if (cursor.getCount() > 0) {
@@ -49,22 +50,14 @@ public class User_Dao {
         return listUser;
     }
 
-    public boolean insertUser(User user) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("username", user.getUsername());
-        values.put("password", user.getPassword());
-        values.put("name", user.getName());
-        values.put("email", user.getEmail());
-        values.put("phone", user.getPhone());
-        values.put("role", user.getRole());
-        values.put("avatar", user.getAvatar());
-        long row = db.insert("User", null, values);
-        return (row > 0);
+    public boolean isExistCategory(String name) {
+        Cursor c = db.rawQuery("select * from Category WHERE name = ?", new String[]{name});
+        if (c.getCount() != 0) {
+            return true;
+        }
+        return false;
     }
-
     public boolean updateUser(User user) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("username", user.getUsername());
         values.put("name", user.getName());
@@ -76,24 +69,20 @@ public class User_Dao {
     }
 
     public boolean updatePasswordUser(int userId, String newPassword) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("password", newPassword);
         long row = db.update("User", values, "id = ?", new String[]{String.valueOf(userId)});
         return (row > 0);
     }
 
-    public boolean updateUserRoleById(int userId, int role) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+    public long updateUserRoleById(int userId, int role) {
         ContentValues values = new ContentValues();
         values.put("role", role);
-        long row = db.update("User", values, "id = ?", new String[]{String.valueOf(userId)});
-        return (row > 0);
+        return db.update("User", values, "id = ?", new String[]{String.valueOf(userId)});
     }
 
     //    1: thêm thành công - 0: thêm thất bại - -1: thủ thư có tồn tại, k đc thêm
     public int insert(User user) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         Cursor c = db.rawQuery("SELECT * FROM User WHERE username = ?", new String[]{user.getUsername()});
         if (c.getCount() != 0) {
@@ -116,7 +105,6 @@ public class User_Dao {
     }
 
     public int deleteUser(int id) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM Bill_in WHERE id_user = ?", new String[]{String.valueOf(id)});
         Cursor cursor1 = db.rawQuery("SELECT * FROM Bill_out WHERE id_user = ?", new String[]{String.valueOf(id)});
 
@@ -132,7 +120,6 @@ public class User_Dao {
     }
 
     public User getUserById(int id) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM User WHERE id = ?", new String[]{String.valueOf(id)});
         if (c.getCount() != 0) {
             c.moveToFirst();
@@ -142,7 +129,6 @@ public class User_Dao {
     }
 
     public User getUserByUsernameAndPassword(String username, String password) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
         User user = null;
 
         Cursor cursor = db.rawQuery("SELECT * FROM User WHERE username = ? AND password = ?",
@@ -166,7 +152,6 @@ public class User_Dao {
     }
 
     public boolean checkLogin(String username, String password) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM User WHERE username = ? AND password = ?", new String[]{username, password});
         if (c.getCount() != 0) {
             c.moveToFirst();

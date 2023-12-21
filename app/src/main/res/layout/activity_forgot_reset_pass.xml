@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.Forgot_Reset_Pass_Activity">
+    tools:context=".Login_SignUp_Forget_Reset.Activity.Forgot_Reset_Pass_Activity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frag_container"

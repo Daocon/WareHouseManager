@@ -149,7 +149,7 @@
         android:layout_below="@+id/til_Coefficient_Staff"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10sp"
-        android:background="@drawable/khung_btn_add"
+        android:background="@drawable/custom_bgr_btn_add_update"
         android:text="Cập nhật" />
 
 </RelativeLayout>

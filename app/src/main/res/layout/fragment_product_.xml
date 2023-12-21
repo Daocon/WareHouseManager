@@ -8,9 +8,9 @@
     tools:context=".Product.Fragment.Product_Fragment">
 
     <ImageButton
-        android:layout_marginTop="10dp"
         android:id="@+id/img_sort"
         style="@style/custom_img_sort"
+        android:layout_marginTop="10dp"
         android:src="@drawable/sort"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

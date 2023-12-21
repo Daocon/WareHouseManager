@@ -6,12 +6,6 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +14,17 @@ import android.view.Window;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.adapters.Delivery_Adapter;
-import hieudx.fpoly.warehousemanager.Product.Adapter.Product_Adapter;
 import hieudx.fpoly.warehousemanager.dao.Delivery_Dao;
 import hieudx.fpoly.warehousemanager.databinding.BottomSheetDeliveryBinding;
 import hieudx.fpoly.warehousemanager.databinding.DialogUpdateDeliveryBinding;
@@ -58,12 +56,12 @@ public class Delivery_Fragment extends Fragment {
         adapter = new Delivery_Adapter(list, getContext());
         rcvListDeligery.setAdapter(adapter);
         updateAddButtonVisibility();
-        adapter.setOnItemClick(new Product_Adapter.OnItemClick() {
-            @Override
-            public void onItemClick(int position) {
-                showDialogDetail(adapter.getDeliveryAtPosition(position));
-            }
-        });
+//        adapter.setOnItemClick(new Product_Adapter.OnItemClick() {
+//            @Override
+//            public void onItemClick(int position) {
+//                showDialogDetail(adapter.getDeliveryAtPosition(position));
+//            }
+//        });
         binding.btnAddDeligery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

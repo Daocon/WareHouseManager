@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="15dp"
+    android:paddingHorizontal="15dp"
+    android:theme="@style/Base.Theme.Bill"
     tools:context=".Bill.Fragment.Bill_In.Add_Bill_In_Fragment">
 
     <LinearLayout
@@ -64,7 +65,6 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -90,8 +90,9 @@
 
     <Button
         android:id="@+id/btnAdd"
-        style="@style/custom_title_add"
+        style="@style/custom_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:backgroundTint="@color/theme"
-        android:text="xác nhận" />
+        android:text="Xác nhận" />
 </LinearLayout>

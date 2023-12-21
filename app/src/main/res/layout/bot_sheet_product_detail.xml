@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Base.Theme.Bill"
     android:background="@drawable/custom_bgr_bot_sheet"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/Base.Theme.Bill">
 
     <TextView
         style="@style/custom_title_add"
@@ -83,15 +83,13 @@
             android:textColor="@color/red" />
 
         <Button
+            style="@style/custom_btn"
             android:id="@+id/btnEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:layout_weight="1"
-            android:background="@drawable/custom_bgr_btn_add_update"
-            android:backgroundTint="@color/theme"
-            android:text="Sửa"
-            android:textColor="@color/black" />
+            android:text="Sửa" />
     </LinearLayout>
 
 </LinearLayout>

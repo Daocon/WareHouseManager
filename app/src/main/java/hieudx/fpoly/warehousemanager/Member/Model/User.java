@@ -1,6 +1,7 @@
-package hieudx.fpoly.warehousemanager.models;
+package hieudx.fpoly.warehousemanager.Member.Model;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public class User implements Serializable {
     private int id;
@@ -10,8 +11,10 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private int role;
-
     private String avatar;
+
+    public static Comparator<User> sortByNameAZ = (t1, t2) -> t1.getName().compareTo(t2.getName());
+    public static Comparator<User> sortByNameZA = (t1, t2) -> t2.getName().compareTo(t1.getName());
 
 
     public User() {

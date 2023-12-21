@@ -30,7 +30,6 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.View
     private Category_Dao dao;
     private FragmentManager fragmentManager;
 
-
     public Category_Adapter(Context context, ArrayList<Category> list, FragmentManager fragmentManager) {
         this.context = context;
         this.list = list;
@@ -38,7 +37,6 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.View
         dao = new Category_Dao(context);
         this.fragmentManager = fragmentManager;
     }
-
 
     @NonNull
     @Override
@@ -139,7 +137,8 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.View
         if (list != null) {
             return list.size();
         }
-        return 0;    }
+        return 0;
+    }
 
     @Override
     public Filter getFilter() {

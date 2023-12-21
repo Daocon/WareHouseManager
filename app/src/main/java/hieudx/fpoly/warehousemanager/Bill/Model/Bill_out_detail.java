@@ -2,13 +2,20 @@ package hieudx.fpoly.warehousemanager.Bill.Model;
 
 public class Bill_out_detail {
     private int id;
-    private int price;
+    private double price;
     private int quantity;
-    private int total;
+    private String total;
     private int id_product;
-    private int id_bill_out;
+    private String id_bill_out;
 
-    public Bill_out_detail(int id, int price, int quantity, int total, int id_product, int id_bill_out) {
+    public Bill_out_detail(double price, int quantity, int id_product, String id_bill_out) {
+        this.price = price;
+        this.quantity = quantity;
+        this.id_product = id_product;
+        this.id_bill_out = id_bill_out;
+    }
+
+    public Bill_out_detail(int id, double price, int quantity, String total, int id_product, String id_bill_out) {
         this.id = id;
         this.price = price;
         this.quantity = quantity;
@@ -25,11 +32,11 @@ public class Bill_out_detail {
         this.id = id;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -41,11 +48,11 @@ public class Bill_out_detail {
         this.quantity = quantity;
     }
 
-    public int getTotal() {
+    public String getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(String total) {
         this.total = total;
     }
 
@@ -57,11 +64,11 @@ public class Bill_out_detail {
         this.id_product = id_product;
     }
 
-    public int getId_bill_out() {
+    public String getId_bill_out() {
         return id_bill_out;
     }
 
-    public void setId_bill_out(int id_bill_out) {
+    public void setId_bill_out(String id_bill_out) {
         this.id_bill_out = id_bill_out;
     }
 }

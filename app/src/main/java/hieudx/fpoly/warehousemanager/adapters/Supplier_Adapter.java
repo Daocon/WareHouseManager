@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import hieudx.fpoly.warehousemanager.Product.Adapter.Product_Adapter;
 import hieudx.fpoly.warehousemanager.dao.Supplier_Dao;
 import hieudx.fpoly.warehousemanager.databinding.DialogDeleteSupplierBinding;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvSupplierBinding;
@@ -35,11 +34,11 @@ public class Supplier_Adapter extends RecyclerView.Adapter<Supplier_Adapter.View
         void onItemClick(int position);
     }
 
-    private Product_Adapter.OnItemClick mListener;
+//    private Product_Adapter.OnItemClick mListener;
 
-    public void setOnItemClick(Product_Adapter.OnItemClick listener) {
-        mListener = listener;
-    }
+//    public void setOnItemClick(Product_Adapter.OnItemClick listener) {
+//        mListener = listener;
+//    }
 
     public Supplier getSupplierAtPosition(int position) {
         if (position >= 0 && position < list.size()) {
@@ -66,10 +65,10 @@ public class Supplier_Adapter extends RecyclerView.Adapter<Supplier_Adapter.View
             @Override
             public void onClick(View view) {
 
-                if (mListener != null) {
-                    mListener.onItemClick(holder.getAdapterPosition());
-
-                }
+//                if (mListener != null) {
+//                    mListener.onItemClick(holder.getAdapterPosition());
+//
+//                }
             }
         });
 

@@ -1,6 +1,7 @@
-package hieudx.fpoly.warehousemanager.Bill.Adapter.bill_in;
+package hieudx.fpoly.warehousemanager.Bill.Adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -14,13 +15,13 @@ import hieudx.fpoly.warehousemanager.dao.Supplier_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvProductBillBinding;
 import hieudx.fpoly.warehousemanager.Product.Model.Product;
 
-public class Bill_In_Product_Add_Adapter extends RecyclerView.Adapter<Bill_In_Product_Add_Adapter.ViewHolder> {
+public class Bill_Product_Add_Adapter extends RecyclerView.Adapter<Bill_Product_Add_Adapter.ViewHolder> {
     private Context context;
     private ArrayList<Product> list;
     private ArrayList<Product> list_checked;
     private OnCheckedChangeListener listener;
 
-    public Bill_In_Product_Add_Adapter(Context context, ArrayList<Product> list, OnCheckedChangeListener listener) {
+    public Bill_Product_Add_Adapter(Context context, ArrayList<Product> list, OnCheckedChangeListener listener) {
         this.context = context;
         this.list = list;
         this.listener = listener;
@@ -43,15 +44,14 @@ public class Bill_In_Product_Add_Adapter extends RecyclerView.Adapter<Bill_In_Pr
         Product product = list.get(position);
         Supplier_Dao supplier_dao = new Supplier_Dao(context);
 
-        String nameSUpplier = supplier_dao.getSupplierById(list.get(position).getId_supplier()).getName();
-        holder.binding.tvNameProduct.setText(product.getName() + " - "+nameSUpplier);
+        String nameSupplier = supplier_dao.getSupplierById(list.get(position).getId_supplier()).getName();
+        holder.binding.tvNameProduct.setText(product.getName() + " - "+nameSupplier);
         holder.binding.tvQuantity.setText(product.getQuantity() + "");
         holder.binding.edPrice.setText(product.getPrice() + "");
         holder.binding.btnPlus.setOnClickListener(view -> {
             holder.binding.tvQuantity.setText((product.getQuantity() + 1) + "");
             product.setQuantity(product.getQuantity() + 1);
             list.set(position, product);
-//            notifyDataSetChanged();
         });
 
         holder.binding.btnMinus.setOnClickListener(view -> {
@@ -61,7 +61,6 @@ public class Bill_In_Product_Add_Adapter extends RecyclerView.Adapter<Bill_In_Pr
                 holder.binding.tvQuantity.setText((product.getQuantity() - 1) + "");
                 product.setQuantity(product.getQuantity() - 1);
                 list.set(position, product);
-//                notifyDataSetChanged();
             }
         });
         holder.binding.cbAddProduct.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -71,10 +70,10 @@ public class Bill_In_Product_Add_Adapter extends RecyclerView.Adapter<Bill_In_Pr
                 if (b) {
                     if (price.contains(" ") || price.isEmpty()) {
                         Toast.makeText(context, "Giá phải lớn hơn 0", Toast.LENGTH_SHORT).show();
-                    } else if (price.matches("[a-zA-Z]+")) {
+                    } else if (!TextUtils.isDigitsOnly(price)) {
                         Toast.makeText(context, "Giá không được nhập chữ", Toast.LENGTH_SHORT).show();
                     } else {
-                        product.setPrice(Integer.parseInt(price));
+                        product.setPrice(Double.parseDouble(price));
                         if (!list_checked.contains(product)) {
                             list_checked.add(product);
                         }
@@ -99,7 +98,6 @@ public class Bill_In_Product_Add_Adapter extends RecyclerView.Adapter<Bill_In_Pr
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ItemRcvProductBillBinding binding;
-
         public ViewHolder(@NonNull ItemRcvProductBillBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

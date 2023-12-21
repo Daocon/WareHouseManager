@@ -16,10 +16,11 @@
 
     <Button
         android:id="@+id/btn_add"
-        style="@style/custom_title_add"
-        android:background="@drawable/custom_bgr_btn_add_update"
-        android:backgroundTint="@color/theme"
-        android:text="tạo phiếu nhập"
+        style="@style/custom_btn"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tạo phiếu nhập"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

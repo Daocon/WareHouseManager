@@ -5,7 +5,7 @@
     android:theme="@style/Base.Theme.WareHouseManager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.Login_SignUp_Activity">
+    tools:context=".Login_SignUp_Forget_Reset.Activity.Login_SignUp_Activity">
 
     <ImageView
         android:layout_width="wrap_content"

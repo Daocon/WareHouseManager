@@ -36,6 +36,7 @@
                 android:background="@drawable/custom_actionbar">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"

@@ -46,11 +46,6 @@ public class Product_Adapter extends RecyclerView.Adapter<Product_Adapter.Viewho
         dao = new Product_Dao(context);
     }
 
-
-    public interface OnItemClick {
-        void onItemClick(int position);
-    }
-
     @NonNull
     @Override
     public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

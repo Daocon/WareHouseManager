@@ -8,20 +8,21 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.Bill.Adapter.bill_in.Bill_In_Detail_Adapter;
 import hieudx.fpoly.warehousemanager.Bill.Dao.Bill_In_Dao;
-import hieudx.fpoly.warehousemanager.Bill.Fragment.Bill_Fragment;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_In;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_in_detail;
 import hieudx.fpoly.warehousemanager.General;
-import hieudx.fpoly.warehousemanager.dao.User_Dao;
+import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentDetailBillInBinding;
-import hieudx.fpoly.warehousemanager.models.User;
+import hieudx.fpoly.warehousemanager.Member.Model.User;
 
 public class Detail_Bill_In_Fragment extends Fragment {
     private FragmentDetailBillInBinding binding;
@@ -34,7 +35,6 @@ public class Detail_Bill_In_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentDetailBillInBinding.inflate(inflater, container, false);
-
         return binding.getRoot();
     }
 
@@ -42,7 +42,8 @@ public class Detail_Bill_In_Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.imgBack.setOnClickListener(view1 -> General.loadFragment(requireActivity().getSupportFragmentManager(), new Bill_Fragment(), null));
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        General.onStateIconBack(getActivity(), actionBar, getParentFragmentManager(), false);
         Bundle bundle = getArguments();
         if (bundle != null) {
             User_Dao user_dao = new User_Dao(getContext());
@@ -68,7 +69,7 @@ public class Detail_Bill_In_Fragment extends Fragment {
                     long check = bill_in_dao.delete(bill_in.getId());
                     if (check == 1) {
                         Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
-                        General.loadFragment(requireActivity().getSupportFragmentManager(), new Bill_Fragment(), null);
+                        getParentFragmentManager().popBackStack();
                     } else {
                         Toast.makeText(getContext(), "Xóa lỗi", Toast.LENGTH_SHORT).show();
                     }

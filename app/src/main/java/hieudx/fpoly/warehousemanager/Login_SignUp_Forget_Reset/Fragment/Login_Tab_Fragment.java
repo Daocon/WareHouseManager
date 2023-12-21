@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.fragments.login_signup;
+package hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Fragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -13,10 +13,10 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import hieudx.fpoly.warehousemanager.MainActivity;
-import hieudx.fpoly.warehousemanager.dao.User_Dao;
+import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentLoginTabBinding;
-import hieudx.fpoly.warehousemanager.models.User;
-import hieudx.fpoly.warehousemanager.view.Forgot_Reset_Pass_Activity;
+import hieudx.fpoly.warehousemanager.Member.Model.User;
+import hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Activity.Forgot_Reset_Pass_Activity;
 
 
 public class Login_Tab_Fragment extends Fragment {

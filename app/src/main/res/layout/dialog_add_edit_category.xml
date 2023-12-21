@@ -56,18 +56,17 @@
             android:id="@+id/ed_name"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:hint="nhập tên thể loại sản phẩm"
             android:background="@drawable/custom_ed_bgr"
+            android:hint="nhập tên thể loại sản phẩm"
             android:textColorHighlight="@color/cardview_dark_background" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnAdd"
-        style="@style/custom_title_add"
+        style="@style/custom_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
-        android:background="@drawable/custom_actionbar"
-        android:text="thêm" />
+        android:text="Thêm" />
 </LinearLayout>

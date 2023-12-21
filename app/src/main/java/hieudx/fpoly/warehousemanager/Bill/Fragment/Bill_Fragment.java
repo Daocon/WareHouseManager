@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import hieudx.fpoly.warehousemanager.Bill.Bill_Adapter;
+import hieudx.fpoly.warehousemanager.Bill.Adapter.Bill_Adapter;
 import hieudx.fpoly.warehousemanager.databinding.FragmentBillBinding;
 
 public class Bill_Fragment extends Fragment {

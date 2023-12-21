@@ -1,8 +1,5 @@
 package hieudx.fpoly.warehousemanager.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,8 +9,13 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.squareup.picasso.Picasso;
 
+import hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Activity.Forgot_Reset_Pass_Activity;
+import hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Activity.Login_SignUp_Activity;
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.ActivityAccountBinding;
 import hieudx.fpoly.warehousemanager.fragments.account.Edit_UserLogin;
@@ -35,8 +37,8 @@ public class Account_Activity extends AppCompatActivity {
         binding.toolbar.setNavigationOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
         sharedPreferences = getSharedPreferences("ACCOUNT", MODE_PRIVATE);
-        Picasso.get().load(sharedPreferences.getString("avatar","")).into(binding.avatarIV);
-        binding.tvNameUser.setText(sharedPreferences.getString("name", ""));
+        Picasso.get().load(sharedPreferences.getString("avatar","")).into(binding.imgAvt);
+        binding.tvName.setText(sharedPreferences.getString("name", ""));
         binding.tvPhone.setText(sharedPreferences.getString("phone",""));
 
         sharedPreferences = getSharedPreferences("MODE", MODE_PRIVATE);

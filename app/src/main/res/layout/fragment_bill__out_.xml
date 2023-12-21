@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Base.Theme.Bill"
     android:orientation="vertical"
     tools:context=".Bill.Fragment.Bill_Out.Bill_Out_Fragment">
 
@@ -16,9 +17,11 @@
 
     <Button
         android:id="@+id/btn_add"
-        style="@style/custom_title_add"
-        android:backgroundTint="@color/theme"
-        android:text="tạo phiếu xuất"
+        style="@style/custom_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Tạo phiếu xuất"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

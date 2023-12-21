@@ -6,12 +6,6 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,20 +14,21 @@ import android.view.Window;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 import hieudx.fpoly.warehousemanager.R;
-
-import hieudx.fpoly.warehousemanager.Product.Adapter.Product_Adapter;
 import hieudx.fpoly.warehousemanager.adapters.Supplier_Adapter;
-
 import hieudx.fpoly.warehousemanager.dao.Supplier_Dao;
 import hieudx.fpoly.warehousemanager.databinding.BottomSheetSupplierBinding;
 import hieudx.fpoly.warehousemanager.databinding.DialogUpdateSupplierBinding;
 import hieudx.fpoly.warehousemanager.databinding.FragmentSupplierBinding;
-
 import hieudx.fpoly.warehousemanager.fragments.Supplier.Supplier_Add;
 import hieudx.fpoly.warehousemanager.fragments.Supplier.Supplier_Update;
 import hieudx.fpoly.warehousemanager.models.Supplier;
@@ -61,12 +56,12 @@ public class Supplier_Fragment extends Fragment {
         adapter = new Supplier_Adapter(list, getContext());
         rcvListSupplier.setAdapter(adapter);
         updateAddButtonVisibility();
-        adapter.setOnItemClick(new Product_Adapter.OnItemClick() {
-            @Override
-            public void onItemClick(int position) {
-                showDialogDetail(adapter.getSupplierAtPosition(position));
-            }
-        });
+//        adapter.setOnItemClick(new Product_Adapter.OnItemClick() {
+//            @Override
+//            public void onItemClick(int position) {
+//                showDialogDetail(adapter.getSupplierAtPosition(position));
+//            }
+//        });
         binding.btnSheetSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

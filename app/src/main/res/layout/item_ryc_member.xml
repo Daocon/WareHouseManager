@@ -5,17 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:background="@drawable/round_back_white_acc"
     app:cardCornerRadius="15dp"
     app:cardElevation="10dp">
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="5dp"
-        android:weightSum="10">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/imgMember"
@@ -23,13 +20,13 @@
             android:layout_height="50dp"
             android:layout_marginVertical="10dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/useravatar"/>
+            android:src="@drawable/useravatar" />
 
         <LinearLayout
             android:id="@+id/layoutDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="9"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
@@ -60,7 +57,6 @@
             android:id="@+id/switchLimit"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:thumb="@drawable/ic_brightness_1_black_24dp"
             android:track="@drawable/track_selector" />
 

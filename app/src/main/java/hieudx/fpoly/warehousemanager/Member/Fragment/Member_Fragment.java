@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.Product.Fragment;
+package hieudx.fpoly.warehousemanager.Member.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,26 +17,26 @@ import java.util.Collections;
 
 import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.MainActivity;
-import hieudx.fpoly.warehousemanager.Product.Adapter.Product_Adapter;
-import hieudx.fpoly.warehousemanager.Product.Dao.Product_Dao;
-import hieudx.fpoly.warehousemanager.Product.Model.Product;
+import hieudx.fpoly.warehousemanager.Member.Adapter.User_Adapter;
+import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
+import hieudx.fpoly.warehousemanager.Member.Model.User;
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.BotSheetSortBinding;
-import hieudx.fpoly.warehousemanager.databinding.FragmentProductBinding;
+import hieudx.fpoly.warehousemanager.databinding.FragmentMemberBinding;
 
-public class Product_Fragment extends Fragment {
-    private FragmentProductBinding binding;
-    private Product_Dao productDao;
-    private Product_Adapter adapter;
-    private ArrayList<Product> list = new ArrayList<>();
+public class Member_Fragment extends Fragment {
+    private FragmentMemberBinding binding;
+    private ArrayList<User> list;
+    private User_Dao userDao;
+    private User_Adapter adapter;
 
-    public Product_Fragment() {
+    public Member_Fragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentProductBinding.inflate(inflater, container, false);
+        binding = FragmentMemberBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -47,7 +47,6 @@ public class Product_Fragment extends Fragment {
         init();
         onClickSort();
         onSearch();
-
     }
 
     private void onSearch() {
@@ -70,42 +69,46 @@ public class Product_Fragment extends Fragment {
         binding.imgSort.setOnClickListener(view -> {
             BotSheetSortBinding btnBinding = BotSheetSortBinding.inflate(getLayoutInflater());
 
+            btnBinding.rdSortAsc.setVisibility(View.GONE);
+            btnBinding.rdSortDecs.setVisibility(View.GONE);
+
             btnBinding.rdGr.setOnCheckedChangeListener(((radioGroup, i) -> {
-                if (i == R.id.rd_sort_asc) {
-                    Collections.sort(list, Product.sortByAscPrice);
-                } else if (i == R.id.rd_sort_decs) {
-                    Collections.sort(list, Product.sortByDescPrice);
-                } else if (i == R.id.rd_sort_AZ) {
-                    Collections.sort(list, Product.sortByNameAZ);
+               if (i == R.id.rd_sort_AZ) {
+                    Collections.sort(list, User.sortByNameAZ);
                 } else if (i == R.id.rd_sort_ZA) {
-                    Collections.sort(list, Product.sortByNameZA);
+                    Collections.sort(list, User.sortByNameZA);
                 }
                 adapter.notifyDataSetChanged();
             }));
             General.onSettingsBotSheet(getContext(), btnBinding);
         });
     }
-
     private void init() {
-        productDao = new Product_Dao(getContext());
-        list = productDao.getProductList();
+        userDao = new User_Dao(getContext());
+        list = new ArrayList<>();
+        for (User user : userDao.getAllUser()) {
+            if (user.getRole() != 0) {
+                list.add(user);
+            }
+        }
         General.transLayout(list, binding.btnAdd, binding.imgSort, binding.rcv, binding.fabAdd);
-        adapter = new Product_Adapter(getContext(), list, getLayoutInflater(), getParentFragmentManager());
+        adapter = new User_Adapter(getActivity(), list);
         binding.rcv.setAdapter(adapter);
 
         binding.fabAdd.setOnClickListener(view1 -> {
-            General.loadFragment(getParentFragmentManager(), new Product_Add_Edit_Fragment(), null);
+            General.loadFragment(getParentFragmentManager(), new Member_Add_Fragment(), null);
         });
 
         binding.btnAdd.setOnClickListener(view1 -> {
-            General.loadFragment(getParentFragmentManager(), new Product_Add_Edit_Fragment(), null);
+            General.loadFragment(getParentFragmentManager(), new Member_Add_Fragment(), null);
         });
     }
-
     @Override
     public void onResume() {
         super.onResume();
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         General.onStateIconBack(getActivity(), actionBar, getParentFragmentManager(), true);
+
+//        init();
     }
 }

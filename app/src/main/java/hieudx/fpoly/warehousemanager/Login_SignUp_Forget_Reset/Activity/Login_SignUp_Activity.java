@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.view;
+package hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Activity;
 
 import android.os.Bundle;
 
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.tabs.TabLayout;
 
-import hieudx.fpoly.warehousemanager.adapters.Login_SignUp_Adapter;
+import hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Login_SignUp_Adapter;
 import hieudx.fpoly.warehousemanager.databinding.ActivityLoginSignUpBinding;
 
 public class Login_SignUp_Activity extends AppCompatActivity {

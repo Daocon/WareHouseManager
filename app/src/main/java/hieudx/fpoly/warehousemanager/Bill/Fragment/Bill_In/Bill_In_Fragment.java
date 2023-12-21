@@ -7,17 +7,22 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import hieudx.fpoly.warehousemanager.Bill.Adapter.bill_in.Bill_In_Adapter;
 import hieudx.fpoly.warehousemanager.Bill.Dao.Bill_In_Dao;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_In;
 import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.MainActivity;
+import hieudx.fpoly.warehousemanager.R;
+import hieudx.fpoly.warehousemanager.databinding.BotSheetSortBinding;
 import hieudx.fpoly.warehousemanager.databinding.FragmentBillInBinding;
 
 public class Bill_In_Fragment extends Fragment {
@@ -63,29 +68,24 @@ public class Bill_In_Fragment extends Fragment {
     }
 
     private void onClickSort() {
-//        binding.imgSort.setOnClickListener(view -> {
-//            Dialog dialog = new Dialog(getContext());
-//            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//            BotSheetSortBinding btnBinding = BotSheetSortBinding.inflate(getLayoutInflater());
-//            dialog.setContentView(btnBinding.getRoot());
-//
-//            btnBinding.rdGr.setOnCheckedChangeListener(((radioGroup, i) -> {
-//                if (i == R.id.rd_sort_asc) {
-//                    Collections.sort(list, Bill_In.sortByAscSum);
-//                } else if(i == R.id.rd_sort_decs){
-//                    Collections.sort(list, Bill_In.sortByDescSum);
-//                } else if (i == R.id.rd_sort_AZ){
-//                    Collections.sort(list, Bill_In.sortByNameAZ);
-//                } else if (i == R.id.rd_sort_ZA){
-//                    Collections.sort(list, Bill_In.sortByNameZA);
-//                }
-//                adapter.notifyDataSetChanged();
-//
-//            }));
-//
-//            General.onSettingsBotSheet(dialog);
-//            dialog.show();
-//        });
+        binding.imgSort.setOnClickListener(view -> {
+            BotSheetSortBinding btnBinding = BotSheetSortBinding.inflate(getLayoutInflater());
+
+            btnBinding.rdGr.setOnCheckedChangeListener(((radioGroup, i) -> {
+                if (i == R.id.rd_sort_asc) {
+                    Collections.sort(list, Bill_In.sortByAscSum);
+                } else if(i == R.id.rd_sort_decs){
+                    Collections.sort(list, Bill_In.sortByDescSum);
+                } else if (i == R.id.rd_sort_AZ){
+                    Collections.sort(list, Bill_In.sortByNameAZ);
+                } else if (i == R.id.rd_sort_ZA){
+                    Collections.sort(list, Bill_In.sortByNameZA);
+                }
+                adapter.notifyDataSetChanged();
+            }));
+
+            General.onSettingsBotSheet(getContext(), btnBinding);
+        });
     }
 
     private void init() {
@@ -103,5 +103,12 @@ public class Bill_In_Fragment extends Fragment {
         binding.fabAdd.setOnClickListener(view -> {
             General.loadFragment(fragmentManager, new Add_Bill_In_Fragment(), null);
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        General.onStateIconBack(getActivity(), actionBar, getParentFragmentManager(), true);
     }
 }
