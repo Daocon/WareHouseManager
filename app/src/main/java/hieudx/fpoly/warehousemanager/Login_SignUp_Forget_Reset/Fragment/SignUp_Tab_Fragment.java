@@ -2,12 +2,16 @@ package hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Fragment;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
@@ -53,7 +57,7 @@ public class SignUp_Tab_Fragment extends Fragment {
                 && binding.pass.getError() == null
                 && binding.repass.getError() == null
                 && binding.phoneNumber.getError() == null) {
-            User user = new User(username, repass, name, email, phone, 1, "https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png");
+            User user = new User(username, md5(repass), name, email, phone, 1, "https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png");
             User_Dao user_dao = new User_Dao(getContext());
             int check = user_dao.insert(user);
             switch (check) {
@@ -84,5 +88,28 @@ public class SignUp_Tab_Fragment extends Fragment {
         General.isEmptyValid(binding.edPass, binding.pass);
         General.isEmptyValid(binding.edRePass, binding.repass);
         General.isEmptyValid(binding.edPhoneNumber, binding.phoneNumber);
+    }
+
+    public static String md5(String text) {
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("md5");
+            byte[] result = digest.digest(text.getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (byte b : result) {
+                int number = b & 0xff; // add salt
+                String hex = Integer.toHexString(number);
+                if (hex.length() == 1) {
+                    sb.append("0"+hex);
+                } else {
+                    sb.append(hex);
+                }
+            }
+            Log.i("Chuoi md5: ",sb.toString());
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }
