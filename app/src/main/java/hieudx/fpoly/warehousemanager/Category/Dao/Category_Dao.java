@@ -15,7 +15,6 @@ public class Category_Dao {
     private DBHelper dbHelper;
     private SQLiteDatabase db;
 
-
     public Category_Dao(Context context) {
         this.dbHelper = new DBHelper(context);
         this.db = dbHelper.getWritableDatabase();

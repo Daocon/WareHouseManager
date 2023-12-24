@@ -30,9 +30,9 @@ import hieudx.fpoly.warehousemanager.Bill.Model.Bill_out_detail;
 import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.Product.Dao.Product_Dao;
 import hieudx.fpoly.warehousemanager.Product.Model.Product;
-import hieudx.fpoly.warehousemanager.dao.Delivery_Dao;
+import hieudx.fpoly.warehousemanager.Delivery.Dao.Delivery_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentAddBillOutBinding;
-import hieudx.fpoly.warehousemanager.models.Delivery;
+import hieudx.fpoly.warehousemanager.Delivery.Model.Delivery;
 
 public class Add_Bill_Out_Fragment extends Fragment {
     private FragmentAddBillOutBinding binding;

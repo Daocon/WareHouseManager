@@ -47,7 +47,7 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.binding.txtMaCategory.setText("Mã loại: " + list.get(position).getId());
+        holder.binding.tvId.setText("Mã loại: " + list.get(position).getId());
         holder.binding.tvName.setText(list.get(position).getName());
 
         holder.binding.btnDelete.setOnClickListener(view -> onDeleteCategory(list.get(position)));
@@ -129,7 +129,6 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.View
         builder.setPositiveButton("Không", null);
         builder.create();
         builder.show();
-
     }
 
     @Override

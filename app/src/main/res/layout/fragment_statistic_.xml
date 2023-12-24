@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:theme="@style/Base.Theme.Bill"
-    tools:context=".fragments.statistic.Statistic_Fragment">
+    tools:context=".Statistic.Fragment.Statistic_Fragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -30,5 +30,6 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 </LinearLayout>

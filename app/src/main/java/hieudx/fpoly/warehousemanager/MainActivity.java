@@ -16,12 +16,12 @@ import hieudx.fpoly.warehousemanager.Bill.Fragment.Bill_Fragment;
 import hieudx.fpoly.warehousemanager.Category.Fragment.Category_Fragment;
 import hieudx.fpoly.warehousemanager.Product.Fragment.Product_Fragment;
 import hieudx.fpoly.warehousemanager.databinding.ActivityMainBinding;
-import hieudx.fpoly.warehousemanager.fragments.Delivery_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.Staff_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.Supplier_Fragment;
+import hieudx.fpoly.warehousemanager.Delivery.Fragment.Delivery_Fragment;
+import hieudx.fpoly.warehousemanager.Staff.Staff_Fragment;
+import hieudx.fpoly.warehousemanager.Supplier.Supplier_Fragment;
 import hieudx.fpoly.warehousemanager.Member.Fragment.Member_Fragment;
-import hieudx.fpoly.warehousemanager.fragments.statistic.Statistic_Fragment;
-import hieudx.fpoly.warehousemanager.view.Account_Activity;
+import hieudx.fpoly.warehousemanager.Statistic.Fragment.Statistic_Fragment;
+import hieudx.fpoly.warehousemanager.Member.Account_Activity;
 
 public class MainActivity extends AppCompatActivity {
     public static ActivityMainBinding binding;

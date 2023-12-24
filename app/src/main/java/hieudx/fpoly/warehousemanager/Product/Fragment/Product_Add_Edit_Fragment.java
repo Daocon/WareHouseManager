@@ -24,9 +24,9 @@ import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.Product.Dao.Product_Dao;
 import hieudx.fpoly.warehousemanager.Product.Model.Product;
 import hieudx.fpoly.warehousemanager.R;
-import hieudx.fpoly.warehousemanager.dao.Supplier_Dao;
+import hieudx.fpoly.warehousemanager.Supplier.Supplier_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentProductAddBinding;
-import hieudx.fpoly.warehousemanager.models.Supplier;
+import hieudx.fpoly.warehousemanager.Supplier.Supplier;
 
 
 public class Product_Add_Edit_Fragment extends Fragment {

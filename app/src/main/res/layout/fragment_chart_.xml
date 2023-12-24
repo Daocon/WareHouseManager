@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="30px"
-    tools:context=".fragments.statistic.Chart_Fragment">
+    tools:context=".Statistic.Fragment.Chart_Fragment">
 
     <TextView
         android:id="@+id/tv_chart"

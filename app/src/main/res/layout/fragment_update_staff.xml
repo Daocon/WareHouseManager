@@ -6,7 +6,7 @@
     android:layout_marginHorizontal="10sp"
     android:layout_marginTop="10sp"
     android:padding="10sp"
-    tools:context=".fragments.Staff.Staff_Update">
+    tools:context=".Staff.Staff.Staff_Update">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

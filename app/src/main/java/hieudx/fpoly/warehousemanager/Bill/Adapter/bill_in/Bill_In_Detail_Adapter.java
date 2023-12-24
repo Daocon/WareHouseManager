@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.Product.Dao.Product_Dao;
-import hieudx.fpoly.warehousemanager.dao.Supplier_Dao;
+import hieudx.fpoly.warehousemanager.Supplier.Supplier_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvDetailBillInBinding;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_in_detail;
 

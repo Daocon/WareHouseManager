@@ -20,10 +20,10 @@ import hieudx.fpoly.warehousemanager.Bill.Dao.Bill_Out_Dao;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_Out;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_out_detail;
 import hieudx.fpoly.warehousemanager.General;
-import hieudx.fpoly.warehousemanager.dao.Delivery_Dao;
+import hieudx.fpoly.warehousemanager.Delivery.Dao.Delivery_Dao;
 import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentDetailBillOutBinding;
-import hieudx.fpoly.warehousemanager.models.Delivery;
+import hieudx.fpoly.warehousemanager.Delivery.Model.Delivery;
 import hieudx.fpoly.warehousemanager.Member.Model.User;
 
 public class Detail_Bill_Out_Fragment extends Fragment {
