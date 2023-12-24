@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".fragments.statistic.Total_Fragment">
+    tools:context=".Statistic.Fragment.Total_Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"

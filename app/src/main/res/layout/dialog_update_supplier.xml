@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="20sp"
-            android:background="@drawable/ic_mess" />
+            android:background="@drawable/sms" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton

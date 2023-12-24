@@ -6,7 +6,7 @@
     android:layout_marginHorizontal="10sp"
     android:layout_marginTop="10sp"
     android:padding="10sp"
-    tools:context=".fragments.delivery.Delevery_update">
+    tools:context=".Delivery.Fragment.Delevery_update">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

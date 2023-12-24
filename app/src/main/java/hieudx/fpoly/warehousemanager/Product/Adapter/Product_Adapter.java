@@ -25,7 +25,7 @@ import hieudx.fpoly.warehousemanager.Product.Dao.Product_Dao;
 import hieudx.fpoly.warehousemanager.Product.Fragment.Product_Add_Edit_Fragment;
 import hieudx.fpoly.warehousemanager.Product.Model.Product;
 import hieudx.fpoly.warehousemanager.R;
-import hieudx.fpoly.warehousemanager.dao.Supplier_Dao;
+import hieudx.fpoly.warehousemanager.Supplier.Supplier_Dao;
 import hieudx.fpoly.warehousemanager.databinding.BotSheetProductDetailBinding;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvProductBinding;
 

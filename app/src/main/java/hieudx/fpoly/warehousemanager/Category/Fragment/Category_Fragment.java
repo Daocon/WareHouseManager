@@ -88,7 +88,6 @@ public class Category_Fragment extends Fragment {
                 if (dialog_binding.name.getError() == null) {
                     if (categoryDao.insertCategory(name) > 0) {
                         Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                        init();
                         dialog.dismiss();
                     } else {
                         Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
@@ -130,11 +129,16 @@ public class Category_Fragment extends Fragment {
 
         binding.fabAdd.setOnClickListener(view -> {
             onAddCategory();
-
         });
 
         binding.btnAdd.setOnClickListener(view -> {
             onAddCategory();
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        init();
     }
 }
