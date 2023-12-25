@@ -23,14 +23,13 @@
 
     <RelativeLayout
         android:id="@+id/rl_spinner"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="3dp"
         android:layout_weight="10"
         android:background="@drawable/background_spiner"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_chart">
 
@@ -40,9 +39,9 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
             android:background="@android:color/transparent"
             android:gravity="center"
-            android:layout_marginLeft="5dp"
             android:spinnerMode="dropdown" />
 
         <ImageView
@@ -58,7 +57,7 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="450dp"
         android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

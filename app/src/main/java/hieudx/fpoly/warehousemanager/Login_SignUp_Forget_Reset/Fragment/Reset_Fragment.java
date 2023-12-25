@@ -6,10 +6,14 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentResetBinding;
@@ -62,12 +66,35 @@ public class Reset_Fragment extends Fragment {
 
         if (!hasErrors()) {
             userDao = new User_Dao(getActivity());
-            if (userDao.updatePasswordUser(userId, newPassword)) {
+            if (userDao.updatePasswordUser(userId, md5(newPassword))) {
                 Toast.makeText(getActivity(), "Cập nhật mật khẩu thành công", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(requireActivity(), Login_SignUp_Activity.class));
             } else {
                 Toast.makeText(getActivity(), "Cập nhật mật khẩu thất bại", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    public static String md5(String text) {
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("md5");
+            byte[] result = digest.digest(text.getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (byte b : result) {
+                int number = b & 0xff; // add salt
+                String hex = Integer.toHexString(number);
+                if (hex.length() == 1) {
+                    sb.append("0"+hex);
+                } else {
+                    sb.append(hex);
+                }
+            }
+            Log.i("Chuoi md5: ",sb.toString());
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return "";
         }
     }
 

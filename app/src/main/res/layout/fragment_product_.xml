@@ -20,7 +20,7 @@
         style="@style/custom_title_add"
         android:background="@drawable/custom_bgr_btn_add_update"
         android:backgroundTint="@color/theme"
-        android:text="thêm thể loại"
+        android:text="Thêm sản phẩm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
