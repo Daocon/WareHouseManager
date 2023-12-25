@@ -27,8 +27,6 @@ import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.BottomSheetSupplierBinding;
 import hieudx.fpoly.warehousemanager.databinding.DialogUpdateSupplierBinding;
 import hieudx.fpoly.warehousemanager.databinding.FragmentSupplierBinding;
-import hieudx.fpoly.warehousemanager.Supplier.Supplier.Supplier_Add;
-import hieudx.fpoly.warehousemanager.Supplier.Supplier.Supplier_Update;
 
 public class Supplier_Fragment extends Fragment {
 

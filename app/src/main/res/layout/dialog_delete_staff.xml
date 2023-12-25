@@ -24,7 +24,7 @@
             android:layout_width="0sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/custom_btn_delete"
+            android:background="@drawable/custom_bgr_btn_delete"
             android:text="Thoát"
             android:textColor="#4696EB" />
 
@@ -33,7 +33,7 @@
             android:layout_width="0sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/custom_btn_delete"
+            android:background="@drawable/custom_bgr_btn_delete"
             android:text="Xóa"
             android:textColor="#4696EB" />
     </LinearLayout>

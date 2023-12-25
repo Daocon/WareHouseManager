@@ -37,7 +37,11 @@ public class Account_Activity extends AppCompatActivity {
         binding.toolbar.setNavigationOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
         sharedPreferences = getSharedPreferences("ACCOUNT", MODE_PRIVATE);
-        Picasso.get().load(sharedPreferences.getString("avatar","")).into(binding.imgAvt);
+
+        String img = sharedPreferences.getString("avatar", "");
+        if (img.isEmpty()) binding.imgAvt.setImageResource(R.drawable.img_avt);
+        else Picasso.get().load(img).into(binding.imgAvt);
+
         binding.tvName.setText(sharedPreferences.getString("name", ""));
         binding.tvPhone.setText(sharedPreferences.getString("phone",""));
 

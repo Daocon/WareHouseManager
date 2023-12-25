@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.Staff;
+package hieudx.fpoly.warehousemanager.Staff.Model;
 
 public class Staff {
     private int id;

@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.Staff;
+package hieudx.fpoly.warehousemanager.Staff.Dao;
 
 
 import android.content.ContentValues;
@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.SQliteDB.DBHelper;
+import hieudx.fpoly.warehousemanager.Staff.Model.Staff;
 
 public class Staff_Dao {
     private DBHelper dbHelper;

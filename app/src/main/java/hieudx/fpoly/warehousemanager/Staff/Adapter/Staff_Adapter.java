@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.Staff;
+package hieudx.fpoly.warehousemanager.Staff.Adapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import hieudx.fpoly.warehousemanager.Staff.Model.Staff;
+import hieudx.fpoly.warehousemanager.Staff.Dao.Staff_Dao;
 import hieudx.fpoly.warehousemanager.databinding.DialogDeleteStaffBinding;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvStaffBinding;
 

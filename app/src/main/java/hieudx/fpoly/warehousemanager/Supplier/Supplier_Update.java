@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.Supplier.Supplier;
+package hieudx.fpoly.warehousemanager.Supplier;
 
 import android.os.Bundle;
 

@@ -50,13 +50,6 @@ public class User_Dao {
         return listUser;
     }
 
-    public boolean isExistCategory(String name) {
-        Cursor c = db.rawQuery("select * from Category WHERE name = ?", new String[]{name});
-        if (c.getCount() != 0) {
-            return true;
-        }
-        return false;
-    }
     public boolean updateUser(User user) {
         ContentValues values = new ContentValues();
         values.put("username", user.getUsername());

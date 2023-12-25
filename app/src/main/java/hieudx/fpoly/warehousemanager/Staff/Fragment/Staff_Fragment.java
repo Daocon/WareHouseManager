@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.Staff;
+package hieudx.fpoly.warehousemanager.Staff.Fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,11 +26,12 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import hieudx.fpoly.warehousemanager.R;
+import hieudx.fpoly.warehousemanager.Staff.Adapter.Staff_Adapter;
+import hieudx.fpoly.warehousemanager.Staff.Dao.Staff_Dao;
+import hieudx.fpoly.warehousemanager.Staff.Model.Staff;
 import hieudx.fpoly.warehousemanager.databinding.BottomSheetStaffBinding;
 import hieudx.fpoly.warehousemanager.databinding.FragmentStaffBinding;
 import hieudx.fpoly.warehousemanager.databinding.UpdateStaffBinding;
-import hieudx.fpoly.warehousemanager.Staff.Staff.Staff_Add;
-import hieudx.fpoly.warehousemanager.Staff.Staff.Staff_Update;
 
 
 public class Staff_Fragment extends Fragment {

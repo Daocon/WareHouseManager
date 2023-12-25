@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.Staff.Staff;
+package hieudx.fpoly.warehousemanager.Staff.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,10 +14,9 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.snackbar.Snackbar;
 
 import hieudx.fpoly.warehousemanager.R;
-import hieudx.fpoly.warehousemanager.Staff.Staff_Dao;
+import hieudx.fpoly.warehousemanager.Staff.Dao.Staff_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentUpdateStaffBinding;
-import hieudx.fpoly.warehousemanager.Staff.Staff_Fragment;
-import hieudx.fpoly.warehousemanager.Staff.Staff;
+import hieudx.fpoly.warehousemanager.Staff.Model.Staff;
 
 public class Staff_Update extends Fragment {
 

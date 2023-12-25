@@ -1,17 +1,16 @@
-package hieudx.fpoly.warehousemanager.Supplier.Supplier;
+package hieudx.fpoly.warehousemanager.Supplier;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import hieudx.fpoly.warehousemanager.R;
-import hieudx.fpoly.warehousemanager.Supplier.Supplier_Fragment;
+import hieudx.fpoly.warehousemanager.databinding.FragmentSupplierAddBinding;
 
 
 public class Supplier_Add extends Fragment {

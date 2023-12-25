@@ -50,7 +50,6 @@ public class Delivery_Fragment extends Fragment {
 
         init();
         onClickSort();
-        onAddDelivery();
         onSearch();
     }
 

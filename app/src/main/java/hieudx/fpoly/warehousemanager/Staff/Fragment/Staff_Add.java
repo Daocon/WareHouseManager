@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.Staff.Staff;
+package hieudx.fpoly.warehousemanager.Staff.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.FragmentStaffAddBinding;
-import hieudx.fpoly.warehousemanager.Staff.Staff_Fragment;
 
 public class Staff_Add extends Fragment {
 

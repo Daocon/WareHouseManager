@@ -12,12 +12,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.squareup.picasso.Picasso;
+
 import hieudx.fpoly.warehousemanager.Bill.Fragment.Bill_Fragment;
 import hieudx.fpoly.warehousemanager.Category.Fragment.Category_Fragment;
 import hieudx.fpoly.warehousemanager.Product.Fragment.Product_Fragment;
 import hieudx.fpoly.warehousemanager.databinding.ActivityMainBinding;
 import hieudx.fpoly.warehousemanager.Delivery.Fragment.Delivery_Fragment;
-import hieudx.fpoly.warehousemanager.Staff.Staff_Fragment;
+import hieudx.fpoly.warehousemanager.Staff.Fragment.Staff_Fragment;
 import hieudx.fpoly.warehousemanager.Supplier.Supplier_Fragment;
 import hieudx.fpoly.warehousemanager.Member.Fragment.Member_Fragment;
 import hieudx.fpoly.warehousemanager.Statistic.Fragment.Statistic_Fragment;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBar actionBar;
     private SharedPreferences sharedPreferences;
     int role;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,6 +150,10 @@ public class MainActivity extends AppCompatActivity {
         binding.cvAccount.setOnClickListener(view -> {
             startActivity(new Intent(this, Account_Activity.class));
         });
+
+        String img = sharedPreferences.getString("avatar", "");
+        if (img.isEmpty()) binding.imgAccount.setImageResource(R.drawable.img_avt);
+        else Picasso.get().load(img).into(binding.imgAccount);
     }
 
     private void translayout() {

@@ -55,6 +55,7 @@ public class Delivery_Adapter extends RecyclerView.Adapter<Delivery_Adapter.View
             onShowBotSheetDetail(list.get(holder.getAdapterPosition()));
         });
 
+
         holder.binding.btnDelete.setOnClickListener(view -> {
             onDelete(list.get(holder.getAdapterPosition()));
         });
@@ -164,6 +165,8 @@ public class Delivery_Adapter extends RecyclerView.Adapter<Delivery_Adapter.View
         btnBinding.imgCall.setOnClickListener(view -> Toast.makeText(context, "Quay số", Toast.LENGTH_SHORT).show());
 
         btnBinding.imgSms.setOnClickListener(view -> Toast.makeText(context, "Nhắn tin sms", Toast.LENGTH_SHORT).show());
+
+        General.onSettingsBotSheet(context, btnBinding);
     }
 
     @Override
