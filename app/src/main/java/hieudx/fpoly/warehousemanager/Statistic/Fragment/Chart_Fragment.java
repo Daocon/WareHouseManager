@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,9 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -56,8 +60,46 @@ public class Chart_Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setUpDataPieChart();
         setUpChart();
         setUpSpinner();
+    }
+
+    private void setUpDataPieChart() {
+        int totalBillin = bill_in_dao.getTotalBillInToday();
+        int totalBillout = bill_out_dao.getTotalBillOutToday();
+
+        if (totalBillin == 0 && totalBillout == 0) {
+            binding.pieChart.setVisibility(View.GONE);
+            binding.tvPieChart.setText("Bạn chưa có hóa đơn nhập hoặc xuất nào hôm nay");
+            return;
+        } else {
+            binding.pieChart.setVisibility(View.VISIBLE);
+
+//            Toast.makeText(getContext(), "In"+totalBillin, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), "out"+totalBillout, Toast.LENGTH_SHORT).show();
+            ArrayList<PieEntry> entries = new ArrayList<>();
+            entries.add(new PieEntry(totalBillin, "Nhập"));
+            entries.add(new PieEntry(totalBillout, "Xuất"));
+
+            PieDataSet pieDataSet = new PieDataSet(entries, "");
+            pieDataSet.setColors(Color.GRAY, Color.CYAN);
+            pieDataSet.setValueTextSize(14f);
+
+            PieData pieData = new PieData(pieDataSet);
+            binding.pieChart.setDrawEntryLabels(true);
+            binding.pieChart.setUsePercentValues(false);
+            binding.pieChart.setCenterTextRadiusPercent(50);
+            binding.pieChart.setHoleRadius(30);
+            binding.pieChart.setTransparentCircleRadius(40);
+            binding.pieChart.setTransparentCircleColor(Color.RED);
+            binding.pieChart.setTransparentCircleAlpha(50);
+            binding.pieChart.setDescription(null);
+
+            binding.pieChart.setData(pieData);
+            binding.pieChart.invalidate();
+        }
+
     }
 
     private void setUpSpinner() {
