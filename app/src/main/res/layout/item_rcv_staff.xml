@@ -24,6 +24,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:text="Họ Và Tên: "
+                android:textStyle="bold"
+                android:textColor="@color/black"
                 />
             <TextView
                 android:id="@+id/txt_Ma_Staff"
@@ -32,6 +34,10 @@
                 android:textSize="20sp"
                 android:text="Mã Nhân Viên:"
                 />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btn_delete_item_Staff"

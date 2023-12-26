@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.Staff.Model.Staff;
 import hieudx.fpoly.warehousemanager.Staff.Dao.Staff_Dao;
+import hieudx.fpoly.warehousemanager.databinding.BotSheetProductDetailBinding;
 import hieudx.fpoly.warehousemanager.databinding.DialogDeleteStaffBinding;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvStaffBinding;
 
@@ -71,41 +73,42 @@ public class Staff_Adapter extends RecyclerView.Adapter<Staff_Adapter.ViewHolder
         });
 
         holder.binding.btnDeleteItemStaff.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-
-            DialogDeleteStaffBinding dialogDeleteStaffBinding = DialogDeleteStaffBinding.inflate(inflater);
-            builder.setView(dialogDeleteStaffBinding.getRoot());
-
-            Dialog dialog = builder.create();
-            dialog.show();
-
-            dialogDeleteStaffBinding.btnConfilmDeleteStaff.setOnClickListener(v1 -> {
-                int check  = dao.deleteStaff(list.get(holder.getAdapterPosition()).getId());
-                Log.i("Check",check + " ");
-                switch (check){
-                    case 1:
-                        Toast.makeText(context, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
-                        list.clear();
-                        list.addAll(dao.getStaffList());
-                        notifyDataSetChanged();
-                        dialog.dismiss();
-                        break;
-                    case 0:
-                        Toast.makeText(context, "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                        break;
-                    default:
-                        Toast.makeText(context, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            });
-
-            dialogDeleteStaffBinding.btnOutDeleteStaff.setOnClickListener(v1 -> {
-                dialog.dismiss();
-            });
-
+            deleteStaff(staff);
         });
+
+    }
+
+
+    private void deleteStaff(Staff staff){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(false);
+        builder.setTitle("Thông báo");
+        builder.setMessage("Bạn có muốn xóa");
+        builder.setNegativeButton("Có", (dialog, which) -> {
+            int check  = dao.deleteStaff(staff.getId());
+            Log.i("Check",check + " ");
+            switch (check){
+                case 1:
+                    Toast.makeText(context, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
+                    list.clear();
+                    list.addAll(dao.getStaffList());
+                    notifyDataSetChanged();
+                    dialog.dismiss();
+                    break;
+                case 0:
+                    Toast.makeText(context, "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    break;
+                default:
+                    Toast.makeText(context, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+            dialog.dismiss();
+        });
+
+        builder.setPositiveButton("Không", null);
+        builder.create();
+        builder.show();
     }
 
     @Override
