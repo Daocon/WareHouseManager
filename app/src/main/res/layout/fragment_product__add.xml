@@ -93,68 +93,28 @@
                 android:textColorHighlight="@color/cardview_dark_background" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-            android:id="@+id/layout_price"
+        <TextView
+            style="@style/custom_tv_add_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:text="Giá"
+            android:layout_marginTop="15dp"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-            <TextView
-                style="@style/custom_tv_add_form"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Giá"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/custom_ed_bgr"
-                    android:hint="nhập giá sản phẩm"
-                    android:textColorHighlight="@color/cardview_dark_background" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layout_quantity"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/price"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:layout_height="wrap_content">
 
-            <TextView
-                style="@style/custom_tv_add_form"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_price"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Số Lượng"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/quantity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_quantity"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/custom_ed_bgr"
-                    android:hint="nhập số lượng"
-                    android:textColorHighlight="@color/cardview_dark_background" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_ed_bgr"
+                android:hint="nhập giá sản phẩm"
+                android:textColorHighlight="@color/cardview_dark_background" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             style="@style/custom_tv_add_form"

@@ -38,15 +38,20 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class General {
+    public static SimpleDateFormat dateFormat = new SimpleDateFormat("ddMM", Locale.getDefault());
+    public static String currentDate = dateFormat.format(new Date());
+
     public static String genarateIdBill(int listSize, String kob, Context context) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMM", Locale.getDefault());
-        String currentDate = dateFormat.format(new Date());
 
         SharedPreferences shared = context.getSharedPreferences("ACCOUNT", Context.MODE_PRIVATE);
         int user_id = shared.getInt("id", 0);
         String generatedId = kob + "_" + currentDate + "_" + user_id + (listSize + 1);
         return generatedId;
     }
+
+//    public static String genarateIdProduct(int listSize, Context context) {
+//
+//    }
 
     public static void onStateIconBack(FragmentActivity fragmentActivity, ActionBar actionBar, FragmentManager fragmentManager, boolean state) {
         ((AppCompatActivity) fragmentActivity).setSupportActionBar(MainActivity.binding.tbMain);
@@ -57,14 +62,13 @@ public class General {
         actionBar.setDisplayShowHomeEnabled(true);
         MainActivity.binding.tbMain.setNavigationOnClickListener(view12 -> {
             if (state) {
-                Fragment currentFragment =  fragmentManager.findFragmentById(R.id.frag_container_main);
+                Fragment currentFragment = fragmentManager.findFragmentById(R.id.frag_container_main);
                 if (currentFragment != null) {
                     fragmentManager.beginTransaction().remove(currentFragment).commit();
                 }
                 MainActivity.binding.bgrDashBoard.setVisibility(View.VISIBLE);
                 MainActivity.binding.layoutDashboard.setVisibility(View.VISIBLE);
-            }
-                else fragmentManager.popBackStack();
+            } else fragmentManager.popBackStack();
 
         });
     }
@@ -132,11 +136,20 @@ public class General {
         else inputLayout.setError(null);
     }
 
+    public static void isContainSpecialChar(String value, TextInputLayout inputLayout) {
+        if (value.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?~-].*"))
+            inputLayout.setError("Không được chứa dữ liệu đặc biệt");
+        else inputLayout.setError(null);
+    }
+
     public static void validEmail(String value, TextInputLayout inputLayout) {
         if (value.trim().contains(" ") || !value.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"))
             inputLayout.setError("Hãy nhập đúng định dạng email");
+        else if (value.matches(".*[!#$%^&*()_+=|<>?{}\\[\\]~-].*"))
+            inputLayout.setError("Không được chứa ký tự đặc biệt");
         else inputLayout.setError(null);
     }
+
 
     public static void passValid(String pass, String repass, TextInputLayout inputLayout) {
         if (!pass.equals(repass)) {
@@ -151,7 +164,7 @@ public class General {
             field.setError("Số điện thoại phải chứa 10 số");
         } else if (!value.matches("^0\\d{9}$")) {
             field.setError("Số điện thoại không hợp lệ");
-        } else if (!TextUtils.isDigitsOnly(value)){
+        } else if (!TextUtils.isDigitsOnly(value)) {
             field.setError("Không được nhập chữ");
         } else {
             field.setError(null);

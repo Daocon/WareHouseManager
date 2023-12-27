@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.Category.Dao.Category_Dao;
-import hieudx.fpoly.warehousemanager.Category.Fragment.Product_Category_Fragment;
 import hieudx.fpoly.warehousemanager.Category.Model.Category;
 import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.databinding.DialogAddEditCategoryBinding;
@@ -52,9 +51,7 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.View
 
         holder.binding.btnDelete.setOnClickListener(view -> onDeleteCategory(list.get(position)));
         holder.binding.btnEdit.setOnClickListener(view -> onEditCategory(list.get(position)));
-        holder.itemView.setOnClickListener(view -> {
-            General.loadFragment(fragmentManager, new Product_Category_Fragment(), null);
-        });
+
     }
 
     private void onEditCategory(Category cat) {

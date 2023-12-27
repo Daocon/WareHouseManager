@@ -1,7 +1,6 @@
 package hieudx.fpoly.warehousemanager.Bill.Adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -9,11 +8,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
+import hieudx.fpoly.warehousemanager.General;
+import hieudx.fpoly.warehousemanager.Product.Model.Product;
+import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.Supplier.Supplier_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvProductBillBinding;
-import hieudx.fpoly.warehousemanager.Product.Model.Product;
 
 public class Bill_Product_Add_Adapter extends RecyclerView.Adapter<Bill_Product_Add_Adapter.ViewHolder> {
     private Context context;
@@ -47,7 +50,9 @@ public class Bill_Product_Add_Adapter extends RecyclerView.Adapter<Bill_Product_
         String nameSupplier = supplier_dao.getSupplierById(list.get(position).getId_supplier()).getName();
         holder.binding.tvNameProduct.setText(product.getName() + " - "+nameSupplier);
         holder.binding.tvQuantity.setText(product.getQuantity() + "");
-        holder.binding.edPrice.setText(product.getPrice() + "");
+        holder.binding.edPrice.setText(General.formatSumVND(product.getPrice()));
+        if (list.get(position).getImg().isEmpty()) holder.binding.imgProduct.setImageResource(R.mipmap.ic_launcher_foreground);
+        else Picasso.get().load(list.get(position).getImg()).into(holder.binding.imgProduct);
         holder.binding.btnPlus.setOnClickListener(view -> {
             holder.binding.tvQuantity.setText((product.getQuantity() + 1) + "");
             product.setQuantity(product.getQuantity() + 1);
@@ -70,8 +75,6 @@ public class Bill_Product_Add_Adapter extends RecyclerView.Adapter<Bill_Product_
                 if (b) {
                     if (price.contains(" ") || price.isEmpty()) {
                         Toast.makeText(context, "Giá phải lớn hơn 0", Toast.LENGTH_SHORT).show();
-                    } else if (!TextUtils.isDigitsOnly(price)) {
-                        Toast.makeText(context, "Giá không được nhập chữ", Toast.LENGTH_SHORT).show();
                     } else {
                         product.setPrice(Double.parseDouble(price));
                         if (!list_checked.contains(product)) {

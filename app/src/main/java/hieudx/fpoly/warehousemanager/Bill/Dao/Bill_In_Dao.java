@@ -31,7 +31,7 @@ public class Bill_In_Dao {
         if (c.getCount() != 0) {
             c.moveToFirst();
             do {
-                list.add(new Bill_In(c.getString(0), c.getString(1), c.getInt(2), c.getInt(3)));
+                list.add(new Bill_In(c.getString(0), c.getString(1), c.getInt(2),c.getInt(3), c.getInt(4)));
             } while (c.moveToNext());
         }
         return list;
@@ -77,6 +77,12 @@ public class Bill_In_Dao {
     public void updateSumTotal(String id_bill_in) {
         db.execSQL("UPDATE Bill_in_detail SET total = price * quantity WHERE id_bill_in = ?", new String[]{id_bill_in});
         db.execSQL("UPDATE Bill_in SET sum = (SELECT IFNULL(SUM(total), 0) FROM Bill_in_detail WHERE Bill_in_detail.id_bill_in = Bill_in.id)");
+    }
+
+    public int updateStatus(int status, String id) {
+        ContentValues values = new ContentValues();
+        values.put("status", status);
+        return db.update("Bill_in", values, "id = ?", new String[]{id});
     }
 
     //    check trả về số hàng bị xóa

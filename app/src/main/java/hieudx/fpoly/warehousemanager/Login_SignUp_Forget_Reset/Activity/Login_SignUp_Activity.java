@@ -10,7 +10,7 @@ import hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Login_SignUp_Adap
 import hieudx.fpoly.warehousemanager.databinding.ActivityLoginSignUpBinding;
 
 public class Login_SignUp_Activity extends AppCompatActivity {
-    private ActivityLoginSignUpBinding binding;
+    public static ActivityLoginSignUpBinding binding;
     private Login_SignUp_Adapter adapter;
     float v = 0;
 

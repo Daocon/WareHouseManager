@@ -24,9 +24,9 @@ import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.Product.Dao.Product_Dao;
 import hieudx.fpoly.warehousemanager.Product.Model.Product;
 import hieudx.fpoly.warehousemanager.R;
+import hieudx.fpoly.warehousemanager.Supplier.Supplier;
 import hieudx.fpoly.warehousemanager.Supplier.Supplier_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentProductAddBinding;
-import hieudx.fpoly.warehousemanager.Supplier.Supplier;
 
 
 public class Product_Add_Edit_Fragment extends Fragment {
@@ -52,23 +52,22 @@ public class Product_Add_Edit_Fragment extends Fragment {
         General.onStateIconBack(getActivity(), actionBar, getParentFragmentManager(), false);
         General.onLoadSpinner(getContext(), getListCategory(), binding.spnCategory);
         General.onLoadSpinner(getContext(), getListSupplier(), binding.spnSupplier);
+
+        General.isEmptyValid(binding.edName, binding.name);
+        General.isEmptyValid(binding.edPrice, binding.price);
+
         product_dao = new Product_Dao(getContext());
-        String name = binding.edName.getText().toString().trim();
-        String img = binding.edImg.getText().toString().trim();
 
         Bundle bundle = getArguments();
         if (bundle != null) {
 
             product = (Product) bundle.getSerializable("data");
-            if (product.getImg().isEmpty()) binding.imgProduct.setImageResource(R.mipmap.ic_launcher_foreground);
+            if (product.getImg().isEmpty())
+                binding.imgProduct.setImageResource(R.mipmap.ic_launcher_foreground);
             else Picasso.get().load(product.getImg()).into(binding.imgProduct);
 
             binding.edName.setText(product.getName());
             binding.edPrice.setText(String.valueOf(product.getPrice()));
-            binding.edQuantity.setText(String.valueOf(product.getQuantity()));
-
-            binding.layoutPrice.setVisibility(View.VISIBLE);
-            binding.layoutQuantity.setVisibility(View.VISIBLE);
 
             ArrayList<HashMap<String, Object>> listCat = getListCategory();
             int index = 0;
@@ -93,86 +92,82 @@ public class Product_Add_Edit_Fragment extends Fragment {
             binding.spnSupplier.setSelection(position1);
 
             binding.btnAdd.setOnClickListener(view1 -> {
+                String name = binding.edName.getText().toString().trim();
+                String img = binding.edImg.getText().toString().trim();
                 String price = binding.edPrice.getText().toString().trim();
-                String quantity = binding.edQuantity.getText().toString().trim();
 
-                General.isContainSpace(img, binding.img);
-                if (!img.isEmpty()) product.setImg(img);
+                if (TextUtils.isEmpty(price) || TextUtils.isEmpty(name)) {
+                    Toast.makeText(getContext(), "Hãy nhập đủ dữ liệu", Toast.LENGTH_SHORT).show();
+                } else {
+                    General.isContainSpace(img, binding.img);
 
-                else if (!name.isEmpty()) {
-                    binding.name.setError(null);
-                    product.setName(name);
-                }
-                General.isContainSpace(price, binding.price);
-                if (!price.isEmpty()) {
-                    General.isContainChar(price.toString(), binding.price);
-                    if (binding.price.getError() == null) {
-                        if (Double.parseDouble(price) < 0) binding.price.setError("Giá phải >= 0");
-                        else {
-                            binding.price.setError(null);
+                    General.isContainSpecialChar(name, binding.name);
+
+                    if (price.contains(" ")) binding.price.setError("Không được chứa khoảng trắng");
+                    else if (price.matches("[a-zA-Z]+"))
+                        binding.price.setError("Không được nhập chữ");
+                    else if (price.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?~].*"))
+                        binding.price.setError("Không được chứa ký tự đặc biệt");
+                    else if (Double.parseDouble(price) < 0) binding.price.setError("Giá phải > 0");
+                    else binding.price.setError(null);
+
+                    if (binding.img.getError() == null && binding.name.getError() == null && binding.price.getError() == null) {
+                        HashMap<String, Object> hm_cat = (HashMap<String, Object>) binding.spnCategory.getSelectedItem();
+                        product.setId_category((int) hm_cat.get("id"));
+
+                        HashMap<String, Object> hm_sup = (HashMap<String, Object>) binding.spnSupplier.getSelectedItem();
+                        product.setId_supplier((int) hm_sup.get("id"));
+                        if (binding.img.getError() == null &&
+                                binding.name.getError() == null &&
+                                binding.price.getError() == null) {
+                            product.setName(name);
                             product.setPrice(Double.parseDouble(price));
+                            product.setImg(img);
+                            if (product_dao.updateProduct(product) > 0) {
+                                Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
+                                getParentFragmentManager().popBackStack();
+                            } else {
+                                Toast.makeText(getContext(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                }
-                General.isContainSpace(quantity, binding.quantity);
-                if (!quantity.isEmpty()) {
-                    General.isContainChar(quantity, binding.quantity);
-                    if (binding.quantity.getError() == null) {
-                        if (Integer.parseInt(quantity) < 0)
-                            binding.quantity.setError("Số lượng phải >= 0");
-                        else {
-                            binding.quantity.setError(null);
-                            product.setQuantity(Integer.parseInt(quantity));
-                        }
-                    }
-                }
-                HashMap<String, Object> hm_cat = (HashMap<String, Object>) binding.spnCategory.getSelectedItem();
-                product.setId_category((int) hm_cat.get("id"));
-
-                HashMap<String, Object> hm_sup = (HashMap<String, Object>) binding.spnSupplier.getSelectedItem();
-                product.setId_supplier((int) hm_sup.get("id"));
-                if (binding.img.getError() == null &&
-                        binding.name.getError() == null &&
-                        binding.price.getError() == null &&
-                        binding.quantity.getError() == null) {
-                    if (product_dao.updateProduct(product) > 0) {
-                        Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
-                        getParentFragmentManager().popBackStack();
-                    } else {
-                        Toast.makeText(getContext(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
-//            product = product_dao.getProductById(product.getId());
-
-//            User user = user_dao.getUserById(bill_in.getId_user());
         } else {
-            binding.layoutPrice.setVisibility(View.GONE);
-            binding.layoutQuantity.setVisibility(View.GONE);
             binding.imgProduct.setVisibility(View.GONE);
-
-            General.isEmptyValid(binding.edImg, binding.img);
-            General.isEmptyValid(binding.edName, binding.name);
-
             binding.btnAdd.setOnClickListener(view12 -> {
-                if (TextUtils.isEmpty(binding.edImg.getText().toString()) || TextUtils.isEmpty(binding.edName.getText().toString()))
+                String name = binding.edName.getText().toString().trim();
+                String img = binding.edImg.getText().toString().trim();
+                String price = binding.edPrice.getText().toString().trim();
+
+                if (TextUtils.isEmpty(price) || TextUtils.isEmpty(name)) {
                     Toast.makeText(getContext(), "Hãy nhập đủ dữ liệu", Toast.LENGTH_SHORT).show();
-                else {
+                } else {
                     General.isContainSpace(img, binding.img);
 
-                    HashMap<String, Object> hm_cat = (HashMap<String, Object>) binding.spnCategory.getSelectedItem();
-                    HashMap<String, Object> hm_sup = (HashMap<String, Object>) binding.spnSupplier.getSelectedItem();
+                    General.isContainSpecialChar(name, binding.name);
 
-                    if (binding.img.getError() == null && binding.name.getError() == null) {
-                        product = new Product(name, 0, 0, img, (int) hm_cat.get("id"), (int) hm_sup.get("id"));
-                        if (product_dao.insertProduct(product) > 0) {
-                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            getParentFragmentManager().popBackStack();
-                        } else
-                            Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                    if (price.contains(" ")) binding.price.setError("Không được chứa khoảng trắng");
+                    else if (price.matches("[a-zA-Z]+"))
+                        binding.price.setError("Không được nhập chữ");
+                    else if (price.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?~].*"))
+                        binding.price.setError("Không được chứa ký tự đặc biệt");
+                    else if (Double.parseDouble(price) < 0) binding.price.setError("Giá phải > 0");
+                    else binding.price.setError(null);
+
+                    if (binding.img.getError() == null && binding.name.getError() == null && binding.price.getError() == null) {
+                        HashMap<String, Object> hm_cat = (HashMap<String, Object>) binding.spnCategory.getSelectedItem();
+                        HashMap<String, Object> hm_sup = (HashMap<String, Object>) binding.spnSupplier.getSelectedItem();
+                        if (binding.img.getError() == null && binding.name.getError() == null) {
+                            product = new Product(name, Double.parseDouble(price), 0, img, (int) hm_cat.get("id"), (int) hm_sup.get("id"));
+                            if (product_dao.insertProduct(product) > 0) {
+                                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                                getParentFragmentManager().popBackStack();
+                            } else
+                                Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
-
             });
         }
     }

@@ -50,7 +50,6 @@ public class Category_Fragment extends Fragment {
 
         init();
         onClickSort();
-        onAddCategory();
         onSearch();
     }
 

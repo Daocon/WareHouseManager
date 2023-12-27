@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +26,12 @@ import hieudx.fpoly.warehousemanager.Bill.Adapter.Bill_Product_Add_Adapter;
 import hieudx.fpoly.warehousemanager.Bill.Dao.Bill_Out_Dao;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_Out;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_out_detail;
+import hieudx.fpoly.warehousemanager.Delivery.Dao.Delivery_Dao;
+import hieudx.fpoly.warehousemanager.Delivery.Model.Delivery;
 import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.Product.Dao.Product_Dao;
 import hieudx.fpoly.warehousemanager.Product.Model.Product;
-import hieudx.fpoly.warehousemanager.Delivery.Dao.Delivery_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentAddBillOutBinding;
-import hieudx.fpoly.warehousemanager.Delivery.Model.Delivery;
 
 public class Add_Bill_Out_Fragment extends Fragment {
     private FragmentAddBillOutBinding binding;
@@ -67,7 +66,7 @@ public class Add_Bill_Out_Fragment extends Fragment {
         Bill_Out bill_out = new Bill_Out();
         Bill_Out_Dao bill_out_dao = new Bill_Out_Dao(getContext());
         list_bill_out = bill_out_dao.getAll();
-        bill_out.setId(General.genarateIdBill(list_bill_out.size(),"PX" ,getContext()));
+        bill_out.setId(General.genarateIdBill(list_bill_out.size(),"PX", getContext()));
         binding.tvIdBillIn.setText(bill_out.getId());
 
         Calendar calendar = Calendar.getInstance();
@@ -94,9 +93,9 @@ public class Add_Bill_Out_Fragment extends Fragment {
                     bill_out.setId_delivery((int) hm_deli.get("id"));
                     bill_out_dao.insert(bill_out);
                     for (Product product : list_product_checked) {
-                        Log.d("zzzzzzzz", "onCreateView: "+product.getId_supplier());
+//                        Log.d("zzzzzzzz", "onCreateView: "+product.getId_supplier());
                         Bill_out_detail bill_out_detail = new Bill_out_detail(product.getPrice(), product.getQuantity(), product.getId(), bill_out.getId());
-                        Log.d("uuuuuuuuuuuuu", "onCreateView: "+bill_out_detail.getPrice()+" - "+bill_out_detail.getQuantity()+ " - "+bill_out_detail.getId_product()+ " - "+bill_out_detail.getId_bill_out());
+//                        Log.d("uuuuuuuuuuuuu", "onCreateView: "+bill_out_detail.getPrice()+" - "+bill_out_detail.getQuantity()+ " - "+bill_out_detail.getId_product()+ " - "+bill_out_detail.getId_bill_out());
                         boolean check = bill_out_dao.insertDetail(bill_out_detail);
                         if (check) {
                             Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
@@ -125,5 +124,11 @@ public class Add_Bill_Out_Fragment extends Fragment {
     private void updateCount(ArrayList<Product> list_checked) {
         list_product_checked.clear();
         list_product_checked.addAll(list_checked);
+
+        Double total = 0.0;
+        for (Product prod : list_product_checked) {
+            total = total + (prod.getPrice() * prod.getQuantity());
+        }
+        binding.tvTotal.setText(General.formatSumVND(total)+" đ");
     }
 }

@@ -14,6 +14,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import hieudx.fpoly.warehousemanager.General;
+import hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Activity.Login_SignUp_Activity;
 import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentSignUpTabBinding;
 import hieudx.fpoly.warehousemanager.Member.Model.User;
@@ -44,7 +45,9 @@ public class SignUp_Tab_Fragment extends Fragment {
         String phone = binding.edPhoneNumber.getText().toString().trim();
 
         General.isContainNumber(name, binding.name);
+        General.isContainSpecialChar(name, binding.name);
         General.isContainSpace(username, binding.username);
+        General.isContainSpecialChar(username, binding.username);
         General.validEmail(email, binding.email);
         General.passValid(pass, repass, binding.repass);
         General.validPhone(phone, binding.phoneNumber);
@@ -63,6 +66,7 @@ public class SignUp_Tab_Fragment extends Fragment {
             switch (check) {
                 case 1:
                     Toast.makeText(getContext(), "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                    Login_SignUp_Activity.binding.viewPager.setCurrentItem(0);
                     binding.username.getEditText().setText("");
                     binding.name.getEditText().setText("");
                     binding.email.getEditText().setText("");

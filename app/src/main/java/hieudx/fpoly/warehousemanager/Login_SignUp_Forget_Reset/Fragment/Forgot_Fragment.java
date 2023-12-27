@@ -41,16 +41,10 @@ public class Forgot_Fragment extends Fragment {
         onAnimation();
 
         binding.imgBack.setOnClickListener(view -> {
-//            fragmentManager.popBackStack();
             getActivity().finish();
         });
 
-        binding.btnVerify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                verifyUser();
-            }
-        });
+        binding.btnVerify.setOnClickListener(view -> verifyUser());
         return binding.getRoot();
     }
 
@@ -72,7 +66,6 @@ public class Forgot_Fragment extends Fragment {
             Reset_Fragment resetFragment = new Reset_Fragment();
             Bundle bundle = new Bundle();
             bundle.putInt("userID", userID);
-            Toast.makeText(getActivity(), "Id: " + userID, Toast.LENGTH_SHORT).show();
             resetFragment.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .replace(R.id.frag_container, resetFragment)

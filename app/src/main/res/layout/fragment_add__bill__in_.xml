@@ -83,6 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:id="@+id/tv_total"
             android:text="1.500.000"
             android:textColor="#F30C0C"
             android:textSize="20sp" />

@@ -7,17 +7,21 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import hieudx.fpoly.warehousemanager.Bill.Dao.Bill_In_Dao;
 import hieudx.fpoly.warehousemanager.Bill.Fragment.Bill_In.Detail_Bill_In_Fragment;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_In;
 import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
+import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvBillBinding;
 
 public class Bill_In_Adapter extends RecyclerView.Adapter<Bill_In_Adapter.ViewHolder> implements Filterable {
@@ -44,16 +48,43 @@ public class Bill_In_Adapter extends RecyclerView.Adapter<Bill_In_Adapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.binding.tvIdBill.setText(list.get(position).getId());
         User_Dao user_dao = new User_Dao(context);
+
+        Bill_In_Dao dao = new Bill_In_Dao(context);
         holder.binding.tvNameUser.setText(user_dao.getUserById(list.get(position).getId_user()).getName());
         holder.binding.tvDateTime.setText(list.get(position).getDate_time());
         String sum = General.formatSumVND(list.get(position).getSum());
-        holder.binding.tvTotal.setText(sum+"đ");
+        holder.binding.tvTotal.setText(sum + "đ");
+
+        int status = list.get(position).getStatus();
+        String state = (status == 0) ? "Done" : "Doing";
+        if (status == 0) {
+            holder.binding.swStatus.setChecked(true);
+            holder.binding.cvItemBill.setClickable(false);
+            holder.binding.cvItemBill.setFocusable(false);
+            holder.binding.cvItemBill.setFocusableInTouchMode(false);
+            holder.binding.cvItemBill.setLongClickable(false);
+            holder.binding.cvItemBill.setForeground(ContextCompat.getDrawable(context, R.drawable.custom_bgr_bill_fade));
+            holder.binding.cvItemBill.setOnClickListener(view -> Toast.makeText(context, "Bill was done, don't change", Toast.LENGTH_SHORT).show());
+        } else holder.binding.swStatus.setChecked(false);
+
+        holder.binding.swStatus.setOnCheckedChangeListener((compoundButton, b) -> {
+            int newStatus = b ? 0 : 1;
+            holder.binding.tvStatus.setText(b ? "Done" : "Doing");
+            dao.updateStatus(newStatus, list.get(position).getId());
+            notifyDataSetChanged();
+        });
+
+        holder.binding.tvStatus.setText(state);
 
         holder.itemView.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("data", list.get(position));
-            bundle.putString("sum", sum);
-            General.loadFragment(fragmentManager, new Detail_Bill_In_Fragment(), bundle);
+            if (status == 0) {
+                Toast.makeText(context, "Bill was done, don't change", Toast.LENGTH_SHORT).show();
+            } else {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("data", list.get(position));
+                bundle.putString("sum", sum);
+                General.loadFragment(fragmentManager, new Detail_Bill_In_Fragment(), bundle);
+            }
         });
     }
 
@@ -97,6 +128,7 @@ public class Bill_In_Adapter extends RecyclerView.Adapter<Bill_In_Adapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ItemRcvBillBinding binding;
+
         public ViewHolder(@NonNull ItemRcvBillBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

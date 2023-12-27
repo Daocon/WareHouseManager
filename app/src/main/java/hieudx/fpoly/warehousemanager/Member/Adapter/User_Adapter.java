@@ -72,12 +72,7 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.Viewholer> i
                 Toast.makeText(context, "Đã gỡ hạn chế " + list.get(position).getName(), Toast.LENGTH_SHORT).show();
             }
         });
-        holder.binding.cardViewMember.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OnClickGoToDetail(list.get(position));
-            }
-        });
+        holder.binding.cardViewMember.setOnClickListener(view -> OnClickGoToDetail(list.get(position)));
     }
 
     private void OnClickGoToDetail(User user) {

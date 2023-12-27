@@ -7,6 +7,7 @@ public class Bill_In implements Serializable {
     private String id;
     private String date_time;
     private double sum;
+    private int status;
     private int id_user;
 
     public Bill_In() {
@@ -20,11 +21,20 @@ public class Bill_In implements Serializable {
 
     public static Comparator<Bill_In> sortByNameZA = (t1, t2) -> t2.getId().compareTo(t1.getId());
 
-    public Bill_In(String id, String date_time, double sum, int id_user) {
+    public Bill_In(String id, String date_time, double sum, int status, int id_user) {
         this.id = id;
         this.date_time = date_time;
         this.sum = sum;
+        this.status = status;
         this.id_user = id_user;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public double getSum() {

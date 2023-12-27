@@ -65,7 +65,7 @@ public class Add_Bill_In_Fragment extends Fragment {
         Bill_In bill_in = new Bill_In();
         Bill_In_Dao bill_in_dao = new Bill_In_Dao(getContext());
         list_bill_in = bill_in_dao.getAll();
-        bill_in.setId(General.genarateIdBill(list_bill_in.size(),"PN" ,getContext()));
+        bill_in.setId(General.genarateIdBill(list_bill_in.size(), "PN", getContext()));
 //        bill_in_dao.genarateIdBillIn(list_bill_in.size());
         binding.tvIdBillIn.setText(bill_in.getId());
 
@@ -77,8 +77,9 @@ public class Add_Bill_In_Fragment extends Fragment {
 
         SharedPreferences shared = requireContext().getSharedPreferences("ACCOUNT", Context.MODE_PRIVATE);
         bill_in.setId_user(shared.getInt("id", 0));
+
         binding.btnAdd.setOnClickListener(view1 -> {
-            if (list_product_checked.isEmpty()){
+            if (list_product_checked.isEmpty()) {
                 Toast.makeText(getContext(), "Vui lòng chọn sản phẩm", Toast.LENGTH_SHORT).show();
             } else {
                 bill_in_dao.insert(bill_in);
@@ -101,5 +102,11 @@ public class Add_Bill_In_Fragment extends Fragment {
     private void updateCount(ArrayList<Product> list_checked) {
         list_product_checked.clear();
         list_product_checked.addAll(list_checked);
+
+        Double total = 0.0;
+        for (Product prod : list_product_checked) {
+            total = total + (prod.getPrice() * prod.getQuantity());
+        }
+        binding.tvTotal.setText(General.formatSumVND(total)+" đ");
     }
 }

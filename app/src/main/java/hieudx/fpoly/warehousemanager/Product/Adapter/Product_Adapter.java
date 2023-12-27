@@ -59,7 +59,7 @@ public class Product_Adapter extends RecyclerView.Adapter<Product_Adapter.Viewho
         holder.binding.tvId.setText("Mã: " + list.get(position).getId());
 
         String price = General.formatSumVND(list.get(position).getPrice());
-        holder.binding.tvPrice.setText("Giá nhập: "+price+"đ");
+        holder.binding.tvPrice.setText("Giá : "+price+"đ");
 
         holder.binding.tvTonKho.setText("Tồn kho: " + list.get(position).getQuantity() + "");
         if (list.get(position).getImg().isEmpty()) holder.binding.img.setImageResource(R.mipmap.ic_launcher_foreground);
