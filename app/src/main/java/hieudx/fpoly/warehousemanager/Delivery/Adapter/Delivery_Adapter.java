@@ -2,7 +2,9 @@ package hieudx.fpoly.warehousemanager.Delivery.Adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -162,9 +164,17 @@ public class Delivery_Adapter extends RecyclerView.Adapter<Delivery_Adapter.View
         btnBinding.tvPrice.setText("Giá cước: " + delivery.getPrice());
         btnBinding.tvTaxCode.setText("Mã số thuế: " + delivery.getTax_code());
 
-        btnBinding.imgCall.setOnClickListener(view -> Toast.makeText(context, "Quay số", Toast.LENGTH_SHORT).show());
+        btnBinding.imgCall.setOnClickListener(view -> {
+            Uri number = Uri.parse("tel:" + delivery.getPhone());
+            Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+            context.startActivity(callIntent);
+        });
 
-        btnBinding.imgSms.setOnClickListener(view -> Toast.makeText(context, "Nhắn tin sms", Toast.LENGTH_SHORT).show());
+        btnBinding.imgSms.setOnClickListener(view -> {
+            Uri smsUri = Uri.parse("smsto:" + delivery.getPhone());
+            Intent smsIntent = new Intent(Intent.ACTION_SENDTO, smsUri);
+            context.startActivity(smsIntent);
+        });
 
         General.onSettingsBotSheet(context, btnBinding);
     }

@@ -2,13 +2,11 @@ package hieudx.fpoly.warehousemanager.Member.Adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Toast;
@@ -19,14 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
-import hieudx.fpoly.warehousemanager.Category.Model.Category;
 import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
 import hieudx.fpoly.warehousemanager.Member.Model.User;
-import hieudx.fpoly.warehousemanager.Product.Adapter.Product_Adapter;
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.ItemDialogDetailMemberBinding;
-import hieudx.fpoly.warehousemanager.databinding.ItemRcvProductBinding;
 import hieudx.fpoly.warehousemanager.databinding.ItemRycMemberBinding;
 
 public class User_Adapter extends RecyclerView.Adapter<User_Adapter.Viewholer> implements Filterable {
@@ -62,14 +56,14 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.Viewholer> i
 //        if (role == -1)holder.binding.switchLimit.setChecked(true);
 //        else holder.binding.switchLimit.setChecked(false);
 
-        holder.binding.switchLimit.setChecked(list.get(position).getRole() == -1);
+        holder.binding.switchLimit.setChecked(list.get(position).getRole() == 1);
         holder.binding.switchLimit.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (isChecked) {
-                userDao.updateUserRoleById(list.get(position).getId(), -1);
-                Toast.makeText(context, "Đã hạn chế " + list.get(position).getName(), Toast.LENGTH_SHORT).show();
-            } else {
                 userDao.updateUserRoleById(list.get(position).getId(), 1);
                 Toast.makeText(context, "Đã gỡ hạn chế " + list.get(position).getName(), Toast.LENGTH_SHORT).show();
+            } else {
+                userDao.updateUserRoleById(list.get(position).getId(), -1);
+                Toast.makeText(context, "Đã hạn chế " + list.get(position).getName(), Toast.LENGTH_SHORT).show();
             }
         });
         holder.binding.cardViewMember.setOnClickListener(view -> OnClickGoToDetail(list.get(position)));
