@@ -1,5 +1,6 @@
 package hieudx.fpoly.warehousemanager.Member.Fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -12,6 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.saadahmedsoft.popupdialog.PopupDialog;
+import com.saadahmedsoft.popupdialog.Styles;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
 import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
@@ -43,14 +48,13 @@ public class Member_Add_Fragment extends Fragment {
 
     private void onClickAddMember() {
         binding.btnAdd.setOnClickListener(view -> {
-            String avt = binding.edAvt.getText().toString().trim();
+//            String avt = binding.edAvt.getText().toString().trim();
             String name = binding.edName.getText().toString().trim();
             String username = binding.edUsername.getText().toString().trim();
             String phone = binding.edPhone.getText().toString().trim();
             String email = binding.edEmail.getText().toString().trim();
             String pass = binding.edPass.getText().toString().trim();
 
-            if (!TextUtils.isEmpty(avt)) General.isContainSpace(avt, binding.avt);
             General.isContainNumber(name, binding.name);
             General.isContainSpace(username, binding.username);
             General.isContainSpace(phone, binding.phone);
@@ -64,24 +68,38 @@ public class Member_Add_Fragment extends Fragment {
                     TextUtils.isEmpty(email) ||
                     TextUtils.isEmpty(pass)) {
                 Toast.makeText(getContext(), "Hãy nhập đủ dữ liệu", Toast.LENGTH_SHORT).show();
-            } else if (binding.avt.getError() == null
-                    && binding.name.getError() == null
+            } else if (binding.name.getError() == null
                     && binding.username.getError() == null
                     && binding.phone.getError() == null
                     && binding.email.getError() == null
                     && binding.pass.getError() == null) {
                 User_Dao user_dao = new User_Dao(getContext());
-                User user = new User(username, pass, name, email, phone, 1, avt);
+                User user = new User(username, pass, name, email, phone, 1, "https://vectorified.com/images/avatar-icon-png-3.png");
                 switch (user_dao.insert(user)){
                     case 1:
-                        Toast.makeText(getContext(), "Thành công", Toast.LENGTH_SHORT).show();
+                        General.showSuccessPopup(getContext(), "Thành công", "Bạn đã thêm thành viên thành công", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                            }
+                        });
                         getParentFragmentManager().popBackStack();
                         break;
                     case 0:
-                        Toast.makeText(getContext(), "Thất bại", Toast.LENGTH_SHORT).show();
+                        General.showFailurePopup(getContext(), "Thất bại", "Thêm thành viên thất bại", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                            }
+                        });
                         break;
                     case -1:
-                        Toast.makeText(getContext(), "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
+                        General.showFailurePopup(getContext(), "Thất bại", "Tên đăng nhập đã tồn tại", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                            }
+                        });
                         break;
                     default:break;
                 }
@@ -89,7 +107,7 @@ public class Member_Add_Fragment extends Fragment {
         });
 
         binding.btnClear.setOnClickListener(view -> {
-            binding.edAvt.setText("");
+//            binding.edAvt.setText("");
             binding.edName.setText("");
             binding.edUsername.setText("");
             binding.edPhone.setText("");

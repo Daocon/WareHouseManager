@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -103,18 +104,33 @@ public class Product_Adapter extends RecyclerView.Adapter<Product_Adapter.Viewho
         builder.setNegativeButton("Có", (dialog1, which) -> {
             switch (dao.deleteProduct(product.getId())) {
                 case 1:
-                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                    General.showSuccessPopup(context, "Thành công", "Bạn đã xóa thành công", new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                        }
+                    });
                     list.clear();
                     list.addAll(dao.getProductList());
                     notifyDataSetChanged();
                     dialog.dismiss();
                     break;
                 case 0:
-                    Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                    General.showFailurePopup(context, "Thất bại", "Xóa thất bại", new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                        }
+                    });
                     dialog.dismiss();
                     break;
                 case -1:
-                    Toast.makeText(context, "Không thể xóa vì sản phẩm này đã được sử dụng trong hóa đơn", Toast.LENGTH_SHORT).show();
+                    General.showFailurePopup(context, "Thất bại", "Không thể xóa sản phẩm này", new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                        }
+                    });
                     dialog.dismiss();
                     break;
                 default:

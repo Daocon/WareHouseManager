@@ -1,6 +1,7 @@
 package hieudx.fpoly.warehousemanager.Member.Adapter;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
@@ -14,11 +15,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.saadahmedsoft.popupdialog.PopupDialog;
+import com.saadahmedsoft.popupdialog.Styles;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
 import hieudx.fpoly.warehousemanager.Member.Model.User;
+import hieudx.fpoly.warehousemanager.Member.account.Edit_UserLogin;
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.ItemDialogDetailMemberBinding;
 import hieudx.fpoly.warehousemanager.databinding.ItemRycMemberBinding;
@@ -60,10 +67,20 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.Viewholer> i
         holder.binding.switchLimit.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (isChecked) {
                 userDao.updateUserRoleById(list.get(position).getId(), 1);
-                Toast.makeText(context, "Đã gỡ hạn chế " + list.get(position).getName(), Toast.LENGTH_SHORT).show();
+                General.showSuccessPopup(context, "Thành công", "Bạn đã mở khóa "+list.get(position).getName()+ " thành công", new OnDialogButtonClickListener() {
+                    @Override
+                    public void onDismissClicked(Dialog dialog) {
+                        super.onDismissClicked(dialog);
+                    }
+                });
             } else {
                 userDao.updateUserRoleById(list.get(position).getId(), -1);
-                Toast.makeText(context, "Đã hạn chế " + list.get(position).getName(), Toast.LENGTH_SHORT).show();
+                General.showSuccessPopup(context, "Thành công", "Bạn đã khóa "+list.get(position).getName()+ " thành công", new OnDialogButtonClickListener() {
+                    @Override
+                    public void onDismissClicked(Dialog dialog) {
+                        super.onDismissClicked(dialog);
+                    }
+                });
             }
         });
         holder.binding.cardViewMember.setOnClickListener(new View.OnClickListener() {
@@ -99,18 +116,33 @@ public class User_Adapter extends RecyclerView.Adapter<User_Adapter.Viewholer> i
             builder1.setNegativeButton("Có", (dialog1, which) -> {
                 switch (userDao.deleteUser(user.getId())) {
                     case 1:
-                        Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                         list.clear();
                         list.addAll(userDao.getAllUser());
                         notifyDataSetChanged();
                         dialog1.dismiss();
                         dialog.dismiss();
+                        General.showSuccessPopup(context, "Thành công", "Bạn đã xóa thành viên thành công", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                            }
+                        });
                         break;
                     case 0:
-                        Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                        General.showFailurePopup(context, "Thất bại", "Xóa thành viên thất bại", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                            }
+                        });
                         break;
                     case -1:
-                        Toast.makeText(context, "Không được xóa", Toast.LENGTH_SHORT).show();
+                        General.showFailurePopup(context, "Thất bại", "Không thể xóa thành viên này", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                            }
+                        });
                         break;
                 }
             });

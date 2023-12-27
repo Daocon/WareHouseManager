@@ -12,8 +12,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+
 import java.util.ArrayList;
 
+import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.databinding.DialogDeleteSupplierBinding;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvSupplierBinding;
 
@@ -88,18 +91,33 @@ public class Supplier_Adapter extends RecyclerView.Adapter<Supplier_Adapter.View
                         int check = dao.deleteSupplier(list.get(holder.getAdapterPosition()).getId());
                         switch (check) {
                             case 1:
-                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                General.showSuccessPopup(context, "Thành công", "Bạn đã xóa thành công", new OnDialogButtonClickListener() {
+                                    @Override
+                                    public void onDismissClicked(Dialog dialog) {
+                                        super.onDismissClicked(dialog);
+                                    }
+                                });
                                 list.clear();
                                 list.addAll(dao.getAll());
                                 notifyDataSetChanged();
                                 dialog.dismiss();
                                 break;
                             case 0:
-                                Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                                General.showSuccessPopup(context, "Thất bại", "Bạn đã xóa thất bại", new OnDialogButtonClickListener() {
+                                    @Override
+                                    public void onDismissClicked(Dialog dialog) {
+                                        super.onDismissClicked(dialog);
+                                    }
+                                });
                                 dialog.dismiss();
                                 break;
                             case -1:
-                                Toast.makeText(context, "Không thể xóa vì nhà cung cấp này đã có sản phẩm", Toast.LENGTH_SHORT).show();
+                                General.showSuccessPopup(context, "Thất bại", "Không thể xóa vì nhà cung cấp này đã có sản phẩm", new OnDialogButtonClickListener() {
+                                    @Override
+                                    public void onDismissClicked(Dialog dialog) {
+                                        super.onDismissClicked(dialog);
+                                    }
+                                });
                                 dialog.dismiss();
                                 break;
                             default:

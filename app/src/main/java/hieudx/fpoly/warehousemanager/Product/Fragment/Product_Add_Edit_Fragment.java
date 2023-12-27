@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -136,7 +137,12 @@ public class Product_Add_Edit_Fragment extends Fragment {
                         binding.price.getError() == null &&
                         binding.quantity.getError() == null) {
                     if (product_dao.updateProduct(product) > 0) {
-                        Toast.makeText(getContext(), "Sửa thành công", Toast.LENGTH_SHORT).show();
+                        General.showSuccessPopup(getContext(), "Thành công", "Bạn đã sửa thành công", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(android.app.Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                            }
+                        });
                         getParentFragmentManager().popBackStack();
                     } else {
                         Toast.makeText(getContext(), "Sửa thất bại", Toast.LENGTH_SHORT).show();
@@ -166,7 +172,12 @@ public class Product_Add_Edit_Fragment extends Fragment {
                     if (binding.img.getError() == null && binding.name.getError() == null) {
                         product = new Product(name, 0, 0, img, (int) hm_cat.get("id"), (int) hm_sup.get("id"));
                         if (product_dao.insertProduct(product) > 0) {
-                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                            General.showSuccessPopup(getContext(), "Thành công", "Bạn đã thêm sản phẩm thành công", new OnDialogButtonClickListener() {
+                                @Override
+                                public void onDismissClicked(android.app.Dialog dialog) {
+                                    super.onDismissClicked(dialog);
+                                }
+                            });
                             getParentFragmentManager().popBackStack();
                         } else
                             Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();

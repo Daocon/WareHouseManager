@@ -2,6 +2,7 @@ package hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Fragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,9 +15,12 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.MainActivity;
 import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentLoginTabBinding;
@@ -56,7 +60,12 @@ public class Login_Tab_Fragment extends Fragment {
                 if (user_dao.checkLogin(username, md5(pass))) {
                     User user = user_dao.getUserByUsernameAndPassword(username,md5(pass));
                     if (user.getRole() == -1){
-                        Toast.makeText(getContext(), "Tài khoản bị hạn chế!", Toast.LENGTH_SHORT).show();
+                        General.showFailurePopup(getContext(), "Thất bại", "Tài khoản của bạn đã bị khóa", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(android.app.Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                            }
+                        });
                     } else {
                         if (binding.cbRemember.isChecked()) {
                             editor.putString("username", username);
@@ -75,7 +84,12 @@ public class Login_Tab_Fragment extends Fragment {
                         getActivity().finish();
                     }
                 } else {
-                    Toast.makeText(getContext(), "Tài khoản và mật khẩu không đúng", Toast.LENGTH_SHORT).show();
+                    General.showFailurePopup(getContext(), "Thất bại", "Tài khoản hoặc mật khẩu không đúng", new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(android.app.Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                        }
+                    });
                 }
             }
         });

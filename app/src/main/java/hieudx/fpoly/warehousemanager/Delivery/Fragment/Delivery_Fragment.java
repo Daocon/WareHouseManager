@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -124,14 +126,25 @@ public class Delivery_Fragment extends Fragment {
                         && dialog_binding.taxCode.getError() == null) {
                     Delivery delivery = new Delivery(name, phone, Double.parseDouble(price), taxCode);
                     if (dao.insertDelivery(delivery) > 0) {
-                        Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        General.showSuccessPopup(getContext(), "Thành công", "Bạn đã thêm đơn vị vận chuyển thành công", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(android.app.Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                                onResume();
+                            }
+                        });
                         dialog.dismiss();
                     } else {
                         Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                     }
                 }
             } else {
-                dialog_binding.name.setError("Tên đvvc đã tồn tại");
+                General.showFailurePopup(getContext(), "Thất bại", "Đơn vị vận chuyển đã tồn tại", new OnDialogButtonClickListener() {
+                    @Override
+                    public void onDismissClicked(android.app.Dialog dialog) {
+                        super.onDismissClicked(dialog);
+                    }
+                });
             }
         });
         dialog_binding.imgClose.setOnClickListener(view -> dialog.dismiss());

@@ -1,6 +1,7 @@
 package hieudx.fpoly.warehousemanager.Member;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.saadahmedsoft.popupdialog.PopupDialog;
+import com.saadahmedsoft.popupdialog.Styles;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
 import hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Activity.Forgot_Reset_Pass_Activity;
@@ -25,6 +29,7 @@ public class Account_Activity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private ActivityAccountBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +48,7 @@ public class Account_Activity extends AppCompatActivity {
         else Picasso.get().load(img).into(binding.imgAvt);
 
         binding.tvName.setText(sharedPreferences.getString("name", ""));
-        binding.tvPhone.setText(sharedPreferences.getString("phone",""));
+        binding.tvPhone.setText(sharedPreferences.getString("phone", ""));
 
         sharedPreferences = getSharedPreferences("MODE", MODE_PRIVATE);
         nightMode = sharedPreferences.getBoolean("night", false);
@@ -101,19 +106,23 @@ public class Account_Activity extends AppCompatActivity {
         binding.rlChangePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Account_Activity.this, "Thay đổi mật khẩu", Toast.LENGTH_SHORT).show();
-                AlertDialog.Builder builder = new AlertDialog.Builder(Account_Activity.this);
-                builder.setTitle("Xác nhận đổi mật khẩu");
-                builder.setMessage("Bạn có chắc chắn muốn đổi mật khẩu không?");
-                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(Account_Activity.this, Forgot_Reset_Pass_Activity.class));
-                        getOnBackPressedDispatcher().onBackPressed();
-                    }
-                });
-                builder.setNegativeButton("Không", null);
-                builder.show();
+                PopupDialog.getInstance(Account_Activity.this)
+                        .setStyle(Styles.IOS)
+                        .setHeading("Đổi mật khẩu")
+                        .setDescription("Bạn có chắc chắn muốn đổi mật khẩu không?")
+                        .setCancelable(false)
+                        .showDialog(new OnDialogButtonClickListener() {
+                            @Override
+                            public void onPositiveClicked(Dialog dialog) {
+                                startActivity(new Intent(Account_Activity.this, Forgot_Reset_Pass_Activity.class));
+                                getOnBackPressedDispatcher().onBackPressed();
+                            }
+
+                            @Override
+                            public void onNegativeClicked(Dialog dialog) {
+                                super.onNegativeClicked(dialog);
+                            }
+                        });
             }
         });
 
@@ -150,17 +159,26 @@ public class Account_Activity extends AppCompatActivity {
         binding.rlLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Account_Activity.this);
-                builder.setTitle("Xác nhận đăng xuất");
-                builder.setMessage("Bạn có chắc chắn muốn đăng xuất không ?");
-                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(Account_Activity.this, Login_SignUp_Activity.class));
-                    }
-                });
-                builder.setNegativeButton("Không", null);
-                builder.show();
+                PopupDialog.getInstance(Account_Activity.this)
+                        .setStyle(Styles.STANDARD)
+                        .setHeading("Đăng xuất")
+                        .setDescription("Bạn có chắc chắn muốn đăng xuất không?" +
+                                " Hành động này không thể được hoàn tác")
+                        .setPopupDialogIcon(R.drawable.ic_logout)
+                        .setPopupDialogIconTint(R.color.red)
+                        .setCancelable(false)
+                        .showDialog(new OnDialogButtonClickListener() {
+                            @Override
+                            public void onPositiveClicked(Dialog dialog) {
+                                startActivity(new Intent(Account_Activity.this, Login_SignUp_Activity.class));
+                                finish();
+                            }
+
+                            @Override
+                            public void onNegativeClicked(Dialog dialog) {
+                                super.onNegativeClicked(dialog);
+                            }
+                        });
             }
         });
     }

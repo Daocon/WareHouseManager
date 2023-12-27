@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.Delivery.Dao.Delivery_Dao;
@@ -107,7 +109,12 @@ public class Delivery_Adapter extends RecyclerView.Adapter<Delivery_Adapter.View
                     delivery.setPrice(Double.parseDouble(price));
                     delivery.setTax_code(taxCode);
                     if (dao.insertDelivery(delivery) > 0) {
-                        Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                        General.showSuccessPopup(context, "Thành công", "Bạn đã sửa đơn vị vận chuyển thành công", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(android.app.Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                            }
+                        });
                         list.clear();
                         list.addAll(dao.getListDelivery());
                         notifyDataSetChanged();
@@ -117,7 +124,12 @@ public class Delivery_Adapter extends RecyclerView.Adapter<Delivery_Adapter.View
                     }
                 }
             } else {
-                dialog_binding.name.setError("Tên đvvc đã tồn tại");
+                General.showFailurePopup(context, "Thất bại", "Đơn vị vận chuyển đã tồn tại", new OnDialogButtonClickListener() {
+                    @Override
+                    public void onDismissClicked(android.app.Dialog dialog) {
+                        super.onDismissClicked(dialog);
+                    }
+                });
             }
         });
         dialog_binding.imgClose.setOnClickListener(view -> {
@@ -133,18 +145,33 @@ public class Delivery_Adapter extends RecyclerView.Adapter<Delivery_Adapter.View
         builder.setNegativeButton("Có", (dialog, which) -> {
             switch (dao.deleteDelivery(delivery.getId())) {
                 case 0:
-                    Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                    General.showFailurePopup(context, "Thất bại", "Xóa thất bại", new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(android.app.Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                        }
+                    });
                     dialog.dismiss();
                     break;
                 case 1:
-                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                    General.showSuccessPopup(context, "Thành công", "Bạn đã xóa đvvc thành công", new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(android.app.Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                        }
+                    });
                     list.clear();
                     list.addAll(dao.getListDelivery());
                     notifyDataSetChanged();
                     dialog.dismiss();
                     break;
                 case -1:
-                    Toast.makeText(context, "Bạn không thể xóa đvvc có trong phiếu xuất", Toast.LENGTH_SHORT).show();
+                    General.showFailurePopup(context, "Thất bại", "Tồn tại đvvc này trong phiếu xuất. Không được xóa", new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(android.app.Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                        }
+                    });
                     dialog.dismiss();
                     break;
             }

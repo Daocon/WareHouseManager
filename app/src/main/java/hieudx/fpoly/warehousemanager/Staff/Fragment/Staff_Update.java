@@ -12,7 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
+import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.Staff.Dao.Staff_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentUpdateStaffBinding;
@@ -131,7 +133,12 @@ public class Staff_Update extends Fragment {
         staff.setWork_day(work_day1);
         staff.setCoefficient(coefficient1);
         dao.updateStaff(staff);
-        Snackbar.make(getView(), "Cập nhật thành công", Snackbar.LENGTH_SHORT).show();
+        General.showSuccessPopup(getContext(), "Thành công", "Bạn đã sửa thành công", new OnDialogButtonClickListener() {
+            @Override
+            public void onDismissClicked(android.app.Dialog dialog) {
+                super.onDismissClicked(dialog);
+            }
+        });
         Staff_Fragment staff_fragment = new Staff_Fragment();
 
 
