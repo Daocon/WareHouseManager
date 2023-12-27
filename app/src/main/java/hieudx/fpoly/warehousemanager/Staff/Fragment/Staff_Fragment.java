@@ -181,18 +181,23 @@ public class Staff_Fragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = ((Activity) getActivity()).getLayoutInflater();
 
+
+
         UpdateStaffBinding updateStaffBinding = UpdateStaffBinding.inflate(inflater);
         builder.setView(updateStaffBinding.getRoot());
 
         Dialog dialog = builder.create();
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         dialog.show();
         if (staff != null) {
             updateStaffBinding.txtNameStaff.setText("Tên: " + staff.getName());
             updateStaffBinding.txtSdtStaff.setText("Phone: " + staff.getPhone());
             updateStaffBinding.txtDiachiStaff.setText("Địa chỉ: " + staff.getAddress());
-            updateStaffBinding.txtLuongStaff.setText("Lương:" + staff.getSalary() + " ");
-            updateStaffBinding.txtWorkDay.setText("Ngày Công:" + staff.getWork_day() + " ");
-            updateStaffBinding.txtHeSo.setText("Hệ Số:" + staff.getCoefficient() + " ");
+            updateStaffBinding.txtLuongStaff.setText("Lương: " + staff.getSalary() + " ");
+            updateStaffBinding.txtWorkDay.setText("Ngày Công: " + staff.getWork_day() + " ");
+            updateStaffBinding.txtHeSo.setText("Hệ Số: " + staff.getCoefficient() + " ");
 
         }
 
@@ -203,12 +208,17 @@ public class Staff_Fragment extends Fragment {
         });
 
         updateStaffBinding.btnMess.setOnClickListener(v -> {
-            String emailAddress = "recipient@example.com";
+            /*String emailAddress = "recipient@example.com";
 
             Uri emailUri = Uri.parse("mailto:" + emailAddress);
 
             Intent emailIntent = new Intent(Intent.ACTION_SENDTO,emailUri);
-                startActivity(emailIntent);
+                startActivity(emailIntent);*/
+
+            Uri smsUri = Uri.parse("smsto:" + staff.getPhone());
+            Intent smsIntent = new Intent(Intent.ACTION_SENDTO, smsUri);
+            startActivity(smsIntent);
+
         });
 
         updateStaffBinding.btnUpdateStaff.setOnClickListener(new View.OnClickListener() {
