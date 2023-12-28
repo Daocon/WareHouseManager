@@ -21,10 +21,13 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.Staff.Adapter.Staff_Adapter;
 import hieudx.fpoly.warehousemanager.Staff.Dao.Staff_Dao;
@@ -99,7 +102,12 @@ public class Staff_Fragment extends Fragment {
                 list.addAll(dao.getStaffList());
                 adapter.notifyDataSetChanged();
                 updateAddButtonVisibility();
-                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                General.showSuccessPopup(getContext(), "Thành công", "Bạn đã thêm nhân viên thành công", new OnDialogButtonClickListener() {
+                    @Override
+                    public void onDismissClicked(Dialog dialog) {
+                        super.onDismissClicked(dialog);
+                    }
+                });
             }
         }
         return binding.getRoot();

@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.Category.Dao.Category_Dao;
@@ -107,18 +109,33 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.View
         builder.setNegativeButton("Có", (dialog, which) -> {
             switch (dao.deleteCategory(cat.getId())) {
                 case 0:
-                    Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                    General.showFailurePopup(context, "Thất bại", "Xóa thất bại", new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(android.app.Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                        }
+                    });
                     dialog.dismiss();
                     break;
                 case 1:
-                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                    General.showSuccessPopup(context, "Thành công", "Bạn đã xóa thành công", new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(android.app.Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                        }
+                    });
                     list.clear();
                     list.addAll(dao.getListCategory());
                     notifyDataSetChanged();
                     dialog.dismiss();
                     break;
                 case -1:
-                    Toast.makeText(context, "Bạn không thể xóa thể loại có sản phẩm", Toast.LENGTH_SHORT).show();
+                    General.showFailurePopup(context, "Thất bại", "Tồn tại sản phẩm của thể loại này. Không được xóa", new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(android.app.Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                        }
+                    });
                     dialog.dismiss();
                     break;
             }

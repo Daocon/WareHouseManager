@@ -1,5 +1,6 @@
 package hieudx.fpoly.warehousemanager;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -29,6 +30,9 @@ import androidx.viewbinding.ViewBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.saadahmedsoft.popupdialog.PopupDialog;
+import com.saadahmedsoft.popupdialog.Styles;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -199,4 +203,20 @@ public class General {
                 .commit();
     }
 
+    public static void showSuccessPopup(Context context, String heading, String description, OnDialogButtonClickListener listener) {
+        PopupDialog.getInstance(context)
+                .setStyle(Styles.SUCCESS)
+                .setHeading(heading)
+                .setDescription(description)
+                .setCancelable(false)
+                .showDialog(listener);
+    }
+    public static void showFailurePopup(Context context, String heading, String description, OnDialogButtonClickListener listener) {
+        PopupDialog.getInstance(context)
+                .setStyle(Styles.FAILED)
+                .setHeading(heading)
+                .setDescription(description)
+                .setCancelable(false)
+                .showDialog(listener);
+    }
 }

@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -50,6 +52,7 @@ public class Category_Fragment extends Fragment {
 
         init();
         onClickSort();
+        onAddCategory();
         onSearch();
     }
 
@@ -82,21 +85,29 @@ public class Category_Fragment extends Fragment {
             String name = dialog_binding.edName.getText().toString();
             if (TextUtils.isEmpty(name)) {
                 Toast.makeText(getContext(), "Hãy nhập dữ liệu", Toast.LENGTH_SHORT).show();
-            } else {
-                General.isContainSpecialChar(name, dialog_binding.name);
+            } else if (!categoryDao.isExistCategory(name)) {
+                dialog_binding.name.setError(null);
                 if (dialog_binding.name.getError() == null) {
-                    if (!categoryDao.isExistCategory(name)) {
-                        dialog_binding.name.setError(null);
-                        if (categoryDao.insertCategory(name) > 0) {
-                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        } else {
-                            Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
-                        }
+                    if (categoryDao.insertCategory(name) > 0) {
+                        General.showSuccessPopup(getContext(), "Thành công", "Bạn đã thêm thành công", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(android.app.Dialog dialog) {
+                                super.onDismissClicked(dialog);
+//                                onResume();
+                            }
+                        });
+                        dialog.dismiss();
                     } else {
-                        dialog_binding.name.setError("Tên thể loại đã tồn tại");
+                        Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                     }
                 }
+            } else {
+                General.showFailurePopup(getContext(), "Thất bại", "Danh mục đã tồn tại", new OnDialogButtonClickListener() {
+                    @Override
+                    public void onDismissClicked(android.app.Dialog dialog) {
+                        super.onDismissClicked(dialog);
+                    }
+                });
             }
         });
         dialog_binding.imgClose.setOnClickListener(view12 -> dialog.dismiss());

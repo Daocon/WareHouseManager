@@ -2,13 +2,18 @@ package hieudx.fpoly.warehousemanager.Member.account;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.saadahmedsoft.popupdialog.PopupDialog;
+import com.saadahmedsoft.popupdialog.Styles;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
+import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ActivityEditUserLoginBinding;
@@ -85,7 +90,12 @@ public class Edit_UserLogin extends AppCompatActivity {
             User user = new User(musername, mname, memail, mphone,mavatar);
             user.setId(id);
             if (userDao.updateUser(user)) {
-                Toast.makeText(this, "Cập nhật dữ liệu thành công", Toast.LENGTH_SHORT).show();
+                General.showSuccessPopup(Edit_UserLogin.this, "Thành công", "Bạn đã cập nhật dữ liệu thành công", new OnDialogButtonClickListener() {
+                    @Override
+                    public void onDismissClicked(Dialog dialog) {
+                        super.onDismissClicked(dialog);
+                    }
+                });
                 // Cập nhật dữ liệu vào SharedPreferences
                 editor.putString("avatar", mavatar);
                 editor.putString("name", mname);
