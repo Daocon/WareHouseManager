@@ -13,6 +13,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+
 import java.util.ArrayList;
 
 import hieudx.fpoly.warehousemanager.Bill.Adapter.bill_out.Bill_Out_Detail_Adapter;
@@ -74,7 +76,12 @@ public class Detail_Bill_Out_Fragment extends Fragment {
                 builder.setNegativeButton("Có", (dialog, which) -> {
                     long check = bill_out_dao.delete(bill_out.getId());
                     if (check == 1) {
-                        Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
+                        General.showSuccessPopup(getContext(), "Thành công", "Bạn đã xóa thành công", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(android.app.Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                            }
+                        });
                         getParentFragmentManager().popBackStack();
                     } else {
                         Toast.makeText(getContext(), "Xóa lỗi", Toast.LENGTH_SHORT).show();

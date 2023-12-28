@@ -1,5 +1,6 @@
 package hieudx.fpoly.warehousemanager.Supplier;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
+import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.Supplier.Supplier_Dao;
 import hieudx.fpoly.warehousemanager.databinding.FragmentSupplierUpdateBinding;
@@ -95,7 +98,12 @@ public class Supplier_Update extends Fragment {
                                 supplier.setAddress(diachi1);
                                 supplier.setTax_code(mst1);
                                 dao.updateSupplier(supplier);
-                                Snackbar.make(getView(), "Cập nhật thành công", Snackbar.LENGTH_SHORT).show();
+                                General.showSuccessPopup(getContext(), "Cập nhật thành công", "Bạn đã cập nhật nhà cung cấp thành công", new OnDialogButtonClickListener() {
+                                    @Override
+                                    public void onDismissClicked(Dialog dialog) {
+                                        super.onDismissClicked(dialog);
+                                    }
+                                });
                                 Supplier_Fragment supplierFragment = new Supplier_Fragment();
 
                                 FragmentManager fragmentManager = getParentFragmentManager();

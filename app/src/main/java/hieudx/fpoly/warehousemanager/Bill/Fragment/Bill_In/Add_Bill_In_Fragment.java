@@ -14,6 +14,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -88,7 +90,12 @@ public class Add_Bill_In_Fragment extends Fragment {
 //                Log.d("uuuuuuuuuuuuu", "onCreateView: "+bill_in_detail.getPrice()+" - "+bill_in_detail.getQuantity()+ " - "+bill_in_detail.getId_product()+ " - "+bill_in_detail.getId_bill_in());
                     boolean check = bill_in_dao.insertDetail(bill_in_detail);
                     if (check) {
-                        Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        General.showSuccessPopup(getContext(), "Thành công", "Bạn đã thêm phiếu nhập thành công", new OnDialogButtonClickListener()  {
+                            @Override
+                            public void onDismissClicked(android.app.Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                            }
+                        });
                         getParentFragmentManager().popBackStack();
                     }
                 }

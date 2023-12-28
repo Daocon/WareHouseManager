@@ -1,5 +1,7 @@
 package hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Fragment;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,11 +12,17 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.saadahmedsoft.popupdialog.PopupDialog;
+import com.saadahmedsoft.popupdialog.Styles;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import hieudx.fpoly.warehousemanager.General;
+import hieudx.fpoly.warehousemanager.Login_SignUp_Forget_Reset.Activity.Login_SignUp_Activity;
 import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
+import hieudx.fpoly.warehousemanager.Member.account.Edit_UserLogin;
 import hieudx.fpoly.warehousemanager.databinding.FragmentSignUpTabBinding;
 import hieudx.fpoly.warehousemanager.Member.Model.User;
 
@@ -57,12 +65,19 @@ public class SignUp_Tab_Fragment extends Fragment {
                 && binding.pass.getError() == null
                 && binding.repass.getError() == null
                 && binding.phoneNumber.getError() == null) {
-            User user = new User(username, md5(repass), name, email, phone, 1, "https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png");
+            User user = new User(username, md5(repass), name, email, phone, 1, "https://vectorified.com/images/avatar-icon-png-3.png");
             User_Dao user_dao = new User_Dao(getContext());
             int check = user_dao.insert(user);
             switch (check) {
                 case 1:
-                    Toast.makeText(getContext(), "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                    General.showSuccessPopup(getContext(), "Đăng ký thành công", "Bạn đã đăng ký thành công tài khoản ", new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                            Intent intent = new Intent(getContext(), Login_SignUp_Activity.class);
+                            startActivity(intent);
+                        }
+                    });
                     binding.username.getEditText().setText("");
                     binding.name.getEditText().setText("");
                     binding.email.getEditText().setText("");

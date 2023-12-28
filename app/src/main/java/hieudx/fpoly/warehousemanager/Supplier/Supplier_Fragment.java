@@ -19,10 +19,13 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.R;
 import hieudx.fpoly.warehousemanager.databinding.BottomSheetSupplierBinding;
 import hieudx.fpoly.warehousemanager.databinding.DialogUpdateSupplierBinding;
@@ -88,7 +91,12 @@ public class Supplier_Fragment extends Fragment {
                 list.addAll(dao.getAll());
                 adapter.notifyDataSetChanged();
                 updateAddButtonVisibility();
-                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                General.showSuccessPopup(getContext(), "Thêm thành công", "Bạn đã thêm nhà cung cấp thành công", new OnDialogButtonClickListener() {
+                    @Override
+                    public void onDismissClicked(Dialog dialog) {
+                        super.onDismissClicked(dialog);
+                    }
+                });
             }
         }
         return binding.getRoot();
