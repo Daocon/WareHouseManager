@@ -1,6 +1,7 @@
 package hieudx.fpoly.warehousemanager.Supplier.Adapter;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
 import java.util.ArrayList;
 
@@ -161,7 +164,12 @@ public class Supplier_Adapter extends RecyclerView.Adapter<Supplier_Adapter.View
         builder.setNegativeButton("Có", (dialog, which) -> {
             switch (dao.deleteSupplier(supplier.getId())) {
                 case 0:
-                    Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                    General.showSuccessPopup(context, "Thành công", "Bạn đã xóa thành công", new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                        }
+                    });
                     dialog.dismiss();
                     break;
                 case 1:

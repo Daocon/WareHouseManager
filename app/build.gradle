@@ -59,6 +59,7 @@ dependencies {
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
-    // thu vien popup
     implementation 'com.saadahmedev.popup-dialog:popup-dialog:1.0.5'
+
+    // thu vien popup
 }

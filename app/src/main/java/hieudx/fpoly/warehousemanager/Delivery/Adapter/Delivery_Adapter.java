@@ -59,7 +59,6 @@ public class Delivery_Adapter extends RecyclerView.Adapter<Delivery_Adapter.View
             onShowBotSheetDetail(list.get(holder.getAdapterPosition()));
         });
 
-
         holder.binding.btnDelete.setOnClickListener(view -> {
             onDelete(list.get(holder.getAdapterPosition()));
         });
