@@ -114,6 +114,7 @@
 
             <Button
                 style="@style/custom_btn"
+                android:id="@+id/btnPrint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -121,7 +122,7 @@
                 android:text="In phiếu" />
 
             <Button
-                android:id="@+id/btnUpdate"
+                android:id="@+id/btnEdit"
                 style="@style/custom_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

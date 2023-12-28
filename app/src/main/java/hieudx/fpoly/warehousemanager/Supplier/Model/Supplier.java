@@ -1,4 +1,6 @@
-package hieudx.fpoly.warehousemanager.Supplier;
+package hieudx.fpoly.warehousemanager.Supplier.Model;
+
+import java.util.Comparator;
 
 public class Supplier {
     private int id;
@@ -6,6 +8,9 @@ public class Supplier {
     private String phone;
     private String address;
     private String tax_code;
+
+    public static Comparator<Supplier> sortByNameAZ = (t1, t2) -> t1.getName().compareTo(t2.getName());
+    public static Comparator<Supplier> sortByNameZA = (t1, t2) -> t2.getName().compareTo(t1.getName());
 
     public Supplier() {
     }

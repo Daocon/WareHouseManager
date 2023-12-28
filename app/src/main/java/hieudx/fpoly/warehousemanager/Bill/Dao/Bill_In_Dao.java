@@ -66,6 +66,7 @@ public class Bill_In_Dao {
         ContentValues values = new ContentValues();
         values.put("id", bill_in.getId());
         values.put("date_time", bill_in.getDate_time());
+        values.put("status", bill_in.getStatus());
         values.put("id_user", bill_in.getId_user());
         long check = db.insert("Bill_in", null, values);
         if (check == -1) {

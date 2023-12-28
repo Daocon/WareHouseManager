@@ -23,6 +23,15 @@
         android:background="#B8B6B6" />
 
     <TextView
+        android:id="@+id/tv_id"
+        style="@style/custom_title_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ID: "
+        android:textAllCaps="false"
+        android:textStyle="normal" />
+
+    <TextView
         android:id="@+id/tv_name"
         style="@style/custom_title_add"
         android:layout_width="match_parent"
@@ -61,24 +70,30 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/img_call"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:layout_weight="1"
             android:src="@drawable/ic_phone" />
+
+        <Button
+            android:id="@+id/btnEdit"
+            style="@style/custom_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Sửa" />
 
         <ImageView
             android:id="@+id/img_sms"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:layout_weight="1"
-            android:src="@drawable/sms"
-            android:text="Sửa" />
+            android:src="@drawable/sms" />
     </LinearLayout>
 
 </LinearLayout>

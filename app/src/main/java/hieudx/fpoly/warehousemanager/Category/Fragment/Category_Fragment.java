@@ -82,18 +82,21 @@ public class Category_Fragment extends Fragment {
             String name = dialog_binding.edName.getText().toString();
             if (TextUtils.isEmpty(name)) {
                 Toast.makeText(getContext(), "Hãy nhập dữ liệu", Toast.LENGTH_SHORT).show();
-            } else if (!categoryDao.isExistCategory(name)) {
-                dialog_binding.name.setError(null);
+            } else {
+                General.isContainSpecialChar(name, dialog_binding.name);
                 if (dialog_binding.name.getError() == null) {
-                    if (categoryDao.insertCategory(name) > 0) {
-                        Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
+                    if (!categoryDao.isExistCategory(name)) {
+                        dialog_binding.name.setError(null);
+                        if (categoryDao.insertCategory(name) > 0) {
+                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } else {
+                            Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                        dialog_binding.name.setError("Tên thể loại đã tồn tại");
                     }
                 }
-            } else {
-                dialog_binding.name.setError("Tên thể loại đã tồn tại");
             }
         });
         dialog_binding.imgClose.setOnClickListener(view12 -> dialog.dismiss());

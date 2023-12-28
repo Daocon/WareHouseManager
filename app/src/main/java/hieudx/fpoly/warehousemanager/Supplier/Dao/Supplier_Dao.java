@@ -1,4 +1,4 @@
-package hieudx.fpoly.warehousemanager.Supplier;
+package hieudx.fpoly.warehousemanager.Supplier.Dao;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,19 +9,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import hieudx.fpoly.warehousemanager.SQliteDB.DBHelper;
+import hieudx.fpoly.warehousemanager.Supplier.Model.Supplier;
 
 public class Supplier_Dao {
     private DBHelper dbHelper;
-    private Context context;
+    private SQLiteDatabase db;
 
     public Supplier_Dao(Context context) {
         dbHelper = new DBHelper(context);
-        this.context = context;
+        this.db = dbHelper.getWritableDatabase();
     }
 
     public ArrayList<Supplier> getAll() {
         ArrayList<Supplier> list = new ArrayList<>();
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM Supplier", null);
         if (c.getCount() != 0) { // nếu có dữ liệu
             c.moveToFirst(); // chuyển con trỏ về đầu bảng
@@ -35,13 +35,29 @@ public class Supplier_Dao {
 
     public Supplier getSupplierById(int id) {
         Supplier supplier = new Supplier();
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM Supplier WHERE id = ?", new String[]{String.valueOf(id)});
         if (c.getCount() != 0) {
             c.moveToFirst();
             supplier = new Supplier(c.getInt(0), c.getString(1), c.getString(2), c.getString(3), c.getString(4));
         }
         return supplier;
+    }
+
+    public boolean isExistSupplier(String name) {
+        Cursor c = db.rawQuery("select * from Delivery WHERE name = ?", new String[]{name});
+        if (c.getCount() != 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public long insert(Supplier supplier) {
+        ContentValues values = new ContentValues();
+        values.put("name", supplier.getName());
+        values.put("phone", supplier.getPhone());
+        values.put("address", supplier.getAddress());
+        values.put("tax_code", supplier.getTax_code());
+        return db.insert("Supplier", null, values);
     }
 
     public ArrayList<HashMap<String, Object>> getListSupplier() {
@@ -56,37 +72,25 @@ public class Supplier_Dao {
         return listHM;
     }
 
-    public boolean inserSupplier(Supplier supplier) {
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
 
-        values.put("name", supplier.getName());
-        values.put("phone", supplier.getPhone());
-        values.put("address", supplier.getAddress());
-        values.put("tax_code", supplier.getTax_code());
-        long check = database.insert("Supplier", null, values);
-        return check > 0;
-    }
 
     public boolean updateSupplier(Supplier supplier) {
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put("name", supplier.getName());
         values.put("phone", supplier.getPhone());
         values.put("address", supplier.getAddress());
         values.put("tax_code", supplier.getTax_code());
-        long check = database.update("Supplier", values, "id = ?", new String[]{String.valueOf(supplier.getId())});
+        long check = db.update("Supplier", values, "id = ?", new String[]{String.valueOf(supplier.getId())});
         return check > 0;
     }
 
     public int deleteSupplier(int id) {
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
-        Cursor cursor = database.rawQuery("SELECT * FROM Product where id_supplier = ?", new String[]{String.valueOf(id)});
+        Cursor cursor = db.rawQuery("SELECT * FROM Product where id_supplier = ?", new String[]{String.valueOf(id)});
         if (cursor.getCount() != 0) {
             return -1;
         }
-        long check = database.delete("Supplier", "id = ?", new String[]{String.valueOf(id)});
+        long check = db.delete("Supplier", "id = ?", new String[]{String.valueOf(id)});
         if (check == -1) {
             return 0;
         } else {

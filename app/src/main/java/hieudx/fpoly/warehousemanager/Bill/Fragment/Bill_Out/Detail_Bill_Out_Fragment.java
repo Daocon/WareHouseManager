@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -63,6 +64,19 @@ public class Detail_Bill_Out_Fragment extends Fragment {
             binding.tvAddress.setText("Địa chỉ nhận hàng: " + bill_out.getAddress());
             binding.tvDelivery.setText("Đvvc: " + delivery.getName());
             binding.tvTotal.setText(bundle.getString("sum"));
+
+            if (bill_out.getStatus() == 0) {
+                binding.btnDelete.setVisibility(View.GONE);
+                binding.btnEdit.setVisibility(View.GONE);
+
+                ViewGroup.LayoutParams layoutParams = binding.btnPrint.getLayoutParams();
+                layoutParams.width = RelativeLayout.LayoutParams.WRAP_CONTENT;
+                layoutParams.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+                binding.btnPrint.setLayoutParams(layoutParams);
+            } else {
+                binding.btnDelete.setVisibility(View.VISIBLE);
+                binding.btnEdit.setVisibility(View.VISIBLE);
+            }
 
             list.addAll(bill_out_dao.getListProductDetail(bill_out.getId()));
             binding.rcv.setAdapter(adapter);

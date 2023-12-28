@@ -50,7 +50,7 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.View
         holder.binding.tvName.setText(list.get(position).getName());
 
         holder.binding.btnDelete.setOnClickListener(view -> onDeleteCategory(list.get(position)));
-        holder.binding.btnEdit.setOnClickListener(view -> onEditCategory(list.get(position)));
+        holder.itemView.setOnClickListener(view -> onEditCategory(list.get(position)));
 
     }
 
@@ -64,7 +64,7 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.View
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         dialog_binding.btnAdd.setText("sửa");
-        dialog_binding.tvTitleDialog.setText("sửa thể loại");
+        dialog_binding.tvTitleDialog.setText("Chi tiết thể loại");
         dialog_binding.edName.setText(cat.getName());
         dialog.show();
 
@@ -73,9 +73,11 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.View
             if (TextUtils.isEmpty(name)) {
                 Toast.makeText(context, "Hãy nhập tên thể loại", Toast.LENGTH_SHORT).show();
             } else {
-                if (!dao.isExistCategory(name)) {
-                    dialog_binding.name.setError(null);
-                    if (dialog_binding.name.getError() == null) {
+                General.isContainSpecialChar(name, dialog_binding.name);
+                if (dialog_binding.name.getError() == null) {
+                    if (!dao.isExistCategory(name)) {
+                        dialog_binding.name.setError(null);
+                        cat.setName(name);
                         if (dao.editCategory(cat) > 0) {
                             Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
                             list.clear();
@@ -85,9 +87,9 @@ public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.View
                         } else {
                             Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
                         }
+                    } else {
+                        dialog_binding.name.setError("Tên thể loại đã tồn tại");
                     }
-                } else {
-                    dialog_binding.name.setError("Tên thể loại đã tồn tại");
                 }
             }
         });

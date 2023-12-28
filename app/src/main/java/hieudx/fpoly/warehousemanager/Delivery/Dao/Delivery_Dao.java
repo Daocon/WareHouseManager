@@ -56,14 +56,13 @@ public class Delivery_Dao {
         return db.insert("Delivery", null, values);
     }
 
-    public boolean updateDelivery(Delivery delivery) {
+    public long updateDelivery(Delivery delivery) {
         ContentValues values = new ContentValues();
         values.put("name", delivery.getName());
         values.put("phone", delivery.getPhone());
         values.put("price", delivery.getPrice());
         values.put("tax_code", delivery.getTax_code());
-        long check = db.update("Delivery", values, "id = ?", new String[]{String.valueOf(delivery.getId())});
-        return check > 0;
+        return db.update("Delivery", values, "id = ?", new String[]{String.valueOf(delivery.getId())});
     }
 
     public int deleteDelivery(int id) {

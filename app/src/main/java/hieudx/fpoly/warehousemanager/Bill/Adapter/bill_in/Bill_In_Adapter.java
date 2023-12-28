@@ -59,32 +59,29 @@ public class Bill_In_Adapter extends RecyclerView.Adapter<Bill_In_Adapter.ViewHo
         String state = (status == 0) ? "Done" : "Doing";
         if (status == 0) {
             holder.binding.swStatus.setChecked(true);
-            holder.binding.cvItemBill.setClickable(false);
-            holder.binding.cvItemBill.setFocusable(false);
-            holder.binding.cvItemBill.setFocusableInTouchMode(false);
-            holder.binding.cvItemBill.setLongClickable(false);
+            holder.binding.swStatus.setClickable(false);
+            holder.binding.swStatus.setFocusable(false);
+            holder.binding.swStatus.setFocusableInTouchMode(false);
+            holder.binding.swStatus.setLongClickable(false);
             holder.binding.cvItemBill.setForeground(ContextCompat.getDrawable(context, R.drawable.custom_bgr_bill_fade));
-            holder.binding.cvItemBill.setOnClickListener(view -> Toast.makeText(context, "Bill was done, don't change", Toast.LENGTH_SHORT).show());
         } else holder.binding.swStatus.setChecked(false);
+        holder.binding.tvStatus.setText(state);
 
         holder.binding.swStatus.setOnCheckedChangeListener((compoundButton, b) -> {
-            int newStatus = b ? 0 : 1;
-            holder.binding.tvStatus.setText(b ? "Done" : "Doing");
-            dao.updateStatus(newStatus, list.get(position).getId());
+            if (b) holder.binding.cvItemBill.setOnClickListener(view -> Toast.makeText(context, "Bill was done, don't change", Toast.LENGTH_SHORT).show());
+            else holder.binding.tvStatus.setText("Done");
+            dao.updateStatus(0, list.get(position).getId());
+//            notifyDataSetChanged();
+            list.clear();
+            list.addAll(dao.getAll());
             notifyDataSetChanged();
         });
 
-        holder.binding.tvStatus.setText(state);
-
         holder.itemView.setOnClickListener(view -> {
-            if (status == 0) {
-                Toast.makeText(context, "Bill was done, don't change", Toast.LENGTH_SHORT).show();
-            } else {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("data", list.get(position));
-                bundle.putString("sum", sum);
-                General.loadFragment(fragmentManager, new Detail_Bill_In_Fragment(), bundle);
-            }
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("data", list.get(position));
+            bundle.putString("sum", sum);
+            General.loadFragment(fragmentManager, new Detail_Bill_In_Fragment(), bundle);
         });
     }
 

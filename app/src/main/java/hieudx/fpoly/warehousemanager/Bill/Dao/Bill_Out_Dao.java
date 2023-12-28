@@ -33,7 +33,7 @@ public class Bill_Out_Dao {
         if (c.getCount() != 0) {
             c.moveToFirst();
             do {
-                list.add(new Bill_Out(c.getString(0), c.getString(1), c.getInt(2), c.getString(3), c.getInt(4), c.getInt(5)));
+                list.add(new Bill_Out(c.getString(0), c.getString(1), c.getInt(2), c.getString(3), c.getInt(4), c.getInt(5), c.getInt(6)));
             } while (c.moveToNext());
         }
         return list;
@@ -82,6 +82,12 @@ public class Bill_Out_Dao {
     public void updateSumTotal(String id_bill_out) {
         db.execSQL("UPDATE Bill_out_detail SET total = price * quantity WHERE id_bill_out = ?", new String[]{id_bill_out});
         db.execSQL("UPDATE Bill_out SET sum = (SELECT IFNULL(SUM(total), 0) FROM Bill_out_detail WHERE Bill_out_detail.id_bill_out = Bill_out.id)");
+    }
+
+    public int updateStatus(int status, String id) {
+        ContentValues values = new ContentValues();
+        values.put("status", status);
+        return db.update("Bill_out", values, "id = ?", new String[]{id});
     }
 
     @SuppressLint("Range")

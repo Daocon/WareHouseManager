@@ -20,7 +20,7 @@ import hieudx.fpoly.warehousemanager.Product.Fragment.Product_Fragment;
 import hieudx.fpoly.warehousemanager.databinding.ActivityMainBinding;
 import hieudx.fpoly.warehousemanager.Delivery.Fragment.Delivery_Fragment;
 import hieudx.fpoly.warehousemanager.Staff.Fragment.Staff_Fragment;
-import hieudx.fpoly.warehousemanager.Supplier.Supplier_Fragment;
+import hieudx.fpoly.warehousemanager.Supplier.Fragment.Supplier_Fragment;
 import hieudx.fpoly.warehousemanager.Member.Fragment.Member_Fragment;
 import hieudx.fpoly.warehousemanager.Statistic.Fragment.Statistic_Fragment;
 import hieudx.fpoly.warehousemanager.Member.Account_Activity;

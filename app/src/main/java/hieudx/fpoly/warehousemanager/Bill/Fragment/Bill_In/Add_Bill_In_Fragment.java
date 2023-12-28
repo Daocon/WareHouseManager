@@ -82,6 +82,7 @@ public class Add_Bill_In_Fragment extends Fragment {
             if (list_product_checked.isEmpty()) {
                 Toast.makeText(getContext(), "Vui lòng chọn sản phẩm", Toast.LENGTH_SHORT).show();
             } else {
+                bill_in.setStatus(1);
                 bill_in_dao.insert(bill_in);
                 for (Product product : list_product_checked) {
 //                Log.d("zzzzzzzz", "onCreateView: "+product.getId_supplier());

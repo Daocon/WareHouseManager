@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,8 +22,8 @@ import hieudx.fpoly.warehousemanager.Bill.Model.Bill_In;
 import hieudx.fpoly.warehousemanager.Bill.Model.Bill_in_detail;
 import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.Member.Dao.User_Dao;
-import hieudx.fpoly.warehousemanager.databinding.FragmentDetailBillInBinding;
 import hieudx.fpoly.warehousemanager.Member.Model.User;
+import hieudx.fpoly.warehousemanager.databinding.FragmentDetailBillInBinding;
 
 public class Detail_Bill_In_Fragment extends Fragment {
     private FragmentDetailBillInBinding binding;
@@ -57,6 +58,20 @@ public class Detail_Bill_In_Fragment extends Fragment {
             binding.tvNameUser.setText("Nhân viên: " + user.getName() + " - ID: " + user.getId());
             binding.tvDateTime.setText("Ngày nhập: " + bill_in.getDate_time());
             binding.tvTotal.setText(bundle.getString("sum"));
+
+            if (bill_in.getStatus() == 0) {
+                binding.btnDelete.setVisibility(View.GONE);
+                binding.btnEdit.setVisibility(View.GONE);
+
+                ViewGroup.LayoutParams layoutParams = binding.btnPrint.getLayoutParams();
+                layoutParams.width = RelativeLayout.LayoutParams.WRAP_CONTENT;
+                layoutParams.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+                binding.btnPrint.setLayoutParams(layoutParams);
+            } else {
+                binding.btnDelete.setVisibility(View.VISIBLE);
+                binding.btnEdit.setVisibility(View.VISIBLE);
+            }
+
 
             list.addAll(bill_in_dao.getListProductDetail(bill_in.getId()));
             binding.rcv.setAdapter(adapter);

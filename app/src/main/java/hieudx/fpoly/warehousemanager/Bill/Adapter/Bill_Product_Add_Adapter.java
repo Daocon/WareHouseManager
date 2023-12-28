@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import hieudx.fpoly.warehousemanager.General;
 import hieudx.fpoly.warehousemanager.Product.Model.Product;
 import hieudx.fpoly.warehousemanager.R;
-import hieudx.fpoly.warehousemanager.Supplier.Supplier_Dao;
+import hieudx.fpoly.warehousemanager.Supplier.Dao.Supplier_Dao;
 import hieudx.fpoly.warehousemanager.databinding.ItemRcvProductBillBinding;
 
 public class Bill_Product_Add_Adapter extends RecyclerView.Adapter<Bill_Product_Add_Adapter.ViewHolder> {
