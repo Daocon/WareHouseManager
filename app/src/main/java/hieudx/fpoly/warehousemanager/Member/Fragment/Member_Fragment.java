@@ -109,6 +109,6 @@ public class Member_Fragment extends Fragment {
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         General.onStateIconBack(getActivity(), actionBar, getParentFragmentManager(), true);
 
-//        init();
+        init();
     }
 }

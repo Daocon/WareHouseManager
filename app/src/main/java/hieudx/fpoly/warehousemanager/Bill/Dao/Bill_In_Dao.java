@@ -104,7 +104,7 @@ public class Bill_In_Dao {
         List<Pair<String, Float>> monthlyTotals = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT strftime('%Y-%m', substr(Bill_in.date_time, 7, 4) || '-' || substr(Bill_in.date_time, 4, 2) || '-' || substr(Bill_in.date_time, 1, 2)) as Month, SUM(Bill_in_detail.total) as Total " +
                 "FROM Bill_in JOIN Bill_in_detail ON Bill_in.id = Bill_in_detail.id_bill_in " +
-                "WHERE strftime('%Y', substr(Bill_in.date_time, 7, 4) || '-' || substr(Bill_in.date_time, 4, 2) || '-' || substr(Bill_in.date_time, 1, 2)) = ? " +
+                "WHERE strftime('%Y', substr(Bill_in.date_time, 7, 4) || '-' || substr(Bill_in.date_time, 4, 2) || '-' || substr(Bill_in.date_time, 1, 2)) = ? AND Bill_in.status = 0 " +
                 "GROUP BY Month", new String[]{year});
         if (cursor.moveToFirst()) {
             do {
