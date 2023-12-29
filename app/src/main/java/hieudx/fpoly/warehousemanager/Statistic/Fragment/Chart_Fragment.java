@@ -69,9 +69,9 @@ public class Chart_Fragment extends Fragment {
         int totalBillin = bill_in_dao.getTotalBillInToday();
         int totalBillout = bill_out_dao.getTotalBillOutToday();
 
-        if (totalBillin == 0 && totalBillout == 0) {
+        if (totalBillin == 0 || totalBillout == 0) {
             binding.pieChart.setVisibility(View.GONE);
-            binding.tvPieChart.setText("Bạn chưa có hóa đơn nhập hoặc xuất nào hôm nay");
+            binding.tvPieChart.setText("Chưa có hóa đơn nhập hoặc xuất nào hoàn thành hôm nay.");
             return;
         } else {
             binding.pieChart.setVisibility(View.VISIBLE);

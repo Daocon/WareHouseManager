@@ -124,7 +124,7 @@ public class Bill_Out_Dao {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT strftime('%Y-%m', substr(Bill_out.date_time, 7, 4) || '-' || substr(Bill_out.date_time, 4, 2) || '-' || substr(Bill_out.date_time, 1, 2)) as Month, SUM(Bill_out_detail.total) as Total " +
                 "FROM Bill_out JOIN Bill_out_detail ON Bill_out.id = Bill_out_detail.id_bill_out " +
-                "WHERE strftime('%Y', substr(Bill_out.date_time, 7, 4) || '-' || substr(Bill_out.date_time, 4, 2) || '-' || substr(Bill_out.date_time, 1, 2)) = ? " +
+                "WHERE strftime('%Y', substr(Bill_out.date_time, 7, 4) || '-' || substr(Bill_out.date_time, 4, 2) || '-' || substr(Bill_out.date_time, 1, 2)) = ? AND Bill_out.status = 0 " +
                 "GROUP BY Month", new String[]{year});
         if (cursor.moveToFirst()) {
             do {
