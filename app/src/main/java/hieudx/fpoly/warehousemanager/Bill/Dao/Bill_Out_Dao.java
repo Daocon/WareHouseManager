@@ -157,7 +157,7 @@ public class Bill_Out_Dao {
     @SuppressLint("Range")
     public int getTotalBillOutToday() {
         int total = 0;
-        Cursor cursor = db.rawQuery("SELECT SUM(sum) as Total FROM Bill_out WHERE strftime('%Y-%m-%d', substr(Bill_out.date_time, 7, 4) || '-' || substr(Bill_out.date_time, 4, 2) || '-' || substr(Bill_out.date_time, 1, 2)) = strftime('%Y-%m-%d', 'now')", null);
+        Cursor cursor = db.rawQuery("SELECT SUM(sum) as Total FROM Bill_out WHERE strftime('%Y-%m-%d', substr(Bill_out.date_time, 7, 4) || '-' || substr(Bill_out.date_time, 4, 2) || '-' || substr(Bill_out.date_time, 1, 2)) = strftime('%Y-%m-%d', 'now') AND status = 0", null);
         if (cursor.moveToFirst()) {
             do {
                 total = cursor.getInt(cursor.getColumnIndex("Total"));
